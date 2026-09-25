@@ -38,16 +38,27 @@
 * **拓展主流 AI**：Claude / Anthropic、Grok、Perplexity、Cursor、OpenRouter。
 * **使用策略**：`PROXY` 或专用的 `OpenAI` / `AI` 策略组。
 
-### 6. Google Search 全球搜索分流规则 (`GoogleSearch.yaml`)
-结合 `mixed.yaml`（Google-Search 精细优化）与 `MESL+tempjms-apple.yaml`（全球各地区顶级域名与搜索基建），涵盖：
+### 6. Google 全球搜索与 Gemini 智能生态规则 (`GoogleSearch-Gemini.yaml`)
+结合 `mixed.yaml`（Google-Search 精细优化 + Gemini 会话锁）与 `MESL+tempjms-apple.yaml`（全球各地区顶级域名与搜索基建），涵盖：
 * **搜索主域与短链**：`google.com`、`g.co`、`goo.gl`、`466453.com`、`toolbarqueries.google.com`。
+* **Google Gemini / AI 全量生态**：`gemini.google.com`、`bard.google.com`、`aistudio.google.com`、`makersuite.google.com`、`ai.google`、`ai.google.dev`、`generativelanguage.googleapis.com`（模型 API）、`proactivebackend-pa.googleapis.com`、`alkalicore-pa.clients6.google.com`、`deepmind.google`、`deepmind.com`。
 * **全球各国家/地区顶级域名 (ccTLD)**：`google.com.hk`、`google.co.jp`、`google.com.tw`、`google.co.uk`、`google.de`、`google.ca` 等 40+ 主流国家搜索后缀。
 * **静态多媒体与字体**：`gstatic.com`、`ssl.gstatic.com`、`fonts.gstatic.com`、`fonts.googleapis.com`、`googleusercontent.com`、`1e100.net`。
-* **统一身份与核心服务**：`accounts.google.com`、`ogs.google.com`（九宫格组件）、`googleapis.com`、`clients6.google.com`、`maps.googleapis.com`、`gemini.google.com`。
+* **统一身份与核心服务**：`accounts.google.com`、`ogs.google.com`（九宫格组件）、`googleapis.com`、`clients6.google.com`、`maps.googleapis.com`。
 * **安全验证与证书**：reCAPTCHA (`recaptcha.net`)、Google PKI 证书体系 (`pki.goog`, `o.pki.goog`)、安全浏览。
 * **移动加速标准 (AMP)**：`ampproject.org`、`ampproject.net`、`amp.dev`、`schema.org`。
-* **推送服务与防回环**：FCM / MTalk (`mtalk.google.com`)、Google Public DNS (`dns.google`)、IPv6 防串流。
-* **使用策略**：`PROXY` 或专用的 `Google` / `Google Search` 策略组。
+* **推送服务与防会话撕裂**：FCM / MTalk (`mtalk.google.com`)、Google Public DNS (`dns.google`)、IPv6 规则。
+* **设计优势**：将 Google 搜索与 Gemini 统一绑定走同一代理出口，彻底解决跨应用不同出口引发的 Google 账号异地风控与 Gemini 区域阻断。
+* **使用策略**：`PROXY` 或专用的 `Google` / `Google-Gemini` 策略组。
+
+### 7. 英国主流流媒体与全媒体规则 (`UK-Media.yaml`)
+结合 `mixed.yaml`（UK Broadcast）与 `MESL+tempjms-apple.yaml`（BBC 全量 Akamai/Limelight 播流 CDN 矩阵），涵盖：
+* **BBC 全量生态**：BBC 主站（`bbc.co.uk`, `bbc.com`）、BBC iPlayer、BBC Sounds 网页及移动组件（`bbci.co.uk`, `bbci.co`）、全球新闻及多语言广播。
+* **BBC 核心流媒体 CDN 播流调度**：Akamai 实时音视频 DASH/HLS 切片（`aod-dash-uk-live.akamaized.net`, `vod-dash-uk-live.akamaized.net`, `vod-hls-uk-live.akamaized.net` 等）、Limelight Networks（`bbcfmt.hs.llnwd.net`）。
+* **ITV 全量生态**：`itv.com`、`itvstatic.com`、ITVX 流媒体移动端 Akamai CDN。
+* **Channel 4 / All 4**：`channel4.com`、`c4assets.com`。
+* **Channel 5 (My5) & BritBox & Sky**：`channel5.com`、`my5.tv`、`britbox.co.uk`、`nowtv.com`、`skygo.co.uk`。
+* **使用策略**：专用 `英国节点` 策略组（必须选择能解锁 BBC iPlayer / ITV 英区版权限制的英国住宅或原生代理节点）。
 
 ---
 
@@ -105,14 +116,24 @@ rule-providers:
     path: ./ruleset/openai.yaml
     interval: 86400
 
-  # 6. 订阅 Google Search 全球搜索规则集
-  google-search:
+  # 6. 订阅 Google 全球搜索与 Gemini 智能生态规则集
+  google-gemini:
     type: http
     behavior: classical
     format: yaml
-    url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/GoogleSearch.yaml"
-    # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/GoogleSearch.yaml"
-    path: ./ruleset/google-search.yaml
+    url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/GoogleSearch-Gemini.yaml"
+    # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/GoogleSearch-Gemini.yaml"
+    path: ./ruleset/google-gemini.yaml
+    interval: 86400
+
+  # 7. 订阅英国全媒体与流媒体规则集 (BBC / ITV / C4)
+  uk-media:
+    type: http
+    behavior: classical
+    format: yaml
+    url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/UK-Media.yaml"
+    # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/UK-Media.yaml"
+    path: ./ruleset/uk-media.yaml
     interval: 86400
 
 rules:
@@ -125,8 +146,11 @@ rules:
   # OpenAI / ChatGPT 生态走专用代理节点
   - RULE-SET,openai,PROXY
 
-  # Google 全球搜索及服务走专用代理节点
-  - RULE-SET,google-search,PROXY
+  # Google 全球搜索与 Gemini 走专用代理节点（统一出口避免风控）
+  - RULE-SET,google-gemini,PROXY
+
+  # 英国全媒体走英国专属原生/住宅解锁节点 (BBC iPlayer / ITV)
+  - RULE-SET,uk-media,PROXY
 
   # YouTube 流量走代理或指定策略组
   - RULE-SET,youtube,PROXY

@@ -1,10 +1,11 @@
 # ==============================================================================
-# 规则名称: Google Search 全球搜索与核心基建分流规则集 (GoogleSearch)
+# 规则名称: Google 全球搜索与 Gemini 智能生态分流规则集 (GoogleSearch-Gemini)
 # 更新时间: 2026-09-25
-# 规则来源: mixed.yaml (Google-Search + Gemini/Web) + MESL+tempjms-apple.yaml 深度提取与合并
-# 规则说明: 涵盖 Google 全球搜索主站、各国家地区顶级域名 (ccTLD)、静态资源、安全验证、AMP 标准及账号框架
+# 规则来源: mixed.yaml (Google-Search + Gemini/Web) + MESL+tempjms-apple.yaml 深度融合
+# 规则说明: 整合 Google 全球搜索主站、40+国家地区顶级域名 (ccTLD)、基础静态资产、账号认证体系与 Google Gemini / DeepMind / AI Studio 全量智能生态
+# 设计优势: 搜索与 Gemini 统一绑定走相同代理出口，彻底解决跨应用/会话多出口引发的 Google 频繁异地登录风控与 Gemini 封锁
 # 适用平台: Stash / Clash rule-providers (behavior: classical)
-# 推荐策略: PROXY 或 专用 Google 节点策略组 (如 [GoogleSearch] / [Google] 节点组)
+# 推荐策略: PROXY 或 专用 Google 节点策略组 (如 [Google] / [Google-Gemini] 节点组)
 # ==============================================================================
 payload:
   # ============================================================================
@@ -18,7 +19,36 @@ payload:
   - DOMAIN-SUFFIX,toolbarqueries.google.com    # 浏览器搜索栏即时联想与自动补全接口
 
   # ============================================================================
-  # 【第二部分：Google 搜索全球国家与地区顶级域名 (ccTLD)】
+  # 【第二部分：Google Gemini / Bard / AI Studio 全量智能生态】
+  # 统一分流策略组，保证对话、网页生成与 API 稳定调用
+  # ============================================================================
+  # 1. Gemini / Bard 对话主站与开发者平台
+  - DOMAIN-SUFFIX,gemini.google.com            # Google Gemini 官方对话主站（支持网页版、移动版）
+  - DOMAIN-SUFFIX,bard.google.com              # Google Bard 原官方主站（重定向至 Gemini）
+  - DOMAIN-SUFFIX,aistudio.google.com          # Google AI Studio 开发者平台主站
+  - DOMAIN-SUFFIX,makersuite.google.com        # Google MakerSuite 原型开发平台（重定向至 AI Studio）
+  - DOMAIN-SUFFIX,ai.google                    # Google AI 官方主页
+  - DOMAIN-SUFFIX,ai.google.dev                # Google AI 开发者中心与 Gemini SDK 文档
+
+  # 2. Gemini 核心模型推理、API 网关与后端中枢
+  - DOMAIN-SUFFIX,generativelanguage.googleapis.com # Google Gemini 官方大模型 API 核心网关接口
+  - DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com # Gemini 主动式推荐与智能后端调度
+  - DOMAIN-SUFFIX,aisandbox-pa.googleapis.com  # Google AI 沙盒与实验功能测试接口
+  - DOMAIN-SUFFIX,robinfrontend-pa.googleapis.com # Gemini / 搜索智能交互前端专有通道
+  - DOMAIN-KEYWORD,generativelanguage          # Gemini 生成式大语言模型关键词兜底
+
+  # 3. 客户端长连接、实时会话信号与交互服务
+  - DOMAIN-SUFFIX,alkalicore-pa.clients6.google.com   # Alkali Core 核心模型计算网关
+  - DOMAIN-SUFFIX,alkalimakersuite-pa.clients6.google.com # Alkali MakerSuite 客户端交互接口
+  - DOMAIN-SUFFIX,signaler-pa.clients6.google.com     # Gemini 实时多模态通信与会话信号调度
+  - DOMAIN-SUFFIX,waa-pa.clients6.google.com          # Web & App 统一智能助手框架通道
+
+  # 4. Google DeepMind 顶尖前沿机构
+  - DOMAIN-SUFFIX,deepmind.google              # Google DeepMind 官方顶级新域名
+  - DOMAIN-SUFFIX,deepmind.com                 # DeepMind 官方主站与前沿研究成果发布
+
+  # ============================================================================
+  # 【第三部分：Google 搜索全球国家与地区顶级域名 (ccTLD)】
   # 确保在任意国家或地区版本（如 google.co.jp / google.com.hk 等）均能精准命中分流
   # ============================================================================
   # 亚太地区
@@ -66,7 +96,7 @@ payload:
   - DOMAIN-SUFFIX,google.com.sa                # 沙特阿拉伯
 
   # ============================================================================
-  # 【第三部分：静态多媒体资源、图床与 Google 字体库】
+  # 【第四部分：静态多媒体资源、图床与 Google 字体库】
   # 搜索结果页面加载、样式表渲染与矢量图标必备依赖
   # ============================================================================
   - DOMAIN-SUFFIX,gstatic.com                  # Google 全球静态内容托管 CDN (核心依赖)
@@ -77,7 +107,7 @@ payload:
   - DOMAIN-SUFFIX,1e100.net                    # Google 全球骨干网络与服务器基础设施
 
   # ============================================================================
-  # 【第四部分：账号会话认证、核心 API 与搜索集成服务】
+  # 【第五部分：账号会话认证、核心 API 与搜索集成服务】
   # 保证 Google 账户登录状态一致，避免会话多出口触发频繁异地风控
   # ============================================================================
   - DOMAIN-SUFFIX,accounts.google.com          # Google 统一身份认证与账号中心
@@ -94,10 +124,9 @@ payload:
   - DOMAIN-SUFFIX,tools.l.google.com           # Google 工具内部接口
   - DOMAIN-SUFFIX,maps.googleapis.com          # 搜索结果内嵌地图与位置服务 API
   - DOMAIN-SUFFIX,play.google.com              # Google Play 搜索卡片与元数据
-  - DOMAIN-SUFFIX,gemini.google.com            # Google Gemini AI（搜索生成式体验与原生 AI）
 
   # ============================================================================
-  # 【第五部分：安全防护、人机验证与数字证书体系】
+  # 【第六部分：安全防护、人机验证与数字证书体系】
   # ============================================================================
   - DOMAIN-SUFFIX,recaptcha.net                # Google reCAPTCHA 人机身份验证核心服务
   - DOMAIN-SUFFIX,safebrowsing.googleapis.com  # Google 安全浏览威胁检测 API
@@ -108,7 +137,7 @@ payload:
   - DOMAIN-SUFFIX,ocsp.pki.goog                # Google OCSP 备用节点
 
   # ============================================================================
-  # 【第六部分：移动网页加速 (AMP) 与语义化搜索标准】
+  # 【第七部分：移动网页加速 (AMP) 与语义化搜索标准】
   # 移动端快速打开搜索结果及 SEO 结构化数据解析
   # ============================================================================
   - DOMAIN-SUFFIX,ampproject.org               # Google AMP 移动加速项目主站与框架
@@ -120,7 +149,7 @@ payload:
   - DOMAIN-SUFFIX,cookiechoices.org            # 欧盟 Cookie 合规指南页面
 
   # ============================================================================
-  # 【第七部分：推送通知与移动端长连接服务 (FCM / MTalk)】
+  # 【第八部分：推送通知与移动端长连接服务 (FCM / MTalk)】
   # 解决移动端与 Chrome 桌面端后台推送长连接
   # ============================================================================
   - DOMAIN-SUFFIX,mtalk.google.com             # Google FCM 消息推送主通道
@@ -135,7 +164,7 @@ payload:
   - DOMAIN-SUFFIX,c.android.clients.google.com # Android 搜索框架与客户端支持
 
   # ============================================================================
-  # 【第八部分：搜索分析与防回环辅助规则】
+  # 【第九部分：搜索分析与防回环辅助规则】
   # ============================================================================
   - DOMAIN-SUFFIX,google-analytics.com         # Google 分析平台
   - DOMAIN-SUFFIX,analytics.google.com         # Google 网站统计控制台
