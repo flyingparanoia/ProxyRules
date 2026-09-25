@@ -13,11 +13,7 @@
 涵盖抖音主站、短视频点播切片（VOD / zjcdn）、直播拉流（FLV）、图床、对象存储（TOS）、前端公共基建（Goofy/Gecko）与相关字节产品线（西瓜/火山/头条）。
 * **使用策略**：`DIRECT`（直连）
 
-### 3. 大陆视频网站与 App PCDN 偷跑阻断规则 (`China-Video-Apps-PCDN.yaml`)
-专门收集国内主流视频/直播 App（抖音、B站、爱优腾等）偷偷利用用户设备上行充当免费 CDN 节点的 P2P 调度域名。
-* **使用策略**：`REJECT`（拦截后 App 会自动降级走官方直连 CDN，视频顺畅播放且手机不再发烫偷跑上传）
-
-### 4. 全球海外综合与专业前沿新闻规则 (不含 NYT / WSJ) (`Foreign-News-no-NYT-WSJ.yaml`)
+### 3. 全球海外综合与专业前沿新闻规则 (不含 NYT / WSJ) (`Foreign-News-no-NYT-WSJ.yaml`)
 基于真实 Chrome 浏览器历史记录全量深度分析（8万+记录），专门剔除了中国大陆境内媒体，专为科学上网分流与海外优质资讯代理设计。涵盖：
 * **全球综合大报与通讯社**：英国卫报、泰晤士报、每日电讯报、洛杉矶时报、法兰克福汇报、世界报、时代周报、费加罗报、读卖新闻、东亚日报、美联社、CNN、CBS、NBC、德国之声、法国国际广播、联合国新闻等（注：纽约时报 NYT 与华尔街日报 WSJ 已单独剥离至专属规则集 `NYT-WSJ.yaml`）。
 * **数字报刊与聚合平台**：PressReader（全球报刊亭旗舰，高频阅读数千次）。
@@ -151,17 +147,7 @@
 
 ```yaml
 rule-providers:
-  # 1. 订阅大陆主流视频网站与 App PCDN 偷跑拦截规则集
-  china-video-apps-pcdn:
-    type: http
-    behavior: domain
-    format: yaml
-    url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/China-Video-Apps-PCDN.yaml"
-    # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/China-Video-Apps-PCDN.yaml"
-    path: ./ruleset/china-video-apps-pcdn.yaml
-    interval: 86400
-
-  # 2. 订阅 YouTube、X (Twitter) 与全球主流成人媒体合集
+  # 1. 订阅 YouTube、X (Twitter) 与全球主流成人媒体合集
   youtube-porn-x:
     type: http
     behavior: domain
