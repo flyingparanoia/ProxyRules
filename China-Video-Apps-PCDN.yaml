@@ -23,4 +23,5 @@ payload:
   - '+.xycdn.com'                               # 星域云 PCDN 边缘节点
   - '+.ndcpp.com'                               # 字节跳动/火山引擎移动端 P2P 调度中枢 (ndcpp)
   - '+.ndcpp.cn'                                # 字节跳动/火山引擎移动端 P2P 备用域名
+  - '+.ctydoh.cn'                               # 天翼云/移动端 PCDN 调度域名 (实机抓包动态子域)
 
