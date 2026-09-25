@@ -538,3 +538,18 @@ payload:
   - '+.zhjfad.com'
   - '+.zqzxz.com'
   - '+.zzsx8.com'
+  # --- 新增新闻/外媒嵌入的高并发程序化广告与数据追踪 ---
+  - '+.app-ads-services.com'
+  - '+.piano.io'
+  - '+.permutive.app'
+  - '+.bidswitch.net'
+  - '+.3lift.com'
+  - '+.media.net'
+  - '+.parsely.com'
+  - '+.spot.im'
+  - '+.the-ozone-project.com'
+  - '+.privacy-mgmt.com'
+  - '+.servenobid.com'
+  - '+.braze.com'
+  - '+.omtrdc.net'
+
