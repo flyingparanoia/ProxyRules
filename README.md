@@ -97,7 +97,14 @@
 * **二次元动漫同人与 Hentai**：`e-hentai.org`、`fakku.net`、`rule34.xxx`、`g6hentai.com`、`erodoujinlog.com` 等。
 * **真人互动直播与成人社交约会**：`stripchat.com`、`chaturbate.com`、`bongacams.com`、`cam4.com`、`cams.com`、`adultfriendfinder.com` 等。
 * **同志与垂直彩虹影视**：`boysfood.com`、`foxgay.com`、`gayhub.com`、`gaytube.com`、`onlygayvideo.com`、`timtales.com` 等。
-* **使用策略**：`PROXY` 或专用的 `🔞 X Porn` / `流媒体` 策略组。
+### 12. 学术数据库与文献资源直连规则 (`Academic.yaml`)
+严格提取自 `mixed.yaml`（`🎓 学术资源类 —— 直连便于认证 / 学术网络识别`）并配套主流学术云补充，涵盖：
+* **全球权威学术检索与分析**：Web of Science 核心正站（`webofscience.com`）、中国镜像（`webofscience.clarivate.cn`）、Clarivate 统一身份网关（`access.clarivate.com`、`clarivate.com`）、EI 工程索引（`engineeringvillage.com`）、MathSciNet（`mathscinet.ams.org`、`ams.org`）。
+* **四大科学出版商与顶级期刊**：Elsevier / ScienceDirect（`sciencedirect.com`、`elsevier.com`）、Nature 自然出版集团（`nature.com`）、Science 科学杂志（`science.org`）、Wiley 在线图书馆（`onlinelibrary.wiley.com`、`wiley.com`、`ietresearch.onlinelibrary.wiley.com`）、Springer Nature（`springer.com`、`springernature.com`）。
+* **工程与专业学术学会**：IEEE Xplore（`ieee.org`）、ACM 计算机学会（`acm.org`）、美国物理学会（`aps.org`）、美国物理联合会（`aip.org`）、美国机械工程师协会（`asme.org`）。
+* **技术实战与国内主流平台**：O'Reilly 学习平台（`learning.oreilly.com`、`oreilly.com`）、中国知网（`cnki.net`）、超星学习通（`chaoxing.com`）、万方数据（`wanfangdata.com.cn`）、维普网（`cqvip.com`）、学术静态 CDN（`xslb.net`）。
+* **高校校外身份认证**：CARSI 国家级高校身份认证联盟（`carsi.edu.cn`、`cernet.edu.cn`）。
+* **使用策略**：`DIRECT`（直连，确保校园网 IP / CARSI 机构身份正常识别，避免代理引发文献下载受阻）。
 
 ---
 
@@ -215,10 +222,23 @@ rule-providers:
     path: ./ruleset/x-porn.yaml
     interval: 86400
 
+  # 12. 订阅学术数据库与文献资源直连规则集
+  academic:
+    type: http
+    behavior: classical
+    format: yaml
+    url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/Academic.yaml"
+    # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/Academic.yaml"
+    path: ./ruleset/academic.yaml
+    interval: 86400
+
 rules:
   # 必须排在最前面：优先阻断所有 P2P 偷跑连接与轻量广告
   - RULE-SET,china-video-apps-pcdn,🛑 全球拦截
   - RULE-SET,hagezi-light,🛑 全球拦截
+
+  # 学术数据库走直连（保障高校机构与 CARSI 认证免登录下载正文）
+  - RULE-SET,academic,DIRECT
 
   # 抖音官方核心业务直连
   - RULE-SET,douyin,👁️ Douyin
