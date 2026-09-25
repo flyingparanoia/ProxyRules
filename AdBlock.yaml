@@ -556,5 +556,25 @@ payload:
   - '+.chartbeat.net'
   - '+.geoedge.be'
   - '+.datadoghq-browser-agent.com'
+  # --- 大陆主流 App 纯开屏广告与商业化分发/曝光打点 ---
+  - 'cm.bilibili.com'
+  - 'bimp.hdslb.com'
+  - 'boss.hdslb.com'
+  - 'sealine.youku.com'
+  - '+.doubleclick-cn.net'
+  - '+.lf-leads-fe-scm.bytecdn.com'
+  - 'mi.gdt.qq.com'
+  - 'qzs.gdt.qq.com'
+  - 'v.gdt.qq.com'
+  - 'adsmind.gdt.qq.com'
+  - 'sdkapp.uve.weibo.com'
+  - 'adstrategy.biz.weibo.com'
+  - 'mobads.baidu.com'
+  - 'mobads-logs.baidu.com'
+  - 'appcloud2.in.zhihu.com'
+  - 'sugar.zhihu.com'
+  - 'dt.adsafeprotected.com'
+  - 'ca.iadsdk.apple.com'
+
 
 
