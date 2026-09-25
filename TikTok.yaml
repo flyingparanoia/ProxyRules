@@ -22,7 +22,8 @@ payload:
   - DOMAIN-SUFFIX,ttcdn-us.com                # TikTok 美区综合资源与电商 CDN (p16-oec-general, p19-oec-general 等)
 
   # 3. 泛解析与边缘 CDN 关键词
-  - DOMAIN-KEYWORD,-tiktokcdn-com             # Akamai 等第三方边缘 CDN 专线加速节点 (如 p16-tiktokcdn-com.akamaized.net)
+  - DOMAIN,p16-tiktokcdn-com.akamaized.net    # Akamai 国际 CDN 边缘加速节点
+  - DOMAIN-KEYWORD,-tiktokcdn-com             # Akamai 等第三方边缘 CDN 专线加速节点
   - DOMAIN-KEYWORD,tiktok                     # TikTok 泛关键词动态保障
 
   # ============================================================================
@@ -71,6 +72,7 @@ payload:
   - DOMAIN-SUFFIX,capcut.com                  # 剪映海外版 CapCut (与 TikTok 紧密联动的视频创作生态)
 
   # 3. 字节跳动海外底层基础设施与监控
+  - DOMAIN-SUFFIX,byteintlapi.com             # 字节跳动海外全系产品线通用统一国际 API 网关
   - DOMAIN-SUFFIX,byteoversea.com             # 字节跳动海外业务核心云底座与全局调度
   - DOMAIN-SUFFIX,ibytedtos.com               # 字节跳动海外分布式对象存储 (TOS)
   - DOMAIN-SUFFIX,bytedapm.com                # 性能监控、崩溃分析与链路追踪平台 (APM)

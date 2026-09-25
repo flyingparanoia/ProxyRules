@@ -15,6 +15,7 @@ payload:
   - DOMAIN-SUFFIX,itunes.com                   # iTunes 媒体商店与资源调度
   - DOMAIN-SUFFIX,mzstatic.com                 # Apple 媒体图床 CDN (应用图标、音乐海报、电子书封面)
   - DOMAIN-SUFFIX,testflight.apple.com         # TestFlight 开发者测试平台官方主站
+  - DOMAIN-KEYWORD,testflight                  # TestFlight 泛关键词全量兜底
 
   # ============================================================================
   # 【第二部分：iCloud 云服务与 CloudKit 数据同步】
@@ -22,6 +23,7 @@ payload:
   - DOMAIN-SUFFIX,icloud.com                   # iCloud 官方主站与 Web 网页端应用
   - DOMAIN-SUFFIX,icloud-content.com           # iCloud 照片流、Drive 云盘、备份与大文件分发
   - DOMAIN-SUFFIX,apple-cloudkit.com           # CloudKit 跨设备数据实时同步引擎
+  - DOMAIN-SUFFIX,apple-livephotoskit.com       # Apple Live Photos 动态照片前端与多媒体套件
   - DOMAIN-SUFFIX,me.com                       # MobileMe / iCloud 邮箱及历史服务
 
   # ============================================================================

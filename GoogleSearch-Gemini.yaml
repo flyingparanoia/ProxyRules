@@ -29,6 +29,7 @@ payload:
   - DOMAIN-SUFFIX,makersuite.google.com        # Google MakerSuite 原型开发平台（重定向至 AI Studio）
   - DOMAIN-SUFFIX,ai.google                    # Google AI 官方主页
   - DOMAIN-SUFFIX,ai.google.dev                # Google AI 开发者中心与 Gemini SDK 文档
+  - DOMAIN-SUFFIX,generativeai.google          # Google Generative AI 官方主站与技术中心
 
   # 2. Gemini 核心模型推理、API 网关与后端中枢
   - DOMAIN-SUFFIX,generativelanguage.googleapis.com # Google Gemini 官方大模型 API 核心网关接口

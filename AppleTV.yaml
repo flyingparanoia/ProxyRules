@@ -28,3 +28,8 @@ payload:
   - DOMAIN,gspe1-ssl.ls.apple.com              # Apple 位置验证、设备许可与区域播放授权服务 (核心防封锁验证)
   - DOMAIN,uts-api.itunes.apple.com            # Universal TV Services (影视元数据、海报墙与剧集信息 API)
   - DOMAIN,umc-api.itunes.apple.com            # Apple TV 媒体目录索引与用户订阅鉴权接口
+
+  # ============================================================================
+  # 【第四部分：原生系统应用进程匹配 (底盘兜底)】
+  # ============================================================================
+  - PROCESS-NAME,TV                           # macOS / iOS / tvOS 原生 Apple TV 应用进程名

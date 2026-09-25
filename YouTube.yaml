@@ -11,8 +11,10 @@ payload:
   # ============================================================================
   # 1. 核心业务主站与官方短链
   - DOMAIN-SUFFIX,youtube.com                  # YouTube 主站、API 网关及核心交互
+  - DOMAIN,music.youtube.com                   # YouTube Music 独立网页端入口
   - DOMAIN-SUFFIX,youtu.be                     # YouTube 官方分享短链接
   - DOMAIN-SUFFIX,yt.be                        # YouTube 官方短域名
+  - DOMAIN-KEYWORD,youtube                     # YouTube 泛关键词全局保障
 
   # 2. 核心视频流媒体分发 (负责 90%+ 的视频点播与直播切片流量)
   - DOMAIN-SUFFIX,googlevideo.com              # 全球音视频切片流媒体 CDN (海量 rr*---sn-*.googlevideo.com)
@@ -59,3 +61,9 @@ payload:
   - DOMAIN-SUFFIX,youtubeeducation.com         # YouTube Education (教育专区)
   - DOMAIN-SUFFIX,youtubefanfest.com           # YouTube FanFest 粉丝节活动
   - DOMAIN-SUFFIX,wide-youtube.l.google.com    # Google 内部骨干网调度节点
+
+  # ============================================================================
+  # 【第五部分：原生系统应用进程匹配 (底盘兜底)】
+  # ============================================================================
+  - PROCESS-NAME,com.google.ios.youtube        # iOS YouTube 官方客户端主进程
+  - PROCESS-NAME,YouTube                       # 跨平台通用客户端进程名

@@ -27,6 +27,7 @@ payload:
   # 2. BBC iPlayer / Sounds 前端资产、移动服务与播放组件
   - DOMAIN-SUFFIX,bbci.co.uk                   # BBC Sounds / iPlayer 网页端及 App 核心组件 CDN
   - DOMAIN-SUFFIX,bbci.co                      # BBC 移动服务与短链路由
+  - DOMAIN-SUFFIX,bb-static.com                # BBC 静态资源与前端依赖辅助域名
 
   # 3. BBC 核心流媒体内容分发网络 (CDN 播流服务器与切片调度)
   - DOMAIN,aod-dash-uk-live.akamaized.net      # BBC UK 音频 DASH 实时流
@@ -50,6 +51,9 @@ payload:
   # ============================================================================
   - DOMAIN-SUFFIX,itv.com                      # ITV 官网与 ITVX 流媒体视频平台
   - DOMAIN-SUFFIX,itvstatic.com                # ITV 前端静态资产与播放器 UI 图床
+  - DOMAIN-SUFFIX,massive-itv.com              # ITV 跨平台多屏架构与点播服务
+  - DOMAIN,itvpnp.live.ott.irdeto.com          # ITV Irdeto DRM 版权验证与播放鉴权
+  - DOMAIN,itvpnp.stage.ott.irdeto.com         # ITV 阶段鉴权接口
   - DOMAIN,itvpnpmobile-a.akamaihd.net         # ITV 移动客户端 Akamai 直播点播流媒体
 
   # ============================================================================

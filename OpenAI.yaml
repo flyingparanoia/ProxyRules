@@ -23,9 +23,11 @@ payload:
   # ============================================================================
   - DOMAIN,chat.openai.com.cdn.cloudflare.net  # Cloudflare 边缘专用反代接入点
   - DOMAIN,openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net # 微软 Azure Front Door 专属 API 入口
+  - DOMAIN,openaicomproductionae4b.blob.core.windows.net # OpenAI 生产环境 Blob 存储与静态资产
   - DOMAIN,production-openaicom-storage.azureedge.net    # Azure Edge 生产环境存储与多媒体分发
   - DOMAIN-SUFFIX,openaiapi-site.azureedge.net # OpenAI API 全球 CDN 加速缓存
   - DOMAIN-SUFFIX,openaicom.imgix.net          # OpenAI 多媒体图片实时渲染与处理服务
+  - DOMAIN-KEYWORD,openaicom-api               # Azure Front Door 与反代集群动态 API 网关关键词
 
   # ============================================================================
   # 【第三部分：人机安全风控、Captcha 验证与身份认证】
@@ -33,6 +35,7 @@ payload:
   # ============================================================================
   - DOMAIN,openai-api.arkoselabs.com           # Arkose Labs 专用人机防刷 API 接口
   - DOMAIN-SUFFIX,client-api.arkoselabs.com    # Arkose Labs 客户端交互验证
+  - DOMAIN-SUFFIX,challenges.cloudflare.com    # Cloudflare Turnstile 智能人机交互验证服务 (核心防卡死)
   - DOMAIN-SUFFIX,inquiry.withpersona.com      # Persona 实名身份核验与高级风控鉴权
   - DOMAIN-SUFFIX,auth0.com                    # Auth0 统一身份认证与第三方授权登录
   - DOMAIN-SUFFIX,identrust.com                # IdenTrust 权威数字证书认证链
@@ -109,3 +112,8 @@ payload:
   - DOMAIN-SUFFIX,openrouter.ai                # OpenRouter 统一大模型 API 聚合网关
   - DOMAIN-SUFFIX,copilot.microsoft.com        # 微软 Copilot 助手
   - DOMAIN-SUFFIX,artificialanalysis.ai        # 全球大模型性能与成本权威评测平台
+
+  # ============================================================================
+  # 【第八部分：原生客户端应用进程匹配 (底盘兜底)】
+  # ============================================================================
+  - PROCESS-NAME,ChatGPT                       # macOS / iOS 原生 ChatGPT 客户端主进程名
