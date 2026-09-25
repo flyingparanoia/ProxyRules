@@ -52,7 +52,6 @@ payload:
   - DOMAIN-SUFFIX,ssl-images-amazon.com
   - DOMAIN-SUFFIX,unagi-na.amazon.com
   - PROCESS-NAME,com.amazon.avod.thirdpartyclient
-  - URL-REGEX,^https?:\/\/www\.amazon\.com\/(Amazon-Video|gp\/video)\/
 
   # ============================================================================
   # 【第二部分：Pluto TV 免费流媒体电视平台】
