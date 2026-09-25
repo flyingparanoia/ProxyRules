@@ -118,12 +118,13 @@
 * **系统连通性测试与远程工具**：Windows 网络连通性测试 (NCSI) 与 TeamViewer 协同。
 * **使用策略**：`DIRECT`（直连，享受本地千兆宽带低延迟高速直达）。
 
-### 13. 纽约时报与华尔街日报全量规则 (`NYT-WSJ.yaml`)
-基于真实 iPhone 移动客户端与 Mac 桌面浏览器双端实机抓包深度分析，完整提取 The New York Times 与 The Wall Street Journal（含道琼斯 Dow Jones 集团）核心资产（已从 `Foreign-News-no-NYT-WSJ.yaml` 及其他规则中完全剥离解耦）：
+### 13. 纽约时报、华尔街日报与美国轻量金融/敏感服务 (`NYT-WSJ-US-Light.yaml`)
+基于真实 iPhone 移动客户端与 Mac 桌面浏览器双端实机抓包深度分析，完整提取 The New York Times 与 The Wall Street Journal（含道琼斯 Dow Jones 集团）核心资产，并融合美国原生轻量金融与敏感资产（已从 `Foreign-News-no-NYT-WSJ.yaml` 及其他规则中完全剥离解耦）：
 * **The New York Times (NYT / 纽约时报)**：纽约时报核心主站、国际版、中文网、Samizdat GraphQL API 网关（`samizdat-graphql.nytimes.com`）、核心多媒体/短域（`nyt.com`、`a1.nyt.com`、`g1.nyt.com`）、高清图床 CDN（`nytimg.com`）、集团公司（`nytco.com`）、时尚版（`nytstyle.com`）、版本对比（`nytdiff.com`）与官方品牌域（`newyorktimes.com`）。
 * **The Wall Street Journal (WSJ / 华尔街日报)**：华尔街日报核心主站（`wsj.com`）、移动端与 Web API（`follow-api.wsj.com`、`video-api.wsj.com`）、报纸数字版（`pbc.wsj.com`、`pblog.wsj.com`）、核心音视频流媒体（`wsjstream.wsj.net`）、图床与静态组件 CDN（`wsj.net`、`images.wsj.net`、`opinion-images.wsj.net`）、读者会员权益（`wsjplus.com`）。
 * **Dow Jones (道琼斯集团与 News Corp 商业矩阵)**：道琼斯公司官网与统一单点登录 SSO 鉴权网关（`dowjones.com`、`sso.accounts.dowjones.com`）、道琼斯云原生微服务与公共共享数据网关（`dowjones.io`、`shared-data.dowjones.io`）、订单订阅系统（`dowjoneson.com`、`oms.dowjoneson.com`）、巴伦周刊（`barrons.com`）、MarketWatch 实时金融行情（`marketwatch.com`）、Mansion Global 豪宅不动产（`mansionglobal.com`）、Factiva 商业情报库（`factiva.com`）、新闻集团统一平台（`newscgp.com`）。
 * **抓包定制接口与读者鉴权通道**：Adobe 专为道琼斯定制的分析节点（`dowjones.hb-api.omtrdc.net`、`dowjones.sc.omtrdc.net`）、道琼斯专用 AWS 资产存储桶（`djcm-pnp.s3.amazonaws.com`、`djcs-multi-region-assets-ohio.s3.us-east-2.amazonaws.com`）、波士顿公共图书馆读者卡免登录鉴权联动（`bpl.org` / EZProxy 联动 `partner.wsj.com`）。
+* **美国轻量金融、支付与权威快讯**：PayPal、Venmo、Braintree、Xoom、BillMeLater，彭博社 Bloomberg、路透社 Reuters、Reddit、Perplexity 等。
 * **使用策略**：专用的优质美国原生/静态代理策略组（如 `🇺🇸 US Light Data Usage Select`），享受纯净 IP 避免被两报严格的风控系统拦截或触发验证码。
 
 ### 14. 微软全生态服务规则 (`Microsoft.yaml`)
@@ -270,14 +271,14 @@ rule-providers:
     path: ./ruleset/china-direct.yaml
     interval: 86400
 
-  # 13. 订阅纽约时报与华尔街日报专属规则集 (NYT / WSJ / Dow Jones)
-  nyt-wsj:
+  # 13. 订阅纽约时报、华尔街日报与美国轻量金融服务合并规则集
+  nyt-wsj-us-light:
     type: http
     behavior: classical
     format: yaml
-    url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/NYT-WSJ.yaml"
-    # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/NYT-WSJ.yaml"
-    path: ./ruleset/nyt-wsj.yaml
+    url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/NYT-WSJ-US-Light.yaml"
+    # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/NYT-WSJ-US-Light.yaml"
+    path: ./ruleset/nyt-wsj-us-light.yaml
     interval: 86400
 
   # 14. 订阅微软全生态服务规则集 (Windows / Office 365 / Azure / OneDrive)
@@ -304,8 +305,8 @@ rules:
   # 抖音官方核心业务直连
   - RULE-SET,douyin,👁️ Douyin
 
-  # 纽约时报与华尔街日报走专用美国轻量/高防风控代理 (防账号风控与频繁验证码)
-  - RULE-SET,nyt-wsj,🇺🇸 US Light Data Usage Select
+  # 纽约时报、华尔街日报与美国轻量金融服务走专用美国轻量/高防风控代理 (防账号风控与频繁验证码)
+  - RULE-SET,nyt-wsj-us-light,🇺🇸 US Light Data Usage Select
 
   # TikTok 全量生态走专用海外流媒体策略组（解锁节点）
   - RULE-SET,tiktok,👁️ TikTok
