@@ -1,9 +1,9 @@
 # ==============================================================================
-# 规则名称: 全球新闻、专业媒体与深度报刊规则集 (News & Media Comprehensive Ruleset)
+# 规则名称: 全球海外新闻、前沿专业媒体与深度报刊规则集 (Foreign-News)
 # 更新时间: 2026-09-25
-# 规则来源: 本地 Chrome 浏览器历史记录全量深度分析 (含综合大报、深度政经、科技、时尚娱乐与小众垂直行业)
+# 规则说明: 纯海外媒体规则（已彻底剔除中国大陆境内媒体），专门用于科学上网出海代理
 # 适用平台: Stash / Clash rule-providers (behavior: classical)
-# 推荐策略: PROXY 或 专用新闻分流策略组 (如 [News] / [Media] 节点组)
+# 推荐策略: PROXY 或 专用新闻分流策略组 (如 [Foreign-News] / [Media] 节点组)
 # ==============================================================================
 payload:
   # ============================================================================
@@ -69,24 +69,15 @@ payload:
 
   # ============================================================================
   # 【第三部分：财经、商业、金融与宏观经济专业媒体】
-  # 包含全球与华语最具权威性的金融资讯、创投市场与深度经济研究
+  # 包含全球与境外最具权威性的金融资讯、创投市场与深度经济研究
   # ============================================================================
   - DOMAIN-SUFFIX,ft.com                       # Financial Times (英国金融时报)
   - DOMAIN-SUFFIX,dowjones.com                 # Dow Jones (道琼斯金融通讯社与 Factiva 商业资讯)
   - DOMAIN-SUFFIX,bloomberglaw.com             # Bloomberg Law (彭博法律与商业合规权威新闻)
   - DOMAIN-SUFFIX,cnbc.com                     # CNBC (全国广播公司全球财经商业新闻)
-  - DOMAIN-SUFFIX,caixin.com                   # 财新网 (Caixin - 财新传媒官方网站、政经与金融频道)
-  - DOMAIN-SUFFIX,caixinglobal.com             # 财新国际英文版 (Caixin Global)
-  - DOMAIN-SUFFIX,yicai.com                    # 第一财经 (Yicai - 领先的原创财经全媒体与日报)
-  - DOMAIN-SUFFIX,cnstock.com                  # 上海证券报数字报 (上海证券报官方电子报刊)
-  - DOMAIN-SUFFIX,comnews.cn                   # 国际商报 (商务部主管国家级外经贸专业报纸)
-  - DOMAIN-SUFFIX,cbimc.cn                     # 中国银行保险报 (国家金融监督管理总局主管权威媒体)
-  - DOMAIN-SUFFIX,pedaily.cn                   # 投资界 (清科创业旗下私募股权与创投领域权威媒体)
-  - DOMAIN-SUFFIX,cyzone.cn                    # 创业邦 (创新商业模式与高成长创业报道平台)
   - DOMAIN-SUFFIX,siteselection.com            # Site Selection Magazine (选址杂志 - 全球产业投资与商业地理)
   - DOMAIN-SUFFIX,ryanbencapital.com           # 瑞恩资本 (RyanBen Capital - 香港资本市场与上市IPO深度报道)
   - DOMAIN-SUFFIX,etnet.com.hk                 # 经济通 (ET Net - 香港核心财经新闻与实时报价平台)
-  - DOMAIN-SUFFIX,10jqka.com.cn                # 同花顺财经资讯 (同花顺上市公司研报与股市快讯)
   - DOMAIN-SUFFIX,nber.org                     # NBER (美国全国经济研究所 - 顶级全球宏观经济工作论文与动态)
   - DOMAIN-SUFFIX,aeaweb.org                   # AEA (美国经济学会 - 美国经济评论 AER 与宏观经济前沿)
 
@@ -98,7 +89,6 @@ payload:
   - DOMAIN-SUFFIX,wired.com                    # Wired (连线杂志 - 科技与数字文化引领者)
   - DOMAIN-SUFFIX,venturebeat.com              # VentureBeat (AI人工智能与技术创新产业旗舰媒体)
   - DOMAIN-SUFFIX,thenextweb.com               # The Next Web / TNW (欧洲知名互联网前沿科技媒体)
-  - DOMAIN-SUFFIX,tmtpost.com                  # 钛媒体 (TMTPost - 硬科技创新与TMT产业深度观察)
   - DOMAIN-SUFFIX,theregister.com              # The Register (英国知名IT基础设施、企业级系统与芯片科技媒体)
   - DOMAIN-SUFFIX,9to5mac.com                  # 9to5Mac (Apple 生态与硬件产业链核心垂直媒体)
   - DOMAIN-SUFFIX,androidauthority.com         # Android Authority (安卓生态与移动消费电子深度测评)
@@ -194,33 +184,3 @@ payload:
   - DOMAIN,news.yahoo.co.jp                    # 雅虎日本新闻 (Yahoo! JAPAN News - 日本访问量最大的新闻门户)
   - DOMAIN-SUFFIX,nikkei.com                   # 日本经济新闻 (The Nikkei - 涵盖日经中文网 cn.nikkei.com)
   - DOMAIN-SUFFIX,economictimes.indiatimes.com # The Economic Times (印度经济时报 - 仅次于华尔街日报的全球主流英文财经报)
-
-  # ============================================================================
-  # 【第八部分：中国大陆权威与行业专业报纸/数字报】
-  # 包含国家级通讯社、中央党政法治机关报、重点行业报及地方主流融媒体数字报
-  # ============================================================================
-  # 1. 国家权威通讯社与中央党政主流报刊
-  - DOMAIN-SUFFIX,people.com.cn                # 人民网 / 人民日报数字报 (paper.people.com.cn)
-  - DOMAIN-SUFFIX,xinhuanet.com                # 新华网 (国家通讯社官方互联网新闻平台)
-  - DOMAIN-SUFFIX,mrdx.cn                      # 新华每日电讯 (新华社主办全国性主流大报)
-  - DOMAIN-SUFFIX,chinadaily.com.cn            # 中国日报 (China Daily - 国家英文日报)
-  - DOMAIN-SUFFIX,cnr.cn                       # 央广网 (中央广播电视总台中国之声/央广网络电台)
-  - DOMAIN-SUFFIX,studytimes.cn                # 学习时报 (中共中央党校主办思想理论与时政大报)
-  - DOMAIN-SUFFIX,guancha.cn                   # 观察者网 (时政、思想与国际观察新媒体)
-
-  # 2. 中央政法与重点专业行业报刊
-  - DOMAIN-SUFFIX,rmfyb.com                    # 人民法院报 (最高人民法院机关报数字报)
-  - DOMAIN-SUFFIX,legaldaily.com.cn            # 法治日报 / 法制网 (中央政法委机关报)
-  - DOMAIN-SUFFIX,cpd.com.cn                   # 中国警察网 / 人民公安报 (公安部主管报刊)
-  - DOMAIN-SUFFIX,iprchn.com                   # 中国知识产权报 (国家知识产权局主管专业报刊)
-  - DOMAIN-SUFFIX,zuzhirenshi.com              # 中国组织人事报 (全国组织人事系统权威指导行业报)
-  - DOMAIN-SUFFIX,ccoalnews.com                # 中国煤炭报 (国家矿山安全监察局主管行业报)
-  - DOMAIN-SUFFIX,stdaily.com                  # 科技日报 (中华人民共和国科学技术部主管中央主流报纸)
-  - DOMAIN-SUFFIX,cnpc.com.cn                  # 中国石油新闻中心 (中国石油行业垂直新闻网)
-  - DOMAIN-SUFFIX,bdcn-media.com               # 首都建设报 (北京市属重点市政与建设工程行业报)
-
-  # 3. 地方主流机关报与都市报数字版
-  - DOMAIN-SUFFIX,jfdaily.com                  # 解放日报 (中共上海市委机关报)
-  - DOMAIN-SUFFIX,shobserver.com               # 上观新闻 (解放日报官方新媒体客户端)
-  - DOMAIN-SUFFIX,bjnews.com.cn                # 新京报数字报 (北京主流新媒体与都市报)
-  - DOMAIN-SUFFIX,southcn.com                  # 南方日报数字报 / 南方网 (中共广东省委机关报)
