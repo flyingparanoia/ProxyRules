@@ -60,6 +60,23 @@
 * **Channel 5 (My5) & BritBox & Sky**：`channel5.com`、`my5.tv`、`britbox.co.uk`、`nowtv.com`、`skygo.co.uk`。
 * **使用策略**：专用 `英国节点` 策略组（必须选择能解锁 BBC iPlayer / ITV 英区版权限制的英国住宅或原生代理节点）。
 
+### 8. Apple TV / Apple TV+ 专属流媒体规则 (`AppleTV.yaml`)
+结合 `mixed.yaml`（Streaming AppleTV）与真实流量深度分析，精准提炼：
+* **Web 与客户端主站**：`tv.apple.com`、`linear.tv.apple.com`（线性频道直播流）、`tv.applemusic.com`。
+* **音视频切片流媒体 CDN**：`play-edge.itunes.apple.com`（核心加密点播切片）、`np-edge.itunes.apple.com`、`hls.itunes.apple.com`、`hls-amt.itunes.apple.com`。
+* **地域版权验证与鉴权元数据**：`gspe1-ssl.ls.apple.com`（地理位置与区域授权验证，防版权限制核心）、`uts-api.itunes.apple.com`、`umc-api.itunes.apple.com`。
+* **使用策略**：`PROXY` 或专用的 `AppleTV` 流媒体策略组（选择美区、台区、港区、日区等支持 Apple TV+ 原生解锁的代理节点）。
+
+### 9. Apple 全生态基础服务规则 (`Apple-Services.yaml`)
+结合 `mixed.yaml` 与 `MESL+tempjms-apple.yaml`（Apple 全量生态），涵盖：
+* **App Store 与 TestFlight**：`appstore.com`、`appsto.re`、`itunes.com`、`mzstatic.com`、`testflight.apple.com`。
+* **iCloud 云服务与同步**：`icloud.com`、`icloud-content.com`（照片与大文件传输）、`apple-cloudkit.com`（跨设备同步）、`me.com`。
+* **官方主站与静态 CDN**：`apple.com`、`apple.co`、`aaplimg.com`、`cdn-apple.com`、`organicfruitapps.com`。
+* **Apple News（新闻服务）**：`apple.news`、`news-client.apple.com`、`news-edge.apple.com`（有严格区域限制）。
+* **Siri 智能助手与搜索建议**：`guzzoni.apple.com`、`smoot.apple.com`。
+* **推送服务 (APNs) 与 Private Relay 隐私中继**：`push.apple.com`、`apple-relay.apple.com`、`apple-relay.cloudflare.com`。
+* **使用策略**：`DIRECT`（国内直连加速）或由专用 `Apple` 策略组智能托管。
+
 ---
 
 ## 在 Stash 中的标准配置示例
@@ -136,6 +153,26 @@ rule-providers:
     path: ./ruleset/uk-media.yaml
     interval: 86400
 
+  # 8. 订阅 Apple TV+ 专属流媒体规则集
+  appletv:
+    type: http
+    behavior: classical
+    format: yaml
+    url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/AppleTV.yaml"
+    # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/AppleTV.yaml"
+    path: ./ruleset/appletv.yaml
+    interval: 86400
+
+  # 9. 订阅 Apple 全生态基础服务规则集
+  apple-services:
+    type: http
+    behavior: classical
+    format: yaml
+    url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/Apple-Services.yaml"
+    # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/Apple-Services.yaml"
+    path: ./ruleset/apple-services.yaml
+    interval: 86400
+
 rules:
   # 必须排在最前面：优先阻断所有 P2P 偷跑连接
   - RULE-SET,china-video-apps-pcdn,REJECT
@@ -151,6 +188,12 @@ rules:
 
   # 英国全媒体走英国专属原生/住宅解锁节点 (BBC iPlayer / ITV)
   - RULE-SET,uk-media,PROXY
+
+  # Apple TV+ 专属流媒体走支持区域版权解锁的节点
+  - RULE-SET,appletv,PROXY
+
+  # Apple 全生态服务（若希望国内直连加速可设 DIRECT，若需使用 Apple News 建议设专用策略组）
+  - RULE-SET,apple-services,DIRECT
 
   # YouTube 流量走代理或指定策略组
   - RULE-SET,youtube,PROXY
