@@ -1,0 +1,56 @@
+# ==============================================================================
+# 规则名称: 抖音 / 字节跳动全量分流规则集 (Douyin & ByteDance)
+# 更新时间: 2026-09-25
+# 规则来源: 本地 Stash 实机抓包分析与验证
+# 适用平台: Stash, Clash rule-providers
+# ==============================================================================
+payload:
+  # ===== 1. 抖音核心业务与主站 =====
+  - DOMAIN-SUFFIX,douyin.com
+  - DOMAIN-SUFFIX,douyinstatic.com
+  - DOMAIN-SUFFIX,douyinpic.com
+  - DOMAIN-SUFFIX,douyinliving.com
+  - DOMAIN-SUFFIX,iesdouyin.com
+  - DOMAIN-SUFFIX,amemv.com
+
+  # ===== 2. 视频流媒体分发 (VOD / 直播流) =====
+  - DOMAIN-SUFFIX,douyinvod.com
+  - DOMAIN-SUFFIX,idouyinvod.com
+  - DOMAIN-SUFFIX,douyinivod.com
+  - DOMAIN-SUFFIX,douyincdn.com
+  - DOMAIN-SUFFIX,ndcpp.com
+
+  # ===== 3. 跨产品关联资源 (今日头条 / 西瓜视频 / 火山小视频) =====
+  - DOMAIN-SUFFIX,bdxiguaimg.com
+  - DOMAIN-SUFFIX,huoshanstatic.com
+  - DOMAIN-SUFFIX,searchpstatp.com
+  - DOMAIN-SUFFIX,snssdk.com
+
+  # ===== 4. 字节跳动底层前端与存储基建 (TOS / SCM / Goofy / Gecko) =====
+  - DOMAIN-SUFFIX,bytedance.com
+  - DOMAIN-SUFFIX,bytetos.com
+  - DOMAIN-SUFFIX,bytescm.com
+  - DOMAIN-SUFFIX,byteimg.com
+  - DOMAIN-SUFFIX,bytegoofy.com
+  - DOMAIN-SUFFIX,bytegecko.com
+  - DOMAIN-SUFFIX,byted-static.com
+  - DOMAIN-SUFFIX,bytednsdoc.com
+  - DOMAIN-SUFFIX,bytetcc.com
+  - DOMAIN-SUFFIX,bytecdn.cn
+  - DOMAIN-SUFFIX,bytecdn.com
+  - DOMAIN-SUFFIX,bytemastatic.com
+  - DOMAIN-SUFFIX,byteacctimg.com
+  - DOMAIN-SUFFIX,bytemaimg.com
+  - DOMAIN-SUFFIX,bytecc.com
+  - DOMAIN-SUFFIX,byteactivity.com
+  - DOMAIN-SUFFIX,asiad.byteactivity.com
+  - DOMAIN-SUFFIX,asiad.byteactivity12.com
+  - DOMAIN-SUFFIX,yhgfb-cn-static.com
+
+  # ===== 5. 后台统一 API、风控安全、APM 与数据埋点 =====
+  - DOMAIN-SUFFIX,zijieapi.com
+  - DOMAIN-SUFFIX,ibytedapm.com
+  - DOMAIN-SUFFIX,applogcdn.com
+  - DOMAIN-SUFFIX,feelgood.cn
+  - DOMAIN-SUFFIX,volcsiriusbd.com
+  - DOMAIN-SUFFIX,bdurl.net
