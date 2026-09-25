@@ -106,6 +106,12 @@
 * **高校校外身份认证**：CARSI 国家级高校身份认证联盟（`carsi.edu.cn`、`cernet.edu.cn`）。
 * **使用策略**：`DIRECT`（直连，确保校园网 IP / CARSI 机构身份正常识别，避免代理引发文献下载受阻）。
 
+### 13. YouTube、X (Twitter) 与全球主流成人媒体合集 (`YouTube-Porn-X.yaml`)
+全量合并 `YouTube.yaml` 与 `X-Porn.yaml`，直接对应 `mixed.yaml` 中的 `🎬 YouTube Porn X Select` 策略组需求：
+* **全量覆盖**：集成了 YouTube 32 条全生态音视频与移动端心跳规则 + X (Twitter) 官方全量体系与 ASN BGP IP 段 + 全球 8 大成人视讯与点播切片 CDN 矩阵（共 202 条精细规则，0 冗余冲突）。
+* **使用场景**：适合希望将 YouTube、X 以及成人网站统一收纳至单一策略组（如 `🎬 YouTube Porn X`）统一管理流媒体节点出口的用户。
+* **使用策略**：专用 `🎬 YouTube Porn X` 策略组或高质量流媒体代理。
+
 ---
 
 ## 在 Stash 中的标准配置示例
