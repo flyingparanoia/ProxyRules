@@ -1,0 +1,111 @@
+# ==============================================================================
+# 规则名称: OpenAI / ChatGPT 全量生态分流规则集 (OpenAI & AI Ecosystem)
+# 更新时间: 2026-09-25
+# 规则来源: mixed.yaml + MESL+tempjms-apple.yaml 深度提取与合并
+# 规则说明: 涵盖 ChatGPT 主站、Sora、API 网关、LiveKit 语音通话、Arkose 人机验证、Statsig 灰度及全套基础设施
+# 适用平台: Stash / Clash rule-providers (behavior: classical)
+# 推荐策略: PROXY 或 专用 OpenAI 节点策略组 (如 [OpenAI] / [ChatGPT] 节点组)
+# ==============================================================================
+payload:
+  # ============================================================================
+  # 【第一部分：OpenAI / ChatGPT 官方核心业务主站】
+  # ============================================================================
+  - DOMAIN-SUFFIX,openai.com                   # OpenAI 官方主站、开发者平台与 API 控制台
+  - DOMAIN-SUFFIX,chatgpt.com                  # ChatGPT 官方独立主站
+  - DOMAIN-SUFFIX,sora.com                     # Sora 官方视频生成与创意平台
+  - DOMAIN-SUFFIX,oaistatic.com                # OpenAI 前端静态资源与核心依赖库
+  - DOMAIN-SUFFIX,oaiusercontent.com           # ChatGPT 用户上传多媒体、分析代码与 DALL-E 生成图片 CDN
+  - DOMAIN-SUFFIX,ai.com                       # 官方短域（直达 ChatGPT）
+  - DOMAIN-SUFFIX,openai.org                   # OpenAI 组织官方域名
+
+  # ============================================================================
+  # 【第二部分：核心 API 网关、专属 CDN 与云端反向代理】
+  # ============================================================================
+  - DOMAIN,chat.openai.com.cdn.cloudflare.net  # Cloudflare 边缘专用反代接入点
+  - DOMAIN,openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net # 微软 Azure Front Door 专属 API 入口
+  - DOMAIN,production-openaicom-storage.azureedge.net    # Azure Edge 生产环境存储与多媒体分发
+  - DOMAIN-SUFFIX,openaiapi-site.azureedge.net # OpenAI API 全球 CDN 加速缓存
+  - DOMAIN-SUFFIX,openaicom.imgix.net          # OpenAI 多媒体图片实时渲染与处理服务
+
+  # ============================================================================
+  # 【第三部分：人机安全风控、Captcha 验证与身份认证】
+  # 解决“抱歉，您已被屏蔽”或人机验证循环卡死问题
+  # ============================================================================
+  - DOMAIN,openai-api.arkoselabs.com           # Arkose Labs 专用人机防刷 API 接口
+  - DOMAIN-SUFFIX,client-api.arkoselabs.com    # Arkose Labs 客户端交互验证
+  - DOMAIN-SUFFIX,inquiry.withpersona.com      # Persona 实名身份核验与高级风控鉴权
+  - DOMAIN-SUFFIX,auth0.com                    # Auth0 统一身份认证与第三方授权登录
+  - DOMAIN-SUFFIX,identrust.com                # IdenTrust 权威数字证书认证链
+
+  # ============================================================================
+  # 【第四部分：实时语音对话、WebRTC 穿透与低延迟音视频网络】
+  # 专门保障 ChatGPT 移动端与桌面端高级语音模式 (Advanced Voice Mode)
+  # ============================================================================
+  - DOMAIN-SUFFIX,chatgpt.livekit.cloud        # ChatGPT 官方语音通信 LiveKit 调度中枢
+  - DOMAIN-SUFFIX,host.livekit.cloud           # LiveKit WebRTC 实时音视频节点
+  - DOMAIN-SUFFIX,turn.livekit.cloud           # LiveKit TURN NAT 穿透中继服务器
+  - DOMAIN-SUFFIX,livekit.io                   # LiveKit 实时通信底层平台
+
+  # ============================================================================
+  # 【第五部分：灰度发布、实验系统、性能监控与客服支持】
+  # ============================================================================
+  - DOMAIN,browser-intake-datadoghq.com        # Datadog 客户端性能与异常上报
+  - DOMAIN-SUFFIX,browser-intake-datadoghq.com # Datadog 监控服务域名
+  - DOMAIN-SUFFIX,statsigapi.net               # Statsig A/B 灰度测试与实验分流
+  - DOMAIN-SUFFIX,events.statsigapi.net        # Statsig 事件追踪与遥测上报
+  - DOMAIN-SUFFIX,api.statsig.com              # Statsig API 调度接口
+  - DOMAIN-SUFFIX,featuregates.org             # FeatureGates 功能开关门禁
+  - DOMAIN-SUFFIX,launchdarkly.com             # LaunchDarkly 动态功能特性控制系统
+  - DOMAIN-SUFFIX,segment.io                   # Segment 用户行为数据分发平台
+  - DOMAIN-SUFFIX,sentry.io                    # Sentry 错误日志采集系统
+  - DOMAIN-SUFFIX,intercom.io                  # Intercom 在线客服沟通系统
+  - DOMAIN-SUFFIX,intercomcdn.com              # Intercom 前端静态组件 CDN
+  - DOMAIN,static.cloudflareinsights.com       # Cloudflare Web 性能指标分析
+  - DOMAIN-SUFFIX,algolia.net                  # Algolia 帮助文档与快速全文检索
+  - DOMAIN-SUFFIX,observeit.net                # 安全合规审计服务
+
+  # ============================================================================
+  # 【第六部分：支付结算、文件上传与生态插件集成】
+  # ============================================================================
+  - DOMAIN-SUFFIX,api.stripe.com               # Stripe 会员订阅、Plus/Team 信用卡支付网关
+  - DOMAIN-SUFFIX,prodregistryv2.org           # ChatGPT 插件与扩展模型注册中心
+  - DOMAIN-SUFFIX,featureassets.org            # ChatGPT 插件配置与运行资产
+  - DOMAIN-SUFFIX,api.onedrive.com             # 微软 OneDrive 文件上传与读取集成
+  - DOMAIN-SUFFIX,api.atlassian.com            # Atlassian 团队协作插件与集成服务
+  - DOMAIN-SUFFIX,mapbox.com                   # Mapbox 空间地理数据（供 ChatGPT 地图插件调用）
+
+  # ============================================================================
+  # 【第七部分：OpenAI 官方数据中心专用 IP 网段与关键词兜底】
+  # ============================================================================
+  - IP-CIDR,24.199.123.28/32,no-resolve        # OpenAI 官方出网节点专用 IP
+  - IP-CIDR,64.23.132.171/32,no-resolve       # OpenAI 官方出网节点专用 IP
+  - DOMAIN-KEYWORD,openai                      # 泛关键词匹配兜底
+
+  # ============================================================================
+  # 【第八部分：伴生主流海外 AI 平台（源自配置中的 OpenAI 策略组拓展）】
+  # 用户配置中统一并入 OpenAI 策略组的主流前沿大模型与编码助手
+  # ============================================================================
+  # 1. Claude / Anthropic
+  - DOMAIN-SUFFIX,claude.ai                    # Claude 网页端主站
+  - DOMAIN-SUFFIX,claude.com                   # Claude 备用域名
+  - DOMAIN-SUFFIX,claudeusercontent.com        # Claude 用户上传与生成附件 CDN
+  - DOMAIN-SUFFIX,anthropic.com                # Anthropic 官方机构与 API 控制台
+
+  # 2. xAI Grok
+  - DOMAIN-SUFFIX,grok.com                     # xAI Grok 官方主站
+  - DOMAIN-SUFFIX,x.ai                         # 马斯克 xAI 官方机构主页
+
+  # 3. Perplexity AI
+  - DOMAIN-SUFFIX,perplexity.ai                # Perplexity 搜索式 AI 主站
+  - DOMAIN-SUFFIX,perplexity.com               # Perplexity 官方域名
+  - DOMAIN-SUFFIX,pplx.ai                      # Perplexity 官方短链
+
+  # 4. Cursor 智能编程环境
+  - DOMAIN-SUFFIX,cursor.com                   # Cursor 官方网站
+  - DOMAIN-SUFFIX,cursor.sh                    # Cursor 早期主站
+  - DOMAIN-SUFFIX,cursor-cdn.com               # Cursor 资源分发 CDN
+
+  # 5. OpenRouter、Copilot 与模型评测
+  - DOMAIN-SUFFIX,openrouter.ai                # OpenRouter 统一大模型 API 聚合网关
+  - DOMAIN-SUFFIX,copilot.microsoft.com        # 微软 Copilot 助手
+  - DOMAIN-SUFFIX,artificialanalysis.ai        # 全球大模型性能与成本权威评测平台

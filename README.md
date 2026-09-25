@@ -27,6 +27,28 @@
 * **华语海外报刊与港澳台及亚洲重点**：联合早报、世界日报、人民报、大纪元、文学城、香港01、香港商报、紫荆网、台湾风传媒、台湾INSIDE、马来西亚南洋商报、新加坡商业时报、泰国民族报、泰国Prachachat、韩国亚洲经济、韩国每日经济、日本经济新闻/日经中文网、印度经济时报等。
 * **使用策略**：`PROXY` 或专用的 `Foreign-News` / `媒体` 策略组。
 
+### 5. OpenAI / ChatGPT 全量生态分流规则 (`OpenAI.yaml`)
+结合 `mixed.yaml` 与 `MESL+tempjms-apple.yaml` 深度提取与合并，涵盖：
+* **OpenAI 核心主站**：`openai.com`、`chatgpt.com`、`sora.com`、`ai.com`、`oaistatic.com`、`oaiusercontent.com`。
+* **反代与专属 CDN 网关**：Azure Front Door / Edge (`azurefd.net`, `azureedge.net`)、Cloudflare 边缘反代节点、Imgix。
+* **人机风控与认证授权**：Arkose Labs 人机验证 (`arkoselabs.com`)、Persona 实名风控 (`inquiry.withpersona.com`)、Auth0。
+* **实时语音高级模式 WebRTC**：LiveKit 核心音视频中继 (`chatgpt.livekit.cloud`, `turn.livekit.cloud`, `host.livekit.cloud`)。
+* **实验灰度与监控遥测**：Statsig (`statsigapi.net`)、Datadog (`browser-intake-datadoghq.com`)、Sentry、LaunchDarkly。
+* **插件生态与支付**：Stripe 信用卡充值网关 (`api.stripe.com`)、插件市场、OneDrive 与 Mapbox 集成。
+* **拓展主流 AI**：Claude / Anthropic、Grok、Perplexity、Cursor、OpenRouter。
+* **使用策略**：`PROXY` 或专用的 `OpenAI` / `AI` 策略组。
+
+### 6. Google Search 全球搜索分流规则 (`GoogleSearch.yaml`)
+结合 `mixed.yaml`（Google-Search 精细优化）与 `MESL+tempjms-apple.yaml`（全球各地区顶级域名与搜索基建），涵盖：
+* **搜索主域与短链**：`google.com`、`g.co`、`goo.gl`、`466453.com`、`toolbarqueries.google.com`。
+* **全球各国家/地区顶级域名 (ccTLD)**：`google.com.hk`、`google.co.jp`、`google.com.tw`、`google.co.uk`、`google.de`、`google.ca` 等 40+ 主流国家搜索后缀。
+* **静态多媒体与字体**：`gstatic.com`、`ssl.gstatic.com`、`fonts.gstatic.com`、`fonts.googleapis.com`、`googleusercontent.com`、`1e100.net`。
+* **统一身份与核心服务**：`accounts.google.com`、`ogs.google.com`（九宫格组件）、`googleapis.com`、`clients6.google.com`、`maps.googleapis.com`、`gemini.google.com`。
+* **安全验证与证书**：reCAPTCHA (`recaptcha.net`)、Google PKI 证书体系 (`pki.goog`, `o.pki.goog`)、安全浏览。
+* **移动加速标准 (AMP)**：`ampproject.org`、`ampproject.net`、`amp.dev`、`schema.org`。
+* **推送服务与防回环**：FCM / MTalk (`mtalk.google.com`)、Google Public DNS (`dns.google`)、IPv6 防串流。
+* **使用策略**：`PROXY` 或专用的 `Google` / `Google Search` 策略组。
+
 ---
 
 ## 在 Stash 中的标准配置示例
@@ -73,12 +95,38 @@ rule-providers:
     path: ./ruleset/foreign-news.yaml
     interval: 86400
 
+  # 5. 订阅 OpenAI / ChatGPT 全量生态规则集
+  openai:
+    type: http
+    behavior: classical
+    format: yaml
+    url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/OpenAI.yaml"
+    # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/OpenAI.yaml"
+    path: ./ruleset/openai.yaml
+    interval: 86400
+
+  # 6. 订阅 Google Search 全球搜索规则集
+  google-search:
+    type: http
+    behavior: classical
+    format: yaml
+    url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/GoogleSearch.yaml"
+    # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/GoogleSearch.yaml"
+    path: ./ruleset/google-search.yaml
+    interval: 86400
+
 rules:
   # 必须排在最前面：优先阻断所有 P2P 偷跑连接
   - RULE-SET,china-video-apps-pcdn,REJECT
 
   # 抖音官方核心业务直连
   - RULE-SET,douyin,DIRECT
+
+  # OpenAI / ChatGPT 生态走专用代理节点
+  - RULE-SET,openai,PROXY
+
+  # Google 全球搜索及服务走专用代理节点
+  - RULE-SET,google-search,PROXY
 
   # YouTube 流量走代理或指定策略组
   - RULE-SET,youtube,PROXY
@@ -87,7 +135,6 @@ rules:
   - RULE-SET,foreign-news,PROXY
 
   # 后续其他分流规则
-  - DOMAIN-SUFFIX,google.com,PROXY
   - GEOIP,CN,DIRECT
   - MATCH,FINAL
 ```

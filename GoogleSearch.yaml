@@ -1,0 +1,148 @@
+# ==============================================================================
+# 规则名称: Google Search 全球搜索与核心基建分流规则集 (GoogleSearch)
+# 更新时间: 2026-09-25
+# 规则来源: mixed.yaml (Google-Search + Gemini/Web) + MESL+tempjms-apple.yaml 深度提取与合并
+# 规则说明: 涵盖 Google 全球搜索主站、各国家地区顶级域名 (ccTLD)、静态资源、安全验证、AMP 标准及账号框架
+# 适用平台: Stash / Clash rule-providers (behavior: classical)
+# 推荐策略: PROXY 或 专用 Google 节点策略组 (如 [GoogleSearch] / [Google] 节点组)
+# ==============================================================================
+payload:
+  # ============================================================================
+  # 【第一部分：Google 搜索全球主站与官方核心短链】
+  # ============================================================================
+  - DOMAIN-SUFFIX,google.com                   # Google 全球主站（网页搜索、图片、新闻、学术等）
+  - DOMAIN-SUFFIX,g.co                         # Google 官方短网址
+  - DOMAIN-SUFFIX,goo.gl                       # Google 官方分享与短链接
+  - DOMAIN-SUFFIX,466453.com                   # Google 电话按键别名域名
+  - DOMAIN-SUFFIX,googlebot.com                # Google 搜索引擎官方爬虫标识
+  - DOMAIN-SUFFIX,toolbarqueries.google.com    # 浏览器搜索栏即时联想与自动补全接口
+
+  # ============================================================================
+  # 【第二部分：Google 搜索全球国家与地区顶级域名 (ccTLD)】
+  # 确保在任意国家或地区版本（如 google.co.jp / google.com.hk 等）均能精准命中分流
+  # ============================================================================
+  # 亚太地区
+  - DOMAIN-SUFFIX,google.com.hk                # 中国香港
+  - DOMAIN-SUFFIX,google.com.tw                # 中国台湾
+  - DOMAIN-SUFFIX,google.co.jp                 # 日本
+  - DOMAIN-SUFFIX,google.co.kr                 # 韩国
+  - DOMAIN-SUFFIX,google.com.sg                # 新加坡
+  - DOMAIN-SUFFIX,google.com.my                # 马来西亚
+  - DOMAIN-SUFFIX,google.co.th                 # 泰国
+  - DOMAIN-SUFFIX,google.co.id                 # 印度尼西亚
+  - DOMAIN-SUFFIX,google.com.ph                # 菲律宾
+  - DOMAIN-SUFFIX,google.com.vn                # 越南
+  - DOMAIN-SUFFIX,google.co.in                 # 印度
+  - DOMAIN-SUFFIX,google.com.au                # 澳大利亚
+  - DOMAIN-SUFFIX,google.co.nz                 # 新西兰
+
+  # 欧洲与北美主流地区
+  - DOMAIN-SUFFIX,google.co.uk                 # 英国
+  - DOMAIN-SUFFIX,google.ca                    # 加拿大
+  - DOMAIN-SUFFIX,google.de                    # 德国
+  - DOMAIN-SUFFIX,google.fr                    # 法国
+  - DOMAIN-SUFFIX,google.it                    # 意大利
+  - DOMAIN-SUFFIX,google.es                    # 西班牙
+  - DOMAIN-SUFFIX,google.nl                    # 荷兰
+  - DOMAIN-SUFFIX,google.ch                    # 瑞士
+  - DOMAIN-SUFFIX,google.se                    # 瑞典
+  - DOMAIN-SUFFIX,google.no                    # 挪威
+  - DOMAIN-SUFFIX,google.fi                    # 芬兰
+  - DOMAIN-SUFFIX,google.dk                    # 丹麦
+  - DOMAIN-SUFFIX,google.be                    # 比利时
+  - DOMAIN-SUFFIX,google.at                    # 奥地利
+  - DOMAIN-SUFFIX,google.pl                    # 波兰
+  - DOMAIN-SUFFIX,google.ie                    # 爱尔兰
+  - DOMAIN-SUFFIX,google.pt                    # 葡萄牙
+  - DOMAIN-SUFFIX,google.cz                    # 捷克
+  - DOMAIN-SUFFIX,google.gr                    # 希腊
+  - DOMAIN-SUFFIX,google.ru                    # 俄罗斯
+  - DOMAIN-SUFFIX,google.com.tr                # 土耳其
+  - DOMAIN-SUFFIX,google.com.br                # 巴西
+  - DOMAIN-SUFFIX,google.com.mx                # 墨西哥
+  - DOMAIN-SUFFIX,google.com.ar                # 阿根廷
+  - DOMAIN-SUFFIX,google.co.za                 # 南非
+  - DOMAIN-SUFFIX,google.ae                    # 阿联酋
+  - DOMAIN-SUFFIX,google.com.sa                # 沙特阿拉伯
+
+  # ============================================================================
+  # 【第三部分：静态多媒体资源、图床与 Google 字体库】
+  # 搜索结果页面加载、样式表渲染与矢量图标必备依赖
+  # ============================================================================
+  - DOMAIN-SUFFIX,gstatic.com                  # Google 全球静态内容托管 CDN (核心依赖)
+  - DOMAIN-SUFFIX,ssl.gstatic.com              # 加密静态资源分发节点
+  - DOMAIN-SUFFIX,fonts.gstatic.com            # Google Fonts 字体文件 CDN
+  - DOMAIN-SUFFIX,fonts.googleapis.com         # Google Fonts 字体样式表加载接口
+  - DOMAIN-SUFFIX,googleusercontent.com        # 搜索网页快照、搜索结果图片与缓存分发
+  - DOMAIN-SUFFIX,1e100.net                    # Google 全球骨干网络与服务器基础设施
+
+  # ============================================================================
+  # 【第四部分：账号会话认证、核心 API 与搜索集成服务】
+  # 保证 Google 账户登录状态一致，避免会话多出口触发频繁异地风控
+  # ============================================================================
+  - DOMAIN-SUFFIX,accounts.google.com          # Google 统一身份认证与账号中心
+  - DOMAIN-SUFFIX,ogs.google.com               # One Google 全局顶栏组件与九宫格菜单
+  - DOMAIN-SUFFIX,onegoogle.com                # One Google 跨应用协同服务
+  - DOMAIN-SUFFIX,googleapis.com               # Google 全球通用 API 接口体系
+  - DOMAIN-SUFFIX,clients6.google.com          # 浏览器与桌面端深度交互专用通道
+  - DOMAIN-SUFFIX,clientservices.googleapis.com # Google 客户端服务框架 API
+  - DOMAIN-SUFFIX,optimizationguide-pa.googleapis.com # Chrome 智能助手与页面智能优化服务
+  - DOMAIN-SUFFIX,update.googleapis.com        # 浏览器安全组件与搜索引擎数据库更新
+  - DOMAIN-SUFFIX,dl.google.com                # Google 官方软件与组件下载分发
+  - DOMAIN-SUFFIX,dl.l.google.com              # Google 下载分发链路
+  - DOMAIN-SUFFIX,tools.google.com             # Google 工具与支持服务
+  - DOMAIN-SUFFIX,tools.l.google.com           # Google 工具内部接口
+  - DOMAIN-SUFFIX,maps.googleapis.com          # 搜索结果内嵌地图与位置服务 API
+  - DOMAIN-SUFFIX,play.google.com              # Google Play 搜索卡片与元数据
+  - DOMAIN-SUFFIX,gemini.google.com            # Google Gemini AI（搜索生成式体验与原生 AI）
+
+  # ============================================================================
+  # 【第五部分：安全防护、人机验证与数字证书体系】
+  # ============================================================================
+  - DOMAIN-SUFFIX,recaptcha.net                # Google reCAPTCHA 人机身份验证核心服务
+  - DOMAIN-SUFFIX,safebrowsing.googleapis.com  # Google 安全浏览威胁检测 API
+  - DOMAIN-SUFFIX,safebrowsing-cache.google.com # 安全浏览本地缓存加速
+  - DOMAIN-SUFFIX,pki.goog                     # Google 官方根证书与 PKI 信任体系
+  - DOMAIN-SUFFIX,o.pki.goog                   # Google OCSP 证书在线状态快速验证
+  - DOMAIN-SUFFIX,crl.pki.goog                 # Google CRL 证书吊销列表
+  - DOMAIN-SUFFIX,ocsp.pki.goog                # Google OCSP 备用节点
+
+  # ============================================================================
+  # 【第六部分：移动网页加速 (AMP) 与语义化搜索标准】
+  # 移动端快速打开搜索结果及 SEO 结构化数据解析
+  # ============================================================================
+  - DOMAIN-SUFFIX,ampproject.org               # Google AMP 移动加速项目主站与框架
+  - DOMAIN-SUFFIX,ampproject.net               # AMP JS 运行时与前端静态组件
+  - DOMAIN-SUFFIX,ampproject.com               # AMP 扩展服务
+  - DOMAIN-SUFFIX,amp.dev                      # AMP 官方开发者平台
+  - DOMAIN-SUFFIX,schema.org                   # 搜索引擎结构化数据通用标准
+  - DOMAIN-SUFFIX,data-vocabulary.org          # Google 早期语义化数据结构标准
+  - DOMAIN-SUFFIX,cookiechoices.org            # 欧盟 Cookie 合规指南页面
+
+  # ============================================================================
+  # 【第七部分：推送通知与移动端长连接服务 (FCM / MTalk)】
+  # 解决移动端与 Chrome 桌面端后台推送长连接
+  # ============================================================================
+  - DOMAIN-SUFFIX,mtalk.google.com             # Google FCM 消息推送主通道
+  - DOMAIN-SUFFIX,alt1-mtalk.google.com        # Google FCM 备用节点 1
+  - DOMAIN-SUFFIX,alt2-mtalk.google.com        # Google FCM 备用节点 2
+  - DOMAIN-SUFFIX,alt3-mtalk.google.com        # Google FCM 备用节点 3
+  - DOMAIN-SUFFIX,alt4-mtalk.google.com        # Google FCM 备用节点 4
+  - DOMAIN-SUFFIX,alt5-mtalk.google.com        # Google FCM 备用节点 5
+  - DOMAIN-SUFFIX,alt6-mtalk.google.com        # Google FCM 备用节点 6
+  - DOMAIN-SUFFIX,alt7-mtalk.google.com        # Google FCM 备用节点 7
+  - DOMAIN-SUFFIX,alt8-mtalk.google.com        # Google FCM 备用节点 8
+  - DOMAIN-SUFFIX,c.android.clients.google.com # Android 搜索框架与客户端支持
+
+  # ============================================================================
+  # 【第八部分：搜索分析与防回环辅助规则】
+  # ============================================================================
+  - DOMAIN-SUFFIX,google-analytics.com         # Google 分析平台
+  - DOMAIN-SUFFIX,analytics.google.com         # Google 网站统计控制台
+  - DOMAIN-SUFFIX,googletagmanager.com         # Google 代码管理器
+  - DOMAIN-SUFFIX,googletagservices.com        # Google 代码调用核心服务
+  - DOMAIN-SUFFIX,ssl-google-analytics.l.google.com # SSL 分析数据上报链路
+  - DOMAIN-SUFFIX,www-googletagmanager.l.google.com # 代码管理器调度
+  - DOMAIN-SUFFIX,app-measurement.com          # 应用内搜索与行为测量
+  - DOMAIN-SUFFIX,dns.google                   # Google Public DNS
+  - DOMAIN-SUFFIX,ipv6.google.com              # 避免测试期间与 IPv6 会话走直连造成会话撕裂
