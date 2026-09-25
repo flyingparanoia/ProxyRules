@@ -64,10 +64,29 @@ payload:
   - '+.apple-relay.fastly-edge.com'             # Fastly 合作隐私中继边缘节点
 
   # ============================================================================
-  # 【第八部分：Apple Maps、位置服务与底层网络凭据】
+  # 【第八部分：Apple 身份认证、系统安全凭据与开发者生态】
   # ============================================================================
+  - '+.appleid.cdn-apple.com'                   # Apple ID 网页端核心登录组件
+  - '+.idmsa.apple.com'                         # Apple 统一账户认证与双重验证 (2FA) 接口
   - '+.apple-mapkit.com'                        # MapKit 地图开发套件服务
-  - '+.apple-dns.net'                           # Apple 智能 DNS 路由与负载均衡
-  - '+.akadns.net'                              # Apple 使用的 Akamai 域名解析支撑
-  - 'apple.comscoreresearch.com'                # Apple 设备分析与遥测服务
-  - '+.crashlytics.com'                         # 崩溃日志分析系统
+  - '+.apple-dns.net'                           # Apple 官方智能 DNS 调度与负载均衡
+  - '+.store.apple.com.edgekey.net'             # Apple Store 官方商店边缘调度
+  - '+.certs.apple.com'                         # Apple 根证书与安全传输凭据服务
+  - '+.crl.apple.com'                           # Apple 证书吊销列表检查
+  - '+.ocsp.apple.com'                          # Apple 在线证书状态检查协议 (系统安全核心)
+  - '+.developer.apple.com'                     # Apple 官方开发者中心与 SDK 文档
+  - '+.swift.org'                               # Swift 编程语言官方开源主站
+
+  # ============================================================================
+  # 【第九部分：iCloud 中国区（云上贵州 GCBD）官方合规运营资产】
+  # 涵盖中国大陆地区 iCloud 官方合规数据资产 (照片备份、钥匙串与云盘同步)
+  # 说明: 若 Apple Services 分组选择海外节点，这组域名亦已写入 China-Direct 保障直连极速
+  # ============================================================================
+  - '+.apple-icloud.cn'                         # 云上贵州数据运营官方域名
+  - '+.appleicloud.cn'                          # 云上贵州数据资产域名
+  - '+.icloud-apple.cn'                         # 云上贵州同步服务
+  - '+.icloud-content.com.cn'                   # 云上贵州大文件与照片流分发 CDN
+  - '+.icloud.cn'                               # 云上贵州主域名
+  - '+.icloud.com.cn'                           # 云上贵州 iCloud 官方门户
+  - '+.icloud.net.cn'                           # 云上贵州网络资源调度
+  - '+.icloudapple.cn'                          # 云上贵州运营备用域

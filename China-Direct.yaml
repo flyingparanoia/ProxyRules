@@ -9,7 +9,60 @@
 # ==============================================================================
 payload:
   # ============================================================================
-  # 【第一部分：顶级域名与国区通配】(ccTLD & Regional Wildcard)
+  # 【第一部分：私有网络、局域网设备与路由器管理】(Private & Local Network)
+  # 确保各类家用/企业路由器管理后台、智能家居、NAS、自建服务等本地通信 100% 直连，绝不出网走代理
+  # ============================================================================
+  # --- 1.1 主流家用与企业级路由器 Web 管理后台 ---
+  # 常见路由器通过本地 DNS 劫持将特定域名重定向至网关管理界面 (如 192.168.1.1)
+  - '+.tplogin.cn'                              # 普联 TP-Link 路由器管理后台
+  - '+.tplinkwifi.net'                          # 普联 TP-Link 国际版路由器管理后台
+  - '+.miwifi.com'                              # 小米 / 红米路由器 Web 管理后台 (默认 192.168.31.1)
+  - '+.asusrouter.com'                          # 华硕 ASUS 路由器与 AiMesh 节点管理面板
+  - '+.routerlogin.com'                         # 网件 NETGEAR 路由器主管理后台
+  - '+.routerlogin.net'                         # 网件 NETGEAR 路由器备用管理后台
+  - '+.tendawifi.com'                           # 腾达 Tenda 家用路由器管理后台
+  - '+.hiwifi.com'                              # 极路由 HiWiFi 管理后台
+  - '+.phicomm.me'                              # 斐讯 Phicomm 路由器后台
+  - '+.peiluyou.com'                            # 斐讯路由备用管理地址
+  - '+.leike.cc'                                # 磊科 Netcore 路由器管理后台
+  - '+.zte.home'                                # 中兴 ZTE 家用光猫/网关后台
+  - '+.router.ctc'                              # 中国电信天翼宽带光猫默认网关
+  - '+.my.router'                               # 常见第三方及定制固件通用网关地址
+  - 'instant.arubanetworks.com'                 # Aruba 企业级无线 AP 初始配置入口
+  - 'setmeup.arubanetworks.com'                 # Aruba Instant AP 零配置部署页面
+  - 'oasisauth.h3c.com'                         # 新华三 H3C 绿洲平台企业 AP 认证网关
+
+  # --- 1.2 局域网协议标准与保留顶级域名 (RFC 6761 / RFC 8375) ---
+  # 操作系统或内网设备约定的专用域名，不得向公网 DNS 查询或走代理
+  - '+.local'                                   # mDNS 多播 DNS (Apple Bonjour / 局域网打印机 / 智能家居)
+  - '+.lan'                                     # OpenWrt / 爱快等软路由常见的默认内网域名后缀
+  - '+.localdomain'                             # Linux / Unix 系统常见的本地默认域名后缀
+  - '+.internal'                                # RFC 6761 局域网私有服务内部域名
+  - '+.home.arpa'                               # RFC 8375 智能家居及家庭网络保留专用域名 (Matter / Home Assistant)
+  - '+.localhost'                               # RFC 6761 本地环回保留顶级域 (指向 127.0.0.1)
+  - '+.example'                                 # RFC 2606 本地文档与示例保留顶级域
+  - '+.invalid'                                 # RFC 2606 本地无效标识保留顶级域
+  - '+.test'                                    # RFC 2606 本地测试环境专用保留顶级域
+
+  # --- 1.3 家庭私有云、NAS 多媒体与内网穿透组网 ---
+  # 本地多媒体串流与私有虚拟网络，直连保障内网千兆/万兆速度
+  - '+.plex.direct'                             # Plex 官方为家庭内网流媒体服务器提供的专属本地 SSL 直连域名
+  - '+.ts.net'                                  # Tailscale 虚拟局域网 MagicDNS 域名 (异地组网多设备直连)
+  - 'local.adguard.org'                         # AdGuard Home 本地 DNS 控制台与过滤服务地址
+
+  # --- 1.4 本机跨进程鉴权与安全套件 ---
+  # 本地桌面客户端通过 127.0.0.1 端口做网页登录握手鉴权
+  - '+.localhost.ptlogin2.qq.com'               # 腾讯 QQ / TIM 桌面端与网页端跨域快捷登录鉴权通道
+  - '+.localhost.sec.qq.com'                    # 腾讯安全中心本地环回验证通道
+  - '+.kis.v2.scr.kaspersky-labs.com'           # 卡巴斯基杀毒软件本地 Web 脚本监控通道
+
+  # --- 1.5 局域网反向 DNS 寻址 (PTR Lookups) ---
+  # 查询局域网 IP 对应的主机名，必须由本地内网网关应答，绝不可发往公网
+  - '+.in-addr.arpa'                            # IPv4 反向域名寻址
+  - '+.ip6.arpa'                                # IPv6 反向域名寻址
+
+  # ============================================================================
+  # 【第二部分：顶级域名与国区通配】(ccTLD & Regional Wildcard)
   # ============================================================================
   # --- 顶级域名与国区通用后缀通配 ---
   - '+.cn'                                      # 通配顶级域名（中国）
@@ -674,15 +727,22 @@ payload:
   # ============================================================================
   # 【补充第七部分：自 jms-ruleset-norelay 合并的国内直连与免流服务】
   # ============================================================================
-  # --- Apple 中国专属服务与地理定位 ---
+  # --- Apple 中国专属服务、本地定位与云上贵州 (GCBD) 合规数据资产 ---
   - '+.cn.apple.com'
+  - '+.apple.com.cn'
   - 'gs-loc-cn.apple.com'
   - '+.cn.ls.apple.com'
   - '+.cn-ssl.ls.apple.com'
   - '+.gspe19-cn-ssl.ls.apple.com'
-  - '+.apple.com.cn'
-  - '+.icloud.com.cn'
   - 'api.smoot.apple.cn'
+  - '+.apple-icloud.cn'
+  - '+.appleicloud.cn'
+  - '+.icloud-apple.cn'
+  - '+.icloud-content.com.cn'
+  - '+.icloud.cn'
+  - '+.icloud.com.cn'
+  - '+.icloud.net.cn'
+  - '+.icloudapple.cn'
 
   # --- 哔哩哔哩 (Bilibili) 核心、海外版、客户端进程与 HTTPDNS 直连节点 ---
   - '+.anitama.cn'
