@@ -154,7 +154,7 @@ rule-providers:
   # 1. 订阅大陆主流视频网站与 App PCDN 偷跑拦截规则集
   china-video-apps-pcdn:
     type: http
-    behavior: classical
+    behavior: domain
     format: yaml
     url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/China-Video-Apps-PCDN.yaml"
     # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/China-Video-Apps-PCDN.yaml"
@@ -164,7 +164,7 @@ rule-providers:
   # 2. 订阅 YouTube、X (Twitter) 与全球主流成人媒体合集
   youtube-porn-x:
     type: http
-    behavior: classical
+    behavior: domain
     format: yaml
     url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/YouTube-Porn-X.yaml"
     # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/YouTube-Porn-X.yaml"
@@ -174,7 +174,7 @@ rule-providers:
   # 3. 订阅抖音官方直连规则集
   douyin:
     type: http
-    behavior: classical
+    behavior: domain
     format: yaml
     url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/Douyin.yaml"
     # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/Douyin.yaml"
@@ -184,7 +184,7 @@ rule-providers:
   # 4. 订阅全球海外新闻与专业媒体规则集 (不含 NYT / WSJ)
   foreign-news:
     type: http
-    behavior: classical
+    behavior: domain
     format: yaml
     url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/Foreign-News-no-NYT-WSJ.yaml"
     # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/Foreign-News-no-NYT-WSJ.yaml"
@@ -194,7 +194,7 @@ rule-providers:
   # 5. 订阅 OpenAI / ChatGPT 全量生态规则集
   openai:
     type: http
-    behavior: classical
+    behavior: domain
     format: yaml
     url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/OpenAI.yaml"
     # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/OpenAI.yaml"
@@ -204,7 +204,7 @@ rule-providers:
   # 6. 订阅 Google 全球搜索与 Gemini 智能生态规则集
   google-gemini:
     type: http
-    behavior: classical
+    behavior: domain
     format: yaml
     url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/GoogleSearch-Gemini.yaml"
     # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/GoogleSearch-Gemini.yaml"
@@ -214,7 +214,7 @@ rule-providers:
   # 7. 订阅英国全媒体与流媒体规则集 (BBC / ITV / C4)
   uk-media:
     type: http
-    behavior: classical
+    behavior: domain
     format: yaml
     url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/UK-Media.yaml"
     # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/UK-Media.yaml"
@@ -224,7 +224,7 @@ rule-providers:
   # 8. 订阅 Apple TV+ 专属流媒体规则集
   appletv:
     type: http
-    behavior: classical
+    behavior: domain
     format: yaml
     url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/AppleTV.yaml"
     # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/AppleTV.yaml"
@@ -234,7 +234,7 @@ rule-providers:
   # 9. 订阅 Apple 全生态基础服务规则集
   apple-services:
     type: http
-    behavior: classical
+    behavior: domain
     format: yaml
     url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/Apple-Services.yaml"
     # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/Apple-Services.yaml"
@@ -244,7 +244,7 @@ rule-providers:
   # 10. 订阅 TikTok 全量生态规则集
   tiktok:
     type: http
-    behavior: classical
+    behavior: domain
     format: yaml
     url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/TikTok.yaml"
     # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/TikTok.yaml"
@@ -254,7 +254,7 @@ rule-providers:
   # 11. 订阅学术数据库与文献资源直连规则集
   academic-direct:
     type: http
-    behavior: classical
+    behavior: domain
     format: yaml
     url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/Academic-Direct.yaml"
     # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/Academic-Direct.yaml"
@@ -264,7 +264,7 @@ rule-providers:
   # 12. 订阅中国大陆主流服务直连规则集
   china-direct:
     type: http
-    behavior: classical
+    behavior: domain
     format: yaml
     url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/China-Direct.yaml"
     # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/China-Direct.yaml"
@@ -274,7 +274,7 @@ rule-providers:
   # 13. 订阅纽约时报、华尔街日报与美国轻量金融服务合并规则集
   nyt-wsj-us-light:
     type: http
-    behavior: classical
+    behavior: domain
     format: yaml
     url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/NYT-WSJ-US-Light.yaml"
     # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/NYT-WSJ-US-Light.yaml"
@@ -284,7 +284,7 @@ rule-providers:
   # 14. 订阅微软全生态服务规则集 (Windows / Office 365 / Azure / OneDrive)
   microsoft:
     type: http
-    behavior: classical
+    behavior: domain
     format: yaml
     url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/Microsoft.yaml"
     # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/Microsoft.yaml"

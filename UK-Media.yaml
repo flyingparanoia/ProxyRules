@@ -3,7 +3,7 @@
 # 更新时间: 2026-09-25
 # 规则来源: mixed.yaml (UK Broadcast) + MESL+tempjms-apple.yaml (BBC 全量流媒体 CDN) 深度融合
 # 规则说明: 涵盖 BBC (iPlayer / Sounds / News)、ITV (ITVX)、Channel 4 (All 4)、Channel 5 (My5)、Sky / NOW 等全套英国本土主流媒体
-# 适用平台: Stash / Clash rule-providers (behavior: classical)
+# 适用平台: Stash / Clash rule-providers (behavior: domain)
 # 推荐策略: 🇬🇧 英国本土原生节点 (必须解锁英国 BBC iPlayer / ITV 区域版权限制)
 # ==============================================================================
 payload:
@@ -11,73 +11,71 @@ payload:
   # 【第一部分：BBC 官方全量生态 (BBC iPlayer, Sounds, News & Worldwide)】
   # ============================================================================
   # 1. BBC 核心门户、新闻与国际站点
-  - DOMAIN-SUFFIX,bbc.co.uk                    # BBC 英国官方主站
-  - DOMAIN-SUFFIX,bbc.com                      # BBC 全球新闻网与国际门户
-  - DOMAIN-SUFFIX,bbc.co                       # BBC 官方通用短链
-  - DOMAIN-SUFFIX,bbc.in                       # 印度与区域服务
-  - DOMAIN-SUFFIX,bbc.net.uk                   # BBC 网络基础设施
-  - DOMAIN-SUFFIX,bbcmedia.co.uk               # BBC 媒体资源中心
-  - DOMAIN-SUFFIX,bbcchinese.com               # BBC 中文网
-  - DOMAIN-SUFFIX,bbcpersian.com               # BBC 波斯语等国际广播
-  - DOMAIN-SUFFIX,bbcverticals.com             # BBC 垂直频道
-  - DOMAIN-SUFFIX,bidi.net.uk                  # BBC 内部数据与子系统
-  - DOMAIN-SUFFIX,3d-bbc.co.uk                 # BBC 特殊赛事与直播
-  - DOMAIN-SUFFIX,bbc                          # BBC 顶级品牌域名 (.bbc)
+  - '+.bbc.co.uk'                               # BBC 英国官方主站
+  - '+.bbc.com'                                 # BBC 全球新闻网与国际门户
+  - '+.bbc.co'                                  # BBC 官方通用短链
+  - '+.bbc.in'                                  # 印度与区域服务
+  - '+.bbc.net.uk'                              # BBC 网络基础设施
+  - '+.bbcmedia.co.uk'                          # BBC 媒体资源中心
+  - '+.bbcchinese.com'                          # BBC 中文网
+  - '+.bbcpersian.com'                          # BBC 波斯语等国际广播
+  - '+.bbcverticals.com'                        # BBC 垂直频道
+  - '+.bidi.net.uk'                             # BBC 内部数据与子系统
+  - '+.3d-bbc.co.uk'                            # BBC 特殊赛事与直播
+  - '+.bbc'                                     # BBC 顶级品牌域名 (.bbc)
 
   # 2. BBC iPlayer / Sounds 前端资产、移动服务与播放组件
-  - DOMAIN-SUFFIX,bbci.co.uk                   # BBC Sounds / iPlayer 网页端及 App 核心组件 CDN
-  - DOMAIN-SUFFIX,bbci.co                      # BBC 移动服务与短链路由
-  - DOMAIN-SUFFIX,bb-static.com                # BBC 静态资源与前端依赖辅助域名
+  - '+.bbci.co.uk'                              # BBC Sounds / iPlayer 网页端及 App 核心组件 CDN
+  - '+.bbci.co'                                 # BBC 移动服务与短链路由
+  - '+.bb-static.com'                           # BBC 静态资源与前端依赖辅助域名
 
   # 3. BBC 核心流媒体内容分发网络 (CDN 播流服务器与切片调度)
-  - DOMAIN,aod-dash-uk-live.akamaized.net      # BBC UK 音频 DASH 实时流
-  - DOMAIN,aod-hls-uk-live.akamaized.net       # BBC UK 音频 HLS 实时流
-  - DOMAIN,as-dash-uk-live.akamaized.net       # BBC UK 辅助音视频流
-  - DOMAIN,as-hls-uk-live.akamaized.net        # BBC UK 辅助音视频流
-  - DOMAIN,vod-dash-uk-live.akamaized.net      # BBC iPlayer UK 视频点播 DASH 核心流
-  - DOMAIN,vod-hls-uk-live.akamaized.net       # BBC iPlayer UK 视频点播 HLS 核心流
-  - DOMAIN,vod-sub-uk-live.akamaized.net       # BBC iPlayer 字幕流
-  - DOMAIN,vod-thumb-uk-live.akamaized.net     # BBC iPlayer 视频封面与剧照缩略图
-  - DOMAIN,vod-dash-ww-live.akamaized.net      # BBC 全球国际点播流
-  - DOMAIN,vod-thumb-ww-live.akamaized.net     # BBC 全球国际缩略图
-  - DOMAIN,vs-cmaf-push-uk-live.akamaized.net  # BBC 低延迟 CMAF 直播流调度
-  - DOMAIN-SUFFIX,bbcfmt.hs.llnwd.net          # Limelight Networks 播流 CDN
-  - DOMAIN-SUFFIX,bbcfmt.s.llnwi.net           # Limelight Networks 播流节点
-  - DOMAIN-KEYWORD,bbcfmt                      # BBC 专用流媒体格式标识
-  - DOMAIN-KEYWORD,uk-live                     # 英国本土直播流关键词兜底
+  - 'aod-dash-uk-live.akamaized.net'            # BBC UK 音频 DASH 实时流
+  - 'aod-hls-uk-live.akamaized.net'             # BBC UK 音频 HLS 实时流
+  - 'as-dash-uk-live.akamaized.net'             # BBC UK 辅助音视频流
+  - 'as-hls-uk-live.akamaized.net'              # BBC UK 辅助音视频流
+  - 'vod-dash-uk-live.akamaized.net'            # BBC iPlayer UK 视频点播 DASH 核心流
+  - 'vod-hls-uk-live.akamaized.net'             # BBC iPlayer UK 视频点播 HLS 核心流
+  - 'vod-sub-uk-live.akamaized.net'             # BBC iPlayer 字幕流
+  - 'vod-thumb-uk-live.akamaized.net'           # BBC iPlayer 视频封面与剧照缩略图
+  - 'vod-dash-ww-live.akamaized.net'            # BBC 全球国际点播流
+  - 'vod-thumb-ww-live.akamaized.net'           # BBC 全球国际缩略图
+  - 'vs-cmaf-push-uk-live.akamaized.net'        # BBC 低延迟 CMAF 直播流调度
+  - '+.bbcfmt.hs.llnwd.net'                     # Limelight Networks 播流 CDN
+  - '+.bbcfmt.s.llnwi.net'                      # Limelight Networks 播流节点
 
   # ============================================================================
   # 【第二部分：ITV 英国独立电视台全量生态 (ITVX / ITV Hub)】
   # ============================================================================
-  - DOMAIN-SUFFIX,itv.com                      # ITV 官网与 ITVX 流媒体视频平台
-  - DOMAIN-SUFFIX,itvstatic.com                # ITV 前端静态资产与播放器 UI 图床
-  - DOMAIN-SUFFIX,massive-itv.com              # ITV 跨平台多屏架构与点播服务
-  - DOMAIN,itvpnp.live.ott.irdeto.com          # ITV Irdeto DRM 版权验证与播放鉴权
-  - DOMAIN,itvpnp.stage.ott.irdeto.com         # ITV 阶段鉴权接口
-  - DOMAIN,itvpnpmobile-a.akamaihd.net         # ITV 移动客户端 Akamai 直播点播流媒体
+  - '+.itv.com'                                 # ITV 官网与 ITVX 流媒体视频平台
+  - '+.itvstatic.com'                           # ITV 前端静态资产与播放器 UI 图床
+  - '+.massive-itv.com'                         # ITV 跨平台多屏架构与点播服务
+  - 'itvpnp.live.ott.irdeto.com'                # ITV Irdeto DRM 版权验证与播放鉴权
+  - 'itvpnp.stage.ott.irdeto.com'               # ITV 阶段鉴权接口
+  - 'itvpnpmobile-a.akamaihd.net'               # ITV 移动客户端 Akamai 直播点播流媒体
 
   # ============================================================================
   # 【第三部分：Channel 4 (英国第四台 / All 4)】
   # ============================================================================
-  - DOMAIN-SUFFIX,channel4.com                 # Channel 4 官网与 All 4 点播平台
-  - DOMAIN-SUFFIX,c4assets.com                 # Channel 4 静态多媒体与视频元数据 CDN
+  - '+.channel4.com'                            # Channel 4 官网与 All 4 点播平台
+  - '+.c4assets.com'                            # Channel 4 静态多媒体与视频元数据 CDN
 
   # ============================================================================
   # 【第四部分：Channel 5 (My5) & BritBox & Sky / NOW】
   # ============================================================================
   # 1. Channel 5 / My5
-  - DOMAIN-SUFFIX,channel5.com                 # Channel 5 官网
-  - DOMAIN-SUFFIX,my5.tv                       # My5 流媒体视频播放平台
+  - '+.channel5.com'                            # Channel 5 官网
+  - '+.my5.tv'                                  # My5 流媒体视频播放平台
 
   # 2. BritBox (英国影视精品流媒体)
-  - DOMAIN-SUFFIX,britbox.co.uk                # BritBox 英国本土平台
-  - DOMAIN-SUFFIX,britbox.com                  # BritBox 国际服务
+  - '+.britbox.co.uk'                           # BritBox 英国本土平台
+  - '+.britbox.com'                             # BritBox 国际服务
 
   # 3. Sky UK / NOW TV
-  - DOMAIN-SUFFIX,nowtv.com                    # Sky 旗下 NOW 电视流媒体平台
-  - DOMAIN-SUFFIX,skygo.co.uk                  # Sky Go 移动流媒体客户端
+  - '+.nowtv.com'                               # Sky 旗下 NOW 电视流媒体平台
+  - '+.skygo.co.uk'                             # Sky Go 移动流媒体客户端
 
   # ============================================================================
   # 【第五部分：第三方英区转播与共享 CDN 调度】
   # ============================================================================
-  - DOMAIN-SUFFIX,dcblivedazn.akamaized.net    # DAZN 英区体育赛事与转播流
+  - '+.dcblivedazn.akamaized.net'               # DAZN 英区体育赛事与转播流

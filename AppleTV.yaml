@@ -3,33 +3,28 @@
 # 更新时间: 2026-09-25
 # 规则来源: mixed.yaml (Streaming AppleTV) + ProxyRuleSet/AppleTV.yaml + 流媒体实机调用分析
 # 规则说明: 涵盖 Apple TV+ 原创影视点播、MLS 足球季票、音视频 HLS/DASH 流媒体切片 CDN、地域版权鉴权与影视元数据
-# 适用平台: Stash / Clash rule-providers (behavior: classical)
+# 适用平台: Stash / Clash rule-providers (behavior: domain)
 # 推荐策略: PROXY 或 专用流媒体节点组 (必须支持解锁 Apple TV+ 区域版权限制，如美区、台区、港区、日区原生节点)
 # ==============================================================================
 payload:
   # ============================================================================
   # 【第一部分：Apple TV 官方服务主站与 Web 播放器】
   # ============================================================================
-  - DOMAIN-SUFFIX,tv.apple.com                 # Apple TV+ 官方主站与网页版全功能播放器
-  - DOMAIN-SUFFIX,linear.tv.apple.com          # Apple TV 线性电视频道与实时流媒体广播
-  - DOMAIN-SUFFIX,tv.applemusic.com            # Apple Music TV 官方音乐视频频道
+  - '+.tv.apple.com'                            # Apple TV+ 官方主站与网页版全功能播放器
+  - '+.linear.tv.apple.com'                     # Apple TV 线性电视频道与实时流媒体广播
+  - '+.tv.applemusic.com'                       # Apple Music TV 官方音乐视频频道
 
   # ============================================================================
   # 【第二部分：核心音视频切片流媒体 CDN (播放加载与码率调度)】
   # ============================================================================
-  - DOMAIN,play-edge.itunes.apple.com          # Apple TV+ 核心加密音视频切片流媒体 CDN (点播流量核心)
-  - DOMAIN,np-edge.itunes.apple.com            # Apple TV+ 音视频边缘分发节点与就近缓冲
-  - DOMAIN,hls.itunes.apple.com                # Apple iTunes / TV HLS 视频切片流
-  - DOMAIN,hls-amt.itunes.apple.com            # Apple 多码率动态自适应流媒体分发
+  - 'play-edge.itunes.apple.com'                # Apple TV+ 核心加密音视频切片流媒体 CDN (点播流量核心)
+  - 'np-edge.itunes.apple.com'                  # Apple TV+ 音视频边缘分发节点与就近缓冲
+  - 'hls.itunes.apple.com'                      # Apple iTunes / TV HLS 视频切片流
+  - 'hls-amt.itunes.apple.com'                  # Apple 多码率动态自适应流媒体分发
 
   # ============================================================================
   # 【第三部分：版权鉴权、账户区域验证与影视元数据 API】
   # ============================================================================
-  - DOMAIN,gspe1-ssl.ls.apple.com              # Apple 位置验证、设备许可与区域播放授权服务 (核心防封锁验证)
-  - DOMAIN,uts-api.itunes.apple.com            # Universal TV Services (影视元数据、海报墙与剧集信息 API)
-  - DOMAIN,umc-api.itunes.apple.com            # Apple TV 媒体目录索引与用户订阅鉴权接口
-
-  # ============================================================================
-  # 【第四部分：原生系统应用进程匹配 (底盘兜底)】
-  # ============================================================================
-  - PROCESS-NAME,TV                           # macOS / iOS / tvOS 原生 Apple TV 应用进程名
+  - 'gspe1-ssl.ls.apple.com'                    # Apple 位置验证、设备许可与区域播放授权服务 (核心防封锁验证)
+  - 'uts-api.itunes.apple.com'                  # Universal TV Services (影视元数据、海报墙与剧集信息 API)
+  - 'umc-api.itunes.apple.com'                  # Apple TV 媒体目录索引与用户订阅鉴权接口

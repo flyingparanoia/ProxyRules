@@ -4,7 +4,7 @@
 # 规则来源: 提取自 mixed.yaml (🎓 学术资源类 —— 直连便于认证 / 学术网络识别)
 # 规则说明: 仅包含需要直连的全球与国内权威学术数据库、学术期刊出版商与检索系统
 # 设计目的: 确保校园网 IP 认证、CARSI 统一身份认证正常识别，避免代理导致文献下载受阻
-# 适用平台: Stash, Clash rule-providers (behavior: classical)
+# 适用平台: Stash, Clash rule-providers (behavior: domain)
 # 推荐策略: DIRECT (直连)
 # ==============================================================================
 payload:
@@ -12,64 +12,64 @@ payload:
   # 【第一部分：提取自 mixed.yaml 的直连学术数据库与文献检索平台】
   # ============================================================================
   # 1. Web of Science 与 Clarivate 科睿唯安全球学术平台
-  - DOMAIN-SUFFIX,webofscience.com             # Web of Science 核心正站 (SCI/SSCI/AHCI 检索)
-  - DOMAIN-SUFFIX,access.clarivate.com         # Clarivate 机构登录与身份认证统一网关
-  - DOMAIN-SUFFIX,webofscience.clarivate.cn    # Web of Science 中国区镜像与加速节点
-  - DOMAIN-SUFFIX,clarivate.com                # Clarivate 官方主域与元数据服务
+  - '+.webofscience.com'                        # Web of Science 核心正站 (SCI/SSCI/AHCI 检索)
+  - '+.access.clarivate.com'                    # Clarivate 机构登录与身份认证统一网关
+  - '+.webofscience.clarivate.cn'               # Web of Science 中国区镜像与加速节点
+  - '+.clarivate.com'                           # Clarivate 官方主域与元数据服务
 
   # 2. Elsevier (爱思唯尔) 旗帜级科学文献与期刊全文
-  - DOMAIN-SUFFIX,sciencedirect.com            # ScienceDirect 全文文献数据库平台 (Cell 等子刊依托)
-  - DOMAIN-SUFFIX,elsevier.com                 # Elsevier 出版集团主站与权限认证
+  - '+.sciencedirect.com'                       # ScienceDirect 全文文献数据库平台 (Cell 等子刊依托)
+  - '+.elsevier.com'                            # Elsevier 出版集团主站与权限认证
 
   # 3. 顶级综合科学期刊与学会 (Nature & Science)
-  - DOMAIN-SUFFIX,nature.com                   # Nature 自然出版集团官方主站与全系列子刊
-  - DOMAIN-SUFFIX,science.org                  # Science 科学杂志官网 (AAAS 美国科学促进会)
+  - '+.nature.com'                              # Nature 自然出版集团官方主站与全系列子刊
+  - '+.science.org'                             # Science 科学杂志官网 (AAAS 美国科学促进会)
 
   # 4. 电气与电子工程师协会 (IEEE)
-  - DOMAIN-SUFFIX,ieee.org                     # IEEE Xplore 核心数字图书馆与国际会议论文集
+  - '+.ieee.org'                                # IEEE Xplore 核心数字图书馆与国际会议论文集
 
   # 5. 计算机科学核心学会 (ACM)
-  - DOMAIN-SUFFIX,acm.org                      # ACM Digital Library 计算机文献库与学术会议
+  - '+.acm.org'                                 # ACM Digital Library 计算机文献库与学术会议
 
   # 6. 工程科技核心索引 (Engineering Village / EI)
-  - DOMAIN-SUFFIX,engineeringvillage.com       # EI Compendex / Inspec 工程索引权威数据库
+  - '+.engineeringvillage.com'                  # EI Compendex / Inspec 工程索引权威数据库
 
   # 7. 物理与机械工程顶级专业学会 (APS / AIP / ASME)
-  - DOMAIN-SUFFIX,aps.org                      # 美国物理学会 (APS, Physical Review 系列)
-  - DOMAIN-SUFFIX,aip.org                      # 美国物理联合会 (AIP Publishing)
-  - DOMAIN-SUFFIX,asme.org                     # 美国机械工程师协会 (ASME 数字收藏库)
+  - '+.aps.org'                                 # 美国物理学会 (APS, Physical Review 系列)
+  - '+.aip.org'                                 # 美国物理联合会 (AIP Publishing)
+  - '+.asme.org'                                # 美国机械工程师协会 (ASME 数字收藏库)
 
   # 8. 数学科学学会 (AMS / MathSciNet)
-  - DOMAIN-SUFFIX,mathscinet.ams.org           # MathSciNet 数学评论核心数据库
-  - DOMAIN-SUFFIX,ams.org                      # 美国数学学会官方主站
+  - '+.mathscinet.ams.org'                      # MathSciNet 数学评论核心数据库
+  - '+.ams.org'                                 # 美国数学学会官方主站
 
   # 9. 英国工程技术学会与 Wiley 在线图书馆
-  - DOMAIN-SUFFIX,ietresearch.onlinelibrary.wiley.com # 英国工程技术学会 IET（Wiley 平台托管）
-  - DOMAIN-SUFFIX,onlinelibrary.wiley.com      # Wiley Online Library 全球期刊全文主站
-  - DOMAIN-SUFFIX,wiley.com                    # John Wiley & Sons 出版集团主站
+  - '+.ietresearch.onlinelibrary.wiley.com'     # 英国工程技术学会 IET（Wiley 平台托管）
+  - '+.onlinelibrary.wiley.com'                 # Wiley Online Library 全球期刊全文主站
+  - '+.wiley.com'                               # John Wiley & Sons 出版集团主站
 
   # 10. 计算机与技术实战知识库 (O'Reilly)
-  - DOMAIN-SUFFIX,learning.oreilly.com         # O'Reilly Learning 技术在线图书馆与电子书
-  - DOMAIN-SUFFIX,oreilly.com                  # O'Reilly 官方主站
+  - '+.learning.oreilly.com'                    # O'Reilly Learning 技术在线图书馆与电子书
+  - '+.oreilly.com'                             # O'Reilly 官方主站
 
   # 11. 国内权威学术与数字图书资源 (知网 / 超星)
-  - DOMAIN-SUFFIX,cnki.net                     # 中国知网 (CNKI) 全量学术文献与硕博论文库
-  - DOMAIN-SUFFIX,chaoxing.com                 # 超星学习通 / 超星数字图书馆与名师讲坛
+  - '+.cnki.net'                                # 中国知网 (CNKI) 全量学术文献与硕博论文库
+  - '+.chaoxing.com'                            # 超星学习通 / 超星数字图书馆与名师讲坛
 
   # 12. 学术静态资源与辅助服务
-  - DOMAIN-SUFFIX,xslb.net                     # 学术领域常见静态资源与辅助分发域名
+  - '+.xslb.net'                                # 学术领域常见静态资源与辅助分发域名
 
   # ============================================================================
   # 【第二部分：国内高校校外访问认证与核心中文学术库补充 (保障 CARSI/校外直连免翻墙)】
   # ============================================================================
   # 1. 高校国家级统一认证联盟 (CARSI)
-  - DOMAIN-SUFFIX,carsi.edu.cn                 # CARSI 中国高校身份认证联盟 (高校师生校外免 VPN 直连认证核心)
-  - DOMAIN-SUFFIX,cernet.edu.cn                # 中国教育和科研计算机网
+  - '+.carsi.edu.cn'                            # CARSI 中国高校身份认证联盟 (高校师生校外免 VPN 直连认证核心)
+  - '+.cernet.edu.cn'                           # 中国教育和科研计算机网
 
   # 2. 中文核心文献数据库补充 (与知网并列的三大中文数据库)
-  - DOMAIN-SUFFIX,wanfangdata.com.cn           # 万方数据知识服务平台
-  - DOMAIN-SUFFIX,cqvip.com                    # 维普资讯中文期刊服务平台
+  - '+.wanfangdata.com.cn'                      # 万方数据知识服务平台
+  - '+.cqvip.com'                               # 维普资讯中文期刊服务平台
 
   # 3. 全球四大科学出版商补充 (Springer Nature)
-  - DOMAIN-SUFFIX,springer.com                 # SpringerLink 施普林格期刊与电子书全文库
-  - DOMAIN-SUFFIX,springernature.com           # Springer Nature 集团主域
+  - '+.springer.com'                            # SpringerLink 施普林格期刊与电子书全文库
+  - '+.springernature.com'                      # Springer Nature 集团主域

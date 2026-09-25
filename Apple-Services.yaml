@@ -3,73 +3,71 @@
 # 更新时间: 2026-09-25
 # 规则来源: mixed.yaml (Apple Services) + MESL+tempjms-apple.yaml (Apple 全量生态) 深度融合
 # 规则说明: 涵盖 App Store、TestFlight、iCloud、Apple Music、Apple News、Siri 语音助手、Private Relay 隐私中继等全套基础设施
-# 适用平台: Stash / Clash rule-providers (behavior: classical)
+# 适用平台: Stash / Clash rule-providers (behavior: domain)
 # 推荐策略: DIRECT (直连加速) 或 专用 Apple 节点 (若使用 Apple News 则该服务必须走代理)
 # ==============================================================================
 payload:
   # ============================================================================
   # 【第一部分：App Store 应用商店、TestFlight 与内容分发】
   # ============================================================================
-  - DOMAIN-SUFFIX,appstore.com                 # App Store 官方主站与应用购买
-  - DOMAIN-SUFFIX,appsto.re                    # App Store 官方分享短链接
-  - DOMAIN-SUFFIX,itunes.com                   # iTunes 媒体商店与资源调度
-  - DOMAIN-SUFFIX,mzstatic.com                 # Apple 媒体图床 CDN (应用图标、音乐海报、电子书封面)
-  - DOMAIN-SUFFIX,testflight.apple.com         # TestFlight 开发者测试平台官方主站
-  - DOMAIN-KEYWORD,testflight                  # TestFlight 泛关键词全量兜底
+  - '+.appstore.com'                            # App Store 官方主站与应用购买
+  - '+.appsto.re'                               # App Store 官方分享短链接
+  - '+.itunes.com'                              # iTunes 媒体商店与资源调度
+  - '+.mzstatic.com'                            # Apple 媒体图床 CDN (应用图标、音乐海报、电子书封面)
+  - '+.testflight.apple.com'                    # TestFlight 开发者测试平台官方主站
 
   # ============================================================================
   # 【第二部分：iCloud 云服务与 CloudKit 数据同步】
   # ============================================================================
-  - DOMAIN-SUFFIX,icloud.com                   # iCloud 官方主站与 Web 网页端应用
-  - DOMAIN-SUFFIX,icloud-content.com           # iCloud 照片流、Drive 云盘、备份与大文件分发
-  - DOMAIN-SUFFIX,apple-cloudkit.com           # CloudKit 跨设备数据实时同步引擎
-  - DOMAIN-SUFFIX,apple-livephotoskit.com       # Apple Live Photos 动态照片前端与多媒体套件
-  - DOMAIN-SUFFIX,me.com                       # MobileMe / iCloud 邮箱及历史服务
+  - '+.icloud.com'                              # iCloud 官方主站与 Web 网页端应用
+  - '+.icloud-content.com'                      # iCloud 照片流、Drive 云盘、备份与大文件分发
+  - '+.apple-cloudkit.com'                      # CloudKit 跨设备数据实时同步引擎
+  - '+.apple-livephotoskit.com'                 # Apple Live Photos 动态照片前端与多媒体套件
+  - '+.me.com'                                  # MobileMe / iCloud 邮箱及历史服务
 
   # ============================================================================
   # 【第三部分：Apple 官方主站、短链与前端公共静态资源】
   # ============================================================================
-  - DOMAIN-SUFFIX,apple.com                    # Apple 官方主站
-  - DOMAIN-SUFFIX,apple.co                     # Apple 官方短链接与跳转服务
-  - DOMAIN-SUFFIX,aaplimg.com                  # Apple 官方图像 CDN
-  - DOMAIN-SUFFIX,cdn-apple.com                # Apple 官方前端静态组件与脚本 CDN
-  - DOMAIN-SUFFIX,organicfruitapps.com         # Apple 内部组件与官方支持系统
+  - '+.apple.com'                               # Apple 官方主站
+  - '+.apple.co'                                # Apple 官方短链接与跳转服务
+  - '+.aaplimg.com'                             # Apple 官方图像 CDN
+  - '+.cdn-apple.com'                           # Apple 官方前端静态组件与脚本 CDN
+  - '+.organicfruitapps.com'                    # Apple 内部组件与官方支持系统
 
   # ============================================================================
   # 【第四部分：Apple News 独占新闻服务 (有严格区域网络限制)】
   # ============================================================================
-  - DOMAIN-SUFFIX,apple.news                   # Apple News 核心新闻服务
-  - DOMAIN-SUFFIX,news-client.apple.com        # Apple News 客户端专属新闻数据接口
-  - DOMAIN-SUFFIX,news-edge.apple.com          # Apple News 边缘内容分发节点
+  - '+.apple.news'                              # Apple News 核心新闻服务
+  - '+.news-client.apple.com'                   # Apple News 客户端专属新闻数据接口
+  - '+.news-edge.apple.com'                     # Apple News 边缘内容分发节点
 
   # ============================================================================
   # 【第五部分：Siri 语音助手、聚焦搜索建议与知识图谱】
   # ============================================================================
-  - DOMAIN,guzzoni.apple.com                   # Siri 核心语音交互与自然语言处理接口
-  - DOMAIN,smoot.apple.com                     # Spotlight 聚焦搜索建议与 Siri 知识图谱
-  - DOMAIN,api.smoot.apple.com                 # Siri 智能建议 API 服务
+  - 'guzzoni.apple.com'                         # Siri 核心语音交互与自然语言处理接口
+  - 'smoot.apple.com'                           # Spotlight 聚焦搜索建议与 Siri 知识图谱
+  - 'api.smoot.apple.com'                       # Siri 智能建议 API 服务
 
   # ============================================================================
   # 【第六部分：APNs 苹果推送通知服务 (Apple Push Notification service)】
   # 保障 iPhone / iPad / Mac 后台消息秒级实时到达
   # ============================================================================
-  - DOMAIN-SUFFIX,push.apple.com               # APNs 官方统一推送服务
-  - DOMAIN-SUFFIX,push-apple.com.akadns.net    # APNs 调度解析网络
-  - DOMAIN-SUFFIX,courier-push-apple.com.akadns.net # 消息通道信使调度服务
+  - '+.push.apple.com'                          # APNs 官方统一推送服务
+  - '+.push-apple.com.akadns.net'               # APNs 调度解析网络
+  - '+.courier-push-apple.com.akadns.net'       # 消息通道信使调度服务
 
   # ============================================================================
   # 【第七部分：Apple Private Relay (iCloud 专用专网中继服务)】
   # ============================================================================
-  - DOMAIN-SUFFIX,apple-relay.apple.com        # Apple 官方隐私中继接入点
-  - DOMAIN-SUFFIX,apple-relay.cloudflare.com   # Cloudflare 合作隐私中继边缘节点
-  - DOMAIN-SUFFIX,apple-relay.fastly-edge.com  # Fastly 合作隐私中继边缘节点
-  - DOMAIN-KEYWORD,apple-relay                 # 隐私中继关键词匹配兜底
+  - '+.apple-relay.apple.com'                   # Apple 官方隐私中继接入点
+  - '+.apple-relay.cloudflare.com'              # Cloudflare 合作隐私中继边缘节点
+  - '+.apple-relay.fastly-edge.com'             # Fastly 合作隐私中继边缘节点
 
   # ============================================================================
   # 【第八部分：Apple Maps、位置服务与底层网络凭据】
   # ============================================================================
-  - DOMAIN-SUFFIX,apple-mapkit.com             # MapKit 地图开发套件服务
-  - DOMAIN-SUFFIX,apple-dns.net                # Apple 智能 DNS 路由与负载均衡
-  - DOMAIN-SUFFIX,akadns.net                   # Apple 使用的 Akamai 域名解析支撑
-  - DOMAIN,apple.comscoreresearch.com          # Apple 设备分析与遥测服务
-  - DOMAIN-SUFFIX,crashlytics.com              # 崩溃日志分析系统
+  - '+.apple-mapkit.com'                        # MapKit 地图开发套件服务
+  - '+.apple-dns.net'                           # Apple 智能 DNS 路由与负载均衡
+  - '+.akadns.net'                              # Apple 使用的 Akamai 域名解析支撑
+  - 'apple.comscoreresearch.com'                # Apple 设备分析与遥测服务
+  - '+.crashlytics.com'                         # 崩溃日志分析系统

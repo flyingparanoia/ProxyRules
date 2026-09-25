@@ -10,66 +10,66 @@ payload:
   # 【第一部分：全端共用核心】(桌面 Web 网页端与手机 App 端均高频使用)
   # ============================================================================
   # 1. 核心主站与核心业务网关
-  - DOMAIN-SUFFIX,douyin.com            # 抖音核心主站、搜索落地页、WebSocket 实时长连接通信
-  - DOMAIN-SUFFIX,douyinstatic.com      # 核心静态资源库（前端代码、音频BGM、视频封面、离线组件）
-  - DOMAIN-SUFFIX,douyinpic.com         # 核心签名图床（视频封面、用户头像、直播间背景、动态表情）
-  - DOMAIN-SUFFIX,bytedance.com         # 字节跳动母公司主域及安全设备风控网关 (MSSDK)
-  - DOMAIN-SUFFIX,zijieapi.com          # 字节通用统一 API 网关（接口路由、隐私校验、版本控制）
+  - '+.douyin.com'                              # 抖音核心主站、搜索落地页、WebSocket 实时长连接通信
+  - '+.douyinstatic.com'                        # 核心静态资源库（前端代码、音频BGM、视频封面、离线组件）
+  - '+.douyinpic.com'                           # 核心签名图床（视频封面、用户头像、直播间背景、动态表情）
+  - '+.bytedance.com'                           # 字节跳动母公司主域及安全设备风控网关 (MSSDK)
+  - '+.zijieapi.com'                            # 字节通用统一 API 网关（接口路由、隐私校验、版本控制）
 
   # 2. 核心视频流媒体分发 (VOD 点播)
-  - DOMAIN-SUFFIX,douyinvod.com         # 核心短视频切片点播 CDN（双端主流短视频流量）
-  - DOMAIN-SUFFIX,idouyinvod.com        # 边缘就近接入与负载均衡视频源
-  - DOMAIN-SUFFIX,ndcpp.com             # 抖音视界官方视频云调度大脑 (VC Brain / Edge Gateway)
+  - '+.douyinvod.com'                           # 核心短视频切片点播 CDN（双端主流短视频流量）
+  - '+.idouyinvod.com'                          # 边缘就近接入与负载均衡视频源
+  - '+.ndcpp.com'                               # 抖音视界官方视频云调度大脑 (VC Brain / Edge Gateway)
 
   # 3. 基础前端基建与动态资源调度
-  - DOMAIN-SUFFIX,bytegecko.com         # 字节动态资源包与离线缓存平台 (Gecko)
-  - DOMAIN-SUFFIX,bytednsdoc.com        # 内部统一 DNS 调度与静态资源文档库
+  - '+.bytegecko.com'                           # 字节动态资源包与离线缓存平台 (Gecko)
+  - '+.bytednsdoc.com'                          # 内部统一 DNS 调度与静态资源文档库
 
   # ============================================================================
   # 【第二部分：移动端专属 / 强依赖】(iPhone / Android 抖音 App 与相关客户端)
   # ============================================================================
-  - DOMAIN-SUFFIX,amemv.com             # 移动端原生核心 API（短视频播放与底层流媒体请求接口）
-  - DOMAIN-SUFFIX,snssdk.com            # 移动端专用 SDK 通信与鉴权网关
-  - DOMAIN-SUFFIX,zjcdn.com             # 移动端短视频分发自研 CDN（冷门视频 coldy 与 AB 测试切片）
-  - DOMAIN-SUFFIX,bdcgslb.com           # 移动端全局服务器负载均衡调度器 (ByteDance Cloud GSLB)
-  - DOMAIN-SUFFIX,bdurl.net             # 移动端短链跳转、数据打点与活动落地页
-  - DOMAIN-SUFFIX,bytecdn.com           # 移动端业务前端与组件分发网络
+  - '+.amemv.com'                               # 移动端原生核心 API（短视频播放与底层流媒体请求接口）
+  - '+.snssdk.com'                              # 移动端专用 SDK 通信与鉴权网关
+  - '+.zjcdn.com'                               # 移动端短视频分发自研 CDN（冷门视频 coldy 与 AB 测试切片）
+  - '+.bdcgslb.com'                             # 移动端全局服务器负载均衡调度器 (ByteDance Cloud GSLB)
+  - '+.bdurl.net'                               # 移动端短链跳转、数据打点与活动落地页
+  - '+.bytecdn.com'                             # 移动端业务前端与组件分发网络
 
   # ============================================================================
   # 【第三部分：桌面网页端专属 / 典型】(PC / Mac 浏览器打开 douyin.com)
   # ============================================================================
   # 1. 网页前端基建、对象存储与组件库
-  - DOMAIN-SUFFIX,bytegoofy.com         # Web 前端基建平台 Goofy（包含滑块验证、人机安全防护）
-  - DOMAIN-SUFFIX,bytetos.com           # 字节分布式对象存储 TOS（浏览器直接加载的媒体文件与大附件）
-  - DOMAIN-SUFFIX,bytescm.com           # 静态内容管理系统 SCM
-  - DOMAIN-SUFFIX,byted-static.com      # 前端公共依赖库与 unpkg 镜像源
-  - DOMAIN-SUFFIX,bytetcc.com           # 网页端动态配置中心 TCC
-  - DOMAIN-SUFFIX,byteimg.com           # 网页端通用图片与素材分发
-  - DOMAIN-SUFFIX,yhgfb-cn-static.com   # 网页端用户增长基建前端平台 (Growth Foundation Builder)
+  - '+.bytegoofy.com'                           # Web 前端基建平台 Goofy（包含滑块验证、人机安全防护）
+  - '+.bytetos.com'                             # 字节分布式对象存储 TOS（浏览器直接加载的媒体文件与大附件）
+  - '+.bytescm.com'                             # 静态内容管理系统 SCM
+  - '+.byted-static.com'                        # 前端公共依赖库与 unpkg 镜像源
+  - '+.bytetcc.com'                             # 网页端动态配置中心 TCC
+  - '+.byteimg.com'                             # 网页端通用图片与素材分发
+  - '+.yhgfb-cn-static.com'                     # 网页端用户增长基建前端平台 (Growth Foundation Builder)
 
   # 2. 网页端业务与跨产品关联
-  - DOMAIN-SUFFIX,douyincdn.com         # 网页版直播拉流分发 CDN (FLV/HLS)
-  - DOMAIN-SUFFIX,iesdouyin.com         # 网页端社交互动、分享落地页与活动页
-  - DOMAIN-SUFFIX,searchpstatp.com      # 网页端搜索联想词与今日头条搜索通用素材
-  - DOMAIN-SUFFIX,bdxiguaimg.com        # 网页端联动的西瓜视频封面与图片源
-  - DOMAIN-SUFFIX,huoshanstatic.com     # 网页端复用的火山短视频组件
+  - '+.douyincdn.com'                           # 网页版直播拉流分发 CDN (FLV/HLS)
+  - '+.iesdouyin.com'                           # 网页端社交互动、分享落地页与活动页
+  - '+.searchpstatp.com'                        # 网页端搜索联想词与今日头条搜索通用素材
+  - '+.bdxiguaimg.com'                          # 网页端联动的西瓜视频封面与图片源
+  - '+.huoshanstatic.com'                       # 网页端复用的火山短视频组件
 
   # 3. 网页端监控与体验反馈
-  - DOMAIN-SUFFIX,applogcdn.com         # 火山引擎/字节移动数据分析埋点 SDK (AppLog)
-  - DOMAIN-SUFFIX,ibytedapm.com         # 网页性能监控与前端报错上报 (APM)
-  - DOMAIN-SUFFIX,feelgood.cn           # 字节跳动官方用户体验调研系统 (Feelgood)
+  - '+.applogcdn.com'                           # 火山引擎/字节移动数据分析埋点 SDK (AppLog)
+  - '+.ibytedapm.com'                           # 网页性能监控与前端报错上报 (APM)
+  - '+.feelgood.cn'                             # 字节跳动官方用户体验调研系统 (Feelgood)
 
   # ============================================================================
   # 【第四部分：历史 / 兜底备用域名】(老版本客户端或特殊业务场景备用)
   # ============================================================================
-  - DOMAIN-SUFFIX,douyinliving.com      # 直播业务备用域名
-  - DOMAIN-SUFFIX,douyinivod.com        # 点播切片备用域名
-  - DOMAIN-SUFFIX,bytecdn.cn            # 字节 CDN 备用国内域名
-  - DOMAIN-SUFFIX,bytemastatic.com      # 营销素材备用域名
-  - DOMAIN-SUFFIX,byteacctimg.com       # 账号头像备用域名
-  - DOMAIN-SUFFIX,bytemaimg.com         # 营销图片备用域名
-  - DOMAIN-SUFFIX,bytecc.com            # 字节云备用域名
-  - DOMAIN-SUFFIX,byteactivity.com      # 营销活动备用域名
-  - DOMAIN-SUFFIX,asiad.byteactivity.com
-  - DOMAIN-SUFFIX,asiad.byteactivity12.com
-  - DOMAIN-SUFFIX,volcsiriusbd.com      # 火山引擎企业服务备用
+  - '+.douyinliving.com'                        # 直播业务备用域名
+  - '+.douyinivod.com'                          # 点播切片备用域名
+  - '+.bytecdn.cn'                              # 字节 CDN 备用国内域名
+  - '+.bytemastatic.com'                        # 营销素材备用域名
+  - '+.byteacctimg.com'                         # 账号头像备用域名
+  - '+.bytemaimg.com'                           # 营销图片备用域名
+  - '+.bytecc.com'                              # 字节云备用域名
+  - '+.byteactivity.com'                        # 营销活动备用域名
+  - '+.asiad.byteactivity.com'
+  - '+.asiad.byteactivity12.com'
+  - '+.volcsiriusbd.com'                        # 火山引擎企业服务备用

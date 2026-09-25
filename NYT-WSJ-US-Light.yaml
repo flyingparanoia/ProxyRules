@@ -4,7 +4,7 @@
 # 更新时间: 2026-09-25
 # 规则说明: 整合 NYT-WSJ 与 US-Strict-DataUsage-Light 全量规则，涵盖纽约时报、华尔街日报、
 #           道琼斯集团、PayPal、Venmo、Braintree、Xoom 等美国原生高防风控敏感资产
-# 适用平台: Stash / Clash rule-providers (behavior: classical)
+# 适用平台: Stash / Clash rule-providers (behavior: domain)
 # 推荐策略: 🇺🇸 US Light Data Usage Select (优质美国原生/静态纯净节点)
 # ==============================================================================
 payload:
@@ -12,314 +12,313 @@ payload:
   # 【第一部分：The New York Times (NYT / 纽约时报) 官方生态】
   # ============================================================================
   # 1. 核心主站、国际站与移动端统一 API
-  - DOMAIN-SUFFIX,nytimes.com                  # 纽约时报核心主站、国际版、中文网与 Samizdat GraphQL API
-  - DOMAIN-SUFFIX,nyt.com                      # 纽约时报核心短域、移动端通用接口与多媒体服务
-  - DOMAIN-SUFFIX,newyorktimes.com             # 纽约时报官方品牌保护与跳转域名
+  - '+.nytimes.com'                             # 纽约时报核心主站、国际版、中文网与 Samizdat GraphQL API
+  - '+.nyt.com'                                 # 纽约时报核心短域、移动端通用接口与多媒体服务
+  - '+.newyorktimes.com'                        # 纽约时报官方品牌保护与跳转域名
 
   # 2. 图像多媒体、视频点播与官方发布
-  - DOMAIN-SUFFIX,nytimg.com                   # 纽约时报官方高清图床与多媒体 CDN
-  - DOMAIN-SUFFIX,nytco.com                    # 纽约时报集团公司 (The New York Times Company) 企业官网与官方发布
-  - DOMAIN-SUFFIX,nytstyle.com                 # 纽约时报时尚生活版 (T Magazine) 官方资源
-  - DOMAIN-SUFFIX,nytdiff.com                  # 纽约时报文章实时版本对比追踪服务
+  - '+.nytimg.com'                              # 纽约时报官方高清图床与多媒体 CDN
+  - '+.nytco.com'                               # 纽约时报集团公司 (The New York Times Company) 企业官网与官方发布
+  - '+.nytstyle.com'                            # 纽约时报时尚生活版 (T Magazine) 官方资源
+  - '+.nytdiff.com'                             # 纽约时报文章实时版本对比追踪服务
 
   # ============================================================================
   # 【第二部分：The Wall Street Journal (WSJ / 华尔街日报) 官方生态】
   # ============================================================================
   # 1. 核心主站、数字报刊与移动端 API
-  - DOMAIN-SUFFIX,wsj.com                      # 华尔街日报主站、移动端 API、报刊数字版 (pbc/pblog) 与图表
-  - DOMAIN-SUFFIX,wsjplus.com                  # WSJ+ 华尔街日报订阅读者专属会员权益平台
+  - '+.wsj.com'                                 # 华尔街日报主站、移动端 API、报刊数字版 (pbc/pblog) 与图表
+  - '+.wsjplus.com'                             # WSJ+ 华尔街日报订阅读者专属会员权益平台
 
   # 2. 流媒体切片、音视频分发与图床 CDN
-  - DOMAIN-SUFFIX,wsj.net                      # 华尔街日报核心音视频流媒体 (wsjstream)、高清图床与静态组件
+  - '+.wsj.net'                                 # 华尔街日报核心音视频流媒体 (wsjstream)、高清图床与静态组件
 
   # ============================================================================
   # 【第三部分：Dow Jones (道琼斯集团与 News Corp 商业财经矩阵)】
   # ============================================================================
   # 1. 道琼斯统一云基础设施、API 网关与单点登录 (SSO)
-  - DOMAIN-SUFFIX,dowjones.com                 # 道琼斯公司官网、统一单点登录认证 (sso.accounts) 与官方图库
-  - DOMAIN-SUFFIX,dowjones.io                  # 道琼斯云原生微服务网关、公共共享数据 (shared-data) 与视频调度
-  - DOMAIN-SUFFIX,dowjoneson.com               # 道琼斯在线订单履约与读者订阅服务系统 (oms)
+  - '+.dowjones.com'                            # 道琼斯公司官网、统一单点登录认证 (sso.accounts) 与官方图库
+  - '+.dowjones.io'                             # 道琼斯云原生微服务网关、公共共享数据 (shared-data) 与视频调度
+  - '+.dowjoneson.com'                          # 道琼斯在线订单履约与读者订阅服务系统 (oms)
 
   # 2. 华尔街日报姊妹投资刊物与专业金融快讯旗舰
-  - DOMAIN-SUFFIX,barrons.com                  # Barron's (巴伦周刊 - 华尔街日报姊妹刊，百年权威专业投资旗舰)
-  - DOMAIN-SUFFIX,marketwatch.com              # MarketWatch (道琼斯旗下全球金融行情、快讯与实时美股大盘)
-  - DOMAIN-SUFFIX,mansionglobal.com            # Mansion Global (道琼斯旗下环球高端不动产与豪宅投资平台)
-  - DOMAIN-SUFFIX,factiva.com                  # Factiva (道琼斯全球商业情报、公司研报与新闻数据库)
-  - DOMAIN-SUFFIX,newscgp.com                  # News Corp Global Platform (新闻集团统一服务与标签管理)
+  - '+.barrons.com'                             # Barron's (巴伦周刊 - 华尔街日报姊妹刊，百年权威专业投资旗舰)
+  - '+.marketwatch.com'                         # MarketWatch (道琼斯旗下全球金融行情、快讯与实时美股大盘)
+  - '+.mansionglobal.com'                       # Mansion Global (道琼斯旗下环球高端不动产与豪宅投资平台)
+  - '+.factiva.com'                             # Factiva (道琼斯全球商业情报、公司研报与新闻数据库)
+  - '+.newscgp.com'                             # News Corp Global Platform (新闻集团统一服务与标签管理)
 
   # ============================================================================
   # 【第四部分：抓包精准捕获之定制分析、云存储与读者鉴权通道】
   # ============================================================================
   # 1. Adobe 为道琼斯深度定制的专用数据上报接口
-  - DOMAIN,dowjones.hb-api.omtrdc.net          # Adobe Omniture 专为道琼斯定制的实时行为分析节点
-  - DOMAIN,dowjones.sc.omtrdc.net              # Adobe SiteCatalyst 专为道琼斯定制的读者访问统计节点
+  - 'dowjones.hb-api.omtrdc.net'                # Adobe Omniture 专为道琼斯定制的实时行为分析节点
+  - 'dowjones.sc.omtrdc.net'                    # Adobe SiteCatalyst 专为道琼斯定制的读者访问统计节点
 
   # 2. 道琼斯专用 AWS 资产存储桶 (图片与多区域客户服务资产)
-  - DOMAIN,djcm-pnp.s3.amazonaws.com           # 道琼斯内容管理系统 (DJCM) 专属 S3 存储桶
-  - DOMAIN,djcs-multi-region-assets-ohio.s3.us-east-2.amazonaws.com # 道琼斯全球客户支持多区域静态资产
+  - 'djcm-pnp.s3.amazonaws.com'                 # 道琼斯内容管理系统 (DJCM) 专属 S3 存储桶
+  - 'djcs-multi-region-assets-ohio.s3.us-east-2.amazonaws.com' # 道琼斯全球客户支持多区域静态资产
 
   # 3. 公共图书馆学术读者卡免登录鉴权中转 (Boston Public Library)
-  - DOMAIN-SUFFIX,bpl.org                      # 波士顿公共图书馆官网与读者入口 (EZProxy 联动 WSJ Partner 免登录认证)
+  - '+.bpl.org'                                 # 波士顿公共图书馆官网与读者入口 (EZProxy 联动 WSJ Partner 免登录认证)
 
   # ============================================================================
   # 【第五部分：美国原生轻量金融与支付清算 (PayPal / Venmo / Braintree / Xoom)】
   # ============================================================================
-  - DOMAIN-KEYWORD,paypal
-  - DOMAIN-SUFFIX,account-paypal.info
-  - DOMAIN-SUFFIX,account-paypal.net
-  - DOMAIN-SUFFIX,account-paypal.org
-  - DOMAIN-SUFFIX,accountpaypal.com
-  - DOMAIN-SUFFIX,accountpaypal.net
-  - DOMAIN-SUFFIX,accountpaypal.org
-  - DOMAIN-SUFFIX,anfutong.cn
-  - DOMAIN-SUFFIX,anfutong.com
-  - DOMAIN-SUFFIX,anfutong.com.cn
-  - DOMAIN-SUFFIX,beibao.cn
-  - DOMAIN-SUFFIX,beibao.com
-  - DOMAIN-SUFFIX,beibao.com.cn
-  - DOMAIN-SUFFIX,bill-safe.com
-  - DOMAIN-SUFFIX,billmelater.com
-  - DOMAIN-SUFFIX,billmelater.info
-  - DOMAIN-SUFFIX,billmelater.net
-  - DOMAIN-SUFFIX,bml.info
-  - DOMAIN-SUFFIX,braintreegateway.com
-  - DOMAIN-SUFFIX,braintreegateway.tv
-  - DOMAIN-SUFFIX,braintreepayments.com
-  - DOMAIN-SUFFIX,braintreepayments.info
-  - DOMAIN-SUFFIX,braintreepayments.org
-  - DOMAIN-SUFFIX,braintreepayments.tv
-  - DOMAIN-SUFFIX,braintreepaymentsolutions.com
-  - DOMAIN-SUFFIX,braintreeps.com
-  - DOMAIN-SUFFIX,briantreepayments.net
-  - DOMAIN-SUFFIX,briantreepayments.tv
-  - DOMAIN-SUFFIX,buyfast-paysmart.net
-  - DOMAIN-SUFFIX,card.io
-  - DOMAIN-SUFFIX,cash2.com
-  - DOMAIN-SUFFIX,cashify.com
-  - DOMAIN-SUFFIX,cashify.net
-  - DOMAIN-SUFFIX,devtools-paypal.com
-  - DOMAIN-SUFFIX,experiencebillmelater.com
-  - DOMAIN-SUFFIX,filipino-music.net
-  - DOMAIN-SUFFIX,fundpaypal.com
-  - DOMAIN-SUFFIX,getbraintree.com
-  - DOMAIN-SUFFIX,gmoney.org
-  - DOMAIN-SUFFIX,i-o-u.info
-  - DOMAIN-SUFFIX,krakenjs.com
-  - DOMAIN-SUFFIX,loanbuilder.com
-  - DOMAIN-SUFFIX,login-paypal.com
-  - DOMAIN-SUFFIX,login-paypal.info
-  - DOMAIN-SUFFIX,mywaytopay.info
-  - DOMAIN-SUFFIX,mywaytopay.net
-  - DOMAIN-SUFFIX,pa9pal.com
-  - DOMAIN-SUFFIX,paaypal.com
-  - DOMAIN-SUFFIX,paily.net
-  - DOMAIN-SUFFIX,paily.org
-  - DOMAIN-SUFFIX,paipal.com
-  - DOMAIN-SUFFIX,pavpal.com
-  - DOMAIN-SUFFIX,paydiant.com
-  - DOMAIN-SUFFIX,paylike.com
-  - DOMAIN-SUFFIX,paypa1.com
-  - DOMAIN-SUFFIX,paypa1.org
-  - DOMAIN-SUFFIX,paypaal.com
-  - DOMAIN-SUFFIX,paypal-activate.com
-  - DOMAIN-SUFFIX,paypal-activate.info
-  - DOMAIN-SUFFIX,paypal-activate.org
-  - DOMAIN-SUFFIX,paypal-apac.com
-  - DOMAIN-SUFFIX,paypal-apps.com
-  - DOMAIN-SUFFIX,paypal-biz.com
-  - DOMAIN-SUFFIX,paypal-brandcentral.com
-  - DOMAIN-SUFFIX,paypal-business.com
-  - DOMAIN-SUFFIX,paypal-business.net
-  - DOMAIN-SUFFIX,paypal-business.org
-  - DOMAIN-SUFFIX,paypal-cardcash.com
-  - DOMAIN-SUFFIX,paypal-cash.com
-  - DOMAIN-SUFFIX,paypal-center.com
-  - DOMAIN-SUFFIX,paypal-center.info
-  - DOMAIN-SUFFIX,paypal-center.net
-  - DOMAIN-SUFFIX,paypal-center.org
-  - DOMAIN-SUFFIX,paypal-communication.com
-  - DOMAIN-SUFFIX,paypal-communications.com
-  - DOMAIN-SUFFIX,paypal-communications.net
-  - DOMAIN-SUFFIX,paypal-community.com
-  - DOMAIN-SUFFIX,paypal-community.net
-  - DOMAIN-SUFFIX,paypal-comunidad.com
-  - DOMAIN-SUFFIX,paypal-corp.com
-  - DOMAIN-SUFFIX,paypal-database.com
-  - DOMAIN-SUFFIX,paypal-database.us
-  - DOMAIN-SUFFIX,paypal-donations.com
-  - DOMAIN-SUFFIX,paypal-dynamic.com
-  - DOMAIN-SUFFIX,paypal-engineering.com
-  - DOMAIN-SUFFIX,paypal-europe.com
-  - DOMAIN-SUFFIX,paypal-excelinvoicing.com
-  - DOMAIN-SUFFIX,paypal-exchanges.com
-  - DOMAIN-SUFFIX,paypal-forward.com
-  - DOMAIN-SUFFIX,paypal-galactic.com
-  - DOMAIN-SUFFIX,paypal-gift.com
-  - DOMAIN-SUFFIX,paypal-gifts.com
-  - DOMAIN-SUFFIX,paypal-gpplus.com
-  - DOMAIN-SUFFIX,paypal-here.com
-  - DOMAIN-SUFFIX,paypal-hrsystem.com
-  - DOMAIN-SUFFIX,paypal-innovationlab.com
-  - DOMAIN-SUFFIX,paypal-integration.com
-  - DOMAIN-SUFFIX,paypal-japan.com
-  - DOMAIN-SUFFIX,paypal-knowledge.com
-  - DOMAIN-SUFFIX,paypal-labs.com
-  - DOMAIN-SUFFIX,paypal-latam.com
-  - DOMAIN-SUFFIX,paypal-learning.com
-  - DOMAIN-SUFFIX,paypal-login.com
-  - DOMAIN-SUFFIX,paypal-login.info
-  - DOMAIN-SUFFIX,paypal-login.org
-  - DOMAIN-SUFFIX,paypal-login.us
-  - DOMAIN-SUFFIX,paypal-luxury.com
-  - DOMAIN-SUFFIX,paypal-mainstreet.net
-  - DOMAIN-SUFFIX,paypal-marketing.com
-  - DOMAIN-SUFFIX,paypal-media.com
-  - DOMAIN-SUFFIX,paypal-merchantloyalty.com
-  - DOMAIN-SUFFIX,paypal-mktg.com
-  - DOMAIN-SUFFIX,paypal-mobilemoney.com
-  - DOMAIN-SUFFIX,paypal-network.org
-  - DOMAIN-SUFFIX,paypal-notice.com
-  - DOMAIN-SUFFIX,paypal-notify.com
-  - DOMAIN-SUFFIX,paypal-online.info
-  - DOMAIN-SUFFIX,paypal-online.net
-  - DOMAIN-SUFFIX,paypal-online.org
-  - DOMAIN-SUFFIX,paypal-optimizer.com
-  - DOMAIN-SUFFIX,paypal-pages.com
-  - DOMAIN-SUFFIX,paypal-photocard.com
-  - DOMAIN-SUFFIX,paypal-plaza.com
-  - DOMAIN-SUFFIX,paypal-portal.com
-  - DOMAIN-SUFFIX,paypal-prepagata.com
-  - DOMAIN-SUFFIX,paypal-prepagata.net
-  - DOMAIN-SUFFIX,paypal-prepaid.com
-  - DOMAIN-SUFFIX,paypal-profile.com
-  - DOMAIN-SUFFIX,paypal-proserv.com
-  - DOMAIN-SUFFIX,paypal-qrshopping.org
-  - DOMAIN-SUFFIX,paypal-recargacelular.com
-  - DOMAIN-SUFFIX,paypal-redeem.com
-  - DOMAIN-SUFFIX,paypal-referral.com
-  - DOMAIN-SUFFIX,paypal-retail.com
-  - DOMAIN-SUFFIX,paypal-scoop.com
-  - DOMAIN-SUFFIX,paypal-search.com
-  - DOMAIN-SUFFIX,paypal-secure.net
-  - DOMAIN-SUFFIX,paypal-secure.org
-  - DOMAIN-SUFFIX,paypal-security.net
-  - DOMAIN-SUFFIX,paypal-security.org
-  - DOMAIN-SUFFIX,paypal-service.org
-  - DOMAIN-SUFFIX,paypal-signin.com
-  - DOMAIN-SUFFIX,paypal-signin.us
-  - DOMAIN-SUFFIX,paypal-special.com
-  - DOMAIN-SUFFIX,paypal-specialoffers.com
-  - DOMAIN-SUFFIX,paypal-sptam.com
-  - DOMAIN-SUFFIX,paypal-status.com
-  - DOMAIN-SUFFIX,paypal-support.com
-  - DOMAIN-SUFFIX,paypal-survey.com
-  - DOMAIN-SUFFIX,paypal-survey.org
-  - DOMAIN-SUFFIX,paypal-team.com
-  - DOMAIN-SUFFIX,paypal-viewpoints.net
-  - DOMAIN-SUFFIX,paypal.ca
-  - DOMAIN-SUFFIX,paypal.com.cn
-  - DOMAIN-SUFFIX,paypal.com.hk
-  - DOMAIN-SUFFIX,paypal.com.sg
-  - DOMAIN-SUFFIX,paypal.hk
-  - DOMAIN-SUFFIX,paypal.info
-  - DOMAIN-SUFFIX,paypal.jp
-  - DOMAIN-SUFFIX,paypal.me
-  - DOMAIN-SUFFIX,paypal.net.cn
-  - DOMAIN-SUFFIX,paypal.org.cn
-  - DOMAIN-SUFFIX,paypal.so
-  - DOMAIN-SUFFIX,paypal.us
-  - DOMAIN-SUFFIX,paypalbeacon.com
-  - DOMAIN-SUFFIX,paypalbenefits.com
-  - DOMAIN-SUFFIX,paypalbrasil.com
-  - DOMAIN-SUFFIX,paypalcommunity.cn
-  - DOMAIN-SUFFIX,paypalcommunity.com
-  - DOMAIN-SUFFIX,paypalcommunity.net
-  - DOMAIN-SUFFIX,paypalcommunity.org
-  - DOMAIN-SUFFIX,paypalcorp.com
-  - DOMAIN-SUFFIX,paypalcredit.com
-  - DOMAIN-SUFFIX,paypalcreditcard.com
-  - DOMAIN-SUFFIX,paypalgivingfund.org
-  - DOMAIN-SUFFIX,paypalhere.cn
-  - DOMAIN-SUFFIX,paypalhere.com
-  - DOMAIN-SUFFIX,paypalhere.com.cn
-  - DOMAIN-SUFFIX,paypalhere.info
-  - DOMAIN-SUFFIX,paypalhere.net
-  - DOMAIN-SUFFIX,paypalhere.org
-  - DOMAIN-SUFFIX,paypalhere.tv
-  - DOMAIN-SUFFIX,paypali.net
-  - DOMAIN-SUFFIX,paypalinc.com
-  - DOMAIN-SUFFIX,paypalindia.com
-  - DOMAIN-SUFFIX,paypalinsuranceservices.org
-  - DOMAIN-SUFFIX,paypall.com
-  - DOMAIN-SUFFIX,paypallabs.com
-  - DOMAIN-SUFFIX,paypalme.com
-  - DOMAIN-SUFFIX,paypalnet.net
-  - DOMAIN-SUFFIX,paypalnet.org
-  - DOMAIN-SUFFIX,paypalnetwork.info
-  - DOMAIN-SUFFIX,paypalnetwork.net
-  - DOMAIN-SUFFIX,paypalnetwork.org
-  - DOMAIN-SUFFIX,paypalobjects.com
-  - DOMAIN-SUFFIX,paypalonline.net
-  - DOMAIN-SUFFIX,paypalonline.org
-  - DOMAIN-SUFFIX,paypalprepagata.com
-  - DOMAIN-SUFFIX,paypalprepagata.net
-  - DOMAIN-SUFFIX,paypalservice.com
-  - DOMAIN-SUFFIX,paypalshopping.com
-  - DOMAIN-SUFFIX,paypalshopping.net
-  - DOMAIN-SUFFIX,paypalsurvey.com
-  - DOMAIN-SUFFIX,paypalx.com
-  - DOMAIN-SUFFIX,paypaly.com
-  - DOMAIN-SUFFIX,payppal.com
-  - DOMAIN-SUFFIX,payypal.com
-  - DOMAIN-SUFFIX,pdncommunity.com
-  - DOMAIN-SUFFIX,pp-soc.com
-  - DOMAIN-SUFFIX,ppaypal.com
-  - DOMAIN-SUFFIX,pppds.com
-  - DOMAIN-SUFFIX,pypl.com
-  - DOMAIN-SUFFIX,pypl.info
-  - DOMAIN-SUFFIX,pypl.net
-  - DOMAIN-SUFFIX,pypl.tv
-  - DOMAIN-SUFFIX,s-xoom.com
-  - DOMAIN-SUFFIX,secure-paypal.info
-  - DOMAIN-SUFFIX,securepaypal.info
-  - DOMAIN-SUFFIX,simility.com
-  - DOMAIN-SUFFIX,sslpaypal.org
-  - DOMAIN-SUFFIX,swiftbank.info
-  - DOMAIN-SUFFIX,swiftbank.us
-  - DOMAIN-SUFFIX,swiftcapital.com
-  - DOMAIN-SUFFIX,swiftfinancial.com
-  - DOMAIN-SUFFIX,swiftfinancial.info
-  - DOMAIN-SUFFIX,swiftfinancial.net
-  - DOMAIN-SUFFIX,thepaypalshop.com
-  - DOMAIN-SUFFIX,theshoppingexpresslane.net
-  - DOMAIN-SUFFIX,venmo-touch.com
-  - DOMAIN-SUFFIX,venmo.com
-  - DOMAIN-SUFFIX,venmo.info
-  - DOMAIN-SUFFIX,venmo.net
-  - DOMAIN-SUFFIX,venmo.org
-  - DOMAIN-SUFFIX,venmo.s3.amazonaws.com
-  - DOMAIN-SUFFIX,webmoneyinfo.com
-  - DOMAIN-SUFFIX,wiremoneytoirelandwithxoomeasierandcheaper.com
-  - DOMAIN-SUFFIX,www-paypal.info
-  - DOMAIN-SUFFIX,www-paypal.us
-  - DOMAIN-SUFFIX,wwwxoom.com
-  - DOMAIN-SUFFIX,xn--bnq297cix3a.cn
-  - DOMAIN-SUFFIX,xoom-experience.com
-  - DOMAIN-SUFFIX,xoom.com
-  - DOMAIN-SUFFIX,xoom.io
-  - DOMAIN-SUFFIX,xoom.net.cn
-  - DOMAIN-SUFFIX,xoom.us
-  - DOMAIN-SUFFIX,xoomcom.com
+  - '+.account-paypal.info'
+  - '+.account-paypal.net'
+  - '+.account-paypal.org'
+  - '+.accountpaypal.com'
+  - '+.accountpaypal.net'
+  - '+.accountpaypal.org'
+  - '+.anfutong.cn'
+  - '+.anfutong.com'
+  - '+.anfutong.com.cn'
+  - '+.beibao.cn'
+  - '+.beibao.com'
+  - '+.beibao.com.cn'
+  - '+.bill-safe.com'
+  - '+.billmelater.com'
+  - '+.billmelater.info'
+  - '+.billmelater.net'
+  - '+.bml.info'
+  - '+.braintreegateway.com'
+  - '+.braintreegateway.tv'
+  - '+.braintreepayments.com'
+  - '+.braintreepayments.info'
+  - '+.braintreepayments.org'
+  - '+.braintreepayments.tv'
+  - '+.braintreepaymentsolutions.com'
+  - '+.braintreeps.com'
+  - '+.briantreepayments.net'
+  - '+.briantreepayments.tv'
+  - '+.buyfast-paysmart.net'
+  - '+.card.io'
+  - '+.cash2.com'
+  - '+.cashify.com'
+  - '+.cashify.net'
+  - '+.devtools-paypal.com'
+  - '+.experiencebillmelater.com'
+  - '+.filipino-music.net'
+  - '+.fundpaypal.com'
+  - '+.getbraintree.com'
+  - '+.gmoney.org'
+  - '+.i-o-u.info'
+  - '+.krakenjs.com'
+  - '+.loanbuilder.com'
+  - '+.login-paypal.com'
+  - '+.login-paypal.info'
+  - '+.mywaytopay.info'
+  - '+.mywaytopay.net'
+  - '+.pa9pal.com'
+  - '+.paaypal.com'
+  - '+.paily.net'
+  - '+.paily.org'
+  - '+.paipal.com'
+  - '+.pavpal.com'
+  - '+.paydiant.com'
+  - '+.paylike.com'
+  - '+.paypa1.com'
+  - '+.paypa1.org'
+  - '+.paypaal.com'
+  - '+.paypal-activate.com'
+  - '+.paypal-activate.info'
+  - '+.paypal-activate.org'
+  - '+.paypal-apac.com'
+  - '+.paypal-apps.com'
+  - '+.paypal-biz.com'
+  - '+.paypal-brandcentral.com'
+  - '+.paypal-business.com'
+  - '+.paypal-business.net'
+  - '+.paypal-business.org'
+  - '+.paypal-cardcash.com'
+  - '+.paypal-cash.com'
+  - '+.paypal-center.com'
+  - '+.paypal-center.info'
+  - '+.paypal-center.net'
+  - '+.paypal-center.org'
+  - '+.paypal-communication.com'
+  - '+.paypal-communications.com'
+  - '+.paypal-communications.net'
+  - '+.paypal-community.com'
+  - '+.paypal-community.net'
+  - '+.paypal-comunidad.com'
+  - '+.paypal-corp.com'
+  - '+.paypal-database.com'
+  - '+.paypal-database.us'
+  - '+.paypal-donations.com'
+  - '+.paypal-dynamic.com'
+  - '+.paypal-engineering.com'
+  - '+.paypal-europe.com'
+  - '+.paypal-excelinvoicing.com'
+  - '+.paypal-exchanges.com'
+  - '+.paypal-forward.com'
+  - '+.paypal-galactic.com'
+  - '+.paypal-gift.com'
+  - '+.paypal-gifts.com'
+  - '+.paypal-gpplus.com'
+  - '+.paypal-here.com'
+  - '+.paypal-hrsystem.com'
+  - '+.paypal-innovationlab.com'
+  - '+.paypal-integration.com'
+  - '+.paypal-japan.com'
+  - '+.paypal-knowledge.com'
+  - '+.paypal-labs.com'
+  - '+.paypal-latam.com'
+  - '+.paypal-learning.com'
+  - '+.paypal-login.com'
+  - '+.paypal-login.info'
+  - '+.paypal-login.org'
+  - '+.paypal-login.us'
+  - '+.paypal-luxury.com'
+  - '+.paypal-mainstreet.net'
+  - '+.paypal-marketing.com'
+  - '+.paypal-media.com'
+  - '+.paypal-merchantloyalty.com'
+  - '+.paypal-mktg.com'
+  - '+.paypal-mobilemoney.com'
+  - '+.paypal-network.org'
+  - '+.paypal-notice.com'
+  - '+.paypal-notify.com'
+  - '+.paypal-online.info'
+  - '+.paypal-online.net'
+  - '+.paypal-online.org'
+  - '+.paypal-optimizer.com'
+  - '+.paypal-pages.com'
+  - '+.paypal-photocard.com'
+  - '+.paypal-plaza.com'
+  - '+.paypal-portal.com'
+  - '+.paypal-prepagata.com'
+  - '+.paypal-prepagata.net'
+  - '+.paypal-prepaid.com'
+  - '+.paypal-profile.com'
+  - '+.paypal-proserv.com'
+  - '+.paypal-qrshopping.org'
+  - '+.paypal-recargacelular.com'
+  - '+.paypal-redeem.com'
+  - '+.paypal-referral.com'
+  - '+.paypal-retail.com'
+  - '+.paypal-scoop.com'
+  - '+.paypal-search.com'
+  - '+.paypal-secure.net'
+  - '+.paypal-secure.org'
+  - '+.paypal-security.net'
+  - '+.paypal-security.org'
+  - '+.paypal-service.org'
+  - '+.paypal-signin.com'
+  - '+.paypal-signin.us'
+  - '+.paypal-special.com'
+  - '+.paypal-specialoffers.com'
+  - '+.paypal-sptam.com'
+  - '+.paypal-status.com'
+  - '+.paypal-support.com'
+  - '+.paypal-survey.com'
+  - '+.paypal-survey.org'
+  - '+.paypal-team.com'
+  - '+.paypal-viewpoints.net'
+  - '+.paypal.ca'
+  - '+.paypal.com.cn'
+  - '+.paypal.com.hk'
+  - '+.paypal.com.sg'
+  - '+.paypal.hk'
+  - '+.paypal.info'
+  - '+.paypal.jp'
+  - '+.paypal.me'
+  - '+.paypal.net.cn'
+  - '+.paypal.org.cn'
+  - '+.paypal.so'
+  - '+.paypal.us'
+  - '+.paypalbeacon.com'
+  - '+.paypalbenefits.com'
+  - '+.paypalbrasil.com'
+  - '+.paypalcommunity.cn'
+  - '+.paypalcommunity.com'
+  - '+.paypalcommunity.net'
+  - '+.paypalcommunity.org'
+  - '+.paypalcorp.com'
+  - '+.paypalcredit.com'
+  - '+.paypalcreditcard.com'
+  - '+.paypalgivingfund.org'
+  - '+.paypalhere.cn'
+  - '+.paypalhere.com'
+  - '+.paypalhere.com.cn'
+  - '+.paypalhere.info'
+  - '+.paypalhere.net'
+  - '+.paypalhere.org'
+  - '+.paypalhere.tv'
+  - '+.paypali.net'
+  - '+.paypalinc.com'
+  - '+.paypalindia.com'
+  - '+.paypalinsuranceservices.org'
+  - '+.paypall.com'
+  - '+.paypallabs.com'
+  - '+.paypalme.com'
+  - '+.paypalnet.net'
+  - '+.paypalnet.org'
+  - '+.paypalnetwork.info'
+  - '+.paypalnetwork.net'
+  - '+.paypalnetwork.org'
+  - '+.paypalobjects.com'
+  - '+.paypalonline.net'
+  - '+.paypalonline.org'
+  - '+.paypalprepagata.com'
+  - '+.paypalprepagata.net'
+  - '+.paypalservice.com'
+  - '+.paypalshopping.com'
+  - '+.paypalshopping.net'
+  - '+.paypalsurvey.com'
+  - '+.paypalx.com'
+  - '+.paypaly.com'
+  - '+.payppal.com'
+  - '+.payypal.com'
+  - '+.pdncommunity.com'
+  - '+.pp-soc.com'
+  - '+.ppaypal.com'
+  - '+.pppds.com'
+  - '+.pypl.com'
+  - '+.pypl.info'
+  - '+.pypl.net'
+  - '+.pypl.tv'
+  - '+.s-xoom.com'
+  - '+.secure-paypal.info'
+  - '+.securepaypal.info'
+  - '+.simility.com'
+  - '+.sslpaypal.org'
+  - '+.swiftbank.info'
+  - '+.swiftbank.us'
+  - '+.swiftcapital.com'
+  - '+.swiftfinancial.com'
+  - '+.swiftfinancial.info'
+  - '+.swiftfinancial.net'
+  - '+.thepaypalshop.com'
+  - '+.theshoppingexpresslane.net'
+  - '+.venmo-touch.com'
+  - '+.venmo.com'
+  - '+.venmo.info'
+  - '+.venmo.net'
+  - '+.venmo.org'
+  - '+.venmo.s3.amazonaws.com'
+  - '+.webmoneyinfo.com'
+  - '+.wiremoneytoirelandwithxoomeasierandcheaper.com'
+  - '+.www-paypal.info'
+  - '+.www-paypal.us'
+  - '+.wwwxoom.com'
+  - '+.xn--bnq297cix3a.cn'
+  - '+.xoom-experience.com'
+  - '+.xoom.com'
+  - '+.xoom.io'
+  - '+.xoom.net.cn'
+  - '+.xoom.us'
+  - '+.xoomcom.com'
 
   # ============================================================================
   # 【第六部分：权威财经、智库与轻量 AI 社区 (Bloomberg / Reuters / Reddit / Perplexity)】
   # ============================================================================
-  - DOMAIN-SUFFIX,aei.org
-  - DOMAIN-SUFFIX,bloomberg.com
-  - DOMAIN-SUFFIX,hpcwire.com
-  - DOMAIN-SUFFIX,loc.gov
-  - DOMAIN-SUFFIX,perplexity.ai
-  - DOMAIN-SUFFIX,reddit.com
-  - DOMAIN-SUFFIX,reuters.com
-  - DOMAIN-SUFFIX,scholar.google.com
-  - DOMAIN-SUFFIX,techcrunch.com
+  - '+.aei.org'
+  - '+.bloomberg.com'
+  - '+.hpcwire.com'
+  - '+.loc.gov'
+  - '+.perplexity.ai'
+  - '+.reddit.com'
+  - '+.reuters.com'
+  - '+.scholar.google.com'
+  - '+.techcrunch.com'

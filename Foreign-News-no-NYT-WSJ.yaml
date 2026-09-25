@@ -4,7 +4,7 @@
 # 更新时间: 2026-09-25
 # 规则特性: 纯海外媒体规则（已彻底剔除中国大陆境内媒体，且不含 NYT 纽约时报与 WSJ 华尔街日报）
 # 规则解耦: 纽约时报 (NYT) 与华尔街日报 (WSJ / 道琼斯集团) 核心资产已剥离至专属规则集 NYT-WSJ.yaml
-# 适用平台: Stash / Clash rule-providers (behavior: classical)
+# 适用平台: Stash / Clash rule-providers (behavior: domain)
 # 推荐策略: PROXY 或 专用海外新闻分流策略组
 # ==============================================================================
 payload:
@@ -13,169 +13,169 @@ payload:
   # 涵盖英美法德意日韩等国主流严肃报刊、国家通讯社及电视新闻网
   # ============================================================================
   # 1. 顶尖综合大报 (The Guardian, The Times, The Daily Telegraph, LA Times 等，注: NYT 与 WSJ 已剥离至专属独立规则集)
-  - DOMAIN-SUFFIX,theguardian.com              # The Guardian (英国卫报)
-  - DOMAIN-SUFFIX,guardianapis.com             # 英国卫报 API 服务与移动端接口
-  - DOMAIN-SUFFIX,thetimes.com                 # The Times (英国泰晤士报)
-  - DOMAIN-SUFFIX,thetimes.co.uk               # 英国泰晤士报旧版/跳转域名
-  - DOMAIN-SUFFIX,telegraph.co.uk              # The Daily Telegraph (英国每日电讯报)
-  - DOMAIN-SUFFIX,latimes.com                  # Los Angeles Times (洛杉矶时报及电子报)
-  - DOMAIN-SUFFIX,latimesmedia.com             # 洛杉矶时报媒体资源
-  - DOMAIN-SUFFIX,faz.net                      # Frankfurter Allgemeine Zeitung (德国法兰克福汇报)
-  - DOMAIN-SUFFIX,welt.de                      # Die Welt (德国世界报)
-  - DOMAIN-SUFFIX,zeit.de                      # Die Zeit (德国时代周报)
-  - DOMAIN-SUFFIX,lefigaro.fr                  # Le Figaro (法国费加罗报)
-  - DOMAIN-SUFFIX,lexpress.fr                  # L'Express (法国快报周刊)
-  - DOMAIN-SUFFIX,yomiuri.co.jp                # 读卖新闻 (The Yomiuri Shimbun - 日本发行量最大报纸)
-  - DOMAIN-SUFFIX,donga.com                    # 东亚日报 (Dong-A Ilbo - 韩国三大主流报纸之一)
+  - '+.theguardian.com'                         # The Guardian (英国卫报)
+  - '+.guardianapis.com'                        # 英国卫报 API 服务与移动端接口
+  - '+.thetimes.com'                            # The Times (英国泰晤士报)
+  - '+.thetimes.co.uk'                          # 英国泰晤士报旧版/跳转域名
+  - '+.telegraph.co.uk'                         # The Daily Telegraph (英国每日电讯报)
+  - '+.latimes.com'                             # Los Angeles Times (洛杉矶时报及电子报)
+  - '+.latimesmedia.com'                        # 洛杉矶时报媒体资源
+  - '+.faz.net'                                 # Frankfurter Allgemeine Zeitung (德国法兰克福汇报)
+  - '+.welt.de'                                 # Die Welt (德国世界报)
+  - '+.zeit.de'                                 # Die Zeit (德国时代周报)
+  - '+.lefigaro.fr'                             # Le Figaro (法国费加罗报)
+  - '+.lexpress.fr'                             # L'Express (法国快报周刊)
+  - '+.yomiuri.co.jp'                           # 读卖新闻 (The Yomiuri Shimbun - 日本发行量最大报纸)
+  - '+.donga.com'                               # 东亚日报 (Dong-A Ilbo - 韩国三大主流报纸之一)
 
   # 2. 全球新闻通讯社与权威多媒体广播网
-  - DOMAIN-SUFFIX,apnews.com                   # Associated Press (美联社官方新闻网)
-  - DOMAIN-SUFFIX,globenewswire.com            # GlobeNewswire (全球企业与财经全景通讯社)
-  - DOMAIN-SUFFIX,cnn.com                      # CNN (美国有线电视新闻网)
-  - DOMAIN-SUFFIX,cbsnews.com                  # CBS News (哥伦比亚广播公司新闻频道)
-  - DOMAIN-SUFFIX,cbs.com                      # CBS 电视网与综合资讯
-  - DOMAIN-SUFFIX,nbcnews.com                  # NBC News (全国广播公司新闻网)
-  - DOMAIN-SUFFIX,nbc.com                      # NBC 电视网与综合资讯
-  - DOMAIN-SUFFIX,dw.com                       # Deutsche Welle (德国之声国际广播)
-  - DOMAIN-SUFFIX,rfi.fr                       # Radio France Internationale (法国国际广播电台)
-  - DOMAIN-SUFFIX,voanews.com                  # Voice of America (美国之音英文网)
-  - DOMAIN-SUFFIX,voachinese.com               # Voice of America (美国之音中文网)
-  - DOMAIN-SUFFIX,rfa.org                      # Radio Free Asia (自由亚洲电台)
-  - DOMAIN-SUFFIX,aljazeera.com                # Al Jazeera (半岛电视台国际新闻网)
-  - DOMAIN,news.un.org                         # UN News (联合国官方新闻公报)
+  - '+.apnews.com'                              # Associated Press (美联社官方新闻网)
+  - '+.globenewswire.com'                       # GlobeNewswire (全球企业与财经全景通讯社)
+  - '+.cnn.com'                                 # CNN (美国有线电视新闻网)
+  - '+.cbsnews.com'                             # CBS News (哥伦比亚广播公司新闻频道)
+  - '+.cbs.com'                                 # CBS 电视网与综合资讯
+  - '+.nbcnews.com'                             # NBC News (全国广播公司新闻网)
+  - '+.nbc.com'                                 # NBC 电视网与综合资讯
+  - '+.dw.com'                                  # Deutsche Welle (德国之声国际广播)
+  - '+.rfi.fr'                                  # Radio France Internationale (法国国际广播电台)
+  - '+.voanews.com'                             # Voice of America (美国之音英文网)
+  - '+.voachinese.com'                          # Voice of America (美国之音中文网)
+  - '+.rfa.org'                                 # Radio Free Asia (自由亚洲电台)
+  - '+.aljazeera.com'                           # Al Jazeera (半岛电视台国际新闻网)
+  - 'news.un.org'                               # UN News (联合国官方新闻公报)
 
   # 3. 地方严肃都市报与独立区域新闻
-  - DOMAIN-SUFFIX,amny.com                     # amNewYork (纽约本地发行量领先的都市日报)
-  - DOMAIN-SUFFIX,ny1.com                      # Spectrum News NY1 (纽约本地24小时全天候新闻台)
-  - DOMAIN-SUFFIX,abc7ny.com                   # ABC7 New York (纽约都会区第一新闻台)
-  - DOMAIN-SUFFIX,abc10.com                    # ABC10 (美国加州萨克拉门托地方新闻网)
-  - DOMAIN-SUFFIX,theday.com                   # The Day (美国康涅狄格州历史悠久的独立地方报纸)
+  - '+.amny.com'                                # amNewYork (纽约本地发行量领先的都市日报)
+  - '+.ny1.com'                                 # Spectrum News NY1 (纽约本地24小时全天候新闻台)
+  - '+.abc7ny.com'                              # ABC7 New York (纽约都会区第一新闻台)
+  - '+.abc10.com'                               # ABC10 (美国加州萨克拉门托地方新闻网)
+  - '+.theday.com'                              # The Day (美国康涅狄格州历史悠久的独立地方报纸)
 
   # 4. 深度国际政治评论与公民记者媒体
-  - DOMAIN-SUFFIX,theatlantic.com              # The Atlantic (大西洋月刊 - 顶尖政经、文化与思想深度杂志)
-  - DOMAIN-SUFFIX,politico.eu                  # Politico Europe (政客报欧洲版 - 欧洲政策与政治深度分析)
-  - DOMAIN-SUFFIX,outsidethebeltway.com        # Outside the Beltway (华盛顿圈外视点 - 政策与安全评论)
-  - DOMAIN-SUFFIX,globalvoices.org             # Global Voices (全球之声 - 全球多语言公民记者新闻网)
+  - '+.theatlantic.com'                         # The Atlantic (大西洋月刊 - 顶尖政经、文化与思想深度杂志)
+  - '+.politico.eu'                             # Politico Europe (政客报欧洲版 - 欧洲政策与政治深度分析)
+  - '+.outsidethebeltway.com'                   # Outside the Beltway (华盛顿圈外视点 - 政策与安全评论)
+  - '+.globalvoices.org'                        # Global Voices (全球之声 - 全球多语言公民记者新闻网)
 
   # ============================================================================
   # 【第二部分：全球数字报刊与杂志聚合旗舰平台】
   # 涵盖用户访问达数千次、聚合全球海量报纸与杂志的在线阅读终端
   # ============================================================================
-  - DOMAIN-SUFFIX,pressreader.com              # PressReader (全球最大数字报刊亭，收录全球数千份主流报刊完整版式)
+  - '+.pressreader.com'                         # PressReader (全球最大数字报刊亭，收录全球数千份主流报刊完整版式)
 
   # ============================================================================
   # 【第三部分：财经、商业、金融与宏观经济专业媒体】
   # 包含全球与境外最具权威性的金融资讯、创投市场与深度经济研究
   # ============================================================================
-  - DOMAIN-SUFFIX,ft.com                       # Financial Times (英国金融时报)
-  - DOMAIN-SUFFIX,bloomberglaw.com             # Bloomberg Law (彭博法律与商业合规权威新闻)
-  - DOMAIN-SUFFIX,cnbc.com                     # CNBC (全国广播公司全球财经商业新闻)
-  - DOMAIN-SUFFIX,siteselection.com            # Site Selection Magazine (选址杂志 - 全球产业投资与商业地理)
-  - DOMAIN-SUFFIX,ryanbencapital.com           # 瑞恩资本 (RyanBen Capital - 香港资本市场与上市IPO深度报道)
-  - DOMAIN-SUFFIX,etnet.com.hk                 # 经济通 (ET Net - 香港核心财经新闻与实时报价平台)
-  - DOMAIN-SUFFIX,nber.org                     # NBER (美国全国经济研究所 - 顶级全球宏观经济工作论文与动态)
-  - DOMAIN-SUFFIX,aeaweb.org                   # AEA (美国经济学会 - 美国经济评论 AER 与宏观经济前沿)
+  - '+.ft.com'                                  # Financial Times (英国金融时报)
+  - '+.bloomberglaw.com'                        # Bloomberg Law (彭博法律与商业合规权威新闻)
+  - '+.cnbc.com'                                # CNBC (全国广播公司全球财经商业新闻)
+  - '+.siteselection.com'                       # Site Selection Magazine (选址杂志 - 全球产业投资与商业地理)
+  - '+.ryanbencapital.com'                      # 瑞恩资本 (RyanBen Capital - 香港资本市场与上市IPO深度报道)
+  - '+.etnet.com.hk'                            # 经济通 (ET Net - 香港核心财经新闻与实时报价平台)
+  - '+.nber.org'                                # NBER (美国全国经济研究所 - 顶级全球宏观经济工作论文与动态)
+  - '+.aeaweb.org'                              # AEA (美国经济学会 - 美国经济评论 AER 与宏观经济前沿)
 
   # ============================================================================
   # 【第四部分：科技前沿、数字与数码媒体】
   # 涵盖硬核技术极客、芯片硬件、AI与移动计算产业深度报道
   # ============================================================================
-  - DOMAIN-SUFFIX,arstechnica.com              # Ars Technica (权威科技极客媒体 - 涵盖OS、硬件、科学与安全)
-  - DOMAIN-SUFFIX,wired.com                    # Wired (连线杂志 - 科技与数字文化引领者)
-  - DOMAIN-SUFFIX,venturebeat.com              # VentureBeat (AI人工智能与技术创新产业旗舰媒体)
-  - DOMAIN-SUFFIX,thenextweb.com               # The Next Web / TNW (欧洲知名互联网前沿科技媒体)
-  - DOMAIN-SUFFIX,theregister.com              # The Register (英国知名IT基础设施、企业级系统与芯片科技媒体)
-  - DOMAIN-SUFFIX,9to5mac.com                  # 9to5Mac (Apple 生态与硬件产业链核心垂直媒体)
-  - DOMAIN-SUFFIX,androidauthority.com         # Android Authority (安卓生态与移动消费电子深度测评)
-  - DOMAIN-SUFFIX,notebookcheck.net            # Notebookcheck (全球权威笔记本电脑与半导体硬件硬核测评媒体)
-  - DOMAIN-SUFFIX,chromeunboxed.com            # Chrome Unboxed (ChromeOS 与 Google 生态硬件前沿观察)
-  - DOMAIN-SUFFIX,gadgets360.com               # Gadgets 360 (消费数码科技与智能硬件综合资讯)
-  - DOMAIN-SUFFIX,idropnews.com                # iDrop News (iOS 及移动科技前沿资讯)
-  - DOMAIN-SUFFIX,thequantuminsider.com        # The Quantum Insider (量子计算与前沿深度技术市场情报媒体)
-  - DOMAIN-SUFFIX,electrek.co                  # Electrek (新能源电动汽车、智能交通与清洁能源科技媒体)
-  - DOMAIN-SUFFIX,spacenews.com                # SpaceNews (全球商业航天、卫星工业与太空政策权威媒体)
+  - '+.arstechnica.com'                         # Ars Technica (权威科技极客媒体 - 涵盖OS、硬件、科学与安全)
+  - '+.wired.com'                               # Wired (连线杂志 - 科技与数字文化引领者)
+  - '+.venturebeat.com'                         # VentureBeat (AI人工智能与技术创新产业旗舰媒体)
+  - '+.thenextweb.com'                          # The Next Web / TNW (欧洲知名互联网前沿科技媒体)
+  - '+.theregister.com'                         # The Register (英国知名IT基础设施、企业级系统与芯片科技媒体)
+  - '+.9to5mac.com'                             # 9to5Mac (Apple 生态与硬件产业链核心垂直媒体)
+  - '+.androidauthority.com'                    # Android Authority (安卓生态与移动消费电子深度测评)
+  - '+.notebookcheck.net'                       # Notebookcheck (全球权威笔记本电脑与半导体硬件硬核测评媒体)
+  - '+.chromeunboxed.com'                       # Chrome Unboxed (ChromeOS 与 Google 生态硬件前沿观察)
+  - '+.gadgets360.com'                          # Gadgets 360 (消费数码科技与智能硬件综合资讯)
+  - '+.idropnews.com'                           # iDrop News (iOS 及移动科技前沿资讯)
+  - '+.thequantuminsider.com'                   # The Quantum Insider (量子计算与前沿深度技术市场情报媒体)
+  - '+.electrek.co'                             # Electrek (新能源电动汽车、智能交通与清洁能源科技媒体)
+  - '+.spacenews.com'                           # SpaceNews (全球商业航天、卫星工业与太空政策权威媒体)
 
   # ============================================================================
   # 【第五部分：影视、娱乐、流行文化与生活方式】
   # 涵盖好莱坞影视制作前沿、流行文化深度评论与高品质生活杂志
   # ============================================================================
-  - DOMAIN-SUFFIX,deadline.com                 # Deadline Hollywood (好莱坞影视娱乐行业头条与权威快讯)
-  - DOMAIN-SUFFIX,collider.com                 # Collider (影视制作独家内幕、电影电视剧深度评论)
-  - DOMAIN-SUFFIX,vulture.com                  # Vulture (纽约杂志旗下影视、艺术、书籍与文化评论)
-  - DOMAIN-SUFFIX,avclub.com                   # The A.V. Club (流行文化、电影、音乐与电视专业评论网)
-  - DOMAIN-SUFFIX,dexerto.com                  # Dexerto (全球最大电竞、游戏文化、流媒体网红与青年娱乐媒体)
-  - DOMAIN-SUFFIX,rollingstone.com             # Rolling Stone (滚石杂志 - 摇滚乐、流行文化与深度调查)
-  - DOMAIN-SUFFIX,topgear.com                  # Top Gear (英国顶级汽车文化、超跑与出行评测杂志)
-  - DOMAIN-SUFFIX,consumerreports.org          # Consumer Reports (美国消费者报告 - 独立权威产品测评与消费指南)
-  - DOMAIN-SUFFIX,pocketmags.com               # Pocketmags (国际电子杂志期刊订阅 - 含 Men's Health 等时尚健康刊物)
-  - DOMAIN-SUFFIX,frommers.com                 # Frommer's (国际知名旅行生活方式与城市指南媒体)
-  - DOMAIN,culturecrave.beehiiv.com            # Culture Crave (流行文化与影视行业最新爆料速递)
+  - '+.deadline.com'                            # Deadline Hollywood (好莱坞影视娱乐行业头条与权威快讯)
+  - '+.collider.com'                            # Collider (影视制作独家内幕、电影电视剧深度评论)
+  - '+.vulture.com'                             # Vulture (纽约杂志旗下影视、艺术、书籍与文化评论)
+  - '+.avclub.com'                              # The A.V. Club (流行文化、电影、音乐与电视专业评论网)
+  - '+.dexerto.com'                             # Dexerto (全球最大电竞、游戏文化、流媒体网红与青年娱乐媒体)
+  - '+.rollingstone.com'                        # Rolling Stone (滚石杂志 - 摇滚乐、流行文化与深度调查)
+  - '+.topgear.com'                             # Top Gear (英国顶级汽车文化、超跑与出行评测杂志)
+  - '+.consumerreports.org'                     # Consumer Reports (美国消费者报告 - 独立权威产品测评与消费指南)
+  - '+.pocketmags.com'                          # Pocketmags (国际电子杂志期刊订阅 - 含 Men's Health 等时尚健康刊物)
+  - '+.frommers.com'                            # Frommer's (国际知名旅行生活方式与城市指南媒体)
+  - 'culturecrave.beehiiv.com'                  # Culture Crave (流行文化与影视行业最新爆料速递)
 
   # ============================================================================
   # 【第六部分：垂直专业、前沿学术与细分行业新闻】
   # 包含医学健康、科学发现、军事防务、司法案件追踪与行业专业刊物
   # ============================================================================
   # 1. 科学发现与前沿科研新闻
-  - DOMAIN-SUFFIX,scientificamerican.com       # Scientific American (科学美国人 - 权威科普与前沿科学新闻)
-  - DOMAIN-SUFFIX,science.org                  # Science / ScienceInsider (美国科学促进会顶级前沿科研新闻)
-  - DOMAIN-SUFFIX,nature.com                   # Nature News (自然杂志科学前沿与科研政策动态)
-  - DOMAIN-SUFFIX,cen.acs.org                  # Chemical & Engineering News (美国化学会 C&EN 化学与化工周刊)
+  - '+.scientificamerican.com'                  # Scientific American (科学美国人 - 权威科普与前沿科学新闻)
+  - '+.science.org'                             # Science / ScienceInsider (美国科学促进会顶级前沿科研新闻)
+  - '+.nature.com'                              # Nature News (自然杂志科学前沿与科研政策动态)
+  - '+.cen.acs.org'                             # Chemical & Engineering News (美国化学会 C&EN 化学与化工周刊)
 
   # 2. 生物医药与临床医学专业新闻
-  - DOMAIN-SUFFIX,statnews.com                 # STAT News (波士顿环球报旗下顶级生物医药与生命科学新闻媒体)
-  - DOMAIN-SUFFIX,medscape.com                 # Medscape (WebMD 旗下专业临床医学新闻与医学前沿资讯)
+  - '+.statnews.com'                            # STAT News (波士顿环球报旗下顶级生物医药与生命科学新闻媒体)
+  - '+.medscape.com'                            # Medscape (WebMD 旗下专业临床医学新闻与医学前沿资讯)
 
   # 3. 军事防务、海事安全与地缘情报
-  - DOMAIN-SUFFIX,usni.org                     # USNI News (美国海军学会官方新闻 - 全球海上防务动态与舰艇追踪)
-  - DOMAIN-SUFFIX,twz.com                      # The War Zone (战区 - 顶尖尖端军事技术、装备试飞与防务前沿)
-  - DOMAIN-SUFFIX,defencesecurityasia.com      # Defence Security Asia (亚洲防务与安全垂直军事媒体)
+  - '+.usni.org'                                # USNI News (美国海军学会官方新闻 - 全球海上防务动态与舰艇追踪)
+  - '+.twz.com'                                 # The War Zone (战区 - 顶尖尖端军事技术、装备试飞与防务前沿)
+  - '+.defencesecurityasia.com'                 # Defence Security Asia (亚洲防务与安全垂直军事媒体)
 
   # 4. 食品制造、司法诉讼与影视产业垂直专刊
-  - DOMAIN-SUFFIX,fooddive.com                 # Food Dive (全球食品饮料制造、供应链与消费工业垂直新闻)
-  - DOMAIN-SUFFIX,courthousenews.com           # Courthouse News Service (全美司法诉讼、法院裁决与法庭案件新闻社)
-  - DOMAIN-SUFFIX,timeshighereducation.com     # Times Higher Education / THE (泰晤士高等教育大学新闻与动态)
-  - DOMAIN-SUFFIX,stanforddaily.com            # The Stanford Daily (斯坦福大学独立学生新闻报纸)
-  - DOMAIN-SUFFIX,theweekjunior.co.uk          # The Week Junior (知名前沿少年儿童新闻周刊)
-  - DOMAIN-SUFFIX,firstnews.co.uk              # First News (英国屡获殊荣的儿童与中小学时事新闻周报)
-  - DOMAIN-SUFFIX,pipamag.org                  # 小枇杷杂志 (Pipa Mag - 儿童双语优质读物与文化期刊)
-  - DOMAIN-SUFFIX,productionweekly.com         # Production Weekly (影视前期制作进度追踪与行业专刊)
-  - DOMAIN-SUFFIX,productionbulletin.com       # Production Bulletin (影视行业开机通告与制作行业资讯)
-  - DOMAIN-SUFFIX,espn.com                     # ESPN (全球专业体育赛事与体育行业新闻)
-  - DOMAIN-SUFFIX,nfl.com                      # NFL (国家美式足球联盟官方体育新闻)
+  - '+.fooddive.com'                            # Food Dive (全球食品饮料制造、供应链与消费工业垂直新闻)
+  - '+.courthousenews.com'                      # Courthouse News Service (全美司法诉讼、法院裁决与法庭案件新闻社)
+  - '+.timeshighereducation.com'                # Times Higher Education / THE (泰晤士高等教育大学新闻与动态)
+  - '+.stanforddaily.com'                       # The Stanford Daily (斯坦福大学独立学生新闻报纸)
+  - '+.theweekjunior.co.uk'                     # The Week Junior (知名前沿少年儿童新闻周刊)
+  - '+.firstnews.co.uk'                         # First News (英国屡获殊荣的儿童与中小学时事新闻周报)
+  - '+.pipamag.org'                             # 小枇杷杂志 (Pipa Mag - 儿童双语优质读物与文化期刊)
+  - '+.productionweekly.com'                    # Production Weekly (影视前期制作进度追踪与行业专刊)
+  - '+.productionbulletin.com'                  # Production Bulletin (影视行业开机通告与制作行业资讯)
+  - '+.espn.com'                                # ESPN (全球专业体育赛事与体育行业新闻)
+  - '+.nfl.com'                                 # NFL (国家美式足球联盟官方体育新闻)
 
   # ============================================================================
   # 【第七部分：华语与海外华文媒体 / 港澳台及亚洲重点报刊】
   # 涵盖新加坡、香港、台湾、马来西亚、泰国、日韩知名华文与区域主流外媒
   # ============================================================================
   # 1. 国际著名华文新闻门户与海外华文报刊
-  - DOMAIN-SUFFIX,zaobao.com.sg                # 联合早报官方网站 (Lianhe Zaobao - 新加坡报业控股旗舰华文大报)
-  - DOMAIN-SUFFIX,zaobao.com                   # 联合早报网国际服务域名
-  - DOMAIN-SUFFIX,zaochenbao.com               # 早晨报 (联合早报资讯服务镜像)
-  - DOMAIN-SUFFIX,worldjournal.com             # 世界日报 (World Journal - 北美最大中文报业集团)
-  - DOMAIN-SUFFIX,renminbao.com                # 人民报 (海外华文政经与时事报纸)
-  - DOMAIN-SUFFIX,epochtimes.com               # 大纪元时报 (The Epoch Times)
-  - DOMAIN-SUFFIX,wenxuecity.com               # 文学城 (Wenxuecity - 北美华人综合新闻与资讯社区)
+  - '+.zaobao.com.sg'                           # 联合早报官方网站 (Lianhe Zaobao - 新加坡报业控股旗舰华文大报)
+  - '+.zaobao.com'                              # 联合早报网国际服务域名
+  - '+.zaochenbao.com'                          # 早晨报 (联合早报资讯服务镜像)
+  - '+.worldjournal.com'                        # 世界日报 (World Journal - 北美最大中文报业集团)
+  - '+.renminbao.com'                           # 人民报 (海外华文政经与时事报纸)
+  - '+.epochtimes.com'                          # 大纪元时报 (The Epoch Times)
+  - '+.wenxuecity.com'                          # 文学城 (Wenxuecity - 北美华人综合新闻与资讯社区)
 
   # 2. 港澳台知名新闻媒体
-  - DOMAIN-SUFFIX,hk01.com                     # 香港01 (HK01 - 香港主流综合新媒体与社会民生新闻)
-  - DOMAIN-SUFFIX,hkcd.com.hk                  # 香港商报 (Hong Kong Commercial Daily - 历史悠久的财经商报)
-  - DOMAIN-SUFFIX,bau.com.hk                   # 紫荆杂志社 (Bauhinia Magazine / 紫荆网 - 权威时政与涉港评论)
-  - DOMAIN-SUFFIX,storm.mg                     # 风传媒 (The Storm Media - 台湾知名独立网络新闻与深度评论)
-  - DOMAIN-SUFFIX,inside.com.tw                # INSIDE 硬塞的網路趨勢觀察 (台湾最具影响力的科技与创业趋势媒体)
+  - '+.hk01.com'                                # 香港01 (HK01 - 香港主流综合新媒体与社会民生新闻)
+  - '+.hkcd.com.hk'                             # 香港商报 (Hong Kong Commercial Daily - 历史悠久的财经商报)
+  - '+.bau.com.hk'                              # 紫荆杂志社 (Bauhinia Magazine / 紫荆网 - 权威时政与涉港评论)
+  - '+.storm.mg'                                # 风传媒 (The Storm Media - 台湾知名独立网络新闻与深度评论)
+  - '+.inside.com.tw'                           # INSIDE 硬塞的網路趨勢觀察 (台湾最具影响力的科技与创业趋势媒体)
 
   # 3. 东南亚与东亚重点区域媒体
-  - DOMAIN-SUFFIX,businesstimes.com.sg         # The Business Times (新加坡商业时报)
-  - DOMAIN-SUFFIX,enanyang.my                  # e南洋 (南洋商报 - 马来西亚知名华文经济与综合大报)
-  - DOMAIN-SUFFIX,nationthailand.com           # The Nation Thailand (泰国民族报 - 泰国主要英文大报)
-  - DOMAIN-SUFFIX,bkktribune.com               # Bangkok Tribune (曼谷论坛 - 泰国深度环境与公共政策独立报)
-  - DOMAIN-SUFFIX,themomentum.co               # The Momentum (泰国新锐时政深度报道与生活方式新媒体)
-  - DOMAIN-SUFFIX,prachachat.net               # Prachachat (泰国商业与财经综合大报)
-  - DOMAIN-SUFFIX,isranews.org                 # Isra News Agency (泰国知名调查新闻通讯社)
-  - DOMAIN-SUFFIX,thaipbs.or.th                # Thai PBS (泰国公共电视台新闻网)
-  - DOMAIN-SUFFIX,forbesthailand.com           # Forbes Thailand (福布斯泰国版)
-  - DOMAIN-SUFFIX,asiae.co.kr                  # 亚洲经济 (Asia Economy - 韩国知名经济与综合新闻报社)
-  - DOMAIN-SUFFIX,mk.co.kr                     # 每日经济新闻 (Maeil Business Newspaper - 韩国领先财经报纸)
-  - DOMAIN,v.daum.net                          # Daum News (韩国多音综合门户新闻频道)
-  - DOMAIN,news.yahoo.co.jp                    # 雅虎日本新闻 (Yahoo! JAPAN News - 日本访问量最大的新闻门户)
-  - DOMAIN-SUFFIX,nikkei.com                   # 日本经济新闻 (The Nikkei - 涵盖日经中文网 cn.nikkei.com)
-  - DOMAIN-SUFFIX,economictimes.indiatimes.com # The Economic Times (印度经济时报 - 仅次于华尔街日报的全球主流英文财经报)
+  - '+.businesstimes.com.sg'                    # The Business Times (新加坡商业时报)
+  - '+.enanyang.my'                             # e南洋 (南洋商报 - 马来西亚知名华文经济与综合大报)
+  - '+.nationthailand.com'                      # The Nation Thailand (泰国民族报 - 泰国主要英文大报)
+  - '+.bkktribune.com'                          # Bangkok Tribune (曼谷论坛 - 泰国深度环境与公共政策独立报)
+  - '+.themomentum.co'                          # The Momentum (泰国新锐时政深度报道与生活方式新媒体)
+  - '+.prachachat.net'                          # Prachachat (泰国商业与财经综合大报)
+  - '+.isranews.org'                            # Isra News Agency (泰国知名调查新闻通讯社)
+  - '+.thaipbs.or.th'                           # Thai PBS (泰国公共电视台新闻网)
+  - '+.forbesthailand.com'                      # Forbes Thailand (福布斯泰国版)
+  - '+.asiae.co.kr'                             # 亚洲经济 (Asia Economy - 韩国知名经济与综合新闻报社)
+  - '+.mk.co.kr'                                # 每日经济新闻 (Maeil Business Newspaper - 韩国领先财经报纸)
+  - 'v.daum.net'                                # Daum News (韩国多音综合门户新闻频道)
+  - 'news.yahoo.co.jp'                          # 雅虎日本新闻 (Yahoo! JAPAN News - 日本访问量最大的新闻门户)
+  - '+.nikkei.com'                              # 日本经济新闻 (The Nikkei - 涵盖日经中文网 cn.nikkei.com)
+  - '+.economictimes.indiatimes.com'            # The Economic Times (印度经济时报 - 仅次于华尔街日报的全球主流英文财经报)
