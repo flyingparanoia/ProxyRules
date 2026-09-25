@@ -17,7 +17,7 @@
 专门收集国内主流视频/直播 App（抖音、B站、爱优腾等）偷偷利用用户设备上行充当免费 CDN 节点的 P2P 调度域名。
 * **使用策略**：`REJECT`（拦截后 App 会自动降级走官方直连 CDN，视频顺畅播放且手机不再发烫偷跑上传）
 
-### 4. 全球海外综合与专业前沿新闻规则 (`Foreign-News.yaml`)
+### 4. 全球海外综合与专业前沿新闻规则 (不含 NYT / WSJ) (`Foreign-News-no-NYT-WSJ.yaml`)
 基于真实 Chrome 浏览器历史记录全量深度分析（8万+记录），专门剔除了中国大陆境内媒体，专为科学上网分流与海外优质资讯代理设计。涵盖：
 * **全球综合大报与通讯社**：英国卫报、泰晤士报、每日电讯报、洛杉矶时报、法兰克福汇报、世界报、时代周报、费加罗报、读卖新闻、东亚日报、美联社、CNN、CBS、NBC、德国之声、法国国际广播、联合国新闻等（注：纽约时报 NYT 与华尔街日报 WSJ 已单独剥离至专属规则集 `NYT-WSJ.yaml`）。
 * **数字报刊与聚合平台**：PressReader（全球报刊亭旗舰，高频阅读数千次）。
@@ -119,7 +119,7 @@
 * **使用策略**：`DIRECT`（直连，享受本地千兆宽带低延迟高速直达）。
 
 ### 13. 纽约时报与华尔街日报全量规则 (`NYT-WSJ.yaml`)
-基于真实 iPhone 移动客户端与 Mac 桌面浏览器双端实机抓包深度分析，完整提取 The New York Times 与 The Wall Street Journal（含道琼斯 Dow Jones 集团）核心资产（已从 `Foreign-News.yaml` 及其他规则中完全剥离解耦）：
+基于真实 iPhone 移动客户端与 Mac 桌面浏览器双端实机抓包深度分析，完整提取 The New York Times 与 The Wall Street Journal（含道琼斯 Dow Jones 集团）核心资产（已从 `Foreign-News-no-NYT-WSJ.yaml` 及其他规则中完全剥离解耦）：
 * **The New York Times (NYT / 纽约时报)**：纽约时报核心主站、国际版、中文网、Samizdat GraphQL API 网关（`samizdat-graphql.nytimes.com`）、核心多媒体/短域（`nyt.com`、`a1.nyt.com`、`g1.nyt.com`）、高清图床 CDN（`nytimg.com`）、集团公司（`nytco.com`）、时尚版（`nytstyle.com`）、版本对比（`nytdiff.com`）与官方品牌域（`newyorktimes.com`）。
 * **The Wall Street Journal (WSJ / 华尔街日报)**：华尔街日报核心主站（`wsj.com`）、移动端与 Web API（`follow-api.wsj.com`、`video-api.wsj.com`）、报纸数字版（`pbc.wsj.com`、`pblog.wsj.com`）、核心音视频流媒体（`wsjstream.wsj.net`）、图床与静态组件 CDN（`wsj.net`、`images.wsj.net`、`opinion-images.wsj.net`）、读者会员权益（`wsjplus.com`）。
 * **Dow Jones (道琼斯集团与 News Corp 商业矩阵)**：道琼斯公司官网与统一单点登录 SSO 鉴权网关（`dowjones.com`、`sso.accounts.dowjones.com`）、道琼斯云原生微服务与公共共享数据网关（`dowjones.io`、`shared-data.dowjones.io`）、订单订阅系统（`dowjoneson.com`、`oms.dowjoneson.com`）、巴伦周刊（`barrons.com`）、MarketWatch 实时金融行情（`marketwatch.com`）、Mansion Global 豪宅不动产（`mansionglobal.com`）、Factiva 商业情报库（`factiva.com`）、新闻集团统一平台（`newscgp.com`）。
@@ -162,14 +162,14 @@ rule-providers:
     path: ./ruleset/douyin.yaml
     interval: 86400
 
-  # 4. 订阅全球海外新闻与专业媒体规则集
+  # 4. 订阅全球海外新闻与专业媒体规则集 (不含 NYT / WSJ)
   foreign-news:
     type: http
     behavior: classical
     format: yaml
-    url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/Foreign-News.yaml"
-    # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/Foreign-News.yaml"
-    path: ./ruleset/foreign-news.yaml
+    url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/Foreign-News-no-NYT-WSJ.yaml"
+    # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/Foreign-News-no-NYT-WSJ.yaml"
+    path: ./ruleset/foreign-news-no-nyt-wsj.yaml
     interval: 86400
 
   # 5. 订阅 OpenAI / ChatGPT 全量生态规则集
