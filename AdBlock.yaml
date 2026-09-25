@@ -552,4 +552,9 @@ payload:
   - '+.servenobid.com'
   - '+.braze.com'
   - '+.omtrdc.net'
+  - '+.indexww.com'
+  - '+.chartbeat.net'
+  - '+.geoedge.be'
+  - '+.datadoghq-browser-agent.com'
+
 
