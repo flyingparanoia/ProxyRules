@@ -193,37 +193,38 @@ rule-providers:
     interval: 86400
 
 rules:
-  # 必须排在最前面：优先阻断所有 P2P 偷跑连接
-  - RULE-SET,china-video-apps-pcdn,REJECT
+  # 必须排在最前面：优先阻断所有 P2P 偷跑连接与轻量广告
+  - RULE-SET,china-video-apps-pcdn,🛑 全球拦截
+  - RULE-SET,hagezi-light,🛑 全球拦截
 
   # 抖音官方核心业务直连
-  - RULE-SET,douyin,DIRECT
+  - RULE-SET,douyin,👁️ Douyin
 
   # TikTok 全量生态走专用海外流媒体策略组（解锁节点）
-  - RULE-SET,tiktok,TikTok
-
-  # OpenAI / ChatGPT 生态走专用代理节点
-  - RULE-SET,openai,PROXY
-
-  # Google 全球搜索与 Gemini 走专用代理节点（统一出口避免风控）
-  - RULE-SET,google-gemini,PROXY
-
-  # 英国全媒体走英国专属原生/住宅解锁节点 (BBC iPlayer / ITV)
-  - RULE-SET,uk-media,PROXY
+  - RULE-SET,tiktok,👁️ TikTok
 
   # Apple TV+ 专属流媒体走支持区域版权解锁的节点
-  - RULE-SET,appletv,PROXY
+  - RULE-SET,appletv,👁️ AppleTV
 
-  # Apple 全生态服务（若希望国内直连加速可设 DIRECT，若需使用 Apple News 建议设专用策略组）
-  - RULE-SET,apple-services,DIRECT
+  # Apple 全生态基础服务（可走 DIRECT 或专属策略组）
+  - RULE-SET,apple-services,🍎 Apple Services
 
-  # YouTube 流量走代理或指定策略组
-  - RULE-SET,youtube,PROXY
+  # YouTube 流量走代理或专属流媒体组
+  - RULE-SET,youtube,🎬 YouTube
 
-  # 全球海外新闻与专业媒体走代理（或指定 [Foreign-News] 策略组）
-  - RULE-SET,foreign-news,PROXY
+  # Google 全球搜索与 Gemini 走专用代理节点（统一出口避免风控）
+  - RULE-SET,google-gemini,🔍 Google Gemini
+
+  # OpenAI / ChatGPT 生态走专用代理节点
+  - RULE-SET,openai,🤖 OpenAI
+
+  # 英国全媒体走英国专属原生/住宅解锁节点 (BBC iPlayer / ITV)
+  - RULE-SET,uk-media,📡 UK Media
+
+  # 全球海外新闻与专业媒体走专属代理策略组
+  - RULE-SET,foreign-news,📰 Foreign News
 
   # 后续其他分流规则
-  - GEOIP,CN,DIRECT
-  - MATCH,FINAL
+  - GEOIP,CN,🎯 全球直连
+  - MATCH,🐟 漏网之鱼
 ```
