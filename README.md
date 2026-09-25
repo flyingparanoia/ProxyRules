@@ -87,7 +87,7 @@
 * **海外基建、电商与衍生生态**：TikTok Shop 美区电商（`tiktokshops.us`）、TikTok Music（`tiktokmusic.app`）、剪映海外版 CapCut（`capcut.com`）、字节跳动海外技术底座（`byteoversea.com`、`ibytedtos.com`、`bytedapm.com`、`bytegecko-i18n.com`、`ipstatp.com`、`sgpstatp.com`）、Musical.ly 历史兼容资产。
 * **使用策略**：专用的 `TikTok` 流媒体策略组（选择美区、新加坡、日本等支持 TikTok 解锁的住宅或原生代理节点，注意避开国内/香港节点）。
 
-### 11. 学术数据库与文献资源直连规则 (`Academic.yaml`)
+### 11. 学术数据库与文献资源直连规则 (`Academic-Direct.yaml`)
 严格提取自 `mixed.yaml`（`🎓 学术资源类 —— 直连便于认证 / 学术网络识别`）并配套主流学术云补充，涵盖：
 * **全球权威学术检索与分析**：Web of Science 核心正站（`webofscience.com`）、中国镜像（`webofscience.clarivate.cn`）、Clarivate 统一身份网关（`access.clarivate.com`、`clarivate.com`）、EI 工程索引（`engineeringvillage.com`）、MathSciNet（`mathscinet.ams.org`、`ams.org`）。
 * **四大科学出版商与顶级期刊**：Elsevier / ScienceDirect（`sciencedirect.com`、`elsevier.com`）、Nature 自然出版集团（`nature.com`）、Science 科学杂志（`science.org`）、Wiley 在线图书馆（`onlinelibrary.wiley.com`、`wiley.com`、`ietresearch.onlinelibrary.wiley.com`）、Springer Nature（`springer.com`、`springernature.com`）。
@@ -203,13 +203,13 @@ rule-providers:
     interval: 86400
 
   # 11. 订阅学术数据库与文献资源直连规则集
-  academic:
+  academic-direct:
     type: http
     behavior: classical
     format: yaml
-    url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/Academic.yaml"
-    # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/Academic.yaml"
-    path: ./ruleset/academic.yaml
+    url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/Academic-Direct.yaml"
+    # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/Academic-Direct.yaml"
+    path: ./ruleset/academic-direct.yaml
     interval: 86400
 
 rules:
@@ -218,7 +218,7 @@ rules:
   - RULE-SET,hagezi-light,🛑 全球拦截
 
   # 学术数据库走直连（保障高校机构与 CARSI 认证免登录下载正文）
-  - RULE-SET,academic,DIRECT
+  - RULE-SET,academic-direct,DIRECT
 
   # 抖音官方核心业务直连
   - RULE-SET,douyin,👁️ Douyin
