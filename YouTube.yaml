@@ -1,0 +1,61 @@
+# ==============================================================================
+# 规则名称: YouTube 全量分流规则集 (YouTube All-in-One)
+# 更新时间: 2026-09-25
+# 规则来源: 本地 Stash Mac 网页端 + iPhone 客户端双端实机抓包深度分析
+# 规则说明: 细分为“全端共用核心”、“移动端专属/典型”、“桌面网页端专属”及“扩展服务与子站”
+# 适用平台: Stash, Clash rule-providers
+# ==============================================================================
+payload:
+  # ============================================================================
+  # 【第一部分：全端共用核心】(桌面 Web 网页端与手机 App 端均高频使用)
+  # ============================================================================
+  # 1. 核心业务主站与官方短链
+  - DOMAIN-SUFFIX,youtube.com                  # YouTube 主站、API 网关及核心交互
+  - DOMAIN-SUFFIX,youtu.be                     # YouTube 官方分享短链接
+  - DOMAIN-SUFFIX,yt.be                        # YouTube 官方短域名
+
+  # 2. 核心视频流媒体分发 (负责 90%+ 的视频点播与直播切片流量)
+  - DOMAIN-SUFFIX,googlevideo.com              # 全球音视频切片流媒体 CDN (海量 rr*---sn-*.googlevideo.com)
+
+  # 3. 核心图床、缩略图与静态资源
+  - DOMAIN-SUFFIX,ytimg.com                    # 视频缩略图、封面海报图床 (i.ytimg.com, i9.ytimg.com)
+  - DOMAIN-SUFFIX,ggpht.com                    # 频道头像、创作者多媒体与用户头像图床 (yt3.ggpht.com)
+  - DOMAIN-SUFFIX,ggpht.cn                     # 国内部分网络环境下的头像 CDN 节点
+  
+  # 4. YouTube 跨端通用内部 API 网关 (Innertube API)
+  - DOMAIN,youtubei.googleapis.com             # YouTube 跨平台核心内部 API 接口
+  - DOMAIN-SUFFIX,youtube.googleapis.com       # YouTube 开放 API 接口服务
+  - DOMAIN-SUFFIX,youtubeembeddedplayer.googleapis.com # 网页嵌入式播放器组件
+
+  # ============================================================================
+  # 【第二部分：iPhone / 移动端专属与典型调用】(移动端特有网关与调度)
+  # ============================================================================
+  # 1. 移动端播放进度同步与视频流调度
+  - DOMAIN,s.youtube.com                       # 移动端播放历史记录、播放进度心跳同步与统计上报 (核心标志域名)
+  - DOMAIN,redirector.googlevideo.com          # 移动端视频流全局重定向与就近节点调度器 (移动端播放前必调)
+  
+  # 2. 移动端搜索建议、风控反作弊与特权接口
+  - DOMAIN,suggestqueries.google.com           # 移动端 YouTube 搜索栏联想词与自动补全服务
+  - DOMAIN,iosantiabuse-pa.googleapis.com      # iOS 原生防刷量与点击反作弊风控网关 (Anti-Abuse)
+  - DOMAIN,accountcapabilities-pa.googleapis.com # 移动端 YouTube Premium 会员特权与后台播放鉴权接口
+  - DOMAIN,growth-pa.googleapis.com            # 移动端个性化推荐算法与新用户增长接口
+
+  # ============================================================================
+  # 【第三部分：桌面网页端专属 / 典型】(PC / Mac 浏览器打开 YouTube)
+  # ============================================================================
+  - DOMAIN,studio.youtube.com                  # YouTube Studio 创作者中心网页版
+  - DOMAIN,tv.youtube.com                      # YouTube TV 电视网页版服务
+  - DOMAIN,realtimesupport.youtube.com         # 网页端实时创作者与用户客服支持系统
+  - DOMAIN,casespartner-pa.youtube.com         # 合作方与客服案例后台支持
+  - DOMAIN-SUFFIX,c.youtube.com                # 网页播放器本地流媒体就近解析调度 (rr*---sn-*.c.youtube.com)
+  - DOMAIN-SUFFIX,youtube-nocookie.com         # 网页端防隐私追踪的嵌入式视频播放域名
+  - DOMAIN-SUFFIX,withyoutube.com              # YouTube 营销活动与官方合作落地页
+
+  # ============================================================================
+  # 【第四部分：子产品、教育网与海外专用分支】(备用兜底)
+  # ============================================================================
+  - DOMAIN-SUFFIX,youtubekids.com              # YouTube Kids (儿童版)
+  - DOMAIN-SUFFIX,youtubegaming.com            # YouTube Gaming (游戏专区)
+  - DOMAIN-SUFFIX,youtubeeducation.com         # YouTube Education (教育专区)
+  - DOMAIN-SUFFIX,youtubefanfest.com           # YouTube FanFest 粉丝节活动
+  - DOMAIN-SUFFIX,wide-youtube.l.google.com    # Google 内部骨干网调度节点
