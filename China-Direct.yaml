@@ -905,6 +905,7 @@ payload:
   - '+.local'
 
   # --- 其他直连辅助服务 ---
+  - '+.em.mesl.cloud'
   - 'cdn.hockeyapp.net'
   - '+.animetamashi.cn'
   - '+.animetamashi.com'
