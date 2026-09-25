@@ -138,7 +138,7 @@
 * **世纪互联运营中国区资产**：`21vbc.com`、`21vbluecloud.com`、`azure.cn`、`partner.microsoftonline.cn` 等。
 * **使用策略**：`🖥 Microsoft` 或 `DIRECT` / `PROXY` 节点策略组。
 
-### 15. Prime Video、Pluto TV 与 CBS 流媒体合集 (`Prime-Pluto-CBS.yaml`)
+### 15. Prime Video、Pluto TV、CBS 及其他海外流媒体合集 (`Prime-Pluto-CBS-Other.yaml`)
 整合 Amazon Prime Video、Pluto TV 以及 CBS / Paramount+ / Showtime 全量海外流媒体分发、API 与播放调度（共 78 条高精度规则）：
 * **Amazon Prime Video**：`primevideo.com`、`amazonvideo.com`、`pv-cdn.net`、`aiv-cdn.net`、`aiv-delivery.net`、CloudFront 媒体流切片节点、macOS/iOS 客户端进程。
 * **Pluto TV 电视直播**：`pluto.tv`、`plutotv.net`。

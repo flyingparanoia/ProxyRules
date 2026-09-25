@@ -1,10 +1,10 @@
 # ==============================================================================
-# 规则名称: Prime Video、Pluto TV 与 CBS / Paramount+ 流媒体合集规则集
-# 英文标识: Prime-Pluto-CBS
+# 规则名称: Prime Video、Pluto TV、CBS 及其他海外流媒体合集 (Prime-Pluto-CBS-Other)
+# 英文标识: Prime-Pluto-CBS-Other
 # 更新时间: 2026-09-25
-# 规则说明: 整合 Amazon Prime Video、Pluto TV 以及 CBS / Paramount+ / Showtime 全量海外流媒体分发、API 与播放调度
+# 规则说明: 整合 Amazon Prime Video、Pluto TV 以及 CBS / Paramount+ / Showtime / Viacom 等海外主流流媒体分发、API 与播放调度
 # 适用平台: Stash / Clash rule-providers (behavior: classical)
-# 推荐策略: 👁️ Prime Pluto CBS 或 PROXY (需支持美国区域版权解锁的节点)
+# 推荐策略: 👁️ Prime Pluto CBS 或 PROXY (需支持海外区域版权解锁的节点)
 # ==============================================================================
 payload:
   # ============================================================================
