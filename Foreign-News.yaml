@@ -10,13 +10,7 @@ payload:
   # 【第一部分：全球综合大报、主流电视新闻网与通讯社】
   # 涵盖英美法德意日韩等国主流严肃报刊、国家通讯社及电视新闻网
   # ============================================================================
-  # 1. 顶尖综合大报 (The New York Times, WSJ, The Guardian 等)
-  - DOMAIN-SUFFIX,nytimes.com                  # The New York Times (纽约时报官网及国际版)
-  - DOMAIN-SUFFIX,nyt.com                      # The New York Times 静态多媒体与核心服务
-  - DOMAIN-SUFFIX,nytimg.com                   # 纽约时报多媒体图床 CDN
-  - DOMAIN-SUFFIX,nytco.com                    # 纽约时报公司企业与官方发布
-  - DOMAIN-SUFFIX,wsj.com                      # The Wall Street Journal (华尔街日报官网及多语言版)
-  - DOMAIN-SUFFIX,wsj.net                      # 华尔街日报前端静态资源与 CDN
+  # 1. 顶尖综合大报 (The Guardian, The Times, The Daily Telegraph, LA Times 等，注: NYT 与 WSJ 已剥离至专属独立规则集)
   - DOMAIN-SUFFIX,theguardian.com              # The Guardian (英国卫报)
   - DOMAIN-SUFFIX,guardianapis.com             # 英国卫报 API 服务与移动端接口
   - DOMAIN-SUFFIX,thetimes.com                 # The Times (英国泰晤士报)
@@ -72,7 +66,6 @@ payload:
   # 包含全球与境外最具权威性的金融资讯、创投市场与深度经济研究
   # ============================================================================
   - DOMAIN-SUFFIX,ft.com                       # Financial Times (英国金融时报)
-  - DOMAIN-SUFFIX,dowjones.com                 # Dow Jones (道琼斯金融通讯社与 Factiva 商业资讯)
   - DOMAIN-SUFFIX,bloomberglaw.com             # Bloomberg Law (彭博法律与商业合规权威新闻)
   - DOMAIN-SUFFIX,cnbc.com                     # CNBC (全国广播公司全球财经商业新闻)
   - DOMAIN-SUFFIX,siteselection.com            # Site Selection Magazine (选址杂志 - 全球产业投资与商业地理)

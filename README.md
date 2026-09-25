@@ -19,9 +19,9 @@
 
 ### 4. 全球海外综合与专业前沿新闻规则 (`Foreign-News.yaml`)
 基于真实 Chrome 浏览器历史记录全量深度分析（8万+记录），专门剔除了中国大陆境内媒体，专为科学上网分流与海外优质资讯代理设计。涵盖：
-* **全球综合大报与通讯社**：纽约时报、华尔街日报、英国卫报、泰晤士报、每日电讯报、洛杉矶时报、法兰克福汇报、世界报、时代周报、费加罗报、读卖新闻、东亚日报、美联社、CNN、CBS、NBC、德国之声、法国国际广播、联合国新闻等。
+* **全球综合大报与通讯社**：英国卫报、泰晤士报、每日电讯报、洛杉矶时报、法兰克福汇报、世界报、时代周报、费加罗报、读卖新闻、东亚日报、美联社、CNN、CBS、NBC、德国之声、法国国际广播、联合国新闻等（注：纽约时报 NYT 与华尔街日报 WSJ 已单独剥离至专属规则集 `NYT-WSJ.yaml`）。
 * **数字报刊与聚合平台**：PressReader（全球报刊亭旗舰，高频阅读数千次）。
-* **深度财经与宏观经济**：金融时报、道琼斯、彭博法律、CNBC、香港瑞恩资本、香港经济通、NBER（美国国家经济研究所）、AEA（美国经济学会）等。
+* **深度财经与宏观经济**：金融时报、彭博法律、CNBC、香港瑞恩资本、香港经济通、NBER（美国国家经济研究所）、AEA（美国经济学会）等（注：道琼斯集团及旗下媒体已移至 `NYT-WSJ.yaml`）。
 * **科技前沿与数码媒体**：Ars Technica、Wired、VentureBeat、TNW、The Register、9to5Mac、Android Authority、Notebookcheck、Chrome Unboxed、Electrek、The Quantum Insider、SpaceNews 等。
 * **影视娱乐与流行文化**：Deadline Hollywood、Collider、Vulture、The A.V. Club、Dexerto、Rolling Stone、Top Gear、Consumer Reports、Pocketmags 等。
 * **垂直专业与细分行业新闻**：科学美国人、Science/ScienceInsider、Nature News、STAT News（生物医药）、Medscape（临床医学）、C&EN（化学工程）、USNI News（海军防务）、The War Zone（军事实战前沿）、Food Dive（食品制造工业）、Courthouse News（全美司法法庭）、Times Higher Education 等。
@@ -117,6 +117,14 @@
 * **生活便民与实用工具**：中国天气网、墨迹天气、空气质量、下厨房菜谱、欧路词典等。
 * **系统连通性测试与远程工具**：Windows 网络连通性测试 (NCSI) 与 TeamViewer 协同。
 * **使用策略**：`DIRECT`（直连，享受本地千兆宽带低延迟高速直达）。
+
+### 13. 纽约时报与华尔街日报全量规则 (`NYT-WSJ.yaml`)
+基于真实 iPhone 移动客户端与 Mac 桌面浏览器双端实机抓包深度分析，完整提取 The New York Times 与 The Wall Street Journal（含道琼斯 Dow Jones 集团）核心资产（已从 `Foreign-News.yaml` 及其他规则中完全剥离解耦）：
+* **The New York Times (NYT / 纽约时报)**：纽约时报核心主站、国际版、中文网、Samizdat GraphQL API 网关（`samizdat-graphql.nytimes.com`）、核心多媒体/短域（`nyt.com`、`a1.nyt.com`、`g1.nyt.com`）、高清图床 CDN（`nytimg.com`）、集团公司（`nytco.com`）、时尚版（`nytstyle.com`）、版本对比（`nytdiff.com`）与官方品牌域（`newyorktimes.com`）。
+* **The Wall Street Journal (WSJ / 华尔街日报)**：华尔街日报核心主站（`wsj.com`）、移动端与 Web API（`follow-api.wsj.com`、`video-api.wsj.com`）、报纸数字版（`pbc.wsj.com`、`pblog.wsj.com`）、核心音视频流媒体（`wsjstream.wsj.net`）、图床与静态组件 CDN（`wsj.net`、`images.wsj.net`、`opinion-images.wsj.net`）、读者会员权益（`wsjplus.com`）。
+* **Dow Jones (道琼斯集团与 News Corp 商业矩阵)**：道琼斯公司官网与统一单点登录 SSO 鉴权网关（`dowjones.com`、`sso.accounts.dowjones.com`）、道琼斯云原生微服务与公共共享数据网关（`dowjones.io`、`shared-data.dowjones.io`）、订单订阅系统（`dowjoneson.com`、`oms.dowjoneson.com`）、巴伦周刊（`barrons.com`）、MarketWatch 实时金融行情（`marketwatch.com`）、Mansion Global 豪宅不动产（`mansionglobal.com`）、Factiva 商业情报库（`factiva.com`）、新闻集团统一平台（`newscgp.com`）。
+* **抓包定制接口与读者鉴权通道**：Adobe 专为道琼斯定制的分析节点（`dowjones.hb-api.omtrdc.net`、`dowjones.sc.omtrdc.net`）、道琼斯专用 AWS 资产存储桶（`djcm-pnp.s3.amazonaws.com`、`djcs-multi-region-assets-ohio.s3.us-east-2.amazonaws.com`）、波士顿公共图书馆读者卡免登录鉴权联动（`bpl.org` / EZProxy 联动 `partner.wsj.com`）。
+* **使用策略**：专用的优质美国原生/静态代理策略组（如 `🇺🇸 US Light Data Usage Select`），享受纯净 IP 避免被两报严格的风控系统拦截或触发验证码。
 
 ---
 
@@ -244,6 +252,16 @@ rule-providers:
     path: ./ruleset/china-direct.yaml
     interval: 86400
 
+  # 13. 订阅纽约时报与华尔街日报专属规则集 (NYT / WSJ / Dow Jones)
+  nyt-wsj:
+    type: http
+    behavior: classical
+    format: yaml
+    url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/NYT-WSJ.yaml"
+    # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/NYT-WSJ.yaml"
+    path: ./ruleset/nyt-wsj.yaml
+    interval: 86400
+
 rules:
   # 必须排在最前面：优先阻断所有 P2P 偷跑连接与轻量广告
   - RULE-SET,china-video-apps-pcdn,🛑 全球拦截
@@ -257,6 +275,9 @@ rules:
 
   # 抖音官方核心业务直连
   - RULE-SET,douyin,👁️ Douyin
+
+  # 纽约时报与华尔街日报走专用美国轻量/高防风控代理 (防账号风控与频繁验证码)
+  - RULE-SET,nyt-wsj,🇺🇸 US Light Data Usage Select
 
   # TikTok 全量生态走专用海外流媒体策略组（解锁节点）
   - RULE-SET,tiktok,👁️ TikTok
