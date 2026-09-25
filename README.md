@@ -12,7 +12,7 @@
 涵盖抖音主站、短视频点播切片（VOD / zjcdn）、直播拉流（FLV）、图床、对象存储（TOS）、前端公共基建（Goofy/Gecko）与相关字节产品线（西瓜/火山/头条）。
 * **使用策略**：`DIRECT`（直连）
 
-### 3. PCDN / P2P 偷跑上行阻断规则 (`PCDN.yaml`)
+### 3. 大陆视频网站与 App PCDN 偷跑阻断规则 (`China-Video-Apps-PCDN.yaml`)
 专门收集国内主流视频/直播 App（抖音、B站、爱优腾等）偷偷利用用户设备上行充当免费 CDN 节点的 P2P 调度域名。
 * **使用策略**：`REJECT`（拦截后 App 会自动降级走官方直连 CDN，视频顺畅播放且手机不再发烫偷跑上传）
 
@@ -34,14 +34,14 @@
 
 ```yaml
 rule-providers:
-  # 1. 订阅 PCDN 偷跑拦截规则集
-  pcdn-block:
+  # 1. 订阅大陆主流视频网站与 App PCDN 偷跑拦截规则集
+  china-video-apps-pcdn:
     type: http
     behavior: classical
     format: yaml
-    url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/PCDN.yaml"
-    # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/PCDN.yaml"
-    path: ./ruleset/pcdn-block.yaml
+    url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/China-Video-Apps-PCDN.yaml"
+    # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/China-Video-Apps-PCDN.yaml"
+    path: ./ruleset/china-video-apps-pcdn.yaml
     interval: 86400
 
   # 2. 订阅抖音官方直连规则集
@@ -76,7 +76,7 @@ rule-providers:
 
 rules:
   # 必须排在最前面：优先阻断所有 P2P 偷跑连接
-  - RULE-SET,pcdn-block,REJECT
+  - RULE-SET,china-video-apps-pcdn,REJECT
 
   # 抖音官方核心业务直连
   - RULE-SET,douyin,DIRECT
