@@ -1,10 +1,10 @@
 # ==============================================================================
 # 规则名称: X (Twitter) 与全球主流成人媒体分流规则集 (X-Porn)
 # 更新时间: 2026-09-25
-# 规则来源: 本地 Stash Mac 网页端 + iPhone 客户端双端实机抓包深度分析 + 社区精选
-# 规则说明: 涵盖 X (Twitter) 全平台生态与全球主流成人视频点播、切片 CDN 及资讯
+# 规则来源: 本地实机双端抓包 (Mac/iPhone) + mixed.yaml (🎬 YouTube Porn X Select) + 社区精选
+# 规则说明: 涵盖 X (Twitter) 全平台生态与全球主流成人视频点播、切片 CDN、片商、写真及二次元 18+
 # 适用平台: Stash, Clash rule-providers (behavior: classical)
-# 推荐策略: PROXY 或 专用策略组 (如 [🎬 YouTube / X] 或 [X-Porn] 节点组)
+# 推荐策略: PROXY 或 专用策略组 (如 [🔞 X Porn] 节点组)
 # ==============================================================================
 payload:
   # ============================================================================
@@ -68,6 +68,8 @@ payload:
   - DOMAIN-SUFFIX,porngub.com                  # 官方防拼写错误保护域
   - DOMAIN-SUFFIX,pronstore.com                # 官方防拼写错误与商城
   - DOMAIN-SUFFIX,pornhubapparel.com           # 官方商城与衍生品
+  - DOMAIN-SUFFIX,pornhost.com                 # 视频托管与上传服务
+  - DOMAIN-SUFFIX,pornmate.com                 # 旗下资讯与播放
   - DOMAIN-SUFFIX,youporn.com                  # YouPorn 官方主站
   - DOMAIN-SUFFIX,ypncdn.com                   # YouPorn 核心流媒体 CDN
   - DOMAIN-SUFFIX,redtube.com                  # RedTube 官方主站
@@ -76,21 +78,135 @@ payload:
 
   # 2. XVideos & XNXX 核心生态 (WGCZ Holding)
   - DOMAIN-SUFFIX,xvideos.com                  # XVideos 官方主站
-  - DOMAIN-SUFFIX,xvideos-cdn.com              # XVideos 全球核心流媒体 CDN (hls-cdn77, thumb-cdn77, thumbs-gcore 等)
+  - DOMAIN-SUFFIX,xvideos-cdn.com              # XVideos 全球核心点播切片 CDN (hls-cdn77, thumb-cdn77, thumbs-gcore 等)
   - DOMAIN-SUFFIX,xv-cdn.com                   # XVideos 静态图床备用
   - DOMAIN-SUFFIX,xvideos.es                   # 西班牙及拉美分站
   - DOMAIN-SUFFIX,xnxx.com                     # XNXX 官方主站
   - DOMAIN-SUFFIX,xnxx-cdn.com                 # XNXX 核心音视频 CDN
 
-  # 3. 其他主流平台与日韩影视 (XHamster / Stripchat / DMM / JAV)
+  # 3. 全球主流综合点播与影视平台 (Global Tube & Networks)
   - DOMAIN-SUFFIX,xhamster.com                 # XHamster 官方主站
-  - DOMAIN-SUFFIX,xhcdn.com                    # XHamster 核心流媒体与封面 CDN
-  - DOMAIN-SUFFIX,stripchat.com                # Stripchat 互动直播平台
+  - DOMAIN-SUFFIX,xhcdn.com                    # XHamster 核心流媒体 CDN
   - DOMAIN-SUFFIX,spankbang.com                # SpankBang 高清视频主站
   - DOMAIN-SUFFIX,spankbang.party              # SpankBang 备用镜像
+  - DOMAIN-SUFFIX,beeg.com                     # Beeg 极简流媒体主站
+  - DOMAIN-SUFFIX,blacked.com                  # Blacked 影视工作室
+  - DOMAIN-SUFFIX,bangbrosnetwork.com          # BangBros 全球影视网络
+  - DOMAIN-SUFFIX,bangyoulater.com             # BangYouLater 点播平台
+  - DOMAIN-SUFFIX,cumlouder.com                # Cumlouder 欧美影视
+  - DOMAIN-SUFFIX,daftporn.com                 # DaftPorn 流媒体
+  - DOMAIN-SUFFIX,dreamamateurs.com            # DreamAmateurs 原创点播
+  - DOMAIN-SUFFIX,ebony-beauty.com             # 垂直影视专区
+  - DOMAIN-SUFFIX,efukt.com                    # 幽默与奇特成人短视频
+  - DOMAIN-SUFFIX,alphaporno.com               # AlphaPorno 聚合检索
+  - DOMAIN-SUFFIX,legalporno.com               # LegalPorno 高清专业影视
+  - DOMAIN-SUFFIX,lushstories.com              # 文本与音频成人故事
+  - DOMAIN-SUFFIX,pussyspace.com               # PussySpace 社区
+  - DOMAIN-SUFFIX,slutload.com                 # SlutLoad 影视点播
+  - DOMAIN-SUFFIX,superzooi.com                # SuperZooi 点播
+  - DOMAIN-SUFFIX,teensinasia.com              # 亚裔成人影视
+  - DOMAIN-SUFFIX,thongdreams.com              # 垂直写真与视频
+  - DOMAIN-SUFFIX,upornia.com                  # Upornia 综合点播
+  - DOMAIN-SUFFIX,vrporn.com                   # VR Porn 全景沉浸式视频
+  - DOMAIN-SUFFIX,vrsmash.com                  # VRSmash 全景流媒体
+  - DOMAIN-SUFFIX,wetpussygames.com            # 成人互动小游戏
+  - DOMAIN-SUFFIX,x-art.com                    # X-Art 唯美艺术影视
+  - DOMAIN-SUFFIX,xerotica.com                 # XErotica 艺术文学与影视
+  - DOMAIN-SUFFIX,xmovies.com                  # XMovies 在线影视
+  - DOMAIN-SUFFIX,youjizz.com                  # YouJizz 点播平台
+  - DOMAIN-SUFFIX,yourlust.com                 # YourLust 聚合视频
+  - DOMAIN-SUFFIX,crazyshit.com                # 极限重口味与奇趣视频
+  - DOMAIN-SUFFIX,bdsmlibrary.com              # BDSM 文学与图书
+  - DOMAIN-SUFFIX,bdsmvideos.net               # BDSM 视频库
+  - DOMAIN-SUFFIX,boobstagram.com              # 趣味写真社区
+  - DOMAIN-SUFFIX,allfinegirls.com             # 美女影视合集
+  - DOMAIN-SUFFIX,allgirlmassage.com           # 按摩主题影视
+
+  # 4. 日韩主流 AV 影视、数据库与写真 (Japanese & Asian AV)
   - DOMAIN-SUFFIX,dmm.co.jp                    # 日本 DMM 影视娱乐主站
   - DOMAIN-SUFFIX,dmm.com                      # DMM 国际通用门户
   - DOMAIN-SUFFIX,javdb.com                    # JAVDB 影视数据库与索引
   - DOMAIN-SUFFIX,javbus.com                   # JAVBus 影视资讯
-  - DOMAIN-SUFFIX,javlibrary.com               # JAVLibrary 评论与资讯平台
+  - DOMAIN-SUFFIX,javlibrary.com               # JAVLibrary 影评与资讯平台
+  - DOMAIN-SUFFIX,jav321.com                   # JAV321 磁力与番号查询
+  - DOMAIN-SUFFIX,javhub.net                   # JAVHub 在线影视
+  - DOMAIN-SUFFIX,javhuge.com                  # JAVHuge 影视点播
+  - DOMAIN-SUFFIX,javmobile.net                # JAV 移动端专属站点
+  - DOMAIN-SUFFIX,vjav.com                     # VJAV 在线播放
+  - DOMAIN-SUFFIX,avmo.pw                      # AVMOO 早期镜像
+  - DOMAIN-SUFFIX,avmoo.com                    # AVMOO 日本女优与作品信息库
+  - DOMAIN-SUFFIX,avmoo.net                    # AVMOO 备用镜像
+  - DOMAIN-SUFFIX,avmoo.pw                     # AVMOO 移动镜像
+  - DOMAIN-SUFFIX,avdb.in                      # AVDB 在线数据库
+  - DOMAIN-SUFFIX,avdb.tv                      # AVDB 影视数据服务
+  - DOMAIN-SUFFIX,av-e-body.com                # E-BODY 官方影视片商
+  - DOMAIN-SUFFIX,av.com                       # 综合 AV 导航
+  - DOMAIN-SUFFIX,av.movie                     # AV 电影在线
+  - DOMAIN-SUFFIX,av01.tv                      # AV01 在线点播
+  - DOMAIN-SUFFIX,avcool.com                   # AVCool 资讯与片库
+  - DOMAIN-SUFFIX,avfantasy.com                # AVFantasy 官方网站
+  - DOMAIN-SUFFIX,avgle.com                    # Avgle 知名在线流媒体
+  - DOMAIN-SUFFIX,allgravure.com               # 日本偶像写真合集
+  - DOMAIN-SUFFIX,bigjapanesesex.com           # 日本无码视频
+  - DOMAIN-SUFFIX,eic-av.com                   # EIC-AV 片库索引
+  - DOMAIN-SUFFIX,japan-whores.com             # 日本写真与视频
+  - DOMAIN-SUFFIX,legsjapan.com                # 美腿与丝袜写真
+  - DOMAIN-SUFFIX,madonna-av.com               # Madonna 官方片商
+  - DOMAIN-SUFFIX,tokyo-247.com                # 东京247 官方视频片商
+
+  # 5. 华语及亚洲主流成人社区与流媒体 (Chinese & Asian Adult Community)
+  - DOMAIN-SUFFIX,91porn.com                   # 91Porn 核心主站
+  - DOMAIN-SUFFIX,91porny.com                  # 91Porn 官方镜像
+  - DOMAIN-SUFFIX,99btgc01.com                 # 99BT 种子发布网
+  - DOMAIN-SUFFIX,madou.club                   # 麻豆传媒官方俱乐部
+  - DOMAIN-SUFFIX,cool18.com                   # 酷18 禁忌文学与影视论坛
+  - DOMAIN-SUFFIX,sex8.cc                      # 杏吧 华人成人社区
+  - DOMAIN-SUFFIX,thisav.com                   # ThisAV 经典香港影视
+  - DOMAIN-SUFFIX,pigav.com                    # PigAV 亚洲流媒体
+  - DOMAIN-SUFFIX,sex3.com                     # 华人原创成人视讯
   - DOMAIN-SUFFIX,7mmtv.tv                     # 亚洲成人影视流媒体
+  - DOMAIN-SUFFIX,fuckgfw.org                  # 翻墙成人社区
+  - DOMAIN-SUFFIX,iyf.tv                       # 爱壹帆影视点播
+
+  # 6. 二次元动漫同人与 Hentai (Anime Doujin & Hentai)
+  - DOMAIN-SUFFIX,e-hentai.org                 # E-Hentai 权威里番漫画主站
+  - DOMAIN-SUFFIX,e-hentaidb.com               # E-Hentai 数据库与索引
+  - DOMAIN-SUFFIX,fakku.net                    # FAKKU 欧美最大正版成人漫画平台
+  - DOMAIN-SUFFIX,g6hentai.com                 # G6Hentai 在线漫画
+  - DOMAIN-SUFFIX,rule34.xxx                   # Rule34 同人插画与图库
+  - DOMAIN-SUFFIX,erodoujinlog.com             # 同人志资讯与推荐
+  - DOMAIN-SUFFIX,erodoujinworld.com           # 同人漫画世界
+  - DOMAIN-SUFFIX,eromanga-kingdom.com         # 成人漫画王国
+  - DOMAIN-SUFFIX,eromangadouzin.com           # 漫画同人志在线
+  - DOMAIN-SUFFIX,eromon.net                   # 日漫同人推荐
+
+  # 7. 互动直播与成人社交约会 (Cam / Dating / Adult Social)
+  - DOMAIN-SUFFIX,stripchat.com                # Stripchat 全球互动直播
+  - DOMAIN-SUFFIX,chaturbate.com               # Chaturbate 全球最大真人视频聊天
+  - DOMAIN-SUFFIX,bongacams.com                # BongaCams 国际真人直播
+  - DOMAIN-SUFFIX,cam4.com                     # Cam4 真人视频平台
+  - DOMAIN-SUFFIX,cam4.jp                      # Cam4 日本分站
+  - DOMAIN-SUFFIX,cam4.sg                      # Cam4 新加坡分站
+  - DOMAIN-SUFFIX,cams.com                     # Cams.com 在线视频交友
+  - DOMAIN-SUFFIX,blueangellive.com            # BlueAngelLive 互动直播
+  - DOMAIN-SUFFIX,adult-sex-games.com          # 成人游戏平台
+  - DOMAIN-SUFFIX,adult.friendfinder.com       # Adult FriendFinder 专属子域
+  - DOMAIN-SUFFIX,adultfriendfinder.com        # Adult FriendFinder 约会交友主站
+  - DOMAIN-SUFFIX,eroprofile.com               # 成人个人社交主页
+  - DOMAIN-SUFFIX,eroticsaloon.net             # 成人沙龙交友
+  - DOMAIN-SUFFIX,etadult.com                  # 成人娱乐资讯
+  - DOMAIN-SUFFIX,freeviewmovies.com           # 试看与推广入口
+  - DOMAIN-SUFFIX,jjgirls.com                  # JJGirls 模特摄影与社交
+
+  # 8. 同志与垂直彩虹影视 (Gay & Queer Adult Media)
+  - DOMAIN-SUFFIX,boysfood.com                 # 男同写真与视频
+  - DOMAIN-SUFFIX,boysmaster.com               # 男同影视平台
+  - DOMAIN-SUFFIX,foxgay.com                   # FoxGay 视频平台
+  - DOMAIN-SUFFIX,gaybubble.com                # GayBubble 社交社区
+  - DOMAIN-SUFFIX,gayhub.com                   # GayHub 视频聚合
+  - DOMAIN-SUFFIX,gaymap.cc                    # GayMap 社区导航
+  - DOMAIN-SUFFIX,gaymenring.com               # 同志交友环
+  - DOMAIN-SUFFIX,gaytube.com                  # GayTube 在线影视
+  - DOMAIN-SUFFIX,gaywatch.com                 # GayWatch 点播平台
+  - DOMAIN-SUFFIX,onlygayvideo.com             # OnlyGayVideo 专属视频
+  - DOMAIN-SUFFIX,timtales.com                 # TimTales 独立电影工作室

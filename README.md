@@ -87,12 +87,17 @@
 * **使用策略**：专用的 `TikTok` 流媒体策略组（选择美区、新加坡、日本等支持 TikTok 解锁的住宅或原生代理节点，注意避开国内/香港节点）。
 
 ### 11. X (Twitter) 与全球主流成人媒体规则 (`X-Porn.yaml`)
-结合 Mac 桌面网页端 + iPhone 客户端双端实机抓包深度分析，涵盖：
-* **X (Twitter) 全量官方生态**：`x.com`、`twitter.com`、`t.co`（官方跳转短链）、`twimg.com`（核心图床与音视频分发 CDN）、`tweetdeck.com`、`twvid.com`、`twitter.biz`、`twtrdns.net` 等。
-* **Pornhub 全球生态与多媒体 CDN**：`pornhub.com`、`phncdn.com`（全量加密点播切片与图片 CDN）、`pornhubpremium.com`、`youporn.com`、`redtube.com`、`brazzers.com` 等。
-* **XVideos & XNXX 核心生态**：`xvideos.com`、`xvideos-cdn.com`（全球核心 HLS 视频切片 CDN）、`xnxx.com`、`xnxx-cdn.com` 等。
-* **其他主流平台与日韩影视**：`xhamster.com`、`stripchat.com`、`spankbang.com`、`dmm.co.jp`、`javdb.com`、`javbus.com` 等。
-* **使用策略**：`PROXY` 或专用的 `X-Porn` / `流媒体` 策略组。
+结合 Mac 桌面网页端 + iPhone 客户端双端实机抓包深度分析，并全量融合 `mixed.yaml`（`🎬 YouTube Porn X Select`）精选资产，涵盖：
+* **X (Twitter) 全量官方生态**：`x.com`、`twitter.com`、`t.co`（官方跳转短链）、`twimg.com`（核心图床与音视频分发 CDN）、`tweetdeck.com`、`twvid.com`、`twitter.biz`、`twtrdns.net`、官方 ASN 6 大 BGP IP-CIDR 地址段与客户端进程名。
+* **Pornhub 全球生态与多媒体 CDN**：`pornhub.com`、`phncdn.com`（全量加密点播切片与图片 CDN）、`pornhubpremium.com`、`youporn.com`、`redtube.com`、`brazzers.com`、`pornhost.com`、`pornmate.com` 及防拼写错误域名。
+* **XVideos & XNXX 核心生态**：`xvideos.com`、`xvideos-cdn.com`（全球核心 HLS 视频切片 CDN）、`xv-cdn.com`、`xnxx.com`、`xnxx-cdn.com` 等。
+* **全球主流综合点播与影视网络**：`xhamster.com`、`spankbang.com`、`beeg.com`、`blacked.com`、`bangbrosnetwork.com`、`cumlouder.com`、`legalporno.com`、`lushstories.com`、`upornia.com`、`vrporn.com`、`x-art.com`、`youjizz.com` 等。
+* **日韩主流 AV 影视、数据库与写真**：DMM（`dmm.co.jp`, `dmm.com`）、JAV 数据库（`javdb.com`, `javbus.com`, `javlibrary.com`, `jav321.com`, `vjav.com` 等）、AVMOO 矩阵、片商及写真（`e-body`, `madonna`, `tokyo-247`, `allgravure` 等）。
+* **华语及亚洲主流成人社区与流媒体**：`91porn.com`、`91porny.com`、`99btgc01.com`、`madou.club`（麻豆传媒）、`cool18.com`、`sex8.cc`、`thisav.com`、`pigav.com`、`7mmtv.tv`、`iyf.tv`。
+* **二次元动漫同人与 Hentai**：`e-hentai.org`、`fakku.net`、`rule34.xxx`、`g6hentai.com`、`erodoujinlog.com` 等。
+* **真人互动直播与成人社交约会**：`stripchat.com`、`chaturbate.com`、`bongacams.com`、`cam4.com`、`cams.com`、`adultfriendfinder.com` 等。
+* **同志与垂直彩虹影视**：`boysfood.com`、`foxgay.com`、`gayhub.com`、`gaytube.com`、`onlygayvideo.com`、`timtales.com` 等。
+* **使用策略**：`PROXY` 或专用的 `🔞 X Porn` / `流媒体` 策略组。
 
 ---
 
