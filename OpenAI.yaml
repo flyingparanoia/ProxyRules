@@ -73,15 +73,9 @@ payload:
   - DOMAIN-SUFFIX,api.stripe.com               # Stripe 会员订阅、Plus/Team 信用卡支付网关
   - DOMAIN-SUFFIX,prodregistryv2.org           # ChatGPT 插件与扩展模型注册中心
   - DOMAIN-SUFFIX,featureassets.org            # ChatGPT 插件配置与运行资产
-  - DOMAIN-SUFFIX,api.onedrive.com             # 微软 OneDrive 文件上传与读取集成
-  - DOMAIN-SUFFIX,api.atlassian.com            # Atlassian 团队协作插件与集成服务
-  - DOMAIN-SUFFIX,mapbox.com                   # Mapbox 空间地理数据（供 ChatGPT 地图插件调用）
-
   # ============================================================================
-  # 【第七部分：OpenAI 官方数据中心专用 IP 网段与关键词兜底】
+  # 【第七部分：关键词兜底】
   # ============================================================================
-  - IP-CIDR,24.199.123.28/32,no-resolve        # OpenAI 官方出网节点专用 IP
-  - IP-CIDR,64.23.132.171/32,no-resolve       # OpenAI 官方出网节点专用 IP
   - DOMAIN-KEYWORD,openai                      # 泛关键词匹配兜底
 
   # ============================================================================

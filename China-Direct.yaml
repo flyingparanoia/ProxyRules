@@ -900,13 +900,11 @@ payload:
   - DOMAIN,local.adguard.org
   - DOMAIN-SUFFIX,local
 
-  # --- 其他直连辅助服务与特定 IP 段 ---
+  # --- 其他直连辅助服务 ---
   - DOMAIN-SUFFIX,em.mesl.cloud
   - DOMAIN,cdn.hockeyapp.net
   - DOMAIN-SUFFIX,animetamashi.cn
   - DOMAIN-SUFFIX,animetamashi.com
-  - IP-CIDR,109.239.140.0/24
   - DOMAIN,slife.xy-asia.com
   - DOMAIN-SUFFIX,qlogo.cn
   - DOMAIN-SUFFIX,qpic.cn
-  - IP-CIDR,17.0.0.0/8
