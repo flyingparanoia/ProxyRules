@@ -1,0 +1,712 @@
+# ==============================================================================
+# 规则名称: 中国大陆主流服务直连规则集 (China-Direct)
+# 更新时间: 2026-09-25
+# 规则来源: 提取自 mixed.yaml (🎯 全球直连 / 🎯 其他国内可信加速)
+# 规则特性: 涵盖中国大陆顶级域名、主流大厂生态、流媒体、电商、金融、出行、云计算基础设施
+# 特殊排除: 已完整排除抖音/字节跳动官方资产 (由 Douyin.yaml 承接) 及已单独分流的学术/应用规则
+# 适用平台: Stash, Clash rule-providers (behavior: classical)
+# 推荐策略: DIRECT (直连)
+# ==============================================================================
+payload:
+
+  # ============================================================================
+  # 【第一部分：顶级域名与国区通配】(ccTLD & Regional Wildcard)
+  # ============================================================================
+  # --- 顶级域名与国区通用后缀通配 ---
+  - DOMAIN-SUFFIX,cn                            # 通配顶级域名（中国）
+  - DOMAIN-SUFFIX,中国                            # 中文顶级域名
+  - DOMAIN-SUFFIX,公司                            # 中文顶级域名
+  - DOMAIN-SUFFIX,网络                            # 中文顶级域名
+  - DOMAIN-KEYWORD,-cn                          # 带 -cn 字样的域名，通常为国区
+
+
+  # ============================================================================
+  # 【第二部分：互联网主流大厂与核心生态】(BAT / JD / NetEase / Bilibili / Xiaomi / Huawei 等)
+  # ============================================================================
+  # --- 阿里巴巴与蚂蚁金服生态 ---
+  - DOMAIN-KEYWORD,alicdn                       # 阿里巴巴静态资源 CDN
+  - DOMAIN-KEYWORD,alimama                      # 阿里妈妈广告平台
+  - DOMAIN-KEYWORD,alipay                       # 支付宝相关服务
+  - DOMAIN-KEYWORD,xiami                        # 虾米音乐（已关闭）
+  - DOMAIN-SUFFIX,1688.com                      # 阿里巴巴批发网
+  - DOMAIN-SUFFIX,aliapp.org                    # 阿里旧服务域名
+  - DOMAIN-SUFFIX,alibaba.com                   # 阿里巴巴国际站
+  - DOMAIN-SUFFIX,alibabacloud.com              # 阿里云国际站
+  - DOMAIN-SUFFIX,alibabausercontent.com        # 阿里用户资源
+  - DOMAIN-SUFFIX,alicdn.com                    # 阿里静态 CDN
+  - DOMAIN-SUFFIX,alicloudccp.com               # 阿里云盘服务
+  - DOMAIN-SUFFIX,aliexpress.com                # 全球速卖通
+  - DOMAIN-SUFFIX,aliimg.com                    # 阿里图像资源
+  - DOMAIN-SUFFIX,alikunlun.com                 # 阿里基础服务域名
+  - DOMAIN-SUFFIX,alipay.com                    # 支付宝官网
+  - DOMAIN-SUFFIX,alipayobjects.com             # 支付宝静态资源
+  - DOMAIN-SUFFIX,alisoft.com                   # 阿里软件
+  - DOMAIN-SUFFIX,aliyun.com                    # 阿里云官网
+  - DOMAIN-SUFFIX,aliyuncdn.com                 # 阿里云 CDN 服务
+  - DOMAIN-SUFFIX,aliyuncs.com                  # 阿里云 OSS 存储
+  - DOMAIN-SUFFIX,aliyundrive.com               # 阿里云盘
+  - DOMAIN-SUFFIX,dingtalk.com                  # 钉钉协同办公平台
+  - DOMAIN-SUFFIX,ele.me                        # 饿了么外卖平台
+  - DOMAIN-SUFFIX,hichina.com                   # 阿里旗下万网服务
+  - DOMAIN-SUFFIX,mmstat.com                    # 阿里数据统计域名
+  - DOMAIN-SUFFIX,mxhichina.com                 # 万网邮箱系统
+  - DOMAIN-SUFFIX,taobao.com                    # 淘宝网
+  - DOMAIN-SUFFIX,taobaocdn.com                 # 淘宝静态 CDN
+  - DOMAIN-SUFFIX,tbcache.com                   # 淘宝缓存服务
+  - DOMAIN-SUFFIX,tbcdn.com                     # 淘宝 CDN
+  - DOMAIN-SUFFIX,tmall.com                     # 天猫商城
+  - DOMAIN-SUFFIX,tmall.hk                      # 天猫国际
+  - DOMAIN-SUFFIX,ucweb.com                     # UC 浏览器服务
+  - DOMAIN-SUFFIX,xiami.com                     # 虾米音乐官网（已关闭）
+  - DOMAIN-SUFFIX,xiami.net                     # 虾米音乐 CDN（已关闭）
+  - DOMAIN-SUFFIX,ykimg.com                     # 优酷图片资源
+  - DOMAIN-SUFFIX,youku.com                     # 优酷视频网站
+  - DOMAIN-SUFFIX,tudou.com                     # 土豆网（与优酷合并）
+  - DOMAIN-SUFFIX,wandoujia.com                 # 豌豆荚应用市场（已停服）
+
+  # --- 腾讯与微信核心生态 ---
+  - DOMAIN-SUFFIX,ksosoft.com                   # 金山软件官网
+  - DOMAIN-SUFFIX,sogo.com                      # 搜狗主站
+  - DOMAIN-SUFFIX,sogou.com                     # 搜狗搜索
+  - DOMAIN-SUFFIX,sogoucdn.com                  # 搜狗 CDN
+  - DOMAIN-SUFFIX,foxmail.com                   # 腾讯邮箱（Foxmail）
+  - DOMAIN-SUFFIX,gtimg.com                     # 腾讯 CDN 图像
+  - DOMAIN-SUFFIX,idqqimg.com                   # 腾讯 QQ 图片资源
+  - DOMAIN-SUFFIX,igamecj.com                   # 腾讯游戏加速
+  - DOMAIN-SUFFIX,myapp.com                     # 腾讯应用宝
+  - DOMAIN-SUFFIX,myqcloud.com                  # 腾讯云服务
+  - DOMAIN-SUFFIX,qq.com                        # 腾讯 QQ 官网
+  - DOMAIN-SUFFIX,qqmail.com                    # QQ 邮箱
+  - DOMAIN-SUFFIX,qqurl.com                     # 腾讯短链接服务
+  - DOMAIN-SUFFIX,smtcdns.com                   # 腾讯云 DNS
+  - DOMAIN-SUFFIX,soso.com                      # 搜搜（已并入搜狗）
+  - DOMAIN-SUFFIX,tencent-cloud.net             # 腾讯云域名
+  - DOMAIN-SUFFIX,tencent.com                   # 腾讯主域名
+  - DOMAIN-SUFFIX,tencentmind.com               # 腾讯广告
+  - DOMAIN-SUFFIX,tenpay.com                    # 财付通
+  - DOMAIN-SUFFIX,wechat.com                    # 微信官网
+  - DOMAIN-SUFFIX,weixin.com                    # 微信域名
+  - DOMAIN-SUFFIX,weiyun.com                    # 腾讯微云
+  - DOMAIN-SUFFIX,qcloud.com                    # 腾讯云主域名
+  - DOMAIN-SUFFIX,qcloudcdn.com                 # 腾讯云 CDN 资源
+
+  # --- 百度核心搜索与云服务生态 ---
+  - DOMAIN-KEYWORD,baidupcs                     # 百度网盘 PCS 接口
+  - DOMAIN-SUFFIX,baidu.com                     # 百度主站
+  - DOMAIN-SUFFIX,baidubcr.com                  # 百度浏览器资源
+  - DOMAIN-SUFFIX,baidupcs.com                  # 百度网盘 PCS 接口
+  - DOMAIN-SUFFIX,baidustatic.com               # 百度静态资源
+  - DOMAIN-SUFFIX,bcebos.com                    # 百度对象存储 BOS
+  - DOMAIN-SUFFIX,bdimg.com                     # 百度图片资源
+  - DOMAIN-SUFFIX,bdstatic.com                  # 百度静态资源 CDN
+  - DOMAIN-SUFFIX,hao123.com                    # 百度导航网站
+  - DOMAIN-SUFFIX,hao123img.com                 # hao123 图像资源
+  - DOMAIN-SUFFIX,jomodns.com                   # 百度旗下 DNS 服务
+  - DOMAIN-SUFFIX,yunjiasu-cdn.net              # 百度云加速 CDN
+  - DOMAIN-SUFFIX,baidupan.com                  # 百度网盘跳转
+  - DOMAIN-SUFFIX,nuomi.com                     # 糯米网（百度旗下团购）
+
+  # --- 京东电商与云生态 ---
+  - DOMAIN-KEYWORD,360buy                       # 京东旧域名
+  - DOMAIN-KEYWORD,jdpay                        # 京东支付平台
+  - DOMAIN-SUFFIX,360buy.com                    # 京东官网
+  - DOMAIN-SUFFIX,360buyimg.com                 # 京东图片资源
+  - DOMAIN-SUFFIX,jcloudcs.com                  # 京东云 CDN
+  - DOMAIN-SUFFIX,jd.com                        # 京东官网主域
+  - DOMAIN-SUFFIX,jd.hk                         # 京东香港站
+  - DOMAIN-SUFFIX,jdcloud.com                   # 京东云官网
+  - DOMAIN-SUFFIX,jdpay.com                     # 京东支付
+  - DOMAIN-SUFFIX,paipai.com                    # 拍拍网（已并入京东）
+  - DOMAIN-SUFFIX,yhd.com                       # 一号店（京东旗下）
+  - DOMAIN-SUFFIX,yihaodianimg.com              # 一号店图片 CDN
+
+  # --- 网易综合门户与移动生态 ---
+  - DOMAIN-SUFFIX,126.com                       # 网易邮箱
+  - DOMAIN-SUFFIX,126.net                       # 网易服务
+  - DOMAIN-SUFFIX,127.net                       # 网易云服务
+  - DOMAIN-SUFFIX,163.com                       # 网易主站
+  - DOMAIN-SUFFIX,163yun.com                    # 网易云服务
+  - DOMAIN-SUFFIX,lofter.com                    # LOFTER 博客平台
+  - DOMAIN-SUFFIX,netease.com                   # 网易主域
+  - DOMAIN-SUFFIX,ydstatic.com                  # 网易云音乐资源
+  - DOMAIN-SUFFIX,youdao.com                    # 有道词典
+  - DOMAIN-SUFFIX,cn163.net                     # 在线影视站
+  - DOMAIN-SUFFIX,kaola.com                     # 考拉海购（网易旗下）
+
+  # --- 哔哩哔哩弹幕视讯与社区 ---
+  - DOMAIN-KEYWORD,bilibili                     # 哔哩哔哩相关
+  - DOMAIN-SUFFIX,acg.tv                        # Bilibili 域名（短链）
+  - DOMAIN-SUFFIX,acgvideo.com                  # Bilibili 视频分发域
+  - DOMAIN-SUFFIX,b23.tv                        # Bilibili 短链
+  - DOMAIN-SUFFIX,bigfun.cn                     # Bilibili 游戏社区
+  - DOMAIN-SUFFIX,bigfunapp.cn                  # Bigfun App 资源
+  - DOMAIN-SUFFIX,biliapi.com                   # Bilibili API 接口
+  - DOMAIN-SUFFIX,biliapi.net                   # Bilibili API 接口
+  - DOMAIN-SUFFIX,bilibili.com                  # Bilibili 主站
+  - DOMAIN-SUFFIX,biligame.com                  # 哔哩哔哩游戏中心
+  - DOMAIN-SUFFIX,biligame.net                  # 哔哩哔哩游戏分发
+  - DOMAIN-SUFFIX,bilivideo.com                 # Bilibili 视频资源
+  - DOMAIN-SUFFIX,bilivideo.cn                  # Bilibili 视频 CDN
+  - DOMAIN-SUFFIX,hdslb.com                     # Bilibili 静态资源
+  - DOMAIN-SUFFIX,smtcdns.net                   # Bilibili DNS 服务
+
+  # --- 小米科技与智能家居生态 ---
+  - DOMAIN-KEYWORD,xiaomi                       # 小米公司相关域名
+  - DOMAIN-SUFFIX,duokan.com                    # 多看阅读（小米）
+  - DOMAIN-SUFFIX,mi-img.com                    # 小米图片 CDN
+  - DOMAIN-SUFFIX,mi.com                        # 小米官网
+  - DOMAIN-SUFFIX,miui.com                      # MIUI 系统官网
+  - DOMAIN-SUFFIX,xiaomi.com                    # 小米官网主域
+  - DOMAIN-SUFFIX,xiaomi.net                    # 小米备用域
+  - DOMAIN-SUFFIX,xiaomicp.com                  # 小米 ICP 备案相关
+
+  # --- 华为终端与鸿蒙云生态 ---
+  - DOMAIN-SUFFIX,dbankcdn.com                  # 华为网盘 CDN
+  - DOMAIN-SUFFIX,hc-cdn.com                    # 华为云 CDN
+  - DOMAIN-SUFFIX,hicloud.com                   # 华为云服务
+  - DOMAIN-SUFFIX,huawei.com                    # 华为官网
+  - DOMAIN-SUFFIX,huaweicloud.com               # 华为云官网
+  - DOMAIN-SUFFIX,huaweishop.net                # 华为商城相关域
+  - DOMAIN-SUFFIX,hwccpc.com                    # 华为相关域名
+  - DOMAIN-SUFFIX,vmall.com                     # 华为商城（VMall）
+  - DOMAIN-SUFFIX,vmallres.com                  # 华为商城资源
+
+  # --- 美团与大众点评本地生活 ---
+  - DOMAIN-SUFFIX,dianping.com                  # 大众点评
+  - DOMAIN-SUFFIX,dpfile.com                    # 大众点评资源
+  - DOMAIN-SUFFIX,maoyan.com                    # 猫眼电影
+  - DOMAIN-SUFFIX,meituan.com                   # 美团网
+  - DOMAIN-SUFFIX,meituan.net                   # 美团 CDN 或业务域名
+  - DOMAIN-SUFFIX,mobike.com                    # 摩拜单车
+  - DOMAIN-SUFFIX,sankuai.com                   # 美团点评集团
+
+  # --- 快手短视频流媒体生态 ---
+  - DOMAIN-SUFFIX,gifshow.com                   # 快手主域
+  - DOMAIN-SUFFIX,kspkg.com                     # 快手安装包服务
+  - DOMAIN-SUFFIX,kuaishou.com                  # 快手官网
+  - DOMAIN-SUFFIX,yximgs.com                    # 快手 图片资源
+
+  # --- 新浪与微博社交媒体生态 ---
+  - DOMAIN-SUFFIX,sina.com                      # 新浪官网
+  - DOMAIN-SUFFIX,sinaapp.com                   # 新浪 App 平台
+  - DOMAIN-SUFFIX,sinaimg.com                   # 新浪图片资源
+  - DOMAIN-SUFFIX,weibo.com                     # 微博主域
+  - DOMAIN-SUFFIX,weibocdn.com                  # 微博 CDN
+  - DOMAIN-SUFFIX,weico.cc                      # 微可微博客户端
+
+  # --- 奇虎 360 安全与搜索服务 ---
+  - DOMAIN-KEYWORD,qhimg                        # 360 图像 CDN
+  - DOMAIN-SUFFIX,360.com                       # 奇虎 360 官方网站
+  - DOMAIN-SUFFIX,360kuai.com                   # 360 快资讯
+  - DOMAIN-SUFFIX,360safe.com                   # 360 安全产品
+  - DOMAIN-SUFFIX,dhrest.com                    # 360 DNS 服务
+  - DOMAIN-SUFFIX,qhres.com                     # 360 静态资源
+  - DOMAIN-SUFFIX,qhstatic.com                  # 360 静态资源
+  - DOMAIN-SUFFIX,qhupdate.com                  # 360 更新服务
+  - DOMAIN-SUFFIX,so.com                        # 360 搜索引擎
+  - DOMAIN-SUFFIX,camera360.com                 # Camera360 相机 App
+  - DOMAIN-SUFFIX,chinaso.com                   # 中国搜索
+  - DOMAIN-SUFFIX,haosou.com                    # 360 好搜搜索引擎
+  - DOMAIN-SUFFIX,qhimg.com                     # 360 图片资源 CDN
+  - DOMAIN-SUFFIX,qihucdn.com                   # 360 旗下 CDN
+
+  # --- 搜狐门户与视频网络 ---
+  - DOMAIN-SUFFIX,go2map.com                    # 搜狐地图（已关闭）
+  - DOMAIN-SUFFIX,sohu-inc.com                  # 搜狐公司域名
+  - DOMAIN-SUFFIX,sohu.com                      # 搜狐主站
+  - DOMAIN-SUFFIX,sohucs.com                    # 搜狐评论系统
+  - DOMAIN-SUFFIX,sohuno.com                    # 搜狐域名服务
+  - DOMAIN-SUFFIX,sohurdc.com                   # 搜狐广告平台
+  - DOMAIN-SUFFIX,v-56.com                      # 搜狐视频 CDN
+
+  # --- 金山办公 WPS 与云服务 ---
+  - DOMAIN-SUFFIX,iciba.com                     # 爱词霸词典
+  - DOMAIN-SUFFIX,ksyun.com                     # 金山云官网
+  - DOMAIN-SUFFIX,ksyungslb.com                 # 金山云负载均衡域名
+
+  # --- 其他国产手机与硬件厂商 ---
+  - DOMAIN-SUFFIX,meizu.com                     # 魅族科技
+
+
+  # ============================================================================
+  # 【第三部分：社交社区、知识问答与生活兴趣圈】
+  # ============================================================================
+  # --- 社交社区、知识问答与生活兴趣圈 ---
+  - DOMAIN-SUFFIX,tianyancha.com                # 天眼查（企业数据查询，直连较快）
+  - DOMAIN-SUFFIX,360doc.com                    # 个人图书馆
+  - DOMAIN-SUFFIX,babytree.com                  # 宝宝树母婴社区
+  - DOMAIN-SUFFIX,babytreeimg.com               # 宝宝树图片资源
+  - DOMAIN-SUFFIX,baike.com                     # 互动百科
+  - DOMAIN-SUFFIX,coolapk.com                   # 酷安 App 社区
+  - DOMAIN-SUFFIX,coolapkmarket.com             # 酷安市场
+  - DOMAIN-SUFFIX,douban.com                    # 豆瓣网
+  - DOMAIN-SUFFIX,doubanio.com                  # 豆瓣静态资源
+  - DOMAIN-SUFFIX,hupu.com                      # 虎扑体育与社区
+  - DOMAIN-SUFFIX,jianshu.com                   # 简书写作平台
+  - DOMAIN-SUFFIX,jianshu.io                    # 简书静态资源
+  - DOMAIN-SUFFIX,jianshuapi.com                # 简书 API 接口域名
+  - DOMAIN-SUFFIX,qiushibaike.com               # 糗事百科
+  - DOMAIN-SUFFIX,ruguoapp.com                  # 如果 APP（社交应用）
+  - DOMAIN-SUFFIX,tianyaui.com                  # 天涯社区 UI 资源
+  - DOMAIN-SUFFIX,xhscdn.com                    # 小红书静态资源 CDN
+  - DOMAIN-SUFFIX,xiaohongshu.com               # 小红书社交电商平台
+  - DOMAIN-SUFFIX,xitek.com                     # 器材库，摄影论坛
+  - DOMAIN-SUFFIX,zhihu.com                     # 知乎
+  - DOMAIN-SUFFIX,zhimg.com                     # 知乎静态资源 CDN
+
+
+  # ============================================================================
+  # 【第四部分：影视长视频、音乐音频、网络直播与字幕影视】
+  # ============================================================================
+  # --- 影视长视频、音乐音频、网络直播与字幕影视 ---
+  - DOMAIN-KEYWORD,imeijutt.tv                  # 爱美剧官网，直连访问稳定
+  - DOMAIN-SUFFIX,bokecc.com                    # 博客云视频点播服务
+  - DOMAIN-SUFFIX,soku.com                      # 搜库视频（优酷子站）
+  - DOMAIN-SUFFIX,cctv.com                      # 央视主站
+  - DOMAIN-SUFFIX,cctvpic.com                   # 央视 图片资源
+  - DOMAIN-SUFFIX,livechina.com                 # 央视网直播服务
+  - DOMAIN-SUFFIX,douyu.com                     # 斗鱼直播
+  - DOMAIN-SUFFIX,douyu.tv                      # 斗鱼直播主域
+  - DOMAIN-SUFFIX,douyuscdn.com                 # 斗鱼 CDN
+  - DOMAIN-SUFFIX,douyutv.com                   # 斗鱼备用域
+  - DOMAIN-SUFFIX,71.am                         # 爱奇艺短链
+  - DOMAIN-SUFFIX,71edge.com                    # 爱奇艺 CDN 域名
+  - DOMAIN-SUFFIX,iqiyi.com                     # 爱奇艺官网
+  - DOMAIN-SUFFIX,iqiyipic.com                  # 爱奇艺 图片资源
+  - DOMAIN-SUFFIX,ppsimg.com                    # PPS 图片（爱奇艺旗下）
+  - DOMAIN-SUFFIX,qiyi.com                      # 爱奇艺老域名
+  - DOMAIN-SUFFIX,qiyipic.com                   # 爱奇艺 图片资源
+  - DOMAIN-SUFFIX,qy.net                        # 爱奇艺短链/跳转
+  - DOMAIN-SUFFIX,meitu.com                     # 美图官网
+  - DOMAIN-SUFFIX,meitudata.com                 # 美图数据分析
+  - DOMAIN-SUFFIX,meitustat.com                 # 美图统计服务
+  - DOMAIN-SUFFIX,meipai.com                    # 美拍（美图旗下）
+  - DOMAIN-SUFFIX,le.com                        # 乐视官网
+  - DOMAIN-SUFFIX,lecloud.com                   # 乐视云服务
+  - DOMAIN-SUFFIX,letv.com                      # Letv 主域
+  - DOMAIN-SUFFIX,letvcloud.com                 # 乐视云视频
+  - DOMAIN-SUFFIX,letvimg.com                   # 乐视图片资源
+  - DOMAIN-SUFFIX,letvlive.com                  # 乐视直播
+  - DOMAIN-SUFFIX,letvstore.com                 # 乐视商店
+  - DOMAIN-SUFFIX,hitv.com                      # 华数 TV
+  - DOMAIN-SUFFIX,hunantv.com                   # 湖南卫视官网
+  - DOMAIN-SUFFIX,mgtv.com                      # 芒果 TV
+  - DOMAIN-SUFFIX,pplive.com                    # PPTV 前身域名
+  - DOMAIN-SUFFIX,pptv.com                      # PPTV 网络电视
+  - DOMAIN-SUFFIX,miaopai.com                   # 秒拍短视频
+  - DOMAIN-SUFFIX,xiaoka.tv                     # 小咖秀
+  - DOMAIN-SUFFIX,ximalaya.com                  # 喜马拉雅
+  - DOMAIN-SUFFIX,xmcdn.com                     # 喜马拉雅 CDN
+  - DOMAIN-SUFFIX,00cdn.com                     # 迅雷 CDN
+  - DOMAIN-SUFFIX,88cdn.com                     # 迅雷 CDN
+  - DOMAIN-SUFFIX,kanimg.com                    # 迅雷看看图片资源
+  - DOMAIN-SUFFIX,kankan.com                    # 迅雷看看
+  - DOMAIN-SUFFIX,p2cdn.com                     # 迅雷 P2P CDN
+  - DOMAIN-SUFFIX,sandai.net                    # 迅雷公司
+  - DOMAIN-SUFFIX,thundercdn.com                # 迅雷 CDN
+  - DOMAIN-SUFFIX,xunlei.com                    # 迅雷主站
+  - DOMAIN-SUFFIX,got001.com                    # 人人影视（字幕）
+  - DOMAIN-SUFFIX,p4pfile.com                   # 人人影视文件分发
+  - DOMAIN-SUFFIX,rrys.tv                       # 人人影视官网
+  - DOMAIN-SUFFIX,rrys2020.com                  # 人人影视备用域名
+  - DOMAIN-SUFFIX,yyets.com                     # 人人影视历史域名
+  - DOMAIN-SUFFIX,zimuzu.io                     # 字幕组官网
+  - DOMAIN-SUFFIX,zimuzu.tv                     # 字幕组旧域名
+  - DOMAIN-SUFFIX,zmz001.com                    # 字幕组备用域名
+  - DOMAIN-SUFFIX,zmz002.com                    # 字幕组备用域名
+  - DOMAIN-SUFFIX,zmz003.com                    # 字幕组备用域名
+  - DOMAIN-SUFFIX,zmz004.com                    # 字幕组备用域名
+  - DOMAIN-SUFFIX,zmz2019.com                   # 字幕组备用域名
+  - DOMAIN-SUFFIX,zmzapi.com                    # 字幕组 API
+  - DOMAIN-SUFFIX,zmzapi.net                    # 字幕组 API 备用
+  - DOMAIN-SUFFIX,zmzfile.com                   # 字幕组文件服务
+  - DOMAIN-SUFFIX,broadcasthe.net               # 音乐 PT 站
+  - DOMAIN-SUFFIX,classix-unlimited.co.uk       # 经典音乐站
+  - DOMAIN-SUFFIX,jpopsuki.eu                   # JPop 音乐站
+  - DOMAIN-SUFFIX,redacted.ch                   # Redacted 音乐 PT
+  - DOMAIN-SUFFIX,springsunday.net              # 春天字幕组
+  - DOMAIN-SUFFIX,trontv.com                    # TronTV 视频平台
+  - DOMAIN-SUFFIX,jiasule.com                   # 加速乐 CDN
+  - DOMAIN-SUFFIX,56.com                        # 56 视频网
+  - DOMAIN-SUFFIX,acfun.tv                      # AcFun 弹幕视频
+  - DOMAIN-SUFFIX,aixifan.com                   # AcFun 旧域名
+  - DOMAIN-SUFFIX,cibntv.net                    # CIBN 互联网电视
+  - DOMAIN-SUFFIX,dilidili.wang                 # 动漫资源站
+  - DOMAIN-SUFFIX,dytt8.net                     # 电影天堂
+  - DOMAIN-SUFFIX,fantasy.tv                    # 网络视频站
+  - DOMAIN-SUFFIX,gzlzfm.com                    # 广州岭南之声广播电台
+  - DOMAIN-SUFFIX,haibian.com                   # 海边直播/视频分享平台
+  - DOMAIN-SUFFIX,huajiao.com                   # 花椒直播
+  - DOMAIN-SUFFIX,huya.com                      # 虎牙直播平台
+  - DOMAIN-SUFFIX,koowo.com                     # 酷我音乐（旧域名）
+  - DOMAIN-SUFFIX,kugou.com                     # 酷狗音乐
+  - DOMAIN-SUFFIX,lizhi.fm                      # 荔枝 FM 音频平台
+  - DOMAIN-SUFFIX,lizhi.io                      # 荔枝 FM 资源域名
+  - DOMAIN-SUFFIX,lizhifm.com                   # 荔枝 FM 旧域名
+  - DOMAIN-SUFFIX,luoo.net                      # 萝卜音乐（独立电台）
+  - DOMAIN-SUFFIX,migucloud.com                 # 咪咕云服务
+  - DOMAIN-SUFFIX,miguvideo.com                 # 咪咕视频
+  - DOMAIN-SUFFIX,msstatic.com                  # 美图公司静态资源域名
+  - DOMAIN-SUFFIX,oracle.com                    # Oracle 公司官网
+  - DOMAIN-SUFFIX,ourdvs.com                    # 数字视频技术公司
+  - DOMAIN-SUFFIX,polyv.net                     # 保利威视频云服务
+  - DOMAIN-SUFFIX,qianqian.com                  # 千千音乐
+  - DOMAIN-SUFFIX,quanmin.tv                    # 全民直播（已下线）
+  - DOMAIN-SUFFIX,rrmj.tv                       # 人人美剧（已关闭）
+  - DOMAIN-SUFFIX,taihe.com                     # 太合音乐集团
+  - DOMAIN-SUFFIX,ttmeiju.com                   # 天天美剧
+  - DOMAIN-SUFFIX,videocc.net                   # 保利威视频点播服务
+  - DOMAIN-SUFFIX,yinyuetai.com                 # 音悦台（MV 视频）
+  - DOMAIN-SUFFIX,yixia.com                     # 一下科技（秒拍、波波视频）
+  - DOMAIN-SUFFIX,yy.com                        # YY 语音，欢聚时代
+  - DOMAIN-SUFFIX,yystatic.com                  # YY 平台静态资源
+  - DOMAIN-SUFFIX,zhanqi.tv                     # 战旗直播
+  - DOMAIN-SUFFIX,zhuihd.com                    # 追剧网，影视下载
+
+
+  # ============================================================================
+  # 【第五部分：数字阅读、网络文学与正版图书】
+  # ============================================================================
+  # --- 数字阅读、网络文学与正版图书 ---
+  - DOMAIN-SUFFIX,17k.com                       # 17K 小说网
+  - DOMAIN-SUFFIX,biqudu.com                    # 笔趣读 小说站
+  - DOMAIN-SUFFIX,biquge.com                    # 笔趣阁 小说站
+  - DOMAIN-SUFFIX,easou.com                     # 宜搜小说
+  - DOMAIN-SUFFIX,hongxiu.com                   # 红袖添香小说网（起点旗下）
+  - DOMAIN-SUFFIX,ixdzs.com                     # 爱下电子书下载
+  - DOMAIN-SUFFIX,qdmm.com                      # 起点女生网
+  - DOMAIN-SUFFIX,qidian.com                    # 起点中文网
+  - DOMAIN-SUFFIX,shumilou.net                  # 书迷楼小说网
+  - DOMAIN-SUFFIX,snwx.com                      # 少年漫画网
+  - DOMAIN-SUFFIX,tmiaoo.com                    # 图喵漫画网
+  - DOMAIN-SUFFIX,yuewen.com                    # 阅文集团（网络小说平台）
+
+
+  # ============================================================================
+  # 【第六部分：出行导航、交通客运与快递物流】
+  # ============================================================================
+  # --- 出行导航、交通客运与快递物流 ---
+  - DOMAIN-SUFFIX,amap.com                      # 高德地图官网
+  - DOMAIN-SUFFIX,autonavi.com                  # 高德地图服务域名
+  - DOMAIN-SUFFIX,didialift.com                 # 滴滴广告平台
+  - DOMAIN-SUFFIX,didiglobal.com                # 滴滴国际业务
+  - DOMAIN-SUFFIX,udache.com                    # 滴滴出行
+  - DOMAIN-SUFFIX,12306.com                     # 中国铁路购票
+  - DOMAIN-SUFFIX,c-ctrip.com                   # 携程资源域
+  - DOMAIN-SUFFIX,ctrip.com                     # 携程旅行
+  - DOMAIN-SUFFIX,kuaidi100.com                 # 快递100
+  - DOMAIN-SUFFIX,lvmama.com                    # 驴妈妈旅游网
+  - DOMAIN-SUFFIX,qunar.com                     # 去哪儿旅行
+  - DOMAIN-SUFFIX,qunarzz.com                   # 去哪儿静态资源
+  - DOMAIN-SUFFIX,sf-express.com                # 顺丰快递官网
+  - DOMAIN-SUFFIX,trip.com                      # 携程国际版（原天巡）
+  - DOMAIN-SUFFIX,tuniu.com                     # 途牛旅游网
+  - DOMAIN-SUFFIX,tuniucdn.com                  # 途牛旅游静态资源
+  - DOMAIN-SUFFIX,xiaojukeji.com                # 嘀嗒出行、小桔科技（滴滴前身）
+
+
+  # ============================================================================
+  # 【第七部分：电商网购、品牌特卖与二手闲置】
+  # ============================================================================
+  - DOMAIN-SUFFIX,265.com                       # 雅虎旗下导航站，国内跳转页面
+  - DOMAIN-KEYWORD,duobao                       # 优博等电商平台
+  - DOMAIN-KEYWORD,vpimg                        # 唯品会图像资源
+  - DOMAIN-SUFFIX,pinduoduo.com                 # 拼多多官网
+  - DOMAIN-SUFFIX,yangkeduo.com                 # 拼多多 APP 域
+  - DOMAIN-SUFFIX,appsimg.com                   # 唯品会图片资源
+  - DOMAIN-SUFFIX,appvipshop.com                # 唯品会 App 服务
+  - DOMAIN-SUFFIX,vip.com                       # 唯品会官网
+  - DOMAIN-SUFFIX,vipstatic.com                 # 唯品会静态资源
+  - DOMAIN-SUFFIX,abercrombie.com               # Abercrombie & Fitch
+  - DOMAIN-SUFFIX,che168.com                    # 二手车平台
+  - DOMAIN-SUFFIX,dangdang.com                  # 当当网
+  - DOMAIN-SUFFIX,guazi.com                     # 瓜子二手车
+  - DOMAIN-SUFFIX,gwdang.com                    # 购物党比价插件
+  - DOMAIN-SUFFIX,hollisterco.com               # Hollister 美国服装品牌
+  - DOMAIN-SUFFIX,jmstatic.com                  # 聚美优品静态资源
+  - DOMAIN-SUFFIX,jumei.com                     # 聚美优品
+  - DOMAIN-SUFFIX,meilishuo.com                 # 美丽说购物平台
+  - DOMAIN-SUFFIX,mogu.com                      # 蘑菇街
+  - DOMAIN-SUFFIX,mogucdn.com                   # 蘑菇街静态资源
+  - DOMAIN-SUFFIX,mogujie.com                   # 蘑菇街主站
+  - DOMAIN-SUFFIX,smzdm.com                     # 什么值得买
+  - DOMAIN-SUFFIX,suning.com                    # 苏宁易购
+  - DOMAIN-SUFFIX,weidian.com                   # 微店电商平台
+  - DOMAIN-SUFFIX,womai.com                     # 我买网（中粮旗下生鲜）
+
+
+  # ============================================================================
+  # 【第八部分：金融支付、商业银行、证券投资与企业信用查询】
+  # ============================================================================
+  - DOMAIN-SUFFIX,abchina.com                   # 农业银行
+  - DOMAIN-SUFFIX,dfcfw.com                     # 东方财富网
+  - DOMAIN-SUFFIX,eastmoney.com                 # 东方财富网
+  - DOMAIN-SUFFIX,ecitic.com                    # 中信银行
+  - DOMAIN-SUFFIX,ewqcxz.com                    # 外企查寻服务
+  - DOMAIN-SUFFIX,paypal.com                    # PayPal 在线支付
+  - DOMAIN-SUFFIX,xueqiu.com                    # 雪球网，投资社区
+  - DOMAIN-SUFFIX,yeepay.com                    # 易宝支付
+
+
+  # ============================================================================
+  # 【第九部分：生活分类、房产租赁与汽车资讯】
+  # ============================================================================
+  # --- 生活分类、房产租赁与汽车资讯 ---
+  - DOMAIN-SUFFIX,58.com                        # 58 同城分类信息
+  - DOMAIN-SUFFIX,leju.com                      # 乐居网（房产）
+  - DOMAIN-SUFFIX,bitauto.com                   # 易车网
+  - DOMAIN-SUFFIX,chuimg.com                    # 下厨房图片资源
+  - DOMAIN-SUFFIX,fang.com                      # 房天下
+  - DOMAIN-SUFFIX,ganji.com                     # 赶集网
+  - DOMAIN-SUFFIX,ganjistatic1.com              # 赶集静态资源
+  - DOMAIN-SUFFIX,soufunimg.com                 # 搜房网图片资源
+  - DOMAIN-SUFFIX,xiachufang.com                # 下厨房菜谱网站
+
+
+  # ============================================================================
+  # 【第十部分：权威时政新闻、地方媒体与军事资讯】
+  # ============================================================================
+  # --- 权威时政新闻、地方媒体与军事资讯 ---
+  - DOMAIN-SUFFIX,eastday.com                   # 东方网
+  - DOMAIN-SUFFIX,feng.com                      # 凤凰网
+  - DOMAIN-SUFFIX,ifeng.com                     # 凤凰网
+  - DOMAIN-SUFFIX,ifengimg.com                  # 凤凰网图片资源
+  - DOMAIN-SUFFIX,infzm.com                     # 南方周末网站
+  - DOMAIN-SUFFIX,tiexue.net                    # 铁血军事网
+  - DOMAIN-SUFFIX,xinhuanet.com                 # 新华网
+
+
+  # ============================================================================
+  # 【第十一部分：科技前沿、数码测评与数字生活新媒体】
+  # ============================================================================
+  # --- 科技前沿、数码测评与数字生活新媒体 ---
+  - DOMAIN-SUFFIX,13th.tech                     # 科技博客/软件资源网站
+  - DOMAIN-SUFFIX,chaipip.com                   # 拆派派：国内拆机评测平台
+  - DOMAIN-KEYWORD,chinacache                   # 网宿科技 CDN 服务
+  - DOMAIN-SUFFIX,36kr.com                      # 36氪 科技媒体
+  - DOMAIN-SUFFIX,chinacache.net                # 速网科技 CDN
+  - DOMAIN-SUFFIX,cnbeta.com                    # cnBeta 科技资讯
+  - DOMAIN-SUFFIX,cnbetacdn.com                 # cnBeta 静态资源
+  - DOMAIN-SUFFIX,ithome.com                    # IT之家
+  - DOMAIN-SUFFIX,knewone.com                   # 在知新（新奇产品平台）
+  - DOMAIN-SUFFIX,landiannews.com               # 蓝点网（科技资讯）
+  - DOMAIN-SUFFIX,qdaily.com                    # 好奇心日报
+  - DOMAIN-SUFFIX,sspai.com                     # 少数派
+  - DOMAIN-SUFFIX,weiphone.com                  # 威锋网（旧版）
+  - DOMAIN-SUFFIX,weiphone.net                  # 威锋网（新版）
+  - DOMAIN-SUFFIX,zealer.com                    # ZEALER 数码测评媒体
+
+
+  # ============================================================================
+  # 【第十二部分：开发者技术社区、在线教育与求职招聘】
+  # ============================================================================
+  # --- 开发者技术社区、在线教育与求职招聘 ---
+  - DOMAIN-SUFFIX,kaikeba.com                   # 开课吧，在线职业教育平台
+  - DOMAIN-KEYWORD,duolingo                     # 多邻国语言学习平台
+  - DOMAIN-KEYWORD,moke                         # 摩课网在线教育
+  - DOMAIN-SUFFIX,iflyink.com                   # 科大讯飞 墨水屏平台
+  - DOMAIN-SUFFIX,iflyrec.com                   # 讯飞听见 语音转写
+  - DOMAIN-SUFFIX,iflytek.com                   # 科大讯飞官网
+  - DOMAIN-SUFFIX,51cto.com                     # 51CTO 技术社区
+  - DOMAIN-SUFFIX,51job.com                     # 前程无忧招聘
+  - DOMAIN-SUFFIX,51jobcdn.com                  # 前程无忧资源
+  - DOMAIN-SUFFIX,algocasts.io                  # 编程算法课程
+  - DOMAIN-SUFFIX,baicizhan.com                 # 百词斩 英语学习
+  - DOMAIN-SUFFIX,cnblogs.com                   # 博客园
+  - DOMAIN-SUFFIX,csdn.net                      # CSDN 开发者社区
+  - DOMAIN-SUFFIX,fresh-ideas.cc                # 开发者博客/站点
+  - DOMAIN-SUFFIX,ghpym.com                     # 技术博客
+  - DOMAIN-SUFFIX,it168.com                     # IT168 技术门户网站
+  - DOMAIN-SUFFIX,moke.com                      # 魔可编程教育平台
+  - DOMAIN-SUFFIX,oschina.net                   # 开源中国社区
+  - DOMAIN-SUFFIX,runoob.com                    # 菜鸟教程
+  - DOMAIN-SUFFIX,segmentfault.com              # SegmentFault 思否社区
+  - DOMAIN-SUFFIX,yach.me                       # YACH 技术博客或个人站
+  - DOMAIN-SUFFIX,zhaopin.com                   # 智联招聘
+
+
+  # ============================================================================
+  # 【第十三部分：游戏生态、国服官方加速与玩家社区】
+  # ============================================================================
+  - DOMAIN-SUFFIX,steampowered.com.8686c.com    # Steam 国区加速服务（第三方）
+  - DOMAIN-SUFFIX,steamcommunity-a.akamaihd.net # Steam 社区 CDN
+  - DOMAIN-SUFFIX,steamuserimages-a.akamaihd.net # Steam 用户图片 CDN
+  - DOMAIN-SUFFIX,steamusercontent.com          # Steam 用户内容服务器
+  - DOMAIN-SUFFIX,steamstatic.com               # Steam 静态资源
+  - DOMAIN-SUFFIX,steamcontent.com              # Steam 下载内容分发
+  - DOMAIN-SUFFIX,steamgames.com                # Steam 游戏官网
+  - DOMAIN-SUFFIX,steamstat.us                  # Steam 状态监控
+  - DOMAIN-SUFFIX,csgo.wmsj.cn                  # 国服 CSGO 服务器
+  - DOMAIN-SUFFIX,dota2.wmsj.cn                 # 国服 DOTA2 服务器
+  - DOMAIN-SUFFIX,dl.steam.ksyna.com            # 国服 Steam 下载加速
+  - DOMAIN-SUFFIX,st.dl.bscstorage.net          # 官方加速 CDN（网宿）
+  - DOMAIN-SUFFIX,st.dl.eccdnx.com              # 官方加速 CDN（网宿）
+  - DOMAIN-SUFFIX,st.dl.pinyuncloud.com         # 官方加速 CDN（品云）
+  - DOMAIN-SUFFIX,4399.com                      # 4399 网页游戏平台
+  - DOMAIN-SUFFIX,4399pk.com                    # 4399 对战游戏站
+  - DOMAIN-SUFFIX,5054399.com                   # 4399 辅助域名
+  - DOMAIN-SUFFIX,img4399.com                   # 4399 图片资源
+  - DOMAIN-SUFFIX,battle.net                    # 暴雪战网
+  - DOMAIN-SUFFIX,battlenet.com                 # 暴雪战网主域
+  - DOMAIN-SUFFIX,blizzard.com                  # 暴雪娱乐官网
+  - DOMAIN-SUFFIX,epicgames.com                 # Epic 游戏平台
+  - DOMAIN-SUFFIX,helpshift.com                 # 游戏支持服务平台
+  - DOMAIN-SUFFIX,paragon.com                   # Epic 游戏（虚幻竞技场）
+  - DOMAIN-SUFFIX,unrealengine.com              # 虚幻引擎官网
+  - DOMAIN-SUFFIX,playstation.com               # 索尼 PlayStation
+  - DOMAIN-SUFFIX,playstation.net               # 索尼 PlayStation 网络
+  - DOMAIN-SUFFIX,playstationnetwork.com        # PS 网络服务
+  - DOMAIN-SUFFIX,sony.com                      # 索尼官网
+  - DOMAIN-SUFFIX,sonyentertainmentnetwork.com  # 索尼娱乐网络
+  - DOMAIN-SUFFIX,gazellegames.net              # 游戏种子站
+  - DOMAIN-SUFFIX,17173.com                     # 17173 游戏门户
+  - DOMAIN-SUFFIX,178.com                       # 178 游戏网
+  - DOMAIN-SUFFIX,3dmgame.com                   # 3DM 游戏资讯
+  - DOMAIN-SUFFIX,8686c.com                     # Steam 镜像站
+  - DOMAIN-SUFFIX,duowan.com                    # 多玩游戏网
+  - DOMAIN-SUFFIX,startssl.com                  # StartSSL HTTPS 证书服务（已停服）
+
+
+  # ============================================================================
+  # 【第十四部分：BT / PT 种子下载与 Private Tracker (直连省流防封)】
+  # ============================================================================
+  # --- BT / PT 种子下载与 Private Tracker (直连省流防封) ---
+  - DOMAIN-KEYWORD,announce                     # BT Tracker 通用关键词
+  - DOMAIN-KEYWORD,torrent                      # BT 相关关键词
+  - DOMAIN-KEYWORD,tracker                      # BT Tracker 关键词
+  - DOMAIN-SUFFIX,animebytes.tv                 # 动漫私有种站
+  - DOMAIN-SUFFIX,animetorrents.me              # 动漫私有种站
+  - DOMAIN-SUFFIX,awesome-hd.me                 # 高清种子站
+  - DOMAIN-SUFFIX,beitai.pt                     # 北台 PT 站
+  - DOMAIN-SUFFIX,bittorrent.com                # 官方 BitTorrent
+  - DOMAIN-SUFFIX,chdbits.co                    # CHD 高清站
+  - DOMAIN-SUFFIX,empornium.me                  # 成人 PT 站
+  - DOMAIN-SUFFIX,hd4fans.org                   # 高清粉 PT 社区
+  - DOMAIN-SUFFIX,hdchina.org                   # HDChina
+  - DOMAIN-SUFFIX,hdhome.org                    # HDHome
+  - DOMAIN-SUFFIX,hdsky.me                      # HDSky
+  - DOMAIN-SUFFIX,hdtime.org                    # HDTime
+  - DOMAIN-SUFFIX,hdzone.me                     # HDZone
+  - DOMAIN-SUFFIX,icetorrent.org                # 冷门种子站
+  - DOMAIN-SUFFIX,keepfrds.com                  # KeepFriends PT 社区
+  - DOMAIN-SUFFIX,leaguehd.com                  # LeagueHD
+  - DOMAIN-SUFFIX,m-team.cc                     # MTeam
+  - DOMAIN-SUFFIX,madsrevolution.net            # MADS PT 社区
+  - DOMAIN-SUFFIX,msg.vg                        # 种子索引服务
+  - DOMAIN-SUFFIX,nanyangpt.com                 # 南洋 PT
+  - DOMAIN-SUFFIX,ncore.cc                      # nCore PT
+  - DOMAIN-SUFFIX,open.cd                       # OpenCD PT 社区
+  - DOMAIN-SUFFIX,ourbits.club                  # OurBits PT
+  - DOMAIN-SUFFIX,passthepopcorn.me             # PTP 高清影视 PT
+  - DOMAIN-SUFFIX,privatehd.to                  # PrivateHD 高清 PT
+  - DOMAIN-SUFFIX,pthome.net                    # PTHome 中文 PT
+  - DOMAIN-SUFFIX,tjupt.org                     # 天津大学 PT
+  - DOMAIN-SUFFIX,totheglory.im                 # TTG 私有种子站
+  - DOMAIN-SUFFIX,rarbg.to                      # BT 下载站点（已关闭）
+  - DOMAIN-SUFFIX,simplecd.me                   # SimpleCD 资源社区（已关闭）
+
+
+  # ============================================================================
+  # 【第十五部分：云计算平台、国内公共 CDN 与 DNS 基础设施】
+  # ============================================================================
+  # --- 云计算平台、国内公共 CDN 与 DNS 基础设施 ---
+  - DOMAIN-KEYWORD,ccgslb
+  - DOMAIN-SUFFIX,im9.com                       # 图片资源 CDN（B站相关）
+  - DOMAIN-SUFFIX,bytedns.net                   # 字节跳动 DNS/CDN
+  - DOMAIN-SUFFIX,baomitu.com                   # 静态资源镜像（Bootstrap）
+  - DOMAIN-SUFFIX,bootcss.com                   # BootCDN 静态资源
+  - DOMAIN-SUFFIX,staticfile.org                # 七牛云静态资源
+  - DOMAIN-SUFFIX,upaiyun.com                   # 又拍云 CDN
+  - DOMAIN-SUFFIX,cdnmama.com                   # CDN Mama
+  - DOMAIN-SUFFIX,clouddn.com                   # 七牛云旧域名
+  - DOMAIN-SUFFIX,cloudxns.net                  # CloudXNS DNS
+  - DOMAIN-SUFFIX,cnmstl.net                    # CNM STL 服务
+  - DOMAIN-SUFFIX,dxycdn.com                    # 丁香园 CDN
+  - DOMAIN-SUFFIX,fengkongcloud.com             # 风控云服务
+  - DOMAIN-SUFFIX,geilicdn.com                  # 给力 CDN
+  - DOMAIN-SUFFIX,huxiucdn.com                  # 虎嗅网内容 CDN
+  - DOMAIN-SUFFIX,images-amazon.com             # 亚马逊图片 CDN
+  - DOMAIN-SUFFIX,jianguoyun.com                # 坚果云网盘
+  - DOMAIN-SUFFIX,lancdns.com                   # 蓝汛 CDN
+  - DOMAIN-SUFFIX,lanzou.com                    # 蓝奏云文件分享
+  - DOMAIN-SUFFIX,lanzoui.com                   # 蓝奏云备用域名
+  - DOMAIN-SUFFIX,lanzoux.com                   # 蓝奏云备用域名
+  - DOMAIN-SUFFIX,lxdns.com                     # 联想旗下 DNS 服务
+  - DOMAIN-SUFFIX,myunlu.com                    # 云路智能
+  - DOMAIN-SUFFIX,onedns.net                    # DNSPod 提供的 OneDNS
+  - DOMAIN-SUFFIX,qbox.me                       # 七牛云测试域名
+  - DOMAIN-SUFFIX,qin.io                        # 亲宝宝等 app 的 CDN 域名
+  - DOMAIN-SUFFIX,qiniu.com                     # 七牛云
+  - DOMAIN-SUFFIX,qiniucdn.com                  # 七牛云 CDN 域名
+  - DOMAIN-SUFFIX,qiniudn.com                   # 七牛云旧域名
+  - DOMAIN-SUFFIX,th-sjy.com                    # 世纪云通信
+  - DOMAIN-SUFFIX,upyun.com                     # 又拍云
+  - DOMAIN-SUFFIX,wscdns.com                    # 万象云静态资源 CDN
+  - DOMAIN-SUFFIX,xip.io                        # 公共测试子域服务（wildcard DNS）
+
+
+  # ============================================================================
+  # 【第十六部分：国内电信运营商基础网络服务】
+  # ============================================================================
+  - DOMAIN-SUFFIX,21cn.com                      # 电信旗下门户网站
+  - DOMAIN-SUFFIX,10010.com                     # 中国联通
+
+
+  # ============================================================================
+  # 【第十七部分：办公协同、网盘存储、图床与效率软件资源】
+  # ============================================================================
+  # --- 办公协同、网盘存储、图床与效率软件资源 ---
+  - DOMAIN-SUFFIX,423down.com                   # 软件绿色版资源分享站
+  - DOMAIN-SUFFIX,chinaplay.store               # 国区 Play 商店下载中转
+  - DOMAIN-SUFFIX,hrtsea.com                    # 资源或导航站（小众）
+  - DOMAIN-SUFFIX,laomo.me                      # 老殁软件资源分享博客
+  - DOMAIN-SUFFIX,mpyit.com                     # 软仓资源站（含绿色软件）
+  - DOMAIN-SUFFIX,qupu123.com                   # 曲谱网站
+  - DOMAIN-SUFFIX,pdfwifi.com                   # PDF 工具类网站
+  - DOMAIN-KEYWORD,appzapp                      # App 降价跟踪工具
+  - DOMAIN-SUFFIX,115.com                       # 115 网盘
+  - DOMAIN-SUFFIX,chinaz.com                    # 站长之家
+  - DOMAIN-SUFFIX,chinaz.net                    # 站长之家备用
+  - DOMAIN-SUFFIX,fir.im                        # App 内测分发平台
+  - DOMAIN-SUFFIX,geetest.com                   # 极验验证码
+  - DOMAIN-SUFFIX,ipip.net                      # IPIP IP 地址定位服务
+  - DOMAIN-SUFFIX,jiathis.com                   # 加网社交分享工具
+  - DOMAIN-SUFFIX,lemicp.com                    # 乐米信息备案域名
+  - DOMAIN-SUFFIX,letitfly.me                   # Letitfly 个人博客/服务
+  - DOMAIN-SUFFIX,loli.net                      # 图片外链图床（常见在博客或论坛）
+  - DOMAIN-SUFFIX,mubu.com                      # 幕布在线思维导图
+  - DOMAIN-SUFFIX,nruan.com                     # 南软（用友旗下）
+  - DOMAIN-SUFFIX,onlinedown.net                # 华军软件园
+  - DOMAIN-SUFFIX,repaik.com                    # 热派智能（扫地机/家电）
+  - DOMAIN-SUFFIX,sm.ms                         # SM.MS 图床服务
+  - DOMAIN-SUFFIX,synology.com                  # 群晖 NAS 官方
+  - DOMAIN-SUFFIX,tietuku.com                   # 贴图库图床服务（已停服）
+  - DOMAIN-SUFFIX,uxengine.net                  # 小程序/APP 埋点分析 SDK
+  - DOMAIN-SUFFIX,xdrig.com                     # 小刀娱乐网资源平台
+  - DOMAIN-SUFFIX,xiumi.us                      # 秀米图文编辑工具
+  - DOMAIN-SUFFIX,yinxiang.com                  # 印象笔记（Evernote 中国版）
+  - DOMAIN-SUFFIX,ys168.com                     # 永硕E盘（个人网盘）
+  - DOMAIN-SUFFIX,zhangzishi.cc                 # 张自习工具网站（可能为个人项目）
+  - DOMAIN-SUFFIX,zhongsou.com                  # 中搜搜索引擎（已没落）
+
+
+  # ============================================================================
+  # 【第十八部分：生活便民、天气环境、美食与实用词典】
+  # ============================================================================
+  # --- 生活便民、天气环境、美食与实用词典 ---
+  - DOMAIN-SUFFIX,air-matters.com               # 空气质量 App
+  - DOMAIN-SUFFIX,air-matters.io                # 空气质量 API
+  - DOMAIN-SUFFIX,frdic.com                     # 法语词典
+  - DOMAIN-SUFFIX,godic.net                     # 欧路词典
+  - DOMAIN-SUFFIX,tianqi.com                    # 中国天气网
+  - DOMAIN-SUFFIX,tianqistatic.com              # 中国天气网静态资源
+  - DOMAIN-SUFFIX,weather.com                   # The Weather Channel 天气频道
+
+
+  # ============================================================================
+  # 【第十九部分：系统网络探测与远程协同工具】
+  # ============================================================================
+  # --- 系统网络探测与协同工具 ---
+  - DOMAIN-SUFFIX,msftconnecttest.com           # Windows 网络连通性测试
+  - DOMAIN-SUFFIX,msftncsi.com                  # Windows 网络检测辅助域名
+  - DOMAIN-SUFFIX,teamviewer.com                # TeamViewer 远程工具
