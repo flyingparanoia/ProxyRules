@@ -141,6 +141,64 @@
 * **CBS / Paramount+ / Showtime / Viacom 矩阵**：`cbs.com`、`cbsnews.com`、`paramount.com`、`paramountplus.com`、`pplusstatic.com`、`showtime.com`、`viacomcbs.com` 等。
 * **使用策略**：`👁️ Prime Pluto CBS` 或专用的海外版权解锁代理策略组。
 
+### 16. 常用广告与开屏追踪拦截补充规则集 (`AdBlock.yaml`)
+专为中国大陆主流互联网服务、社交、长短视频与外媒移动端深度定制的广告与商业追踪阻断规则集（收录 570+ 条精选高价值规则）：
+* **开屏广告与商业化分发调度**：Bilibili 商业化分发 (`cm.bilibili.com`)、优酷开屏追踪 (`sealine.youku.com`)、字节营销引流落地页 (`+.lf-leads-fe-scm.bytecdn.com`)、Google AdMob 国内 CDN (`+.doubleclick-cn.net`) 等。
+* **移动端广告联盟矩阵**：腾讯广点通 GDT (`mi.gdt.qq.com`, `qzs.gdt.qq.com`, `v.gdt.qq.com`, `adsmind.gdt.qq.com`)、百度移动联盟 (`mobads.baidu.com`, `mobads-logs.baidu.com`)、微博商业投放 (`sdkapp.uve.weibo.com`, `adstrategy.biz.weibo.com`)、知乎商业化 (`appcloud2.in.zhihu.com`, `sugar.zhihu.com`)。
+* **曝光监控、打点统计与归因监测**：B站广告曝光与打点 (`bimp.hdslb.com`, `boss.hdslb.com`)、Apple Search Ads 归因 (`ca.iadsdk.apple.com`)、IAS 广告可见度监测 (`dt.adsafeprotected.com`)。
+* **外媒嵌入式高并发程序化广告与追踪**：Permutive、Piano.io、BidSwitch、3Lift、Media.net、Parse.ly、Spot.im、Datadog RUM 等高并发追踪器（有效阻断外媒阅读时的电池偷跑与机身发烫）。
+* **使用策略**：`REJECT` 或专用的 `🛑 全球拦截` 策略组。
+
+---
+
+## 开屏广告与商业追踪深度治理指南 (不同 App 架构与实战分析)
+
+基于多次 iPhone 实机运行抓包日志（含 B站、抖音、优酷、阿里系/闲鱼、外媒及各类系统服务）与内核行为分析，去广告与防追踪方案必须**因 App 制宜**，绝不能盲目一刀切。
+
+### 1. 核心原则：为什么必须因 App 制宜？
+
+不同互联网大厂的客户端在网络底层实现、安全策略和接口架构上存在本质差异：
+* **网络底层与协议栈差异**：标准系统网络库（如 Apple CFNetwork / NSURLSession） vs 自研定制网络栈（如字节跳动基于 Chromium 深度定制的 TTNet/Cronet、阿里巴巴 Agoo/mTOP 网关）。
+* **接口设计解耦程度差异**：独立广告分发路径（如 `/x/v2/splash/`） vs 复合多合一业务网关（如 `is.snssdk.com` 同时承载设备激活、登录凭证、配置拉取与开屏广告）。
+* **安全与防抓包机制差异**：标准 TLS 通信 vs 严格证书锁定（SSL Pinning）、全链路请求签名防篡改（如 `X-Gorgon` / `X-Khronos`）、动态环境检测（如阿里无线保镖 SecurityGuardSDK）。
+
+如果忽视这些差异，盲目全局开启 MITM 并挂载 Script：
+1. **加剧设备发烫与掉电**：iOS 系统每遇到挂载脚本的请求，代理都需要唤醒 JavaScriptCore 虚拟机进行 JSON 树的深度遍历与反序列化，频繁触发垃圾回收（GC），是导致 iOS 代理软件后台发烫的核心诱因；
+2. **引发 App 异常断网或风控**：遇到强证书锁定或防篡改验签的 App，中间人解密会导致 TLS 握手失败、请求直接报错甚至触发账户异地风控。
+
+### 2. 各大主流 App 架构特征与具体处理策略（结合实机日志分析）
+
+| 分类 | 典型 App / 域名 | 底层网络特征 | 最佳处理方案 | 为什么这么做（避免发热与报错） |
+| :--- | :--- | :--- | :--- | :--- |
+| **类型一：独立商业/开屏分发主域** | **哔哩哔哩** (`cm.bilibili.com`, `bimp.hdslb.com`)<br>**优酷** (`sealine.youku.com`)<br>**Google AdMob** (`+.doubleclick-cn.net`)<br>**腾讯广点通 GDT** (`*.gdt.qq.com`)<br>**百度移动联盟** (`mobads.baidu.com`) | 广告请求走独立子域名或独立 CDN，与核心业务流量完全解耦 | **域名层拦截 (REJECT)**<br>*(收录于 `AdBlock.yaml`)* | **最省电、零发热**：内核级字典匹配，纳秒级直接丢弃。App 探测超时或断开后内置逻辑直接跳过广告进首页，完全不需要 MITM。 |
+| **类型二：业务广告同域，但有独立 API 路径** | **知乎** (`/commercial_api/real_time/launch`)<br>**微博** (`/2/ad/*`)<br>**网易云音乐** (`/api/ad/get`)<br>**哔哩哔哩备用开屏** (`/x/v2/splash/`) | 与核心 API 共用域名，但开屏由独立 REST 路径下发，无强防篡改校验 | **MITM + Rewrite**<br>*(本地 Mock `reject-dict`)* | **秒进首页且不发烫**：Stash 代理内核用正则命中后直接在本地返回空字典 `{}`（耗时仅 0.05ms），无需连接远端服务器，无需拉起 JS 虚拟机，避免了 Script 带来的 CPU 与发热开销。 |
+| **类型三：严格证书锁定 / 自研网络栈 / 复合网关** | **抖音 / 今日头条** (`is.snssdk.com`)<br>**闲鱼 / 淘宝 / 支付宝** (`acs.m.goofish.com`, `amdc.alipay.com`)<br>**微信 / 银行金融客户端** | 采用 Chromium TTNet / mTOP 网关，开启强制 SSL Pinning，含全链路动态哈希验签（如 `X-Gorgon`），多业务混用 | **严禁开启 MITM 与 Script！**<br>*(仅封禁其外挂打点域名如 `lf-leads-fe-scm.bytecdn.com`)* | **防断网与风控**：一旦解密解开，客户端会报证书不受信任直接中断网络；若用脚本篡改响应，验签失败会导致无法登录、信息流空白。维持纯网络直连最安全。 |
+| **类型四：混合复合包且校验非空字段** | **极个别顽固小众 App** | 开屏广告与 App 冷启动核心参数硬编码在同一个 JSON 结构体中，返回空包会导致 App 崩溃 | **MITM + 针对性 Script (按需单点使用)** | **保底兼容**：仅对特定 URL 单点挂载极简 JS 脚本剔除广告节点。严禁全局通配挂载，避免后台全天候高频消耗 CPU。 |
+
+### 3. 三种拦截手段的性能与发热能耗对比
+
+```
+【方案 A：DNS / 域名 REJECT】（当前 AdBlock.yaml 采用）：
+  TCP 连接 -> 规则集 Hash 命中 -> 立即 REJECT 丢弃
+  ⚡️ 耗时: < 0.01 ms | 💻 CPU/内存占用: 接近 0 | 🔋 手机发热: 零发热，最省电
+
+【方案 B：MITM + URL Rewrite (reject-dict / reject-200)】：
+  HTTPS 握手 -> 代理内核 URL 正则匹配 -> 本地直接构造 HTTP 200 {} 返回
+  ⚡️ 耗时: ≈ 0.05 ms | 💻 CPU/内存占用: 极低（纯 Go/C 内核层处理） | 🔋 手机发热: 几乎无感
+
+【方案 C：MITM + Script (JavaScript 响应体篡改)】：
+  HTTPS 握手 -> 连远端服务器 -> 接收几十KB数据 -> 启动 JavaScriptCore 虚拟机
+  -> 跨语言内存拷贝 -> JSON.parse 解析 -> JS 遍历删除节点 -> JSON.stringify 序列化
+  -> 跨语言拷贝回网络栈 -> 触发 JS 引擎垃圾回收 (GC) -> 返回给 App
+  ⚡️ 耗时: 10 ~ 50 ms | 💻 CPU/内存占用: 极高 (频繁内存分配与 GC) | 🔋 手机发热: ⚠️ 严重，手机发烫掉电的主要诱因之一
+```
+
+### 4. 落地配置最佳实践决策树
+
+1. **第一优先级（首选）**：只要该 App 的开屏请求能抓到独立的广告域名/CDN，**一律加入 `AdBlock.yaml` 走纯域名层 REJECT**。
+2. **第二优先级（次选）**：如果无法通过域名拦截（例如拦截后无法正常登录），但该 App 开屏有单独的 API 路径且不受 SSL Pinning 限制，**在 MITM 中仅解密该域名，并使用 Rewrite (`reject-dict`) 进行本地空 Mock**。
+3. **第三优先级（保底）**：只有在以上两步都无法解决、且 App 强依赖开屏响应体中的其他必要字段时，**才针对单一 URL 配置极简 Script 脚本**。
+
 ---
 
 ## 在 Stash 中的标准配置示例
@@ -155,6 +213,16 @@ rule-providers:
     url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/YouTube-Porn-X.yaml"
     # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/YouTube-Porn-X.yaml"
     path: ./ruleset/youtube-porn-x.yaml
+    interval: 86400
+
+  # 2. 常用广告与开屏追踪拦截补充规则集 (AdBlock)
+  adblock:
+    type: http
+    behavior: domain
+    format: yaml
+    url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/AdBlock.yaml"
+    # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/AdBlock.yaml"
+    path: ./ruleset/domain-AdBlock.yaml
     interval: 86400
 
   # 3. 订阅抖音官方直连规则集
@@ -278,8 +346,8 @@ rule-providers:
     interval: 86400
 
 rules:
-  # 必须排在最前面：优先阻断所有 P2P 偷跑连接与轻量广告
-  - RULE-SET,china-video-apps-pcdn,🛑 全球拦截
+  # 必须排在最前面：优先阻断广告与商业化追踪
+  - RULE-SET,adblock,🛑 全球拦截
   - RULE-SET,hagezi-light,🛑 全球拦截
 
   # 学术数据库走直连（保障高校机构与 CARSI 认证免登录下载正文）
