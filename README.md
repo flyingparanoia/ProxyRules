@@ -122,6 +122,26 @@
 * **抓包定制接口与读者鉴权通道**：Adobe 专为道琼斯定制的分析节点（`dowjones.hb-api.omtrdc.net`、`dowjones.sc.omtrdc.net`）、道琼斯专用 AWS 资产存储桶（`djcm-pnp.s3.amazonaws.com`、`djcs-multi-region-assets-ohio.s3.us-east-2.amazonaws.com`）、波士顿公共图书馆读者卡免登录鉴权联动（`bpl.org` / EZProxy 联动 `partner.wsj.com`）。
 * **美国轻量金融、支付与权威快讯**：PayPal、Venmo、Braintree、Xoom、BillMeLater，彭博社 Bloomberg、路透社 Reuters、Reddit、Perplexity 等。
 * **使用策略**：专用的优质美国原生/静态代理策略组（如 `🇺🇸 US Light Data Usage Select`），享受纯净 IP 避免被两报严格的风控系统拦截或触发验证码。
+* **附：NYT 与 WSJ 的广告体系构成与分流/拦截深度剖析**：
+  在实际阅读中，部分用户希望完整保留两家大报的广告（例如欣赏高质量商业品牌赞助、避免触发网站“检测到广告拦截插件 `Ad-blocker detected`”的阻断弹窗），而部分用户则希望彻底去除。深入理解两家大报的广告分层构成是进行精准分流配置的前提：
+  1. **第一层：第一方自营赞助与原生内容广告（1st-Party Native & Direct Sponsorship）**
+     * **架构特征**：由报业集团直接向高端商业品牌（如劳力士、保时捷、路易威登、各大投行等）直接招商，深度内嵌于版面、正文信息流与特约专栏（Paid Post / Sponsor Content）中的自营图文与视频。
+     * **核心接口与分发域名**：
+       * **The New York Times (NYT)**：通过 GraphQL 网关 `samizdat-graphql.nytimes.com` 随正文直接下发元数据，第一方广告服务器与事件打点为 `adx.nytimes.com`、`et.nytimes.com`（Event Tracker）、`purr.nytimes.com`（隐私与广告授权协议），静态素材由官方高防图床 `static01.nyt.com` 承载。
+       * **The Wall Street Journal (WSJ / Dow Jones)**：依托道琼斯商业矩阵，使用专为大型出版商定制的 Kevel / Adzerk 原生广告系统 `dj.adzerk.net`，以及道琼斯第一方媒体分发接口 `s.wsj.net`、`images.wsj.net`、`dowjones.hb-api.omtrdc.net`。
+     * **分流与拦截表现**：此类广告与正文主站同域或挂在出版商第一方域名下，直接收录于 `NYT-WSJ-US-Light.yaml` 并路由至美国原生代理出口。默认完全畅通，不仅能欣赏高质量品牌广告，还能彻底避免触发两报前端的反广告拦截插件检测（Ad-Blocker Detection）。
+  2. **第二层：第三方程序化展示广告与头部竞价（3rd-Party Programmatic Display & Header Bidding）**
+     * **架构特征**：正文中间穿插的嵌入式方块横幅（Display Banner）、侧边栏浮动推荐、通栏广告与视频贴片，通过全球广告联盟与即时竞价网络（RTB）动态拉取。
+     * **底层基建（Google Ad Manager / DoubleClick）**：两报最主要的展示广告基础设施供应商，核心域名包括 `doubleclick.net`（含 `googleads.g.doubleclick.net`、`adx.g.doubleclick.net`）、`googleadservices.com`、`googlesyndication.com`、`adservice.google.com`。
+     * **程序化交易与头部竞价伙伴（Ad Exchanges / Header Bidding）**：`rubiconproject.com`（Magnite）、`criteo.com` / `criteo.net`、`casalemedia.com`（Index Exchange）、`amazon-adsystem.com`（Amazon A9 广告系统）、`scorecardresearch.com` / `chartbeat.com`（广告可见度与阅读热度监测）。
+     * **分流与拦截表现**：此类跨域商业广告会直接命中通用的去广告规则集（如 `AdBlock.yaml`、`hagezi-light`）并被 `REJECT` 拦截丢弃。
+  3. **用户策略选择指引（想看广告 vs 彻底去广告）**：
+     * **需求 A：想看广告 / 彻底避免反拦截弹窗**：
+       * *仅看第一方原生赞助*：只需确保 `NYT-WSJ-US-Light.yaml` 规则集正常生效即可，第一方广告自然展示且完全不影响日常阅读。
+       * *全量看横幅与方块广告（复刻 MESL 表现）*：在客户端主配置中，将 `doubleclick.net`、`googleadservices.com`、`googlesyndication.com` 从 `REJECT` 列表移出，改走 Google 策略组（或直接放行走代理）。
+     * **需求 B：追求纯净阅读与极致省电**：
+       * 保持 `AdBlock.yaml` 位于规则前列，优先丢弃所有第三方程序化广告和追踪监测，大幅减少网络请求并发与后台基带能耗。
+
 
 ### 14. 微软全生态服务规则 (`Microsoft.yaml`)
 涵盖 Microsoft 核心主站、Windows 系统更新、Office 365 / Microsoft 365 协同套件、OneDrive 云盘、Azure 云计算基础设施、Bing 必应搜索、Teams/Skype 统一通讯、Xbox 游戏网络与世纪互联运营中国区资产：
