@@ -1,0 +1,98 @@
+# ==============================================================================
+# 规则名称: Prime Video、Pluto TV 与 CBS / Paramount+ 流媒体合集规则集
+# 英文标识: Prime-Pluto-CBS
+# 更新时间: 2026-09-25
+# 规则说明: 整合 Amazon Prime Video、Pluto TV 以及 CBS / Paramount+ / Showtime 全量海外流媒体分发、API 与播放调度
+# 适用平台: Stash / Clash rule-providers (behavior: classical)
+# 推荐策略: 👁️ Prime Pluto CBS 或 PROXY (需支持美国区域版权解锁的节点)
+# ==============================================================================
+payload:
+  # ============================================================================
+  # 【第一部分：Amazon Prime Video 专属流媒体与视频调度】
+  # ============================================================================
+  - DOMAIN,atv-ps.amazon.com
+  - DOMAIN,avodmp4s3ww-a.akamaihd.net
+  - DOMAIN,d1v5ir2lpwr8os.cloudfront.net
+  - DOMAIN,d1xfray82862hr.cloudfront.net
+  - DOMAIN,d22qjgkvxw22r6.cloudfront.net
+  - DOMAIN,d25xi40x97liuc.cloudfront.net
+  - DOMAIN,d27xxe7juh1us6.cloudfront.net
+  - DOMAIN,d3196yreox78o9.cloudfront.net
+  - DOMAIN,dmqdd6hw24ucf.cloudfront.net
+  - DOMAIN,ktpx.amazon.com
+  - DOMAIN,pop-ca-cf.dash.pv-cdn.net
+  - DOMAIN,primevideo.com
+  - DOMAIN,unagi.amazon.com
+  - DOMAIN-KEYWORD,avoddashs
+  - DOMAIN-SUFFIX,aboutamazon.com
+  - DOMAIN-SUFFIX,aiv-cdn.net
+  - DOMAIN-SUFFIX,aiv-delivery.net
+  - DOMAIN-SUFFIX,amazon.jobs
+  - DOMAIN-SUFFIX,amazonprimevideo.cn
+  - DOMAIN-SUFFIX,amazonprimevideo.com.cn
+  - DOMAIN-SUFFIX,amazonprimevideos.com
+  - DOMAIN-SUFFIX,amazontools.com
+  - DOMAIN-SUFFIX,amazonuniversity.jobs
+  - DOMAIN-SUFFIX,amazonvideo.cc
+  - DOMAIN-SUFFIX,amazonvideo.com
+  - DOMAIN-SUFFIX,atv-ps.amazon.com
+  - DOMAIN-SUFFIX,avodmp4s3ww-a.akamaihd.net
+  - DOMAIN-SUFFIX,fls-eu.amazon.com
+  - DOMAIN-SUFFIX,fls-na.amazon.com
+  - DOMAIN-SUFFIX,llnwd.net
+  - DOMAIN-SUFFIX,media-amazon.com
+  - DOMAIN-SUFFIX,prime-video.com
+  - DOMAIN-SUFFIX,primevideo.cc
+  - DOMAIN-SUFFIX,primevideo.com
+  - DOMAIN-SUFFIX,primevideo.info
+  - DOMAIN-SUFFIX,primevideo.org
+  - DOMAIN-SUFFIX,primevideo.tv
+  - DOMAIN-SUFFIX,pv-cdn.net
+  - DOMAIN-SUFFIX,seattlespheres.com
+  - DOMAIN-SUFFIX,ssl-images-amazon.com
+  - DOMAIN-SUFFIX,unagi-na.amazon.com
+  - PROCESS-NAME,com.amazon.avod.thirdpartyclient
+  - URL-REGEX,^https?:\/\/www\.amazon\.com\/(Amazon-Video|gp\/video)\/
+
+  # ============================================================================
+  # 【第二部分：Pluto TV 免费流媒体电视平台】
+  # ============================================================================
+  - DOMAIN-SUFFIX,pluto.tv
+  - DOMAIN-SUFFIX,plutotv.net
+
+  # ============================================================================
+  # 【第三部分：CBS / Paramount+ / Showtime / ViacomCBS 影视生态】
+  # ============================================================================
+  - DOMAIN-SUFFIX,amlg.io
+  - DOMAIN-SUFFIX,cbs.com
+  - DOMAIN-SUFFIX,cbsaavideo.com
+  - DOMAIN-SUFFIX,cbscorporation.com
+  - DOMAIN-SUFFIX,cbsi.com
+  - DOMAIN-SUFFIX,cbsi.live.ott.irdeto.com
+  - DOMAIN-SUFFIX,cbsi.video
+  - DOMAIN-SUFFIX,cbsiam.com
+  - DOMAIN-SUFFIX,cbsig.net
+  - DOMAIN-SUFFIX,cbsimg.net
+  - DOMAIN-SUFFIX,cbsinteractive.com
+  - DOMAIN-SUFFIX,cbsistatic.com
+  - DOMAIN-SUFFIX,cbsivideo.com
+  - DOMAIN-SUFFIX,cbsnews.com
+  - DOMAIN-SUFFIX,cbsplaylistserver.aws.syncbak.com
+  - DOMAIN-SUFFIX,cbspressexpress.com
+  - DOMAIN-SUFFIX,cbsradio.com
+  - DOMAIN-SUFFIX,cbsservice.aws.syncbak.com
+  - DOMAIN-SUFFIX,cbssports.com
+  - DOMAIN-SUFFIX,cbsstatic.com
+  - DOMAIN-SUFFIX,cbsstore.com
+  - DOMAIN-SUFFIX,cbssvideo.com
+  - DOMAIN-SUFFIX,cbstelevisioncity.com
+  - DOMAIN-SUFFIX,mtvnservices.com
+  - DOMAIN-SUFFIX,paramount.com
+  - DOMAIN-SUFFIX,paramountplus.com
+  - DOMAIN-SUFFIX,pplusstatic.com
+  - DOMAIN-SUFFIX,showtime.com
+  - DOMAIN-SUFFIX,viacbs.com
+  - DOMAIN-SUFFIX,viacom.com
+  - DOMAIN-SUFFIX,viacomcbs.com
+  - DOMAIN-SUFFIX,viacomcbspressexpress.com
+  - DOMAIN-SUFFIX,youboranqs01.com
