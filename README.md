@@ -4,9 +4,10 @@
 
 ## 规则列表
 
-### 1. YouTube 全量分流规则 (`YouTube.yaml`)
-基于 Mac 桌面网页端 + iPhone 客户端双端实测抓包，涵盖 YouTube 主站、点播与直播流媒体 CDN (`googlevideo.com`)、移动端历史同步与进度心跳 (`s.youtube.com`)、移动端视频调度器 (`redirector.googlevideo.com`)、图床及各类子产品。
-* **使用策略**：`Proxy` 或专用的流媒体策略组（如 `YouTube`）
+### 1. YouTube、X (Twitter) 与全球主流成人媒体合集 (`YouTube-Porn-X.yaml`)
+全量合并 YouTube 与 X-Porn 体系，直接对应 `mixed.yaml` 中的 `🎬 YouTube Porn X Select` 策略组：
+* **全量覆盖**：集成了 YouTube 32 条全生态音视频与移动端心跳规则 + X (Twitter) 官方全量体系与 ASN BGP IP 段 + 全球 8 大成人视讯与点播切片 CDN 矩阵（共 202 条精细规则，0 冗余冲突）。
+* **使用策略**：专用的 `🎬 YouTube Porn X` 流媒体策略组或高质量代理。
 
 ### 2. 抖音与字节跳动官方规则 (`Douyin.yaml`)
 涵盖抖音主站、短视频点播切片（VOD / zjcdn）、直播拉流（FLV）、图床、对象存储（TOS）、前端公共基建（Goofy/Gecko）与相关字节产品线（西瓜/火山/头条）。
@@ -86,18 +87,7 @@
 * **海外基建、电商与衍生生态**：TikTok Shop 美区电商（`tiktokshops.us`）、TikTok Music（`tiktokmusic.app`）、剪映海外版 CapCut（`capcut.com`）、字节跳动海外技术底座（`byteoversea.com`、`ibytedtos.com`、`bytedapm.com`、`bytegecko-i18n.com`、`ipstatp.com`、`sgpstatp.com`）、Musical.ly 历史兼容资产。
 * **使用策略**：专用的 `TikTok` 流媒体策略组（选择美区、新加坡、日本等支持 TikTok 解锁的住宅或原生代理节点，注意避开国内/香港节点）。
 
-### 11. X (Twitter) 与全球主流成人媒体规则 (`X-Porn.yaml`)
-结合 Mac 桌面网页端 + iPhone 客户端双端实机抓包深度分析，并全量融合 `mixed.yaml`（`🎬 YouTube Porn X Select`）精选资产，涵盖：
-* **X (Twitter) 全量官方生态**：`x.com`、`twitter.com`、`t.co`（官方跳转短链）、`twimg.com`（核心图床与音视频分发 CDN）、`tweetdeck.com`、`twvid.com`、`twitter.biz`、`twtrdns.net`、官方 ASN 6 大 BGP IP-CIDR 地址段与客户端进程名。
-* **Pornhub 全球生态与多媒体 CDN**：`pornhub.com`、`phncdn.com`（全量加密点播切片与图片 CDN）、`pornhubpremium.com`、`youporn.com`、`redtube.com`、`brazzers.com`、`pornhost.com`、`pornmate.com` 及防拼写错误域名。
-* **XVideos & XNXX 核心生态**：`xvideos.com`、`xvideos-cdn.com`（全球核心 HLS 视频切片 CDN）、`xv-cdn.com`、`xnxx.com`、`xnxx-cdn.com` 等。
-* **全球主流综合点播与影视网络**：`xhamster.com`、`spankbang.com`、`beeg.com`、`blacked.com`、`bangbrosnetwork.com`、`cumlouder.com`、`legalporno.com`、`lushstories.com`、`upornia.com`、`vrporn.com`、`x-art.com`、`youjizz.com` 等。
-* **日韩主流 AV 影视、数据库与写真**：DMM（`dmm.co.jp`, `dmm.com`）、JAV 数据库（`javdb.com`, `javbus.com`, `javlibrary.com`, `jav321.com`, `vjav.com` 等）、AVMOO 矩阵、片商及写真（`e-body`, `madonna`, `tokyo-247`, `allgravure` 等）。
-* **华语及亚洲主流成人社区与流媒体**：`91porn.com`、`91porny.com`、`99btgc01.com`、`madou.club`（麻豆传媒）、`cool18.com`、`sex8.cc`、`thisav.com`、`pigav.com`、`7mmtv.tv`、`iyf.tv`。
-* **二次元动漫同人与 Hentai**：`e-hentai.org`、`fakku.net`、`rule34.xxx`、`g6hentai.com`、`erodoujinlog.com` 等。
-* **真人互动直播与成人社交约会**：`stripchat.com`、`chaturbate.com`、`bongacams.com`、`cam4.com`、`cams.com`、`adultfriendfinder.com` 等。
-* **同志与垂直彩虹影视**：`boysfood.com`、`foxgay.com`、`gayhub.com`、`gaytube.com`、`onlygayvideo.com`、`timtales.com` 等。
-### 12. 学术数据库与文献资源直连规则 (`Academic.yaml`)
+### 11. 学术数据库与文献资源直连规则 (`Academic.yaml`)
 严格提取自 `mixed.yaml`（`🎓 学术资源类 —— 直连便于认证 / 学术网络识别`）并配套主流学术云补充，涵盖：
 * **全球权威学术检索与分析**：Web of Science 核心正站（`webofscience.com`）、中国镜像（`webofscience.clarivate.cn`）、Clarivate 统一身份网关（`access.clarivate.com`、`clarivate.com`）、EI 工程索引（`engineeringvillage.com`）、MathSciNet（`mathscinet.ams.org`、`ams.org`）。
 * **四大科学出版商与顶级期刊**：Elsevier / ScienceDirect（`sciencedirect.com`、`elsevier.com`）、Nature 自然出版集团（`nature.com`）、Science 科学杂志（`science.org`）、Wiley 在线图书馆（`onlinelibrary.wiley.com`、`wiley.com`、`ietresearch.onlinelibrary.wiley.com`）、Springer Nature（`springer.com`、`springernature.com`）。
@@ -105,12 +95,6 @@
 * **技术实战与国内主流平台**：O'Reilly 学习平台（`learning.oreilly.com`、`oreilly.com`）、中国知网（`cnki.net`）、超星学习通（`chaoxing.com`）、万方数据（`wanfangdata.com.cn`）、维普网（`cqvip.com`）、学术静态 CDN（`xslb.net`）。
 * **高校校外身份认证**：CARSI 国家级高校身份认证联盟（`carsi.edu.cn`、`cernet.edu.cn`）。
 * **使用策略**：`DIRECT`（直连，确保校园网 IP / CARSI 机构身份正常识别，避免代理引发文献下载受阻）。
-
-### 13. YouTube、X (Twitter) 与全球主流成人媒体合集 (`YouTube-Porn-X.yaml`)
-全量合并 `YouTube.yaml` 与 `X-Porn.yaml`，直接对应 `mixed.yaml` 中的 `🎬 YouTube Porn X Select` 策略组需求：
-* **全量覆盖**：集成了 YouTube 32 条全生态音视频与移动端心跳规则 + X (Twitter) 官方全量体系与 ASN BGP IP 段 + 全球 8 大成人视讯与点播切片 CDN 矩阵（共 202 条精细规则，0 冗余冲突）。
-* **使用场景**：适合希望将 YouTube、X 以及成人网站统一收纳至单一策略组（如 `🎬 YouTube Porn X`）统一管理流媒体节点出口的用户。
-* **使用策略**：专用 `🎬 YouTube Porn X` 策略组或高质量流媒体代理。
 
 ---
 
@@ -128,7 +112,17 @@ rule-providers:
     path: ./ruleset/china-video-apps-pcdn.yaml
     interval: 86400
 
-  # 2. 订阅抖音官方直连规则集
+  # 2. 订阅 YouTube、X (Twitter) 与全球主流成人媒体合集
+  youtube-porn-x:
+    type: http
+    behavior: classical
+    format: yaml
+    url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/YouTube-Porn-X.yaml"
+    # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/YouTube-Porn-X.yaml"
+    path: ./ruleset/youtube-porn-x.yaml
+    interval: 86400
+
+  # 3. 订阅抖音官方直连规则集
   douyin:
     type: http
     behavior: classical
@@ -136,16 +130,6 @@ rule-providers:
     url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/Douyin.yaml"
     # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/Douyin.yaml"
     path: ./ruleset/douyin.yaml
-    interval: 86400
-
-  # 3. 订阅 YouTube 规则集
-  youtube:
-    type: http
-    behavior: classical
-    format: yaml
-    url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/YouTube.yaml"
-    # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/YouTube.yaml"
-    path: ./ruleset/youtube.yaml
     interval: 86400
 
   # 4. 订阅全球海外新闻与专业媒体规则集
@@ -218,17 +202,7 @@ rule-providers:
     path: ./ruleset/tiktok.yaml
     interval: 86400
 
-  # 11. 订阅 X (Twitter) 与全球主流成人媒体规则集
-  x-porn:
-    type: http
-    behavior: classical
-    format: yaml
-    url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/X-Porn.yaml"
-    # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/X-Porn.yaml"
-    path: ./ruleset/x-porn.yaml
-    interval: 86400
-
-  # 12. 订阅学术数据库与文献资源直连规则集
+  # 11. 订阅学术数据库与文献资源直连规则集
   academic:
     type: http
     behavior: classical
@@ -258,11 +232,8 @@ rules:
   # Apple 全生态基础服务（可走 DIRECT 或专属策略组）
   - RULE-SET,apple-services,🍎 Apple Services
 
-  # YouTube 流量走代理或专属流媒体组
-  - RULE-SET,youtube,🎬 YouTube
-
-  # X (Twitter) 与主流成人影视走专属策略组或流媒体代理
-  - RULE-SET,x-porn,🔞 X Porn
+  # YouTube、X 与全球主流成人影视走专属流媒体策略组
+  - RULE-SET,youtube-porn-x,🎬 YouTube Porn X
 
   # Google 全球搜索与 Gemini 走专用代理节点（统一出口避免风控）
   - RULE-SET,google-gemini,🔍 Google Gemini
