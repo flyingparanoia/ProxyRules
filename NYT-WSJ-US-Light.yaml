@@ -46,6 +46,8 @@ payload:
   - '+.mansionglobal.com'                       # Mansion Global (道琼斯旗下环球高端不动产与豪宅投资平台)
   - '+.factiva.com'                             # Factiva (道琼斯全球商业情报、公司研报与新闻数据库)
   - '+.newscgp.com'                             # News Corp Global Platform (新闻集团统一服务与标签管理)
+  - '+.adzerk.net'                              # Kevel / Adzerk (华尔街日报 WSJ 专属第一方自营广告与赞助分发服务器)
+
 
   # ============================================================================
   # 【第四部分：抓包精准捕获之定制分析、云存储与读者鉴权通道】
