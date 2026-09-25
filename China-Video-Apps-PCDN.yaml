@@ -21,3 +21,6 @@ payload:
   - '+.szbdyd.com'                              # 移动端音视频通用 PCDN 调度网络
   - '+.onethingpcs.com'                         # 网心云/迅雷 PCDN 边缘网络
   - '+.xycdn.com'                               # 星域云 PCDN 边缘节点
+  - '+.ndcpp.com'                               # 字节跳动/火山引擎移动端 P2P 调度中枢 (ndcpp)
+  - '+.ndcpp.cn'                                # 字节跳动/火山引擎移动端 P2P 备用域名
+
