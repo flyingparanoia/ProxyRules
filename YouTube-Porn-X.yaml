@@ -22,6 +22,8 @@ payload:
 
   # 2. 核心视频流媒体分发 (负责 90%+ 的视频点播与直播切片流量)
   - DOMAIN-SUFFIX,googlevideo.com              # 全球音视频切片流媒体 CDN (海量 rr*---sn-*.googlevideo.com)
+  - DOMAIN-SUFFIX,gvt1.com                     # Google Video Transcode / YouTube CDN
+  - DOMAIN-SUFFIX,gvt2.com                     # Google Video Transcode / YouTube CDN
 
   # 3. 核心图床、缩略图与静态资源
   - DOMAIN-SUFFIX,ytimg.com                    # 视频缩略图、封面海报图床 (i.ytimg.com, i9.ytimg.com)

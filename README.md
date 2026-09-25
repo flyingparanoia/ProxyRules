@@ -126,6 +126,17 @@
 * **抓包定制接口与读者鉴权通道**：Adobe 专为道琼斯定制的分析节点（`dowjones.hb-api.omtrdc.net`、`dowjones.sc.omtrdc.net`）、道琼斯专用 AWS 资产存储桶（`djcm-pnp.s3.amazonaws.com`、`djcs-multi-region-assets-ohio.s3.us-east-2.amazonaws.com`）、波士顿公共图书馆读者卡免登录鉴权联动（`bpl.org` / EZProxy 联动 `partner.wsj.com`）。
 * **使用策略**：专用的优质美国原生/静态代理策略组（如 `🇺🇸 US Light Data Usage Select`），享受纯净 IP 避免被两报严格的风控系统拦截或触发验证码。
 
+### 14. 微软全生态服务规则 (`Microsoft.yaml`)
+涵盖 Microsoft 核心主站、Windows 系统更新、Office 365 / Microsoft 365 协同套件、OneDrive 云盘、Azure 云计算基础设施、Bing 必应搜索、Teams/Skype 统一通讯、Xbox 游戏网络与世纪互联运营中国区资产：
+* **Microsoft 账户与核心认证**：`microsoft.com`、`live.com`、`msftauth.net`、`msauth.net`、`msidentity.com`、`account.microsoft.com`、`login.microsoftonline.com` 等。
+* **Office 365 / Microsoft 365 协作套件**：`office.com`、`office365.com`、`sharepoint.com`、`onenote.com`、`sway.com`、`yammer.com`、`mstea.ms`、`teams.microsoft.com` 等。
+* **OneDrive / SkyDrive 云存储客户端**：`1drv.ms`、`onedrive.com`、`livefilestore.com`、进程名 `OneDrive` 与 `OneDriveUpdater`。
+* **Azure 云计算基础设施**：`azure.com`、`azure.net`、`azureedge.net`、`cloudapp.net`、`trafficmanager.net`、`azurewebsites.net` 等。
+* **Windows 系统生态与 Edge 浏览器**：`windows.com`、`windowsupdate.com`、`msedge.net`、`microsoftstore.com` 等。
+* **Bing 搜索、MSN 与 Skype 通讯**：`bing.com`、`msn.com`、`skype.com`、`lync.com` 等。
+* **世纪互联运营中国区资产**：`21vbc.com`、`21vbluecloud.com`、`azure.cn`、`partner.microsoftonline.cn` 等。
+* **使用策略**：`🖥 Microsoft` 或 `DIRECT` / `PROXY` 节点策略组。
+
 ---
 
 ## 在 Stash 中的标准配置示例
@@ -262,16 +273,26 @@ rule-providers:
     path: ./ruleset/nyt-wsj.yaml
     interval: 86400
 
+  # 14. 订阅微软全生态服务规则集 (Windows / Office 365 / Azure / OneDrive)
+  microsoft:
+    type: http
+    behavior: classical
+    format: yaml
+    url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/Microsoft.yaml"
+    # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/Microsoft.yaml"
+    path: ./ruleset/microsoft.yaml
+    interval: 86400
+
 rules:
   # 必须排在最前面：优先阻断所有 P2P 偷跑连接与轻量广告
   - RULE-SET,china-video-apps-pcdn,🛑 全球拦截
   - RULE-SET,hagezi-light,🛑 全球拦截
 
   # 学术数据库走直连（保障高校机构与 CARSI 认证免登录下载正文）
-  - RULE-SET,academic-direct,DIRECT
+  - RULE-SET,academic-direct,🎯 全球直连
 
   # 中国大陆主流互联网服务直连加速
-  - RULE-SET,china-direct,DIRECT
+  - RULE-SET,china-direct,🎯 全球直连
 
   # 抖音官方核心业务直连
   - RULE-SET,douyin,👁️ Douyin
@@ -297,11 +318,14 @@ rules:
   # OpenAI / ChatGPT 生态走专用代理节点
   - RULE-SET,openai,🤖 OpenAI
 
+  # 微软全生态服务走专有策略组 (或 DIRECT / PROXY)
+  - RULE-SET,microsoft,🖥 Microsoft
+
   # 英国全媒体走英国专属原生/住宅解锁节点 (BBC iPlayer / ITV)
   - RULE-SET,uk-media,📡 UK Media
 
-  # 全球海外新闻与专业媒体走专属代理策略组
-  - RULE-SET,foreign-news,📰 Foreign News
+  # 全球海外新闻与深度媒体走专属代理策略组 (如 🚀 节点选择)
+  - RULE-SET,foreign-news,🚀 节点选择
 
   # 后续其他分流规则
   - GEOIP,CN,🎯 全球直连

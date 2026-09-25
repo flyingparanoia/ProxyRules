@@ -1,0 +1,52 @@
+# ==============================================================================
+# 规则名称: Amazon Prime Video 专属流媒体规则集 (Prime-Video)
+# 英文标识: Prime-Video
+# 更新时间: 2026-09-25
+# 适用平台: Stash / Clash rule-providers (behavior: classical)
+# 推荐策略: 👁️ Streaming Prime 或 PROXY
+# ==============================================================================
+payload:
+  - DOMAIN,atv-ps.amazon.com
+  - DOMAIN,avodmp4s3ww-a.akamaihd.net
+  - DOMAIN,d1v5ir2lpwr8os.cloudfront.net
+  - DOMAIN,d1xfray82862hr.cloudfront.net
+  - DOMAIN,d22qjgkvxw22r6.cloudfront.net
+  - DOMAIN,d25xi40x97liuc.cloudfront.net
+  - DOMAIN,d27xxe7juh1us6.cloudfront.net
+  - DOMAIN,d3196yreox78o9.cloudfront.net
+  - DOMAIN,dmqdd6hw24ucf.cloudfront.net
+  - DOMAIN,ktpx.amazon.com
+  - DOMAIN,pop-ca-cf.dash.pv-cdn.net
+  - DOMAIN,primevideo.com
+  - DOMAIN,unagi.amazon.com
+  - DOMAIN-KEYWORD,avoddashs
+  - DOMAIN-SUFFIX,aboutamazon.com
+  - DOMAIN-SUFFIX,aiv-cdn.net
+  - DOMAIN-SUFFIX,aiv-delivery.net
+  - DOMAIN-SUFFIX,amazon.jobs
+  - DOMAIN-SUFFIX,amazonprimevideo.cn
+  - DOMAIN-SUFFIX,amazonprimevideo.com.cn
+  - DOMAIN-SUFFIX,amazonprimevideos.com
+  - DOMAIN-SUFFIX,amazontools.com
+  - DOMAIN-SUFFIX,amazonuniversity.jobs
+  - DOMAIN-SUFFIX,amazonvideo.cc
+  - DOMAIN-SUFFIX,amazonvideo.com
+  - DOMAIN-SUFFIX,atv-ps.amazon.com
+  - DOMAIN-SUFFIX,avodmp4s3ww-a.akamaihd.net
+  - DOMAIN-SUFFIX,fls-eu.amazon.com
+  - DOMAIN-SUFFIX,fls-na.amazon.com
+  - DOMAIN-SUFFIX,llnwd.net
+  - DOMAIN-SUFFIX,media-amazon.com
+  - DOMAIN-SUFFIX,prime-video.com
+  - DOMAIN-SUFFIX,primevideo.cc
+  - DOMAIN-SUFFIX,primevideo.com
+  - DOMAIN-SUFFIX,primevideo.info
+  - DOMAIN-SUFFIX,primevideo.org
+  - DOMAIN-SUFFIX,primevideo.tv
+  - DOMAIN-SUFFIX,pv-cdn.net
+  - DOMAIN-SUFFIX,seattlespheres.com
+  - DOMAIN-SUFFIX,ssl-images-amazon.com
+  - DOMAIN-SUFFIX,unagi-na.amazon.com
+  - PROCESS-NAME,com.amazon.avod.thirdpartyclient
+  - URL-REGEX,^https?:\/\/www\.amazon\.com\/(Amazon-Video|gp\/video)\/
+  - {"name":"👁️ Streaming Prime","type":"select"
