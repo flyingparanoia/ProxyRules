@@ -77,6 +77,15 @@
 * **推送服务 (APNs) 与 Private Relay 隐私中继**：`push.apple.com`、`apple-relay.apple.com`、`apple-relay.cloudflare.com`。
 * **使用策略**：`DIRECT`（国内直连加速）或由专用 `Apple` 策略组智能托管。
 
+### 10. TikTok 全量生态分流规则 (`TikTok.yaml`)
+结合 Mac 桌面网页端 + iPhone 客户端双端实机抓包深度分析，涵盖：
+* **全端共用核心主站与 API**：`tiktok.com`、`tiktokv.com`、`tiktokv.us`（美区核心 API 网关）、`tiktokw.us`（网页端安全 SDK）、`tik-tokapi.com`。
+* **音视频与多媒体 CDN**：`tiktokcdn.com`（全球核心音视频/图片 CDN）、`tiktokcdn-us.com`（美区核心切片流媒体 CDN）、`ttcdn-us.com`（美区电商与综合资源 CDN）、`-tiktokcdn-com`（Akamai 边缘节点专线）。
+* **iPhone / 移动端特有架构**：美区“德州计划”(Project Texas) 甲骨文云专属合规网关与遥测代理（`config.mtp.sag.us-ashburn-1.oci.oraclecloud.com`、`proxy.telemetry.us-ashburn-1.oci.oraclecloud.com`）、端智能 AI 架构 Pitaya 与 Tako 推荐模型（`pitaya-clientai.com`）、滤镜特效（`byteeffecttos-g.com`）、TikTok 专属 AppsFlyer 归因打点（`roovza.*.appsflyersdk.com`）、客户端进程（`com.zhiliaoapp.musically`、`TikTok`）。
+* **Mac 桌面网页端特有资源**：网页端核心静态与登录鉴权（`ttwstatic.com` / `sf16-website-login`）、内核容器（`ttwebview.com`）、通用图床（`ibyteimg.com`）。
+* **海外基建、电商与衍生生态**：TikTok Shop 美区电商（`tiktokshops.us`）、TikTok Music（`tiktokmusic.app`）、剪映海外版 CapCut（`capcut.com`）、字节跳动海外技术底座（`byteoversea.com`、`ibytedtos.com`、`bytedapm.com`、`bytegecko-i18n.com`、`ipstatp.com`、`sgpstatp.com`）、Musical.ly 历史兼容资产。
+* **使用策略**：专用的 `TikTok` 流媒体策略组（选择美区、新加坡、日本等支持 TikTok 解锁的住宅或原生代理节点，注意避开国内/香港节点）。
+
 ---
 
 ## 在 Stash 中的标准配置示例
@@ -173,12 +182,25 @@ rule-providers:
     path: ./ruleset/apple-services.yaml
     interval: 86400
 
+  # 10. 订阅 TikTok 全量生态规则集
+  tiktok:
+    type: http
+    behavior: classical
+    format: yaml
+    url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/TikTok.yaml"
+    # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/TikTok.yaml"
+    path: ./ruleset/tiktok.yaml
+    interval: 86400
+
 rules:
   # 必须排在最前面：优先阻断所有 P2P 偷跑连接
   - RULE-SET,china-video-apps-pcdn,REJECT
 
   # 抖音官方核心业务直连
   - RULE-SET,douyin,DIRECT
+
+  # TikTok 全量生态走专用海外流媒体策略组（解锁节点）
+  - RULE-SET,tiktok,TikTok
 
   # OpenAI / ChatGPT 生态走专用代理节点
   - RULE-SET,openai,PROXY

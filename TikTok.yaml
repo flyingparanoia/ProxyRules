@@ -1,0 +1,86 @@
+# ==============================================================================
+# 规则名称: TikTok 全量分流规则集 (TikTok All-in-One)
+# 更新时间: 2026-09-25
+# 规则来源: 本地 Stash Mac 网页端 + iPhone 客户端双端实机抓包深度分析
+# 规则说明: 细分为“全端共用核心”、“移动端专属/强依赖”、“桌面网页端专属”及“电商/海外基建与衍生生态”
+# 适用平台: Stash, Clash rule-providers
+# ==============================================================================
+payload:
+  # ============================================================================
+  # 【第一部分：全端共用核心】(桌面 Web 网页端与手机 App 端均高频使用)
+  # ============================================================================
+  # 1. 核心主站、短视频 Web 门户与通用 API 网关
+  - DOMAIN-SUFFIX,tiktok.com                  # TikTok 核心主站、落地页、网页播放器及通用接口
+  - DOMAIN-SUFFIX,tiktokv.com                 # TikTok 核心视频接口与国际版移动 API 网关 (api16-core 等)
+  - DOMAIN-SUFFIX,tiktokv.us                  # TikTok 美区专用视频调度与核心数据网关 (Project Texas 核心 API)
+  - DOMAIN-SUFFIX,tiktokw.us                  # TikTok 网页端与安全 SDK 专用主域 (mssdk/mcs/libraweb)
+  - DOMAIN-SUFFIX,tik-tokapi.com              # TikTok 开放平台与跨端集成 API 网关
+
+  # 2. 核心音视频流媒体分发与多媒体 CDN (承担 90%+ 短视频/直播点播流量)
+  - DOMAIN-SUFFIX,tiktokcdn.com               # TikTok 全球主流音视频与图片 CDN (sf16-sg, p16-webcast 等)
+  - DOMAIN-SUFFIX,tiktokcdn-us.com            # TikTok 美区核心视频切片流媒体 CDN (v16-cla, v16m, pull-flv, pull-f5 等)
+  - DOMAIN-SUFFIX,ttcdn-us.com                # TikTok 美区综合资源与电商 CDN (p16-oec-general, p19-oec-general 等)
+
+  # 3. 泛解析与边缘 CDN 关键词
+  - DOMAIN-KEYWORD,-tiktokcdn-com             # Akamai 等第三方边缘 CDN 专线加速节点 (如 p16-tiktokcdn-com.akamaized.net)
+  - DOMAIN-KEYWORD,tiktok                     # TikTok 泛关键词动态保障
+
+  # ============================================================================
+  # 【第二部分：iPhone / 移动端专属与强依赖】(移动端特有网关、端智能与安全架构)
+  # ============================================================================
+  # 1. 美区“德州计划”(Project Texas) 甲骨文云 (Oracle Cloud) 专用网关与遥测代理
+  - DOMAIN,config.mtp.sag.us-ashburn-1.oci.oraclecloud.com # TikTok 美区数据合规与安全隐私配置下发
+  - DOMAIN,proxy.telemetry.us-ashburn-1.oci.oraclecloud.com # TikTok 客户端遥测打点与监控代理通道
+
+  # 2. 端智能 AI 大脑与离线资源分发 (Pitaya 架构与 Tako 智能体)
+  - DOMAIN,lf16-pkgcdn.pitaya-clientai.com    # 客户端端侧 AI 推荐模型分发 (Pitaya AI)
+  - DOMAIN-SUFFIX,pitaya-clientai.com         # 端智能机器学习与个性化排序模型下发平台
+
+  # 3. 移动端动态特效、滤镜与素材分发 (Gecko & Effects)
+  - DOMAIN,lf16-effectcdn.byteeffecttos-g.com # 短视频滤镜、AR 特效与动态贴纸分发
+  - DOMAIN-SUFFIX,byteeffecttos-g.com         # 滤镜素材对象存储全域
+
+  # 4. 移动端原生 SDK 通信与风控鉴权
+  - DOMAIN-SUFFIX,isnssdk.com                 # 移动端原生基础网络通讯 SDK
+  - DOMAIN-SUFFIX,snssdk.com                  # 移动端设备指纹与风控打点 SDK
+
+  # 5. 移动端归因与安装监测 (TikTok 专属 AppsFlyer 实例通道)
+  - DOMAIN,roovza.cdn-settings.appsflyersdk.com # TikTok 专属广告配置下发
+  - DOMAIN,roovza.inapps.appsflyersdk.com       # TikTok 专属应用内行为上报
+  - DOMAIN,roovza.launches.appsflyersdk.com     # TikTok 专属应用启动归因打点
+
+  # 6. 原生进程名匹配 (iOS 客户端底层保障)
+  - PROCESS-NAME,com.zhiliaoapp.musically     # iPhone TikTok 官方客户端主进程名
+  - PROCESS-NAME,TikTok                       # 移动端/桌面端常见客户端进程名
+
+  # ============================================================================
+  # 【第三部分：桌面网页端专属 / 典型】(PC / Mac 浏览器打开 tiktok.com)
+  # ============================================================================
+  - DOMAIN-SUFFIX,ttwstatic.com               # 网页端核心静态资源、登录校验与前端脚本 (sf16-website-login)
+  - DOMAIN-SUFFIX,ttwebview.com               # 网页端内核容器与跨平台 Webview 交互组件
+  - DOMAIN-SUFFIX,ibyteimg.com                # 国际版通用签名图床与海报存储 (p16-oec-va 等)
+
+  # ============================================================================
+  # 【第四部分：电商、音乐、海外基建与衍生生态】(全球跨产品与历史兼容)
+  # ============================================================================
+  # 1. TikTok Shop (美区与国际电商业务)
+  - DOMAIN-SUFFIX,tiktokshops.us              # TikTok Shop 美区电商商户与安全校验服务 (api-verification)
+
+  # 2. 音乐流媒体与衍生工具
+  - DOMAIN-SUFFIX,tiktokmusic.app             # TikTok Music 官方音乐流媒体服务
+  - DOMAIN-SUFFIX,capcut.com                  # 剪映海外版 CapCut (与 TikTok 紧密联动的视频创作生态)
+
+  # 3. 字节跳动海外底层基础设施与监控
+  - DOMAIN-SUFFIX,byteoversea.com             # 字节跳动海外业务核心云底座与全局调度
+  - DOMAIN-SUFFIX,ibytedtos.com               # 字节跳动海外分布式对象存储 (TOS)
+  - DOMAIN-SUFFIX,bytedapm.com                # 性能监控、崩溃分析与链路追踪平台 (APM)
+  - DOMAIN-SUFFIX,bytegecko-i18n.com          # 海外多语言离线包与热更新下发 (Gecko i18n)
+  - DOMAIN-SUFFIX,ipstatp.com                 # 海外静态通用内容分发网络
+  - DOMAIN-SUFFIX,sgpstatp.com                # 新加坡及亚太核心静态分发网络
+  - DOMAIN-SUFFIX,tiktokd.net                 # TikTok 辅助调度与备用域名
+  - DOMAIN-SUFFIX,tiktokd.org                 # TikTok 辅助调度与备用域名
+
+  # 4. Musical.ly (前身历史域名全量兼容)
+  - DOMAIN-SUFFIX,musical.ly                  # Musical.ly 全域与历史短链
+  - DOMAIN-SUFFIX,muscdn.com                  # Musical.ly 历史流媒体与静态图床
+  - DOMAIN-KEYWORD,musical.ly                 # Musical.ly 关键词匹配
