@@ -1,64 +1,84 @@
 # ==============================================================================
 # 规则名称: 抖音 / 字节跳动全量分流规则集 (Douyin & ByteDance)
 # 更新时间: 2026-09-25
-# 规则来源: 本地 Stash PC网页端 + iPhone客户端实机抓包分析与验证
+# 规则来源: 本地 Stash PC 网页端 + iPhone 客户端双端实机抓包深度分析
+# 规则说明: 区分“全端共用核心”、“移动端专属”、“桌面网页端专属”及“移动端 P2P 调度”
 # 适用平台: Stash, Clash rule-providers
 # ==============================================================================
 payload:
-  # ===== 1. 抖音核心业务与主站 =====
-  - DOMAIN-SUFFIX,douyin.com
-  - DOMAIN-SUFFIX,douyinstatic.com
-  - DOMAIN-SUFFIX,douyinpic.com
-  - DOMAIN-SUFFIX,douyinliving.com
-  - DOMAIN-SUFFIX,iesdouyin.com
-  - DOMAIN-SUFFIX,amemv.com
+  # ============================================================================
+  # 【第一部分：全端共用核心】(桌面 Web 网页端与手机 App 端均高频使用)
+  # ============================================================================
+  # 1. 核心主站与核心业务网关
+  - DOMAIN-SUFFIX,douyin.com            # 抖音核心主站、搜索落地页、WebSocket 实时长连接通信
+  - DOMAIN-SUFFIX,douyinstatic.com      # 核心静态资源库（前端代码、音频BGM、视频封面、离线组件）
+  - DOMAIN-SUFFIX,douyinpic.com         # 核心签名图床（视频封面、用户头像、直播间背景、动态表情）
+  - DOMAIN-SUFFIX,bytedance.com         # 字节跳动母公司主域及安全设备风控网关 (MSSDK)
+  - DOMAIN-SUFFIX,zijieapi.com          # 字节通用统一 API 网关（接口路由、隐私校验、版本控制）
 
-  # ===== 2. 视频流媒体分发 (VOD / 直播流) =====
-  - DOMAIN-SUFFIX,douyinvod.com
-  - DOMAIN-SUFFIX,idouyinvod.com
-  - DOMAIN-SUFFIX,douyinivod.com
-  - DOMAIN-SUFFIX,douyincdn.com
-  - DOMAIN-SUFFIX,zjcdn.com
-  - DOMAIN-SUFFIX,ndcpp.com
+  # 2. 核心视频流媒体分发 (VOD 点播)
+  - DOMAIN-SUFFIX,douyinvod.com         # 核心短视频切片点播 CDN（双端主流短视频流量）
+  - DOMAIN-SUFFIX,idouyinvod.com        # 边缘就近接入与负载均衡视频源
+  - DOMAIN-SUFFIX,ndcpp.com             # 抖音视界官方视频云调度大脑 (VC Brain / Edge Gateway)
 
-  # ===== 3. 跨产品关联资源 (今日头条 / 西瓜视频 / 火山小视频) =====
-  - DOMAIN-SUFFIX,bdxiguaimg.com
-  - DOMAIN-SUFFIX,huoshanstatic.com
-  - DOMAIN-SUFFIX,searchpstatp.com
-  - DOMAIN-SUFFIX,snssdk.com
+  # 3. 基础前端基建与动态资源调度
+  - DOMAIN-SUFFIX,bytegecko.com         # 字节动态资源包与离线缓存平台 (Gecko)
+  - DOMAIN-SUFFIX,bytednsdoc.com        # 内部统一 DNS 调度与静态资源文档库
 
-  # ===== 4. 字节跳动底层前端与存储基建 (TOS / SCM / Goofy / Gecko / GSLB) =====
-  - DOMAIN-SUFFIX,bytedance.com
-  - DOMAIN-SUFFIX,bytetos.com
-  - DOMAIN-SUFFIX,bytescm.com
-  - DOMAIN-SUFFIX,byteimg.com
-  - DOMAIN-SUFFIX,bytegoofy.com
-  - DOMAIN-SUFFIX,bytegecko.com
-  - DOMAIN-SUFFIX,byted-static.com
-  - DOMAIN-SUFFIX,bytednsdoc.com
-  - DOMAIN-SUFFIX,bytetcc.com
-  - DOMAIN-SUFFIX,bytecdn.cn
-  - DOMAIN-SUFFIX,bytecdn.com
-  - DOMAIN-SUFFIX,bytemastatic.com
-  - DOMAIN-SUFFIX,byteacctimg.com
-  - DOMAIN-SUFFIX,bytemaimg.com
-  - DOMAIN-SUFFIX,bytecc.com
-  - DOMAIN-SUFFIX,byteactivity.com
+  # ============================================================================
+  # 【第二部分：移动端专属 / 强依赖】(iPhone / Android 抖音 App 与相关客户端)
+  # ============================================================================
+  - DOMAIN-SUFFIX,amemv.com             # 移动端原生核心 API（短视频播放与底层流媒体请求接口）
+  - DOMAIN-SUFFIX,snssdk.com            # 移动端专用 SDK 通信与鉴权网关
+  - DOMAIN-SUFFIX,zjcdn.com             # 移动端短视频分发自研 CDN（冷门视频 coldy 与 AB 测试切片）
+  - DOMAIN-SUFFIX,bdcgslb.com           # 移动端全局服务器负载均衡调度器 (ByteDance Cloud GSLB)
+  - DOMAIN-SUFFIX,bdurl.net             # 移动端短链跳转、数据打点与活动落地页
+  - DOMAIN-SUFFIX,bytecdn.com           # 移动端业务前端与组件分发网络
+
+  # ============================================================================
+  # 【第三部分：桌面网页端专属 / 典型】(PC / Mac 浏览器打开 douyin.com)
+  # ============================================================================
+  # 1. 网页前端基建、对象存储与组件库
+  - DOMAIN-SUFFIX,bytegoofy.com         # Web 前端基建平台 Goofy（包含滑块验证、人机安全防护）
+  - DOMAIN-SUFFIX,bytetos.com           # 字节分布式对象存储 TOS（浏览器直接加载的媒体文件与大附件）
+  - DOMAIN-SUFFIX,bytescm.com           # 静态内容管理系统 SCM
+  - DOMAIN-SUFFIX,byted-static.com      # 前端公共依赖库与 unpkg 镜像镜像源
+  - DOMAIN-SUFFIX,bytetcc.com           # 网页端动态配置中心 TCC
+  - DOMAIN-SUFFIX,byteimg.com           # 网页端通用图片与素材分发
+  - DOMAIN-SUFFIX,yhgfb-cn-static.com   # 网页端用户增长基建前端平台 (Growth Foundation Builder)
+
+  # 2. 网页端业务与跨产品关联
+  - DOMAIN-SUFFIX,douyincdn.com         # 网页版直播拉流分发 CDN (FLV/HLS)
+  - DOMAIN-SUFFIX,iesdouyin.com         # 网页端社交互动、分享落地页与活动页
+  - DOMAIN-SUFFIX,searchpstatp.com      # 网页端搜索联想词与今日头条搜索通用素材
+  - DOMAIN-SUFFIX,bdxiguaimg.com        # 网页端联动的西瓜视频封面与图片源
+  - DOMAIN-SUFFIX,huoshanstatic.com     # 网页端复用的火山短视频组件
+
+  # 3. 网页端监控与体验反馈
+  - DOMAIN-SUFFIX,applogcdn.com         # 火山引擎/字节移动数据分析埋点 SDK (AppLog)
+  - DOMAIN-SUFFIX,ibytedapm.com         # 网页性能监控与前端报错上报 (APM)
+  - DOMAIN-SUFFIX,feelgood.cn           # 字节跳动官方用户体验调研系统 (Feelgood)
+
+  # ============================================================================
+  # 【第四部分：移动端短视频 P2P 边缘分发】(利用设备上传互传视频切片)
+  # 提示: 若不想手机当“免费CDN节点”发烫耗电，可在 Stash 规则中将这几条单独设为 REJECT
+  # ============================================================================
+  - DOMAIN-SUFFIX,qrstuvwxyzab.com      # 移动端 P2P CDN 调度 (北京空山信息)
+  - DOMAIN-SUFFIX,ydycdn.com            # 移动端短视频 P2P 边缘分发
+  - DOMAIN-SUFFIX,yingt.fun             # 移动端短视频 P2P 节点 (上海莹田科技)
+  - DOMAIN-SUFFIX,jspcdn.cn             # 移动端短视频 P2P 缓存节点
+
+  # ============================================================================
+  # 【第五部分：历史 / 兜底备用域名】(老版本客户端或特殊业务场景备用)
+  # ============================================================================
+  - DOMAIN-SUFFIX,douyinliving.com      # 直播业务备用域名
+  - DOMAIN-SUFFIX,douyinivod.com        # 点播切片备用域名
+  - DOMAIN-SUFFIX,bytecdn.cn            # 字节 CDN 备用国内域名
+  - DOMAIN-SUFFIX,bytemastatic.com      # 营销素材备用域名
+  - DOMAIN-SUFFIX,byteacctimg.com       # 账号头像备用域名
+  - DOMAIN-SUFFIX,bytemaimg.com         # 营销图片备用域名
+  - DOMAIN-SUFFIX,bytecc.com            # 字节云备用域名
+  - DOMAIN-SUFFIX,byteactivity.com      # 营销活动备用域名
   - DOMAIN-SUFFIX,asiad.byteactivity.com
   - DOMAIN-SUFFIX,asiad.byteactivity12.com
-  - DOMAIN-SUFFIX,bdcgslb.com
-  - DOMAIN-SUFFIX,yhgfb-cn-static.com
-
-  # ===== 5. 后台统一 API、风控安全、APM 与数据埋点 =====
-  - DOMAIN-SUFFIX,zijieapi.com
-  - DOMAIN-SUFFIX,ibytedapm.com
-  - DOMAIN-SUFFIX,applogcdn.com
-  - DOMAIN-SUFFIX,feelgood.cn
-  - DOMAIN-SUFFIX,volcsiriusbd.com
-  - DOMAIN-SUFFIX,bdurl.net
-
-  # ===== 6. 移动端短视频 P2P 边缘分发调度 (防漏网) =====
-  - DOMAIN-SUFFIX,qrstuvwxyzab.com
-  - DOMAIN-SUFFIX,ydycdn.com
-  - DOMAIN-SUFFIX,yingt.fun
-  - DOMAIN-SUFFIX,jspcdn.cn
+  - DOMAIN-SUFFIX,volcsiriusbd.com      # 火山引擎企业服务备用
