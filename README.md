@@ -13,8 +13,8 @@
   * 现场分析 TechCrunch 打开日志，提取出正文流内视频广告分发网（`connatix.com`、`jwplayer.com`、`jwpcdn.com` 等）与营销追踪（`sailthru.com`），将其纳入独立可控的外媒广告控制组。
 * **TikTok 移动端与“德州计划”(Project Texas) 合规架构**：
   * 通过 iPhone 实机抓包逆向出甲骨文云专属合规网关（`config.mtp.sag.us-ashburn-1.oci.oraclecloud.com`）、端智能 Pitaya / Tako 推荐模型（`pitaya-clientai.com`）与移动端专属切片流媒体调度，解决了通用规则仅能支持 Web 网页端的问题。
-* **MESL 等机场原生订阅性能灾难与发热诊断**：
-  * 通过实测日志诊断出机场默认配置中 3,523 条 Classical 线性扫描规则引发的 CPU 高耗、26 个测速 Worker 的后台并发空转，以及末尾缺失 `no-resolve` 引发的 DoH 级联解析风暴，从而确立了本项目“前缀树（Trie）编译 + Fake-IP + no-resolve 强解耦”的高性能架构。
+* **传统单文件商业订阅性能灾难与发热诊断**：
+  * 通过实测日志诊断出传统服务商默认配置中 3,500+ 条 Classical 线性扫描规则引发的 CPU 高耗、大量测速 Worker 的后台并发空转，以及末尾缺失 `no-resolve` 引发的 DoH 级联解析风暴，从而确立了本项目“前缀树（Trie）编译 + Fake-IP + no-resolve 强解耦”的高性能架构。
 * **YouTube / X (Twitter) 全量切片与移动端心跳**：
   * 通过长周期抓包提取 YouTube 32 条全生态音视频与移动端心跳规则、X 官方 ASN BGP IP 段与全球主流成人视讯 CDN 矩阵。
 
@@ -52,7 +52,7 @@
 * **使用策略**：`PROXY` 或专用的 `Foreign-News` / `媒体` 策略组。
 
 ### 5. OpenAI / ChatGPT 全量生态分流规则 (`OpenAI.yaml`)
-结合 `mixed.yaml` 与 `MESL+tempjms-apple.yaml` 深度提取与合并，涵盖：
+结合多源权威配置深度提取与合并，涵盖：
 * **OpenAI 核心主站**：`openai.com`、`chatgpt.com`、`sora.com`、`ai.com`、`oaistatic.com`、`oaiusercontent.com`。
 * **反代与专属 CDN 网关**：Azure Front Door / Edge (`azurefd.net`, `azureedge.net`)、Cloudflare 边缘反代节点、Imgix。
 * **人机风控与认证授权**：Arkose Labs 人机验证 (`arkoselabs.com`)、Persona 实名风控 (`inquiry.withpersona.com`)、Auth0。
@@ -63,7 +63,7 @@
 * **使用策略**：`PROXY` 或专用的 `OpenAI` / `AI` 策略组。
 
 ### 6. Google 全球搜索与 Gemini 智能生态规则 (`GoogleSearch-Gemini.yaml`)
-结合 `mixed.yaml`（Google-Search 精细优化 + Gemini 会话锁）与 `MESL+tempjms-apple.yaml`（全球各地区顶级域名与搜索基建），涵盖：
+结合自研精细优化（Google-Search 优化 + Gemini 会话锁）与全球各地区顶级域名/搜索基建，涵盖：
 * **搜索主域与短链**：`google.com`、`g.co`、`goo.gl`、`466453.com`、`toolbarqueries.google.com`。
 * **Google Gemini / AI 全量生态**：`gemini.google.com`、`bard.google.com`、`aistudio.google.com`、`makersuite.google.com`、`ai.google`、`ai.google.dev`、`generativelanguage.googleapis.com`（模型 API）、`proactivebackend-pa.googleapis.com`、`alkalicore-pa.clients6.google.com`、`deepmind.google`、`deepmind.com`。
 * **全球各国家/地区顶级域名 (ccTLD)**：`google.com.hk`、`google.co.jp`、`google.com.tw`、`google.co.uk`、`google.de`、`google.ca` 等 40+ 主流国家搜索后缀。
@@ -76,7 +76,7 @@
 * **使用策略**：`PROXY` 或专用的 `Google` / `Google-Gemini` 策略组。
 
 ### 7. 英国主流流媒体与全媒体规则 (`UK-Media.yaml`)
-结合 `mixed.yaml`（UK Broadcast）与 `MESL+tempjms-apple.yaml`（BBC 全量 Akamai/Limelight 播流 CDN 矩阵），涵盖：
+结合自研流媒体规则与 BBC 全量 Akamai/Limelight 播流 CDN 矩阵，涵盖：
 * **BBC 全量生态**：BBC 主站（`bbc.co.uk`, `bbc.com`）、BBC iPlayer、BBC Sounds 网页及移动组件（`bbci.co.uk`, `bbci.co`）、全球新闻及多语言广播。
 * **BBC 核心流媒体 CDN 播流调度**：Akamai 实时音视频 DASH/HLS 切片（`aod-dash-uk-live.akamaized.net`, `vod-dash-uk-live.akamaized.net`, `vod-hls-uk-live.akamaized.net` 等）、Limelight Networks（`bbcfmt.hs.llnwd.net`）。
 * **ITV 全量生态**：`itv.com`、`itvstatic.com`、ITVX 流媒体移动端 Akamai CDN。
@@ -85,14 +85,14 @@
 * **使用策略**：专用 `英国节点` 策略组（必须选择能解锁 BBC iPlayer / ITV 英区版权限制的英国住宅或原生代理节点）。
 
 ### 8. Apple TV / Apple TV+ 专属流媒体规则 (`AppleTV.yaml`)
-结合 `mixed.yaml`（Streaming AppleTV）与真实流量深度分析，精准提炼：
+结合自研流媒体规则与真实流量深度分析，精准提炼：
 * **Web 与客户端主站**：`tv.apple.com`、`linear.tv.apple.com`（线性频道直播流）、`tv.applemusic.com`。
 * **音视频切片流媒体 CDN**：`play-edge.itunes.apple.com`（核心加密点播切片）、`np-edge.itunes.apple.com`、`hls.itunes.apple.com`、`hls-amt.itunes.apple.com`。
 * **地域版权验证与鉴权元数据**：`gspe1-ssl.ls.apple.com`（地理位置与区域授权验证，防版权限制核心）、`uts-api.itunes.apple.com`、`umc-api.itunes.apple.com`。
 * **使用策略**：`PROXY` 或专用的 `AppleTV` 流媒体策略组（选择美区、台区、港区、日区等支持 Apple TV+ 原生解锁的代理节点）。
 
 ### 9. Apple 全生态基础服务规则 (`Apple-Services.yaml`)
-结合 `mixed.yaml` 与 `MESL+tempjms-apple.yaml`（Apple 全量生态），涵盖：
+结合自研精选规则与 Apple 全量生态深度融合，涵盖：
 * **App Store 与 TestFlight**：`appstore.com`、`appsto.re`、`itunes.com`、`mzstatic.com`、`testflight.apple.com`。
 * **iCloud 云服务与同步**：`icloud.com`、`icloud-content.com`（照片与大文件传输）、`apple-cloudkit.com`（跨设备同步）、`me.com`。
 * **官方主站与静态 CDN**：`apple.com`、`apple.co`、`aaplimg.com`、`cdn-apple.com`、`organicfruitapps.com`。
@@ -165,7 +165,7 @@
   3. **用户策略选择指引（想看广告 vs 彻底去广告）**：
      * **需求 A：想看广告 / 彻底避免反拦截弹窗**：
        * *仅看第一方原生赞助*：只需确保 `NYT-WSJ-US-Light.yaml` 规则集正常生效即可，第一方广告自然展示且完全不影响日常阅读。
-       * *全量看横幅与方块广告（复刻 MESL 表现）*：在客户端主配置中，将 `doubleclick.net`、`googleadservices.com`、`googlesyndication.com` 从 `REJECT` 列表移出，改走 Google 策略组（或直接放行走代理）。
+       * *全量看横幅与方块广告（如需展示广告）*：在客户端主配置中，将 `doubleclick.net`、`googleadservices.com`、`googlesyndication.com` 从 `REJECT` 列表移出，改走外媒广告策略组（或直接放行走代理）。
      * **需求 B：追求纯净阅读与极致省电**：
        * 保持 `AdBlock.yaml` 位于规则前列，优先丢弃所有第三方程序化广告和追踪监测，大幅减少网络请求并发与后台基带能耗。
 
@@ -443,9 +443,9 @@ rules:
 
 ---
 
-## 移动端性能避坑指南：机场官方订阅配置（以 MESL 为例）在 iOS 端的性能灾难分析
+## 移动端性能避坑指南：传统单文件商业订阅配置在 iOS 端的性能灾难分析
 
-在 iOS 环境下使用 Stash / Clash 等代理客户端时，许多用户常遭遇**机身严重发烫、掉电如崩盘、甚至代理频繁后台被系统杀死（闪退断网）**的问题。经对知名中转/家宽机场（以 MESL 官方订阅导出的 Stash/Clash 完整配置 `MESL-debug.yaml` 为例）及实机内核日志（`2026-09-26-055305.log`，测试时长不足 2 分钟）进行深度逆向与追踪分析，揭示了其在移动端性能极其糟糕的五大底层架构缺陷。
+在 iOS 环境下使用 Stash / Clash 等代理客户端时，许多用户常遭遇**机身严重发烫、掉电如崩盘、甚至代理频繁后台被系统杀死（闪退断网）**的问题。经对业界典型的 3,500+ 条单文件商业订阅配置实测样本及实机内核日志（测试时长不足 2 分钟）进行深度逆向与追踪分析，揭示了传统臃肿配置在移动端性能极其糟糕的五大底层架构缺陷。
 
 ### 1. 核心病因深度剖析（实机内核数据实锤）
 
@@ -454,7 +454,7 @@ rules:
   Stash 官方在《编写高效配置文件》中明确告诫：
   > *“严禁在配置中使用大量 Classical 类型的规则集合，因为此类规则仅支持顺序匹配，会显著增加匹配耗时和内存占用。”*
   
-  MESL 官方配置将多达 **3,523 条规则**全部以明文形式平铺在配置文件的 `rules:` 根节点下。此类古典规则无法被编译为前缀树（Trie Tree）或基数树（Radix Tree），每一个数据包都必须经历从第 1 条逐行扫描到第 3,523 条的低效线性比对。
+  传统商业配置将多达 **3,500+ 条规则**全部以明文形式平铺在配置文件的 `rules:` 根节点下。此类古典规则无法被编译为前缀树（Trie Tree）或基数树（Radix Tree），每一个数据包都必须经历从第 1 条逐行扫描到第 3,523 条的低效线性比对。
 * **实测日志数据**：
   在短短 100 秒的日常使用日志中，共记录 267 个 TCP 连接，其中**多达 162 个连接（占比超 60%）命中末尾的 `MATCH` 规则**。这意味着：
   $$\text{规则匹配次数} \approx 162 \times 3,523 \approx 570,000 \text{ 次/百秒}$$
@@ -463,7 +463,7 @@ rules:
 #### ② 内存逼近 iOS 硬上限：触发系统级内存压缩（Memory Warning 轰炸）
 * **机制缺陷**：
   iOS 系统对网络扩展（Network Extension）进程设置了极为严苛的内存配额（通常阈值为 30MB~50MB，超出立即触发 Jetsam 机制强制强杀）。
-  MESL 官方配置内定义了 172 个节点，并在多达 31 个策略组中**全量重复平铺**这 172 个节点（产生 5,300+ 个节点引用对象），同时承载 3,500+ 个规则数据结构。
+  传统商业配置通常定义了上百个节点，并在多达数十个策略组中**全量重复平铺**这些节点（产生数千个节点引用对象），同时承载数千条规则数据结构。
 * **实测日志数据**：
   ```log
   [INFO] [05:53:06] [CORE] stash core started, used memory: 23.2M
@@ -495,7 +495,7 @@ rules:
 
 ### 2. 架构对比：机场官方订阅 vs 本项目优化架构
 
-| 评估维度 | 机场官方默认配置（以 MESL 为例） | 本项目优化架构 (`ProxyRules`) |
+| 评估维度 | 传统商业订阅单文件配置 (3500+规则) | 本项目优化架构 (`ProxyRules`) |
 | :--- | :--- | :--- |
 | **规则匹配算法** | **$O(N)$ 逐条线性扫描**（3,523 条规则无索引） | **$O(1) \sim O(k)$ 前缀树 (Trie) / 基数树 (Radix)** |
 | **规则存储形式** | 3,500+ 行 Classical 明文写死在主配置 | 模块化 `rule-providers`（由内核编译索引） |

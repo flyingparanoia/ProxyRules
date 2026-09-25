@@ -2,7 +2,7 @@
 # 规则名称: Microsoft 微软全生态服务规则集 (Microsoft)
 # 英文标识: Microsoft
 # 更新时间: 2026-09-25
-# 规则来源: 提取自 jms-ruleset-norelay.yaml 与 mixed.yaml，整合全量微软与 Azure 资产
+# 规则来源: 整合全量微软与 Azure 资产
 # 规则说明: 涵盖 Microsoft 核心主站、Windows 系统更新、Office 365 / Microsoft 365 办公套件、
 #           OneDrive 云盘、Azure 云计算基础设施、Bing 必应搜索、Teams/Skype 统一通讯、
 #           Xbox 游戏网络与世纪互联运营中国区资产

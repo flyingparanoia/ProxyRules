@@ -1,7 +1,7 @@
 # ==============================================================================
 # 规则名称: Apple Services 苹果全生态基础服务分流规则集 (Apple-Services)
 # 更新时间: 2026-09-25
-# 规则来源: mixed.yaml (Apple Services) + MESL+tempjms-apple.yaml (Apple 全量生态) 深度融合
+# 规则来源: 多源规则深度融合与实机测试提炼
 # 规则说明: 涵盖 App Store、TestFlight、iCloud、Apple Music、Apple News、Siri 语音助手、Private Relay 隐私中继等全套基础设施
 # 适用平台: Stash / Clash rule-providers (behavior: domain)
 # 推荐策略: DIRECT (直连加速) 或 专用 Apple 节点 (若使用 Apple News 则该服务必须走代理)

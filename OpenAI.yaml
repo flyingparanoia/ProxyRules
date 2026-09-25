@@ -1,7 +1,7 @@
 # ==============================================================================
 # 规则名称: OpenAI / ChatGPT 全量生态分流规则集 (OpenAI & AI Ecosystem)
 # 更新时间: 2026-09-25
-# 规则来源: mixed.yaml + MESL+tempjms-apple.yaml 深度提取与合并
+# 规则来源: 多源规则深度提取与合并
 # 规则说明: 涵盖 ChatGPT 主站、Sora、API 网关、LiveKit 语音通话、Arkose 人机验证、Statsig 灰度及全套基础设施
 # 适用平台: Stash / Clash rule-providers (behavior: domain)
 # 推荐策略: PROXY 或 专用 OpenAI 节点策略组 (如 [OpenAI] / [ChatGPT] 节点组)

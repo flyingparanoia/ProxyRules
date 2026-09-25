@@ -1,7 +1,7 @@
 # ==============================================================================
 # 规则名称: 英国流媒体与全媒体分流规则集 (UK-Media)
 # 更新时间: 2026-09-25
-# 规则来源: mixed.yaml (UK Broadcast) + MESL+tempjms-apple.yaml (BBC 全量流媒体 CDN) 深度融合
+# 规则来源: 多源规则深度融合 (BBC 全量流媒体 CDN)
 # 规则说明: 涵盖 BBC (iPlayer / Sounds / News)、ITV (ITVX)、Channel 4 (All 4)、Channel 5 (My5)、Sky / NOW 等全套英国本土主流媒体
 # 适用平台: Stash / Clash rule-providers (behavior: domain)
 # 推荐策略: 🇬🇧 英国本土原生节点 (必须解锁英国 BBC iPlayer / ITV 区域版权限制)

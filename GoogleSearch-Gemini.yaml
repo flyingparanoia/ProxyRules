@@ -1,7 +1,7 @@
 # ==============================================================================
 # 规则名称: Google 全球搜索与 Gemini 智能生态分流规则集 (GoogleSearch-Gemini)
 # 更新时间: 2026-09-25
-# 规则来源: mixed.yaml (Google-Search + Gemini/Web) + MESL+tempjms-apple.yaml 深度融合
+# 规则来源: 多源规则深度融合与实机测试提炼
 # 规则说明: 整合 Google 全球搜索主站、40+国家地区顶级域名 (ccTLD)、基础静态资产、账号认证体系与 Google Gemini / DeepMind / AI Studio 全量智能生态
 # 设计优势: 搜索与 Gemini 统一绑定走相同代理出口，彻底解决跨应用/会话多出口引发的 Google 频繁异地登录风控与 Gemini 封锁
 # 适用平台: Stash / Clash rule-providers (behavior: domain)
