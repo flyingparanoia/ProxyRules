@@ -2,6 +2,33 @@
 
 个人代理与分流规则集合 (Stash / Clash Rule-Providers)。
 
+## 规则来源与构建方法论 (Rule Sources & Methodology)
+
+本项目的规则集并非简单的网络脚本抓取，而是基于**“双轨驱动”**的架构设计：一部分来自于**实机真实流量日志的现场 Debug、抓包逆向与业务排查**；另一部分来自于**对业界权威开源规则库的精选吸收、内存轻量化重构与语义化分类**。
+
+### 1. 实机流量现场 Debug 与深度逆向 (Self-Debugged & Traffic Reverse-Engineering)
+针对通用开源规则集无法覆盖、存在严重误杀或有特殊业务诉求的场景，作者通过 iOS / macOS 实机抓包（Stash Console Log、Charles、Wireshark）进行现场抓取和精确定位：
+* **外媒第一方自营赞助与广告服务器**：
+  * 通过现场分析 WSJ 实时日志，逆向出华尔街日报正文自营赞助商广告 100% 托管于 Kevel 广告服务器（`adzerk.net`），成功在 `NYT-WSJ-US-Light.yaml` 实现赞助广告精准放行，消除界面大面积灰框；
+  * 现场分析 TechCrunch 打开日志，提取出正文流内视频广告分发网（`connatix.com`、`jwplayer.com`、`jwpcdn.com` 等）与营销追踪（`sailthru.com`），将其纳入独立可控的外媒广告控制组。
+* **TikTok 移动端与“德州计划”(Project Texas) 合规架构**：
+  * 通过 iPhone 实机抓包逆向出甲骨文云专属合规网关（`config.mtp.sag.us-ashburn-1.oci.oraclecloud.com`）、端智能 Pitaya / Tako 推荐模型（`pitaya-clientai.com`）与移动端专属切片流媒体调度，解决了通用规则仅能支持 Web 网页端的问题。
+* **MESL 等机场原生订阅性能灾难与发热诊断**：
+  * 通过实测日志诊断出机场默认配置中 3,523 条 Classical 线性扫描规则引发的 CPU 高耗、26 个测速 Worker 的后台并发空转，以及末尾缺失 `no-resolve` 引发的 DoH 级联解析风暴，从而确立了本项目“前缀树（Trie）编译 + Fake-IP + no-resolve 强解耦”的高性能架构。
+* **YouTube / X (Twitter) 全量切片与移动端心跳**：
+  * 通过长周期抓包提取 YouTube 32 条全生态音视频与移动端心跳规则、X 官方 ASN BGP IP 段与全球主流成人视讯 CDN 矩阵。
+
+### 2. 外部权威开源规则精选与重构 (Curated & Refactored from Open Source)
+对于基础网络协议、公有云资产、海量国内服务及标准局域网协议，本项目博采业界主流权威开源成果，但**严禁无脑全量照搬**（避免软路由数十万臃肿规则导致移动设备内存溢出 Jetsam 闪退），而是进行了深度的**内存清洗、中文语义化分类与双端兼容改造**：
+* **[Loyalsoldier/clash-rules](https://github.com/Loyalsoldier/clash-rules)**（GitHub 2.8w+ Star 顶级规则库）：
+  * **私有网络与局域网域名 (`private.txt`)**：吸收其涵盖各类家用/企业路由器后台（TP-Link、小米、华硕、网件等）、mDNS 本地多播、RFC 6761/8375 保留域名（`.local`, `.lan`, `.home.arpa`）、Plex 本地直连串流（`+.plex.direct`）与 Tailscale MagicDNS（`+.ts.net`）。**在 `China-Direct.yaml` 中将其重构为 5 大语义化分类并附带详尽中文技术注释**，彻底避免了 Loyalsoldier 原版中 90+ 条无意义纯数字 PTR 记录的内存浪费；
+  * **Apple 与云上贵州（GCBD）官方合规资产 (`apple.txt` / `icloud.txt`)**：吸收其关于中国大陆云上贵州运营的 `.cn` 官方运营资产（`icloud.com.cn`、`apple-icloud.cn` 等），与国际版 iCloud 彻底解耦，保障国内云盘与照片同步 100% 直连不消耗代理流量；
+  * **macOS 桌面端进程分流 (`applications.txt`)**：吸收其防 P2P/BT 污染与防代理工具自环（Routing Loop）的经验，提炼为跨 iOS 和 macOS 完美兼容的双端自适应进程规则块。
+* **[HaGeZi DNS Blocklists](https://github.com/hagezi/dns-blocklists)**：
+  * 作为可选挂载的轻量去广告底层源（Multi LIGHT），提供 0 误杀、不拦截成人内容的全球纯净基础防护。
+
+---
+
 ## 规则列表
 
 ### 1. YouTube、X (Twitter) 与全球主流成人媒体合集 (`YouTube-Porn-X.yaml`)
