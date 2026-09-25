@@ -86,6 +86,14 @@
 * **海外基建、电商与衍生生态**：TikTok Shop 美区电商（`tiktokshops.us`）、TikTok Music（`tiktokmusic.app`）、剪映海外版 CapCut（`capcut.com`）、字节跳动海外技术底座（`byteoversea.com`、`ibytedtos.com`、`bytedapm.com`、`bytegecko-i18n.com`、`ipstatp.com`、`sgpstatp.com`）、Musical.ly 历史兼容资产。
 * **使用策略**：专用的 `TikTok` 流媒体策略组（选择美区、新加坡、日本等支持 TikTok 解锁的住宅或原生代理节点，注意避开国内/香港节点）。
 
+### 11. X (Twitter) 与全球主流成人媒体规则 (`X-Porn.yaml`)
+结合 Mac 桌面网页端 + iPhone 客户端双端实机抓包深度分析，涵盖：
+* **X (Twitter) 全量官方生态**：`x.com`、`twitter.com`、`t.co`（官方跳转短链）、`twimg.com`（核心图床与音视频分发 CDN）、`tweetdeck.com`、`twvid.com`、`twitter.biz`、`twtrdns.net` 等。
+* **Pornhub 全球生态与多媒体 CDN**：`pornhub.com`、`phncdn.com`（全量加密点播切片与图片 CDN）、`pornhubpremium.com`、`youporn.com`、`redtube.com`、`brazzers.com` 等。
+* **XVideos & XNXX 核心生态**：`xvideos.com`、`xvideos-cdn.com`（全球核心 HLS 视频切片 CDN）、`xnxx.com`、`xnxx-cdn.com` 等。
+* **其他主流平台与日韩影视**：`xhamster.com`、`stripchat.com`、`spankbang.com`、`dmm.co.jp`、`javdb.com`、`javbus.com` 等。
+* **使用策略**：`PROXY` 或专用的 `X-Porn` / `流媒体` 策略组。
+
 ---
 
 ## 在 Stash 中的标准配置示例
@@ -192,6 +200,16 @@ rule-providers:
     path: ./ruleset/tiktok.yaml
     interval: 86400
 
+  # 11. 订阅 X (Twitter) 与全球主流成人媒体规则集
+  x-porn:
+    type: http
+    behavior: classical
+    format: yaml
+    url: "https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/X-Porn.yaml"
+    # 国内加速备用: "https://cdn.jsdelivr.net/gh/flyingparanoia/ProxyRules@main/X-Porn.yaml"
+    path: ./ruleset/x-porn.yaml
+    interval: 86400
+
 rules:
   # 必须排在最前面：优先阻断所有 P2P 偷跑连接与轻量广告
   - RULE-SET,china-video-apps-pcdn,🛑 全球拦截
@@ -212,6 +230,9 @@ rules:
   # YouTube 流量走代理或专属流媒体组
   - RULE-SET,youtube,🎬 YouTube
 
+  # X (Twitter) 与主流成人影视走专属策略组或流媒体代理
+  - RULE-SET,x-porn,🔞 X Porn
+
   # Google 全球搜索与 Gemini 走专用代理节点（统一出口避免风控）
   - RULE-SET,google-gemini,🔍 Google Gemini
 
@@ -228,3 +249,4 @@ rules:
   - GEOIP,CN,🎯 全球直连
   - MATCH,🐟 漏网之鱼
 ```
+

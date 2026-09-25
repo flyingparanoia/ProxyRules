@@ -1,0 +1,96 @@
+# ==============================================================================
+# 规则名称: X (Twitter) 与全球主流成人媒体分流规则集 (X-Porn)
+# 更新时间: 2026-09-25
+# 规则来源: 本地 Stash Mac 网页端 + iPhone 客户端双端实机抓包深度分析 + 社区精选
+# 规则说明: 涵盖 X (Twitter) 全平台生态与全球主流成人视频点播、切片 CDN 及资讯
+# 适用平台: Stash, Clash rule-providers (behavior: classical)
+# 推荐策略: PROXY 或 专用策略组 (如 [🎬 YouTube / X] 或 [X-Porn] 节点组)
+# ==============================================================================
+payload:
+  # ============================================================================
+  # 【第一部分：X (Twitter) 全量官方生态】
+  # ============================================================================
+  # 1. 核心主站、短链与移动端主服务
+  - DOMAIN-SUFFIX,x.com                        # X (Twitter) 核心官方主站与 API
+  - DOMAIN-SUFFIX,twitter.com                  # Twitter 官方主站与核心接口
+  - DOMAIN-SUFFIX,t.co                         # 官方短链接重定向服务 (核心跳转)
+  - DOMAIN-SUFFIX,tweetdeck.com                # TweetDeck 网页版管理平台
+  - DOMAIN-SUFFIX,twitpic.com                  # 官方图片分享历史服务
+
+  # 2. 核心图床、视频流媒体切片与多媒体 CDN
+  - DOMAIN-SUFFIX,twimg.com                    # X/Twitter 核心图床与音视频分发 CDN (pbs.twimg.com, abs.twimg.com 等)
+  - DOMAIN-SUFFIX,twimg.co                     # 多媒体资源备用短链
+  - DOMAIN-SUFFIX,twimg.org                    # 静态资产与样式图床
+  - DOMAIN-SUFFIX,twvid.com                    # 视频推文原生视频流
+  - DOMAIN-SUFFIX,twtrdns.net                  # Twitter 全球权威 DNS 调度节点
+
+  # 3. 开发者、认证授权与子域体系
+  - DOMAIN-SUFFIX,twttr.com                    # Twitter 内部底层框架与短链
+  - DOMAIN-SUFFIX,twttr.net                    # 内部调度网络
+  - DOMAIN-SUFFIX,twitter.biz                  # 商业推广平台
+  - DOMAIN-SUFFIX,twitter.jp                   # 日本分站
+  - DOMAIN-SUFFIX,twittercommunity.com         # 开发者社区
+  - DOMAIN-SUFFIX,twitterflightschool.com      # 营销认证平台
+  - DOMAIN-SUFFIX,twitterinc.com               # 公司官方机构站
+  - DOMAIN-SUFFIX,twitteroauth.com             # 第三方 OAuth 登录授权
+  - DOMAIN-SUFFIX,twitterstat.us               # 服务运行状态监控
+
+  # 4. 推广、直播与收购业务
+  - DOMAIN-SUFFIX,ads-twitter.com              # 官方广告分发与展示
+  - DOMAIN-SUFFIX,cms-twdigitalassets.com      # 官方数字资产内容库
+  - DOMAIN-SUFFIX,tellapart.com                # 广告精准投放引擎
+  - DOMAIN-SUFFIX,periscope.tv                 # Periscope 实时流媒体直播
+  - DOMAIN-SUFFIX,pscp.tv                      # Periscope 移动端短链
+  - DOMAIN-SUFFIX,vine.co                      # Vine 历史短视频资产
+
+  # 5. Twitter 官方 ASN IP 地址段
+  - IP-CIDR,192.133.76.0/22,no-resolve
+  - IP-CIDR,199.59.148.0/22,no-resolve
+  - IP-CIDR,199.96.56.0/21,no-resolve
+  - IP-CIDR,202.160.128.0/22,no-resolve
+  - IP-CIDR,209.237.192.0/19,no-resolve
+  - IP-CIDR,69.195.160.0/19,no-resolve
+
+  # 6. 关键词与应用进程兜底
+  - DOMAIN-KEYWORD,twitter                     # Twitter 关键词全量保障
+  - PROCESS-NAME,Twitter                       # 客户端主进程名
+
+  # ============================================================================
+  # 【第二部分：全球主流成人网站与音视频 CDN (Adult / Porn)】
+  # ============================================================================
+  # 1. Pornhub 全球生态与多媒体 CDN (MindGeek / Aylo)
+  - DOMAIN-SUFFIX,pornhub.com                  # Pornhub 官方主站
+  - DOMAIN-SUFFIX,phncdn.com                   # Pornhub 全球核心点播切片与图片 CDN (ei, pix-cdn77, pix-fl 等)
+  - DOMAIN-SUFFIX,phprcdn.com                  # Pornhub 早期/备用媒体资源 CDN
+  - DOMAIN-SUFFIX,pornhubpremium.com           # Pornhub Premium 会员特权与鉴权主站
+  - DOMAIN-SUFFIX,pornhub-deutsch.net          # 德语及欧洲区域镜像
+  - DOMAIN-SUFFIX,porhub.com                   # 官方防拼写错误保护域
+  - DOMAIN-SUFFIX,porngub.com                  # 官方防拼写错误保护域
+  - DOMAIN-SUFFIX,pronstore.com                # 官方防拼写错误与商城
+  - DOMAIN-SUFFIX,pornhubapparel.com           # 官方商城与衍生品
+  - DOMAIN-SUFFIX,youporn.com                  # YouPorn 官方主站
+  - DOMAIN-SUFFIX,ypncdn.com                   # YouPorn 核心流媒体 CDN
+  - DOMAIN-SUFFIX,redtube.com                  # RedTube 官方主站
+  - DOMAIN-SUFFIX,tube8.com                    # Tube8 官方主站
+  - DOMAIN-SUFFIX,brazzers.com                 # Brazzers 影视平台
+
+  # 2. XVideos & XNXX 核心生态 (WGCZ Holding)
+  - DOMAIN-SUFFIX,xvideos.com                  # XVideos 官方主站
+  - DOMAIN-SUFFIX,xvideos-cdn.com              # XVideos 全球核心流媒体 CDN (hls-cdn77, thumb-cdn77, thumbs-gcore 等)
+  - DOMAIN-SUFFIX,xv-cdn.com                   # XVideos 静态图床备用
+  - DOMAIN-SUFFIX,xvideos.es                   # 西班牙及拉美分站
+  - DOMAIN-SUFFIX,xnxx.com                     # XNXX 官方主站
+  - DOMAIN-SUFFIX,xnxx-cdn.com                 # XNXX 核心音视频 CDN
+
+  # 3. 其他主流平台与日韩影视 (XHamster / Stripchat / DMM / JAV)
+  - DOMAIN-SUFFIX,xhamster.com                 # XHamster 官方主站
+  - DOMAIN-SUFFIX,xhcdn.com                    # XHamster 核心流媒体与封面 CDN
+  - DOMAIN-SUFFIX,stripchat.com                # Stripchat 互动直播平台
+  - DOMAIN-SUFFIX,spankbang.com                # SpankBang 高清视频主站
+  - DOMAIN-SUFFIX,spankbang.party              # SpankBang 备用镜像
+  - DOMAIN-SUFFIX,dmm.co.jp                    # 日本 DMM 影视娱乐主站
+  - DOMAIN-SUFFIX,dmm.com                      # DMM 国际通用门户
+  - DOMAIN-SUFFIX,javdb.com                    # JAVDB 影视数据库与索引
+  - DOMAIN-SUFFIX,javbus.com                   # JAVBus 影视资讯
+  - DOMAIN-SUFFIX,javlibrary.com               # JAVLibrary 评论与资讯平台
+  - DOMAIN-SUFFIX,7mmtv.tv                     # 亚洲成人影视流媒体
