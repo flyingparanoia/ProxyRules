@@ -1,8 +1,8 @@
 # ==============================================================================
-# 规则名称: 抖音 / 字节跳动全量分流规则集 (Douyin & ByteDance)
+# 规则名称: 抖音 / 字节跳动官方全量规则集 (Douyin & ByteDance Official)
 # 更新时间: 2026-09-25
 # 规则来源: 本地 Stash PC 网页端 + iPhone 客户端双端实机抓包深度分析
-# 规则说明: 区分“全端共用核心”、“移动端专属”、“桌面网页端专属”及“移动端 P2P 调度”
+# 规则特性: 100% 纯正官方业务资产（已剥离第三方 P2P 边缘偷跑域名），用于 DIRECT 直连
 # 适用平台: Stash, Clash rule-providers
 # ==============================================================================
 payload:
@@ -42,7 +42,7 @@ payload:
   - DOMAIN-SUFFIX,bytegoofy.com         # Web 前端基建平台 Goofy（包含滑块验证、人机安全防护）
   - DOMAIN-SUFFIX,bytetos.com           # 字节分布式对象存储 TOS（浏览器直接加载的媒体文件与大附件）
   - DOMAIN-SUFFIX,bytescm.com           # 静态内容管理系统 SCM
-  - DOMAIN-SUFFIX,byted-static.com      # 前端公共依赖库与 unpkg 镜像镜像源
+  - DOMAIN-SUFFIX,byted-static.com      # 前端公共依赖库与 unpkg 镜像源
   - DOMAIN-SUFFIX,bytetcc.com           # 网页端动态配置中心 TCC
   - DOMAIN-SUFFIX,byteimg.com           # 网页端通用图片与素材分发
   - DOMAIN-SUFFIX,yhgfb-cn-static.com   # 网页端用户增长基建前端平台 (Growth Foundation Builder)
@@ -60,16 +60,7 @@ payload:
   - DOMAIN-SUFFIX,feelgood.cn           # 字节跳动官方用户体验调研系统 (Feelgood)
 
   # ============================================================================
-  # 【第四部分：移动端短视频 P2P 边缘分发】(利用设备上传互传视频切片)
-  # 提示: 若不想手机当“免费CDN节点”发烫耗电，可在 Stash 规则中将这几条单独设为 REJECT
-  # ============================================================================
-  - DOMAIN-SUFFIX,qrstuvwxyzab.com      # 移动端 P2P CDN 调度 (北京空山信息)
-  - DOMAIN-SUFFIX,ydycdn.com            # 移动端短视频 P2P 边缘分发
-  - DOMAIN-SUFFIX,yingt.fun             # 移动端短视频 P2P 节点 (上海莹田科技)
-  - DOMAIN-SUFFIX,jspcdn.cn             # 移动端短视频 P2P 缓存节点
-
-  # ============================================================================
-  # 【第五部分：历史 / 兜底备用域名】(老版本客户端或特殊业务场景备用)
+  # 【第四部分：历史 / 兜底备用域名】(老版本客户端或特殊业务场景备用)
   # ============================================================================
   - DOMAIN-SUFFIX,douyinliving.com      # 直播业务备用域名
   - DOMAIN-SUFFIX,douyinivod.com        # 点播切片备用域名
