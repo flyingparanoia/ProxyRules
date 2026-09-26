@@ -111,6 +111,9 @@ payload:
   # 保证 Google 账户登录状态一致，避免会话多出口触发频繁异地风控
   # ============================================================================
   - '+.accounts.google.com'                     # Google 统一身份认证与账号中心
+  - '+.gmail.com'                               # Gmail 官方主站与 IMAP/SMTP 邮件传输服务
+  - '+.googlemail.com'                          # Gmail 欧洲与历史国际备用域名
+  - '+.withgoogle.com'                          # Google 开发者社区与安全合规平台
   - '+.ogs.google.com'                          # One Google 全局顶栏组件与九宫格菜单
   - '+.onegoogle.com'                           # One Google 跨应用协同服务
   - '+.googleapis.com'                          # Google 全球通用 API 接口体系
