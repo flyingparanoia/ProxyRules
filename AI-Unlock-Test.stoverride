@@ -1,0 +1,144 @@
+#SUBSCRIBED https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/AI-Unlock-Test.stoverride
+name: "🤖 AI 平台解锁状态"
+desc: "一键探测当前出口节点对 ChatGPT (OpenAI)、Claude (Anthropic) 以及 Google Gemini 的访问连通性、区域支持及 Cloudflare 防火墙拦截状态。"
+tiles:
+  - name: ai-unlock-tile
+    interval: 900
+    title: "🤖 AI 解锁状态"
+    content: "等待首次检测..."
+    icon: "sparkles"
+    backgroundColor: "#10B981"
+    collapsed: false
+script-providers:
+  ai-unlock-tile:
+    payload: |
+      // AI Unlock Test for Stash Tile
+      var results = {
+        openai: '检测中...',
+        claude: '检测中...',
+        gemini: '检测中...',
+        ip: '',
+        loc: '',
+        colo: ''
+      };
+      var pending = 3;
+
+      function finishTest() {
+        pending--;
+        if (pending > 0) return;
+
+        function isOk(s) { return s && s.indexOf('🟢') !== -1; }
+        var oOk = isOk(results.openai);
+        var cOk = isOk(results.claude);
+        var gOk = isOk(results.gemini);
+
+        var allOk = oOk && cOk && gOk;
+        var anyOk = oOk || cOk || gOk;
+
+        var color = allOk ? '#10B981' : (anyOk ? '#D97706' : '#DC2626');
+        var icon = allOk ? 'sparkles' : (anyOk ? 'exclamationmark.triangle.fill' : 'xmark.octagon.fill');
+
+        var now = new Date();
+        var h = now.getHours(), m = now.getMinutes(), s = now.getSeconds();
+        var timeStr = (h < 10 ? '0' : '') + h + ':' +
+                      (m < 10 ? '0' : '') + m + ':' +
+                      (s < 10 ? '0' : '') + s;
+
+        var text = 'ChatGPT: ' + results.openai +
+                   '\nClaude:  ' + results.claude +
+                   '\nGemini:  ' + results.gemini;
+
+        if (results.ip) {
+          var locStr = results.loc ? ' (' + results.loc + (results.colo ? ' · ' + results.colo : '') + ')' : '';
+          text += '\n出口: ' + results.ip + locStr;
+        }
+        text += '\n更新: ' + timeStr;
+
+        $done({
+          title: '🤖 AI 解锁状态',
+          content: text,
+          icon: icon,
+          backgroundColor: color
+        });
+      }
+
+      // 1. OpenAI (ChatGPT)
+      $httpClient.get({
+        url: 'https://chatgpt.com/cdn-cgi/trace',
+        headers: {
+          'User-Agent': 'curl/8.7.1'
+        },
+        timeout: 6
+      }, function(err, resp, body) {
+        if (err || !resp) {
+          results.openai = '⚪ 超时断网';
+        } else if (resp.status === 200 && body) {
+          var locMatch = body.match(/loc=([A-Z]+)/);
+          var coloMatch = body.match(/colo=([A-Z]+)/);
+          var ipMatch = body.match(/ip=([0-9a-fA-F.:]+)/);
+          var loc = locMatch ? locMatch[1] : '';
+          var colo = coloMatch ? coloMatch[1] : '';
+          var ip = ipMatch ? ipMatch[1] : '';
+
+          if (ip && !results.ip) results.ip = ip;
+          if (loc && !results.loc) results.loc = loc;
+          if (colo && !results.colo) results.colo = colo;
+
+          if (loc === 'CN' || loc === 'HK') {
+            results.openai = '🔴 地区受限 (' + loc + ')';
+          } else {
+            results.openai = '🟢 原生支持 (' + (loc || 'OK') + (colo ? ' · ' + colo : '') + ')';
+          }
+        } else if (resp.status === 403) {
+          results.openai = '🔴 Cloudflare 拦截';
+        } else {
+          results.openai = '🟡 状态: ' + resp.status;
+        }
+        finishTest();
+      });
+
+      // 2. Claude (Anthropic API)
+      $httpClient.post({
+        url: 'https://api.anthropic.com/v1/messages',
+        headers: {
+          'content-type': 'application/json',
+          'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)'
+        },
+        body: '{}',
+        timeout: 6
+      }, function(err, resp, body) {
+        if (err || !resp) {
+          results.claude = '⚪ 超时断网';
+        } else if (resp.status === 401 || (body && body.indexOf('authentication_error') !== -1)) {
+          results.claude = '🟢 支持 (API 正常)';
+        } else if (resp.status === 403 || (body && body.indexOf('cf-mitigated') !== -1)) {
+          results.claude = '🔴 Cloudflare 拦截';
+        } else if (resp.status === 400) {
+          results.claude = '🟢 支持';
+        } else {
+          results.claude = '🟡 状态: ' + resp.status;
+        }
+        finishTest();
+      });
+
+      // 3. Google Gemini
+      $httpClient.get({
+        url: 'https://generativelanguage.googleapis.com/v1beta/models?key=AIzaSyFakeKeyForTest1234567890123456',
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)'
+        },
+        timeout: 6
+      }, function(err, resp, body) {
+        if (err || !resp) {
+          results.gemini = '⚪ 超时断网';
+        } else if (resp.status === 400 && body && body.indexOf('API_KEY_INVALID') !== -1) {
+          results.gemini = '🟢 支持 (API 正常)';
+        } else if (resp.status === 403) {
+          results.gemini = '🔴 地区不支持 (403)';
+        } else if (resp.status === 200) {
+          results.gemini = '🟢 支持';
+        } else {
+          results.gemini = '🟡 状态: ' + resp.status;
+        }
+        finishTest();
+      });
