@@ -170,6 +170,7 @@ payload:
   - '+.analytics.google.com'                    # Google 网站统计控制台
   - '+.googletagmanager.com'                    # Google 代码管理器
   - '+.googletagservices.com'                   # Google 代码调用核心服务
+  - '+.adtrafficquality.google'                 # Google 广告流量真实性与反欺诈验证接口
   - '+.ssl-google-analytics.l.google.com'       # SSL 分析数据上报链路
   - '+.www-googletagmanager.l.google.com'       # 代码管理器调度
   - '+.app-measurement.com'                     # 应用内搜索与行为测量
