@@ -1,6 +1,6 @@
 # ==============================================================================
 # 规则名称: Google 全球搜索与 Gemini 智能生态分流规则集 (GoogleSearch-Gemini)
-# 更新时间: 2026-09-25
+# 更新时间: 2026-09-27
 # 规则来源: 多源规则深度融合与实机测试提炼
 # 规则说明: 整合 Google 全球搜索主站、40+国家地区顶级域名 (ccTLD)、基础静态资产、账号认证体系与 Google Gemini / DeepMind / AI Studio 全量智能生态
 # 设计优势: 搜索与 Gemini 统一绑定走相同代理出口，彻底解决跨应用/会话多出口引发的 Google 频繁异地登录风控与 Gemini 封锁
@@ -42,6 +42,11 @@ payload:
   - '+.alkalimakersuite-pa.clients6.google.com' # Alkali MakerSuite 客户端交互接口
   - '+.signaler-pa.clients6.google.com'         # Gemini 实时多模态通信与会话信号调度
   - '+.waa-pa.clients6.google.com'              # Web & App 统一智能助手框架通道
+
+  # Antigravity 补充：2026-09-27 日志中这两个地址曾落入 MATCH 兜底
+  # 精确匹配已观察到的主机名，避免将其他 Cloud Run 服务一并分入 Google 组
+  - 'antigravity-unleash.goog'                  # Antigravity 相关服务入口（日志观察）
+  - 'antigravity-hub-auto-updater-974169037036.us-central1.run.app' # Antigravity 自动更新入口（日志观察）
 
   # 4. Google DeepMind 顶尖前沿机构
   - '+.deepmind.google'                         # Google DeepMind 官方顶级新域名
