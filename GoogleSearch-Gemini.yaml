@@ -44,8 +44,8 @@ payload:
   - '+.waa-pa.clients6.google.com'              # Web & App 统一智能助手框架通道
 
   # Antigravity 补充：2026-09-27 日志中这两个地址曾落入 MATCH 兜底
-  # 精确匹配已观察到的主机名，避免将其他 Cloud Run 服务一并分入 Google 组
-  - 'antigravity-unleash.goog'                  # Antigravity 相关服务入口（日志观察）
+  # 涵盖 Google 独占顶级域名 .goog，并精确匹配已观察到的 Cloud Run 主机名避免误伤
+  - '+.goog'                                    # Google 官方独占顶级品牌域名（涵盖 Antigravity Unleash 等全量 .goog 官方基础设施）
   - 'antigravity-hub-auto-updater-974169037036.us-central1.run.app' # Antigravity 自动更新入口（日志观察）
 
   # 4. Google DeepMind 顶尖前沿机构
