@@ -1,42 +1,37 @@
 #SUBSCRIBED https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/AI-Unlock-Test.stoverride
-name: "🤖 AI 平台解锁状态"
-desc: "一键探测当前出口节点对 ChatGPT (OpenAI)、Claude (Anthropic) 以及 Google Gemini 的访问连通性、区域支持及 Cloudflare 防火墙拦截状态。"
+name: "✨ Gemini 解锁状态"
+desc: "一键探测当前出口节点对 Google Gemini 的访问连通性与区域支持状态，并直观展示所检测的节点名称及出口 IP。"
 tiles:
-  - name: ai-unlock-tile
+  - name: gemini-unlock-tile
     interval: 900
-    title: "🤖 AI 解锁状态"
+    title: "✨ Gemini 解锁状态"
     content: "等待首次检测..."
     icon: "sparkles"
     backgroundColor: "#10B981"
     collapsed: false
 script-providers:
-  ai-unlock-tile:
+  gemini-unlock-tile:
     payload: |
-      // AI Unlock Test for Stash Tile
+      // Google Gemini Unlock & Node Detection for Stash Tile
       var results = {
-        openai: '检测中...',
-        claude: '检测中...',
+        node: '',
         gemini: '检测中...',
         ip: '',
         loc: '',
         colo: ''
       };
       var pending = 3;
+      var hasDone = false;
 
       function finishTest() {
         pending--;
-        if (pending > 0) return;
+        if (pending > 0 || hasDone) return;
+        hasDone = true;
 
-        function isOk(s) { return s && s.indexOf('🟢') !== -1; }
-        var oOk = isOk(results.openai);
-        var cOk = isOk(results.claude);
-        var gOk = isOk(results.gemini);
-
-        var allOk = oOk && cOk && gOk;
-        var anyOk = oOk || cOk || gOk;
-
-        var color = allOk ? '#10B981' : (anyOk ? '#D97706' : '#DC2626');
-        var icon = allOk ? 'sparkles' : (anyOk ? 'exclamationmark.triangle.fill' : 'xmark.octagon.fill');
+        var isOk = results.gemini && results.gemini.indexOf('🟢') !== -1;
+        var isFail = results.gemini && results.gemini.indexOf('🔴') !== -1;
+        var color = isOk ? '#10B981' : (isFail ? '#DC2626' : '#D97706');
+        var icon = isOk ? 'sparkles' : (isFail ? 'xmark.octagon.fill' : 'exclamationmark.triangle.fill');
 
         var now = new Date();
         var h = now.getHours(), m = now.getMinutes(), s = now.getSeconds();
@@ -44,84 +39,123 @@ script-providers:
                       (m < 10 ? '0' : '') + m + ':' +
                       (s < 10 ? '0' : '') + s;
 
-        var text = 'ChatGPT: ' + results.openai +
-                   '\nClaude:  ' + results.claude +
-                   '\nGemini:  ' + results.gemini;
-
+        var lines = [];
+        if (results.node) {
+          lines.push('节点: ' + results.node);
+        }
+        lines.push('Gemini: ' + results.gemini);
         if (results.ip) {
           var locStr = results.loc ? ' (' + results.loc + (results.colo ? ' · ' + results.colo : '') + ')' : '';
-          text += '\n出口: ' + results.ip + locStr;
+          lines.push('出口: ' + results.ip + locStr);
         }
-        text += '\n更新: ' + timeStr;
+        lines.push('更新: ' + timeStr);
 
         $done({
-          title: '🤖 AI 解锁状态',
-          content: text,
+          title: '✨ Gemini 解锁状态',
+          content: lines.join('\n'),
           icon: icon,
           backgroundColor: color
         });
       }
 
-      // 1. OpenAI (ChatGPT)
-      $httpClient.get({
-        url: 'https://chatgpt.com/cdn-cgi/trace',
-        headers: {
-          'User-Agent': 'curl/8.7.1'
-        },
-        timeout: 6
-      }, function(err, resp, body) {
-        if (err || !resp) {
-          results.openai = '⚪ 超时断网';
-        } else if (resp.status === 200 && body) {
-          var locMatch = body.match(/loc=([A-Z]+)/);
-          var coloMatch = body.match(/colo=([A-Z]+)/);
-          var ipMatch = body.match(/ip=([0-9a-fA-F.:]+)/);
-          var loc = locMatch ? locMatch[1] : '';
-          var colo = coloMatch ? coloMatch[1] : '';
-          var ip = ipMatch ? ipMatch[1] : '';
+      // 超时兜底保护
+      setTimeout(function() {
+        if (!hasDone) {
+          pending = 1;
+          finishTest();
+        }
+      }, 7000);
 
-          if (ip && !results.ip) results.ip = ip;
-          if (loc && !results.loc) results.loc = loc;
-          if (colo && !results.colo) results.colo = colo;
+      // 1. 获取当前检测的节点名称
+      (function getNodeName() {
+        // (1) 若在长按节点查看代理详情（Collapsed Tile）环境下运行，Stash 会自动注入 globalProxy
+        if (typeof $httpClient !== 'undefined' && $httpClient.globalProxy) {
+          results.node = $httpClient.globalProxy;
+          finishTest();
+          return;
+        }
 
-          if (loc === 'CN' || loc === 'HK') {
-            results.openai = '🔴 地区受限 (' + loc + ')';
-          } else {
-            results.openai = '🟢 原生支持 (' + (loc || 'OK') + (colo ? ' · ' + colo : '') + ')';
+        // (2) 尝试通过 Stash 控制接口读取当前策略组选中的实际节点
+        var cUrl = (typeof $environment !== 'undefined' && $environment['controller-url']) || 'http://127.0.0.1:9090';
+        var cAuth = (typeof $environment !== 'undefined' && $environment['controller-authorization']) || '';
+        var headers = cAuth ? { 'Authorization': cAuth } : {};
+
+        function parseProxies(data) {
+          if (!data || !data.proxies) return '';
+          var proxies = data.proxies;
+          var keys = Object.keys(proxies);
+          var patterns = [/gemini/i, /google/i, /ai/i, /^proxy$/i, /^global$/i];
+          var startGroup = '';
+
+          for (var i = 0; i < patterns.length; i++) {
+            for (var j = 0; j < keys.length; j++) {
+              if (patterns[i].test(keys[j])) {
+                startGroup = keys[j];
+                break;
+              }
+            }
+            if (startGroup) break;
           }
-        } else if (resp.status === 403) {
-          results.openai = '🔴 Cloudflare 拦截';
-        } else {
-          results.openai = '🟡 状态: ' + resp.status;
-        }
-        finishTest();
-      });
 
-      // 2. Claude (Anthropic API)
-      $httpClient.post({
-        url: 'https://api.anthropic.com/v1/messages',
-        headers: {
-          'content-type': 'application/json',
-          'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)'
-        },
-        body: '{}',
-        timeout: 6
-      }, function(err, resp, body) {
-        if (err || !resp) {
-          results.claude = '⚪ 超时断网';
-        } else if (resp.status === 401 || (body && body.indexOf('authentication_error') !== -1)) {
-          results.claude = '🟢 支持 (API 正常)';
-        } else if (resp.status === 403 || (body && body.indexOf('cf-mitigated') !== -1)) {
-          results.claude = '🔴 Cloudflare 拦截';
-        } else if (resp.status === 400) {
-          results.claude = '🟢 支持';
-        } else {
-          results.claude = '🟡 状态: ' + resp.status;
-        }
-        finishTest();
-      });
+          if (!startGroup) {
+            if (proxies['GLOBAL']) startGroup = 'GLOBAL';
+            else return '';
+          }
 
-      // 3. Google Gemini
+          var curr = startGroup;
+          var visited = {};
+          var chain = [];
+          while (curr && !visited[curr]) {
+            visited[curr] = true;
+            chain.push(curr);
+            var p = proxies[curr];
+            if (!p || !p.now) break;
+            curr = p.now;
+          }
+          return chain[chain.length - 1] || startGroup;
+        }
+
+        if (typeof fetch === 'function') {
+          var ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+          var timer = ctrl ? setTimeout(function() { ctrl.abort(); }, 2500) : null;
+          fetch(cUrl + '/proxies', {
+            headers: headers,
+            signal: ctrl ? ctrl.signal : undefined
+          }).then(function(res) {
+            if (timer) clearTimeout(timer);
+            if (!res.ok) throw new Error(res.statusText);
+            return res.json();
+          }).then(function(data) {
+            var node = parseProxies(data);
+            if (node) results.node = node;
+            finishTest();
+          }).catch(function() {
+            tryHttpClientFallback();
+          });
+          return;
+        }
+
+        tryHttpClientFallback();
+
+        function tryHttpClientFallback() {
+          $httpClient.get({
+            url: cUrl + '/proxies',
+            headers: headers,
+            timeout: 3
+          }, function(err, resp, body) {
+            if (!err && resp && (resp.status === 200 || resp.statusCode === 200) && body) {
+              try {
+                var data = JSON.parse(body);
+                var node = parseProxies(data);
+                if (node) results.node = node;
+              } catch (_) {}
+            }
+            finishTest();
+          });
+        }
+      })();
+
+      // 2. 检测 Google Gemini 连通性与区域支持
       $httpClient.get({
         url: 'https://generativelanguage.googleapis.com/v1beta/models?key=AIzaSyFakeKeyForTest1234567890123456',
         headers: {
@@ -137,8 +171,29 @@ script-providers:
           results.gemini = '🔴 地区不支持 (403)';
         } else if (resp.status === 200) {
           results.gemini = '🟢 支持';
+        } else if (resp.status === 429) {
+          results.gemini = '🟡 请求频繁 (429)';
         } else {
           results.gemini = '🟡 状态: ' + resp.status;
+        }
+        finishTest();
+      });
+
+      // 3. 获取出口 IP 及机房归属 (Cloudflare Trace)
+      $httpClient.get({
+        url: 'https://cloudflare.com/cdn-cgi/trace',
+        headers: {
+          'User-Agent': 'curl/8.7.1'
+        },
+        timeout: 5
+      }, function(err, resp, body) {
+        if (!err && resp && resp.status === 200 && body) {
+          var ipMatch = body.match(/ip=([0-9a-fA-F.:]+)/);
+          var locMatch = body.match(/loc=([A-Z]+)/);
+          var coloMatch = body.match(/colo=([A-Z]+)/);
+          if (ipMatch) results.ip = ipMatch[1];
+          if (locMatch) results.loc = locMatch[1];
+          if (coloMatch) results.colo = coloMatch[1];
         }
         finishTest();
       });
