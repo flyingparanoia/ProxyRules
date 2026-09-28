@@ -49,6 +49,7 @@ payload:
   - '+.plex.direct'                             # Plex 官方为家庭内网流媒体服务器提供的专属本地 SSL 直连域名
   - '+.ts.net'                                  # Tailscale 虚拟局域网 MagicDNS 域名 (异地组网多设备直连)
   - 'local.adguard.org'                         # AdGuard Home 本地 DNS 控制台与过滤服务地址
+  - '+.jumpdesktop.com'                         # Jump Desktop 远程桌面 (信令 neuron / 中继 turn / 控制台 / P2P 打洞)
 
   # --- 1.4 本机跨进程鉴权与安全套件 ---
   # 本地桌面客户端通过 127.0.0.1 端口做网页登录握手鉴权
