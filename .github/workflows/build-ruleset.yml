@@ -1,0 +1,60 @@
+name: Build sing-box Rule Sets
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '*.yaml'
+      - 'scripts/**'
+      - '.github/workflows/build-ruleset.yml'
+  schedule:
+    # 每周一 UTC 02:00 (北京时间 10:00) 自动同步上游外部规则 (如 HaGeZi)
+    - cron: '0 2 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Compile .srs & .json
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Python dependencies
+        run: |
+          pip install --upgrade pip pyyaml
+
+      - name: Install sing-box latest binary
+        run: |
+          TAG=$(curl -s https://api.github.com/repos/SagerNet/sing-box/releases/latest | grep -Po '"tag_name": "\K.*?(?=")')
+          ARCH="linux-amd64"
+          echo "Installing sing-box version: ${TAG}"
+          curl -Lo sing-box.tar.gz "https://github.com/SagerNet/sing-box/releases/download/${TAG}/sing-box-${TAG#v}-${ARCH}.tar.gz"
+          tar -xzf sing-box.tar.gz
+          sudo mv sing-box-*/sing-box /usr/local/bin/
+          sing-box version
+
+      - name: Build rule sets
+        run: |
+          python3 scripts/build.py
+
+      - name: Deploy compiled rule sets to release branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: release
+          publish_dir: ./dist
+          keep_files: false
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: 'build: compile sing-box rule sets [skip ci]'
