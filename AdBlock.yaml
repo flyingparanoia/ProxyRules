@@ -565,6 +565,7 @@ payload:
   - 'cm.bilibili.com'
   - 'bimp.hdslb.com'
   - 'boss.hdslb.com'
+  - 'impression.biligame.com'
   - 'sealine.youku.com'
   - '+.doubleclick-cn.net'
   - '+.lf-leads-fe-scm.bytecdn.com'
