@@ -1,0 +1,48 @@
+{
+  "version": 2,
+  "rules": [
+    {
+      "domain": [
+        "p16-tiktokcdn-com.akamaized.net",
+        "config.mtp.sag.us-ashburn-1.oci.oraclecloud.com",
+        "proxy.telemetry.us-ashburn-1.oci.oraclecloud.com",
+        "lf16-pkgcdn.pitaya-clientai.com",
+        "lf16-effectcdn.byteeffecttos-g.com",
+        "roovza.cdn-settings.appsflyersdk.com",
+        "roovza.inapps.appsflyersdk.com",
+        "roovza.launches.appsflyersdk.com"
+      ],
+      "domain_suffix": [
+        "tiktok.com",
+        "tiktokv.com",
+        "tiktokv.us",
+        "tiktokw.us",
+        "tik-tokapi.com",
+        "tiktokcdn.com",
+        "tiktokcdn-us.com",
+        "ttcdn-us.com",
+        "pitaya-clientai.com",
+        "byteeffecttos-g.com",
+        "isnssdk.com",
+        "snssdk.com",
+        "ttwstatic.com",
+        "ttwebview.com",
+        "ibyteimg.com",
+        "tiktokshops.us",
+        "tiktokmusic.app",
+        "capcut.com",
+        "byteintlapi.com",
+        "byteoversea.com",
+        "ibytedtos.com",
+        "bytedapm.com",
+        "bytegecko-i18n.com",
+        "ipstatp.com",
+        "sgpstatp.com",
+        "tiktokd.net",
+        "tiktokd.org",
+        "musical.ly",
+        "muscdn.com"
+      ]
+    }
+  ]
+}

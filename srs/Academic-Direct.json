@@ -1,0 +1,39 @@
+{
+  "version": 2,
+  "rules": [
+    {
+      "domain_suffix": [
+        "webofscience.com",
+        "access.clarivate.com",
+        "webofscience.clarivate.cn",
+        "clarivate.com",
+        "sciencedirect.com",
+        "elsevier.com",
+        "nature.com",
+        "science.org",
+        "ieee.org",
+        "acm.org",
+        "engineeringvillage.com",
+        "aps.org",
+        "aip.org",
+        "asme.org",
+        "mathscinet.ams.org",
+        "ams.org",
+        "ietresearch.onlinelibrary.wiley.com",
+        "onlinelibrary.wiley.com",
+        "wiley.com",
+        "learning.oreilly.com",
+        "oreilly.com",
+        "cnki.net",
+        "chaoxing.com",
+        "xslb.net",
+        "carsi.edu.cn",
+        "cernet.edu.cn",
+        "wanfangdata.com.cn",
+        "cqvip.com",
+        "springer.com",
+        "springernature.com"
+      ]
+    }
+  ]
+}

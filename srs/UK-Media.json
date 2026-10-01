@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "rules": [
+    {
+      "domain": [
+        "aod-dash-uk-live.akamaized.net",
+        "aod-hls-uk-live.akamaized.net",
+        "as-dash-uk-live.akamaized.net",
+        "as-hls-uk-live.akamaized.net",
+        "vod-dash-uk-live.akamaized.net",
+        "vod-hls-uk-live.akamaized.net",
+        "vod-sub-uk-live.akamaized.net",
+        "vod-thumb-uk-live.akamaized.net",
+        "vod-dash-ww-live.akamaized.net",
+        "vod-thumb-ww-live.akamaized.net",
+        "vs-cmaf-push-uk-live.akamaized.net",
+        "itvpnp.live.ott.irdeto.com",
+        "itvpnp.stage.ott.irdeto.com",
+        "itvpnpmobile-a.akamaihd.net"
+      ],
+      "domain_suffix": [
+        "bbc.co.uk",
+        "bbc.com",
+        "bbc.co",
+        "bbc.in",
+        "bbc.net.uk",
+        "bbcmedia.co.uk",
+        "bbcchinese.com",
+        "bbcpersian.com",
+        "bbcverticals.com",
+        "bidi.net.uk",
+        "3d-bbc.co.uk",
+        "bbc",
+        "bbci.co.uk",
+        "bbci.co",
+        "bb-static.com",
+        "bbcfmt.hs.llnwd.net",
+        "bbcfmt.s.llnwi.net",
+        "itv.com",
+        "itvstatic.com",
+        "massive-itv.com",
+        "channel4.com",
+        "c4assets.com",
+        "channel5.com",
+        "my5.tv",
+        "britbox.co.uk",
+        "britbox.com",
+        "nowtv.com",
+        "skygo.co.uk",
+        "dcblivedazn.akamaized.net"
+      ]
+    }
+  ]
+}

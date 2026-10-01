@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "rules": [
+    {
+      "domain": [
+        "play-edge.itunes.apple.com",
+        "np-edge.itunes.apple.com",
+        "hls.itunes.apple.com",
+        "hls-amt.itunes.apple.com",
+        "gspe1-ssl.ls.apple.com",
+        "uts-api.itunes.apple.com",
+        "umc-api.itunes.apple.com"
+      ],
+      "domain_suffix": [
+        "tv.apple.com",
+        "linear.tv.apple.com",
+        "tv.applemusic.com"
+      ]
+    }
+  ]
+}

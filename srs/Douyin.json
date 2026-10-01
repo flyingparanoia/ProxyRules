@@ -1,0 +1,51 @@
+{
+  "version": 2,
+  "rules": [
+    {
+      "domain_suffix": [
+        "douyin.com",
+        "douyinstatic.com",
+        "douyinpic.com",
+        "bytedance.com",
+        "zijieapi.com",
+        "douyinvod.com",
+        "idouyinvod.com",
+        "ndcpp.com",
+        "bytegecko.com",
+        "bytednsdoc.com",
+        "amemv.com",
+        "snssdk.com",
+        "zjcdn.com",
+        "bdcgslb.com",
+        "bdurl.net",
+        "bytecdn.com",
+        "bytegoofy.com",
+        "bytetos.com",
+        "bytescm.com",
+        "byted-static.com",
+        "bytetcc.com",
+        "byteimg.com",
+        "yhgfb-cn-static.com",
+        "douyincdn.com",
+        "iesdouyin.com",
+        "searchpstatp.com",
+        "bdxiguaimg.com",
+        "huoshanstatic.com",
+        "applogcdn.com",
+        "ibytedapm.com",
+        "feelgood.cn",
+        "douyinliving.com",
+        "douyinivod.com",
+        "bytecdn.cn",
+        "bytemastatic.com",
+        "byteacctimg.com",
+        "bytemaimg.com",
+        "bytecc.com",
+        "byteactivity.com",
+        "asiad.byteactivity.com",
+        "asiad.byteactivity12.com",
+        "volcsiriusbd.com"
+      ]
+    }
+  ]
+}

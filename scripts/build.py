@@ -16,7 +16,7 @@ import urllib.request
 import subprocess
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DIST_DIR = os.path.join(REPO_ROOT, "dist")
+DIST_DIR = os.path.join(REPO_ROOT, "srs")
 
 HAGEZI_LIGHT_URL = "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/light.txt"
 
