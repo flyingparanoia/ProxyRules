@@ -1229,3 +1229,87 @@ payload:
   - '+.ypncdn.com'
   - '+.zuckerberg.com'
   - '+.zuckerberg.net'
+
+  # ============================================================================
+  # 【实机日志深度逆向分析：常用海外服务与基础设施高频补充 (Mac / iOS 深度优化)】
+  # ============================================================================
+  # --- 1. Cloudflare 全球网络、Zero Trust 隧道、DoH 与 Pages ---
+  - '+.cloudflare.com'                          # Cloudflare 官方主站、API 与 CDN 节点
+  - '+.cloudflare-dns.com'                      # Cloudflare 1.1.1.1 / Chrome 安全 DNS
+  - '+.argotunnel.com'                          # Cloudflare Tunnel / Argo 穿透节点
+  - '+.cloudflareaccess.com'                    # Cloudflare Zero Trust / Access 鉴权
+  - '+.pages.dev'                               # Cloudflare Pages 静态托管
+  - '+.workers.dev'                             # Cloudflare Workers 边缘计算平台
+
+  # --- 2. Mozilla / Firefox 全球同步、账户与扩展生态 ---
+  - '+.firefox.com'                             # Firefox 账户中心与 Sync 同步
+  - '+.firefox-portal-detection.com'            # Firefox 连通性与 Portal 探测
+  - '+.mozilla.org'                             # Mozilla 官方主站、扩展与遥测通道
+  - '+.mozilla.com'                             # Mozilla 推送与核心服务
+  - '+.mozilla.net'                             # Mozilla 静态 CDN 资源
+
+  # --- 3. Mac 开发者环境、AI 工具、高效终端与笔记 ---
+  - '+.warp.dev'                                # Warp AI 智能终端官方主站与实时协作
+  - '+.rudderstack.com'                         # Warp 终端数据通道与遥测调度
+  - '+.zed.dev'                                 # Zed 高性能代码编辑器云服务
+  - '+.folivora.ai'                             # BetterTouchTool 官方更新与授权
+  - '+.istatmenus.app'                          # iStat Menus 状态监控与外网 IP 探测
+  - '+.obsidian.md'                             # Obsidian 知识库应用与版本更新
+  - '+.pypi.org'                                # Python 官方包索引源
+  - '+.pythonhosted.org'                        # Python 文档与包文件托管 CDN
+  - '+.wireshark.org'                           # Wireshark 官方资源与更新
+
+  # --- 4. 沉浸式翻译 (Immersive Translate) 全套服务 ---
+  - '+.immersivetranslate.com'                   # 沉浸式翻译配置同步、语言识别与官方 API
+  - '+.imtintl.com'                             # 沉浸式翻译国际版智能网关
+
+  # --- 5. 个人自建服务、学术科研与知识管理 ---
+  - '+.immichsnow.space'                        # 个人自建 VPS 服务 (Zotero WebDAV / Immich)
+  - '+.immich.cloud'                            # Immich 照片备份服务
+  - '+.zotero.org'                              # Zotero 文献管理平台、插件源与同步 API
+  - '+.alphaxiv.org'                            # alphaXiv 学术论文讨论与预印本扩展
+
+  # --- 6. 开发者公共 CDN、安全校验与软件许可 ---
+  - '+.unpkg.com'                               # npm 官方公共前端资源 CDN
+  - '+.jsdelivr.net'                            # jsDelivr 公共开源加速 CDN
+  - '+.typekit.net'                             # Adobe Typekit 网页字体资源
+  - '+.darkreader.org'                          # Dark Reader 暗色扩展规则与资源
+  - '+.adguard.com'                             # AdGuard 官方服务与评分系统
+  - '+.adtidy.org'                              # AdGuard 规则过滤源分发
+  - '+.paddle.com'                              # Paddle 国际软件交易与支付平台
+  - '+.paddleapi.com'                           # Paddle 软件授权与许可证鉴权 API
+  - '+.revenuecat.com'                          # RevenueCat 移动应用内购与订阅管理
+  - '+.stash.ws'                                # Stash 官方规则转换与翻译接口
+  - '+.ip.sb'                                   # IP.SB 公共 IP 查询与测速接口
+  - '+.ipinfo.io'                               # IPinfo 商业地理位置数据库
+  - '+.ip-api.com'                              # IP-API 地理信息查询
+  - '+.awswaf.com'                              # AWS WAF 人机验证与安全网关
+  - '+.sectigo.com'                             # Sectigo 数字证书 OCSP 状态校验
+  - '+.polymarket.com'                          # Polymarket 全球预测市场平台
+
+  # --- 7. 海外权威新闻与深度媒体 ---
+  - '+.nypost.com'                              # 纽约邮报 (New York Post)
+  - '+.dailymail.com'                           # 每日邮报 (Daily Mail)
+  - '+.dailymail.co.uk'                         # 每日邮报英国站
+  - '+.themirror.com'                           # 每日镜报 (The Mirror)
+  - '+.thehill.com'                             # 国会山报 (The Hill)
+  - '+.foxnews.com'                             # 福克斯新闻 (Fox News)
+  - '+.pagesix.com'                             # Page Six 娱乐新闻
+  - '+.gu-web.net'                              # 卫报 (The Guardian) 核心媒体网络
+  - '+.guim.co.uk'                              # 卫报图像与多媒体 CDN
+  - '+.pressreader.com'                         # PressReader 报刊电子阅览
+  - '+.prcdn.co'                                # PressReader 图像与版面资源 CDN
+  - '+.viafoura.co'                             # Viafoura 媒体互动评论系统
+  - '+.viafoura.net'                            # Viafoura 评论分发服务
+  - '+.arstechnica.com'                         # Ars Technica 深度科技媒体
+  - '+.arstechnica.net'                         # Ars Technica 媒体图床 CDN
+  - '+.sfchronicle.com'                         # 旧金山纪事报 (San Francisco Chronicle)
+  - '+.insidehighered.com'                      # 内幕高等教育资讯
+
+  # --- 8. 硬件大厂、创意设计与社群 ---
+  - '+.nvidia.com'                              # 英伟达 (NVIDIA) 官网与驱动下载
+  - '+.canva.com'                               # Canva 可画国际版在线设计
+  - '+.redditspace.com'                         # Reddit 国际社区附属网络
+
+  # --- 9. Apple 专属安全代理与隐私保护 ---
+  - '+.safebrowsing.apple'                      # Safari 欺诈性网站警告安全代理通道

@@ -56,6 +56,7 @@ payload:
   - '+.statsigapi.net'                          # Statsig A/B 灰度测试与实验分流
   - '+.events.statsigapi.net'                   # Statsig 事件追踪与遥测上报
   - '+.api.statsig.com'                         # Statsig API 调度接口
+  - '+.oaistatsig.com'                          # OpenAI 专属 Statsig 灰度测试与实验接口
   - '+.featuregates.org'                        # FeatureGates 功能开关门禁
   - '+.launchdarkly.com'                        # LaunchDarkly 动态功能特性控制系统
   - '+.segment.io'                              # Segment 用户行为数据分发平台
