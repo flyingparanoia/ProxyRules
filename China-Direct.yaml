@@ -98,6 +98,8 @@ payload:
   - '+.hichina.com'                             # 阿里旗下万网服务
   - '+.mmstat.com'                              # 阿里数据统计域名
   - '+.mxhichina.com'                           # 万网邮箱系统
+  - '+.alidns.com'                              # 阿里公共 DNS / DoH 服务
+  - '+.goofish.com'                             # 闲鱼二手交易与短视频平台 (Alibaba)
   - '+.taobao.com'                              # 淘宝网
   - '+.taobaocdn.com'                           # 淘宝静态 CDN
   - '+.tbcache.com'                             # 淘宝缓存服务
@@ -126,6 +128,7 @@ payload:
   - '+.qq.com'                                  # 腾讯 QQ 官网
   - '+.qqmail.com'                              # QQ 邮箱
   - '+.qqurl.com'                               # 腾讯短链接服务
+  - '+.doh.pub'                                 # 腾讯 DNSPod 公共 DoH / DNS 服务
   - '+.smtcdns.com'                             # 腾讯云 DNS
   - '+.soso.com'                                # 搜搜（已并入搜狗）
   - '+.tencent-cloud.net'                       # 腾讯云域名
