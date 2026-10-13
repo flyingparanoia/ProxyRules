@@ -1,6 +1,6 @@
 # ==============================================================================
 # 规则名称: OpenAI / ChatGPT 全量生态分流规则集 (OpenAI & AI Ecosystem)
-# 更新时间: 2026-09-25
+# 更新时间: 2026-10-14
 # 规则来源: 多源规则深度提取与合并
 # 规则说明: 涵盖 ChatGPT 主站、Sora、API 网关、LiveKit 语音通话、Arkose 人机验证、Statsig 灰度及全套基础设施
 # 适用平台: Stash / Clash rule-providers (behavior: domain)
@@ -78,11 +78,19 @@ payload:
   # 【第七部分：伴生主流海外 AI 平台（源自配置中的 OpenAI 策略组拓展）】
   # 用户配置中统一并入 OpenAI 策略组的主流前沿大模型与编码助手
   # ============================================================================
-  # 1. Claude / Anthropic
-  - '+.claude.ai'                               # Claude 网页端主站
-  - '+.claude.com'                              # Claude 备用域名
-  - '+.claudeusercontent.com'                   # Claude 用户上传与生成附件 CDN
-  - '+.anthropic.com'                           # Anthropic 官方机构与 API 控制台
+  # 1. Claude / Anthropic 全生态与相关服务
+  - '+.claude.ai'                               # Claude 官方网页主站、客户端与 CLI 分发入口
+  - '+.claude.com'                              # Claude 官方主站、OAuth 鉴权平台与开发者文档
+  - '+.claude.dev'                              # Claude 官方开发者服务与生态门户
+  - '+.clau.de'                                 # Claude 官方短链与跳转服务 (CLI 常用)
+  - '+.claudeusercontent.com'                   # Claude Artifacts 代码预览与用户附件多媒体 CDN
+  - '+.anthropic.com'                           # Anthropic 官方机构、开发者控制台与 API 网关
+  - '+.anthropic.ai'                            # Anthropic 官方机构与品牌域名
+  - '+.claudemcpclient.com'                     # Claude Model Context Protocol (MCP) 客户端连接服务
+  - '+.claudemcpcontent.com'                    # Claude Model Context Protocol (MCP) 外部内容与工具集成
+  - '+.modelcontextprotocol.io'                 # Anthropic 发起之 Model Context Protocol (MCP) 官方协议主站
+  - 'servd-anthropic-website.b-cdn.net'         # Anthropic 官方网站与文档 Servd/Bunny CDN 边缘节点
+  - 'cdn.usefathom.com'                         # Claude 网页端 Fathom 隐私统计与遥测分析 (防加载卡死)
 
   # 2. xAI Grok
   - '+.grok.com'                                # xAI Grok 官方主站
