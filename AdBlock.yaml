@@ -554,7 +554,7 @@ payload:
   - '+.3lift.com'
   - '+.media.net'
   - '+.parsely.com'
-  - '+.spot.im'
+  # OpenWeb / Spot.IM 同时承载 WSJ 评论；兼容例外由 NYT-WSJ-US-Light.yaml 管理。
   - '+.the-ozone-project.com'
   - '+.privacy-mgmt.com'
   - '+.servenobid.com'

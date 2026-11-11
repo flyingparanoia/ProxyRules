@@ -145,6 +145,8 @@
 基于真实 iPhone 移动客户端与 Mac 桌面浏览器双端实机抓包深度分析，完整提取 The New York Times 与 The Wall Street Journal（含道琼斯 Dow Jones 集团）核心资产，并融合美国原生轻量金融与敏感资产（已从 `Foreign-News-no-NYT-WSJ.yaml` 及其他规则中完全剥离解耦）：
 * **The New York Times (NYT / 纽约时报)**：纽约时报核心主站、国际版、中文网、Samizdat GraphQL API 网关（`samizdat-graphql.nytimes.com`）、核心多媒体/短域（`nyt.com`、`a1.nyt.com`、`g1.nyt.com`）、高清图床 CDN（`nytimg.com`）、集团公司（`nytco.com`）、时尚版（`nytstyle.com`）、版本对比（`nytdiff.com`）与官方品牌域（`newyorktimes.com`）。
 * **The Wall Street Journal (WSJ / 华尔街日报)**：华尔街日报核心主站（`wsj.com`）、移动端与 Web API（`follow-api.wsj.com`、`video-api.wsj.com`）、报纸数字版（`pbc.wsj.com`、`pblog.wsj.com`）、核心音视频流媒体（`wsjstream.wsj.net`）、图床与静态组件 CDN（`wsj.net`、`images.wsj.net`、`opinion-images.wsj.net`）、读者会员权益（`wsjplus.com`）。
+* **WSJ 第三方评论服务 OpenWeb（原 Spot.IM）**：`+.spot.im` 与 `+.openweb.com` 在此规则集统一管理。2026-11-12 实测，`open-api.spot.im` 的评论计数接口和 `launcher.spot.im` 的评论组件被广告规则拦截时，文章会显示评论数 0；同一代理出口下放行后，两者返回 HTTP 200，测试文章返回 771 条评论。OpenWeb 同时提供评论与广告变现，不能据此将整个域视为纯广告。[评论计数接口文档](https://developers.openweb.com/docs/comment-counter)、[OpenWeb 变现服务](https://www.openweb.com/monetization/)。
+* **功能性规则优先级**：`NYT-WSJ-US-Light` 必须位于外媒广告显式规则及通用去广告规则之前。Stash/Clash 使用 YAML，sing-box 使用自动构建的 `srs/NYT-WSJ-US-Light.srs`；客户端保留此顺序即可通过更新远程规则集取得修复，无需逐个维护 OpenWeb 域名。域名级放行也覆盖这些域中的商业请求。
 * **Dow Jones (道琼斯集团与 News Corp 商业矩阵)**：道琼斯公司官网与统一单点登录 SSO 鉴权网关（`dowjones.com`、`sso.accounts.dowjones.com`）、道琼斯云原生微服务与公共共享数据网关（`dowjones.io`、`shared-data.dowjones.io`）、订单订阅系统（`dowjoneson.com`、`oms.dowjoneson.com`）、巴伦周刊（`barrons.com`）、MarketWatch 实时金融行情（`marketwatch.com`）、Mansion Global 豪宅不动产（`mansionglobal.com`）、Factiva 商业情报库（`factiva.com`）、新闻集团统一平台（`newscgp.com`）。
 * **抓包定制接口与读者鉴权通道**：Adobe 专为道琼斯定制的分析节点（`dowjones.hb-api.omtrdc.net`、`dowjones.sc.omtrdc.net`）、道琼斯专用 AWS 资产存储桶（`djcm-pnp.s3.amazonaws.com`、`djcs-multi-region-assets-ohio.s3.us-east-2.amazonaws.com`）、波士顿公共图书馆读者卡免登录鉴权联动（`bpl.org` / EZProxy 联动 `partner.wsj.com`）。
 * **美国轻量金融、支付与权威快讯**：PayPal、Venmo、Braintree、Xoom、BillMeLater，彭博社 Bloomberg、路透社 Reuters、Reddit、Perplexity 等。
@@ -167,7 +169,7 @@
        * *仅看第一方原生赞助*：只需确保 `NYT-WSJ-US-Light.yaml` 规则集正常生效即可，第一方广告自然展示且完全不影响日常阅读。
        * *全量看横幅与方块广告（如需展示广告）*：在客户端主配置中，将 `doubleclick.net`、`googleadservices.com`、`googlesyndication.com` 从 `REJECT` 列表移出，改走外媒广告策略组（或直接放行走代理）。
      * **需求 B：追求纯净阅读与极致省电**：
-       * 保持 `AdBlock.yaml` 位于规则前列，优先丢弃所有第三方程序化广告和追踪监测，大幅减少网络请求并发与后台基带能耗。
+       * 将 `AdBlock.yaml` 放在评论等功能性依赖例外之后、普通代理兜底规则之前，拦截第三方程序化广告和追踪监测。
 
 
 ### 14. 微软全生态服务规则 (`Microsoft.yaml`)
@@ -193,7 +195,7 @@
 * **开屏广告与商业化分发调度**：Bilibili 商业化分发 (`cm.bilibili.com`)、优酷开屏追踪 (`sealine.youku.com`)、字节营销引流落地页 (`+.lf-leads-fe-scm.bytecdn.com`)、Google AdMob 国内 CDN (`+.doubleclick-cn.net`) 等。
 * **移动端广告联盟矩阵**：腾讯广点通 GDT (`mi.gdt.qq.com`, `qzs.gdt.qq.com`, `v.gdt.qq.com`, `adsmind.gdt.qq.com`)、百度移动联盟 (`mobads.baidu.com`, `mobads-logs.baidu.com`)、微博商业投放 (`sdkapp.uve.weibo.com`, `adstrategy.biz.weibo.com`)、知乎商业化 (`appcloud2.in.zhihu.com`, `sugar.zhihu.com`)。
 * **曝光监控、打点统计与归因监测**：B站广告曝光与打点 (`bimp.hdslb.com`, `boss.hdslb.com`)、Apple Search Ads 归因 (`ca.iadsdk.apple.com`)、IAS 广告可见度监测 (`dt.adsafeprotected.com`)。
-* **外媒嵌入式高并发程序化广告与追踪**：Permutive、Piano.io、BidSwitch、3Lift、Media.net、Parse.ly、Spot.im、Datadog RUM 等高并发追踪器（有效阻断外媒阅读时的电池偷跑与机身发烫）。
+* **外媒嵌入式程序化广告与追踪**：Permutive、Piano.io、BidSwitch、3Lift、Media.net、Parse.ly、Datadog RUM 等。OpenWeb / Spot.IM 同时承载评论，已移出整域拦截，并在 `NYT-WSJ-US-Light.yaml` 中提供功能性例外。
 * **使用策略**：`REJECT` 或专用的 `🛑 全球拦截` 策略组。
 
 ---
