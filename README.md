@@ -40,6 +40,8 @@
 涵盖抖音主站、短视频点播切片（VOD / zjcdn）、直播拉流（FLV）、图床、对象存储（TOS）、前端公共基建（Goofy/Gecko）与相关字节产品线（西瓜/火山/头条）。
 * **使用策略**：`👁️ Douyin` 策略组，按客户端选择直连或代理。
 * **2026-11-17 实机补充**：加入 `+.ecombdapi.com`、`+.byteeffecttos.com`，覆盖 Pixel 抖音 App 日志中此前落到国内直连的 `ecom5-normal-m-hj.ecombdapi.com`、`lf6-effectcdn-tos.byteeffecttos.com`，以及这两个主域名下的其他子域名。Clash/Stash 使用本 YAML；sing-box 使用对应的 `srs/Douyin.srs`。
+* **Mac / iOS 刷新方式**：`mixed-mac.yaml`、`mixed-nohagezi-ios.yaml` 均引用 `https://raw.githubusercontent.com/flyingparanoia/ProxyRules/main/Douyin.yaml`，现有 `RULE-SET,douyin,👁️ Douyin` 路由可直接使用更新后的域名列表，无需逐端补写域名。在 Stash 的远程规则集中刷新 `douyin` 成功后，新连接会使用新版；两份配置均设置每 24 小时自动更新。仅重新拉取主配置时，客户端可能继续使用规则缓存，因此建议单独刷新 `douyin`；已有连接可通过重开相关 App 重新建立。
+* **Pixel sing-box 刷新方式**：当前主配置使用规则集缓存标识 `douyin-v2` 和 `https://testingcf.jsdelivr.net/gh/flyingparanoia/ProxyRules/srs/Douyin.srs`，避开原 `@main` 地址仍返回旧文件的 CDN 缓存。手机启用的本地导入配置为 `douyin-updated-rules`，两个新增域名均已实测进入 `👁️ Douyin` 选择组；原配置保留作回退。本地 JSON 的后续修改需要重新导入，远程 SRS 域名更新则按其更新间隔生效。
 
 ### 3. 全球海外综合与专业前沿新闻规则 (不含 NYT / WSJ) (`Foreign-News-no-NYT-WSJ.yaml`)
 基于真实 Chrome 浏览器历史记录全量深度分析（8万+记录），专门剔除了中国大陆境内媒体，专为科学上网分流与海外优质资讯代理设计。涵盖：
@@ -275,7 +277,7 @@ rule-providers:
     path: ./ruleset/domain-AdBlock.yaml
     interval: 86400
 
-  # 3. 订阅抖音官方直连规则集
+  # 3. 订阅抖音官方业务规则集（由抖音策略组选择直连或代理）
   douyin:
     type: http
     behavior: domain
@@ -406,7 +408,7 @@ rules:
   # 中国大陆主流互联网服务直连加速
   - RULE-SET,china-direct,🎯 全球直连
 
-  # 抖音官方核心业务直连
+  # 抖音官方核心业务交由独立策略组处理
   - RULE-SET,douyin,👁️ Douyin
 
   # 纽约时报、华尔街日报与美国轻量金融服务走专用美国轻量/高防风控代理 (防账号风控与频繁验证码)
