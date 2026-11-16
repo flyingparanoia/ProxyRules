@@ -38,7 +38,8 @@
 
 ### 2. 抖音与字节跳动官方规则 (`Douyin.yaml`)
 涵盖抖音主站、短视频点播切片（VOD / zjcdn）、直播拉流（FLV）、图床、对象存储（TOS）、前端公共基建（Goofy/Gecko）与相关字节产品线（西瓜/火山/头条）。
-* **使用策略**：`DIRECT`（直连）
+* **使用策略**：`👁️ Douyin` 策略组，按客户端选择直连或代理。
+* **2026-11-17 实机补充**：加入 `+.ecombdapi.com`、`+.byteeffecttos.com`，覆盖 Pixel 抖音 App 日志中此前落到国内直连的 `ecom5-normal-m-hj.ecombdapi.com`、`lf6-effectcdn-tos.byteeffecttos.com`，以及这两个主域名下的其他子域名。Clash/Stash 使用本 YAML；sing-box 使用对应的 `srs/Douyin.srs`。
 
 ### 3. 全球海外综合与专业前沿新闻规则 (不含 NYT / WSJ) (`Foreign-News-no-NYT-WSJ.yaml`)
 基于真实 Chrome 浏览器历史记录全量深度分析（8万+记录），专门剔除了中国大陆境内媒体，专为科学上网分流与海外优质资讯代理设计。涵盖：
